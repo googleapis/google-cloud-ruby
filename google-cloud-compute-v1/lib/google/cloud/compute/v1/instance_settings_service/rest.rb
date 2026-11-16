@@ -32,6 +32,8 @@ module Google
         ##
         # The InstanceSettings API.
         #
+        # This client uses InstanceSettingsService version 2026-11-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/instance_settings_service/rest"

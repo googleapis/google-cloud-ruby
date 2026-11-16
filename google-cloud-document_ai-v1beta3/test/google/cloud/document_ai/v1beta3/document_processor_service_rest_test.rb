@@ -488,6 +488,7 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Rest::Clie
     document_schema = {}
     input_data = {}
     base_processor_version = "hello world"
+    processor_version_overrides = {}
 
     train_processor_version_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -503,27 +504,27 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Rest::Clie
         end
 
         # Use hash object
-        c.train_processor_version({ custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version }) do |_result, response|
+        c.train_processor_version({ custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version, processor_version_overrides: processor_version_overrides }) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use named arguments
-        c.train_processor_version custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version do |_result, response|
+        c.train_processor_version custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version, processor_version_overrides: processor_version_overrides do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object
-        c.train_processor_version ::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest.new(custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version) do |_result, response|
+        c.train_processor_version ::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest.new(custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version, processor_version_overrides: processor_version_overrides) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use hash object with options
-        c.train_processor_version({ custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version }, call_options) do |_result, response|
+        c.train_processor_version({ custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version, processor_version_overrides: processor_version_overrides }, call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 
         # Use protobuf object with options
-        c.train_processor_version(::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest.new(custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version), call_options) do |_result, response|
+        c.train_processor_version(::Google::Cloud::DocumentAI::V1beta3::TrainProcessorVersionRequest.new(custom_document_extraction_options: custom_document_extraction_options, parent: parent, processor_version: processor_version, document_schema: document_schema, input_data: input_data, base_processor_version: base_processor_version, processor_version_overrides: processor_version_overrides), call_options) do |_result, response|
           assert_equal http_response, response.underlying_op
         end
 

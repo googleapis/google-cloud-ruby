@@ -21,6 +21,26 @@ module Google
   module Cloud
     module DiscoveryEngine
       module V1
+        # Request for CreateServingConfig method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Full resource name of parent. Format:
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+        # @!attribute [rw] serving_config
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::ServingConfig]
+        #     Required. The ServingConfig to create.
+        # @!attribute [rw] serving_config_id
+        #   @return [::String]
+        #     Required. The ID to use for the ServingConfig, which will become the final
+        #     component of the ServingConfig's resource name.
+        #
+        #     This value should be 4-63 characters, and valid characters
+        #     are /[a-zA-Z0-9][a-zA-Z0-9_-]+/.
+        class CreateServingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request for UpdateServingConfig method.
         # @!attribute [rw] serving_config
         #   @return [::Google::Cloud::DiscoveryEngine::V1::ServingConfig]
@@ -35,6 +55,57 @@ module Google
         #
         #     If not set, all supported fields are updated.
         class UpdateServingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for DeleteServingConfig method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the ServingConfig to delete. Format:
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
+        class DeleteServingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for GetServingConfig method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the ServingConfig to get. Format:
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/servingConfigs/{serving_config_id}`
+        class GetServingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for ListServingConfigs method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Full resource name of the parent resource. Format:
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of results to return. If unspecified, defaults
+        #     to 100. If a value greater than 100 is provided, at most 100 results are
+        #     returned.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListServingConfigs` call.
+        #     Provide this to retrieve the subsequent page.
+        class ListServingConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for ListServingConfigs method.
+        # @!attribute [rw] serving_configs
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::ServingConfig>]
+        #     All the ServingConfigs for a given dataStore.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Pagination token, if not returned indicates the last page.
+        class ListServingConfigsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

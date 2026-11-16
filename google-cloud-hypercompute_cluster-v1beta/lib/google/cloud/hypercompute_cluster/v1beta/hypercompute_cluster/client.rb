@@ -450,9 +450,10 @@ module Google
             #     Required. Parent location in which the cluster should be created, in the
             #     format `projects/{project}/locations/{location}`.
             #   @param cluster_id [::String]
-            #     Required. ID of the cluster to create. Must conform to
-            #     [RFC-1034](https://datatracker.ietf.org/doc/html/rfc1034) (lower-case,
-            #     alphanumeric, and at most 63 characters).
+            #     Required. The ID of the cluster to create.
+            #     The cluster ID must start with a lowercase letter (`a`-`z`), use only
+            #     lowercase letters or numbers, and contain up to 10 characters. For example,
+            #     specify `cluster001`.
             #   @param cluster [::Google::Cloud::HypercomputeCluster::V1beta::Cluster, ::Hash]
             #     Required. Cluster to create.
             #   @param request_id [::String]
@@ -735,6 +736,117 @@ module Google
             end
 
             ##
+            # Lists Nodes in a given cluster.
+            #
+            # @overload list_nodes(request, options = nil)
+            #   Pass arguments to `list_nodes` via a request object, either of type
+            #   {::Google::Cloud::HypercomputeCluster::V1beta::ListNodesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::HypercomputeCluster::V1beta::ListNodesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_nodes(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_nodes` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Parent cluster of the nodes to list, in the format
+            #     `projects/{project}/locations/{location}/clusters/{cluster}`.
+            #   @param page_size [::Integer]
+            #     Optional. Maximum number of nodes to return. The service may return fewer
+            #     than this value.
+            #   @param page_token [::String]
+            #     Optional. A page token received from a previous `ListNodes` call. Provide
+            #     this to retrieve the subsequent page. When paginating, all other parameters
+            #     provided to `ListNodes` must match the call that provided the page
+            #     token.
+            #   @param filter [::String]
+            #     Optional. [Filter](https://google.aip.dev/160) to apply to the returned
+            #     results.
+            #   @param order_by [::String]
+            #     Optional. How to order the resulting nodes. Must be one of the following
+            #     strings:
+            #
+            #     * `name`
+            #     * `name desc`
+            #
+            #     If not specified, nodes will be returned in an arbitrary order.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::HypercomputeCluster::V1beta::Node>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::HypercomputeCluster::V1beta::Node>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/hypercompute_cluster/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::HypercomputeCluster::V1beta::ListNodesRequest.new
+            #
+            #   # Call the list_nodes method.
+            #   result = client.list_nodes request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::HypercomputeCluster::V1beta::Node.
+            #     p item
+            #   end
+            #
+            def list_nodes request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::HypercomputeCluster::V1beta::ListNodesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_nodes.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::HypercomputeCluster::V1beta::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_nodes.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_nodes.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @hypercompute_cluster_stub.call_rpc :list_nodes, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @hypercompute_cluster_stub, :list_nodes, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the HypercomputeCluster API.
             #
             # This class represents the configuration for HypercomputeCluster,
@@ -944,6 +1056,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_cluster
+                ##
+                # RPC-specific configuration for `list_nodes`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_nodes
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -957,6 +1074,8 @@ module Google
                   @update_cluster = ::Gapic::Config::Method.new update_cluster_config
                   delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster
                   @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
+                  list_nodes_config = parent_rpcs.list_nodes if parent_rpcs.respond_to? :list_nodes
+                  @list_nodes = ::Gapic::Config::Method.new list_nodes_config
 
                   yield self if block_given?
                 end

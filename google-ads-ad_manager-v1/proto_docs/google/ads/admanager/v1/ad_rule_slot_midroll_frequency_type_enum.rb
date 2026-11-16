@@ -41,7 +41,9 @@ module Google
             # 100 seconds".
             EVERY_N_SECONDS = 2
 
-            # Same as `FIXED_TIME`, except the values represent the ordinal cue
+            # Same as
+            # {::Google::Ads::AdManager::V1::AdRuleSlotMidrollFrequencyTypeEnum::AdRuleSlotMidrollFrequencyType::FIXED_TIME AdRuleSlotMidrollFrequencyTypeEnum.AdRuleSlotMidrollFrequencyType.FIXED_TIME},
+            # except the values represent the ordinal cue
             # points ("1,3,5", for example).
             FIXED_CUE_POINTS = 3
 

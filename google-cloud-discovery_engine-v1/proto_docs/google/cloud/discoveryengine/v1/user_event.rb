@@ -34,7 +34,6 @@ module Google
         #     * `view-item-list`: View of a panel or ordered list of Documents.
         #     * `view-home-page`: View of the home page.
         #     * `view-category-page`: View of a category page, e.g. Home > Men > Jeans
-        #     * `add-feedback`: Add a user feedback.
         #
         #     Retail-related values:
         #
@@ -166,8 +165,9 @@ module Google
         #     to this field.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     The filter syntax consists of an expression language for constructing a
-        #     predicate from one or more fields of the documents being filtered.
+        #     Optional. The filter syntax consists of an expression language for
+        #     constructing a predicate from one or more fields of the documents being
+        #     filtered.
         #
         #     One example is for `search` events, the associated
         #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest SearchRequest} may contain
@@ -233,7 +233,7 @@ module Google
         #     Currently, this field is restricted to at most one ID.
         # @!attribute [rw] attributes
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DiscoveryEngine::V1::CustomAttribute}]
-        #     Extra user event features to include in the recommendation model.
+        #     Optional. Extra user event features to include in the recommendation model.
         #     These attributes must NOT contain data that needs to be parsed or processed
         #     further, e.g. JSON or other encodings.
         #
@@ -266,6 +266,16 @@ module Google
         #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::PanelInfo>]
         #     Optional. List of panels associated with this event.
         #     Used for page-level impression data.
+        # @!attribute [rw] feedback
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::Feedback]
+        #     Optional. This field is optional except for the `add-feedback` event types.
+        # @!attribute [rw] entity
+        #   @return [::String]
+        #     Optional. Represents the entity for customers that may run multiple
+        #     different entities, domains, sites or regions, for example, `Google US`,
+        #     `Google Ads`, `Waymo`, `google.com`, `youtube.com`, etc. We recommend that
+        #     you set `entity` to get better per-entity search, completion, and
+        #     prediction results.
         class UserEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -329,7 +339,7 @@ module Google
         # Detailed search information.
         # @!attribute [rw] search_query
         #   @return [::String]
-        #     The user's search query.
+        #     Optional. The user's search query.
         #
         #     See
         #     {::Google::Cloud::DiscoveryEngine::V1::SearchRequest#query SearchRequest.query}
@@ -378,7 +388,7 @@ module Google
         # clicked completion info.
         # @!attribute [rw] selected_suggestion
         #   @return [::String]
-        #     End user selected
+        #     Optional. End user selected
         #     {::Google::Cloud::DiscoveryEngine::V1::CompleteQueryResponse::QuerySuggestion#suggestion CompleteQueryResponse.QuerySuggestion.suggestion}.
         # @!attribute [rw] selected_position
         #   @return [::Integer]

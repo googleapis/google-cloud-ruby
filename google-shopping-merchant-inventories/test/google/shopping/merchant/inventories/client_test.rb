@@ -48,7 +48,7 @@ class Google::Shopping::Merchant::Inventories::ClientConstructionMinitest < Mini
       client = Google::Shopping::Merchant::Inventories.local_inventory_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Shopping::Merchant::Inventories::ClientConstructionMinitest < Mini
       client = Google::Shopping::Merchant::Inventories.local_inventory_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Inventories::V1beta::LocalInventoryService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Inventories::V1::LocalInventoryService::Rest::Client, client
     end
   end
 
@@ -69,7 +69,7 @@ class Google::Shopping::Merchant::Inventories::ClientConstructionMinitest < Mini
       client = Google::Shopping::Merchant::Inventories.regional_inventory_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Inventories::V1beta::RegionalInventoryService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Inventories::V1::RegionalInventoryService::Client, client
     end
   end
 
@@ -79,7 +79,7 @@ class Google::Shopping::Merchant::Inventories::ClientConstructionMinitest < Mini
       client = Google::Shopping::Merchant::Inventories.regional_inventory_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Inventories::V1beta::RegionalInventoryService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Inventories::V1::RegionalInventoryService::Rest::Client, client
     end
   end
 end

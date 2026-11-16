@@ -19,6 +19,7 @@
 require "google/cloud/sql/v1/sql_backup_runs_service/rest"
 require "google/cloud/sql/v1/sql_instances_service/rest"
 require "google/cloud/sql/v1/sql_backups_service/rest"
+require "google/cloud/sql/v1/blue_green_deployments_service/rest"
 require "google/cloud/sql/v1/sql_connect_service/rest"
 require "google/cloud/sql/v1/sql_databases_service/rest"
 require "google/cloud/sql/v1/sql_flags_service/rest"
@@ -26,6 +27,7 @@ require "google/cloud/sql/v1/sql_operations_service/rest"
 require "google/cloud/sql/v1/sql_ssl_certs_service/rest"
 require "google/cloud/sql/v1/sql_tiers_service/rest"
 require "google/cloud/sql/v1/sql_users_service/rest"
+require "google/cloud/sql/v1/sql_workload_captures_service/rest"
 require "google/cloud/sql/v1/version"
 
 module Google

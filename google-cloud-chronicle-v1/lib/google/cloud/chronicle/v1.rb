@@ -30,6 +30,7 @@ require "google/cloud/chronicle/v1/instance_service"
 require "google/cloud/chronicle/v1/reference_list_service"
 require "google/cloud/chronicle/v1/rule_service"
 require "google/cloud/chronicle/v1/rule_execution_error_service"
+require "google/cloud/chronicle/v1/search_service"
 require "google/cloud/chronicle/v1/version"
 
 module Google

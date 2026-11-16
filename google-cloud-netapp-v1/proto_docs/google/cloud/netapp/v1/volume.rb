@@ -58,6 +58,60 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Message for requesting list of BackupConfigs in a StoragePool.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The ONTAP StoragePool for which to retrieve backup configuration
+        #     information, in the format
+        #     `projects/{project}/locations/{location}/storagePools/{storage_pool}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of items to return. The service may return
+        #     fewer than this value. The maximum value is 1000; values above 1000 will be
+        #     coerced to 1000. If unspecified or set to 0, a default of 50 will be used.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. The next_page_token value to use if there are additional
+        #     results to retrieve for this list request.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Sort results. Supported values are "volume_id" or ""
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. The standard list filter.
+        class ListBackupConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for response to listing BackupConfigs in an ONTAP StoragePool.
+        # @!attribute [rw] volume_backup_configs
+        #   @return [::Array<::Google::Cloud::NetApp::V1::VolumeBackupConfig>]
+        #     A list of backup configurations for volumes in the pool.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The token you can use to retrieve the next page of results. Not returned
+        #     if there are no more results in the list.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unordered list. Locations that could not be reached.
+        class ListBackupConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Backup configuration for a volume in a pool.
+        # @!attribute [rw] volume_uuid
+        #   @return [::String]
+        #     Provides the Ontap UUID of the volume within the pool.
+        # @!attribute [rw] backup_config
+        #   @return [::Google::Cloud::NetApp::V1::BackupConfig]
+        #     Backup configuration for the volume.
+        class VolumeBackupConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Message for getting a Volume
         # @!attribute [rw] name
         #   @return [::String]
@@ -126,6 +180,44 @@ module Google
         #     specified ID is the \\{snapshot_id} of the fully qualified name like
         #     projects/\\{project_id}/locations/\\{location_id}/volumes/\\{volume_id}/snapshots/\\{snapshot_id}
         class RevertVolumeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for splitting a volume.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full name of the clone volume to be split from its source.
+        #     Format: projects/\\{project_number}/locations/\\{location}/volumes/\\{volume_id}
+        class StartSplitRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetSplitStatus.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full name of the volume.
+        #     Format: projects/\\{project_number}/locations/\\{location}/volumes/\\{volume_id}
+        class GetSplitStatusRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message for SplitStatus.
+        # @!attribute [r] split_state
+        #   @return [::Google::Cloud::NetApp::V1::SplitState]
+        #     Output only. The current state of the clone split operation.
+        # @!attribute [r] state_details
+        #   @return [::String]
+        #     Output only. Human-readable details about the current state. Mostly used
+        #     for displaying error messages during split failure Examples: "Split in
+        #     progress", "Error: insufficient capacity".
+        # @!attribute [r] progress_percent
+        #   @return [::Integer]
+        #     Output only. The estimated progress percentage of the split operation
+        #     (0-100). This is meaningful primarily when split_state is IN_PROGRESS.
+        class SplitStatus
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -304,6 +396,9 @@ module Google
           #   @return [::Integer]
           #     Output only. Shared space in GiB. Determined at volume creation time
           #     based on size of source snapshot.
+          # @!attribute [r] split_state
+          #   @return [::Google::Cloud::NetApp::V1::SplitState]
+          #     Output only. The current state of the clone split operation.
           class CloneDetails
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -355,7 +450,7 @@ module Google
         end
 
         # Configuration for a Large Capacity Volume. A Large Capacity Volume
-        # supports sizes ranging from 4.8 TiB to 20 PiB, it is composed of multiple
+        # supports sizes ranging from 4.8 TiB to 20 PiB; it is composed of multiple
         # internal constituents, and must be created in a large capacity pool.
         # @!attribute [rw] constituent_count
         #   @return [::Integer]
@@ -582,7 +677,7 @@ module Google
         #   @return [::String]
         #     Full name of the backup resource.
         #     Format for standard backup:
-        #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backup_vault_id}/backups/\\{backup_id}
+        #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backup_vault_id}/backups/\\{backup_id}.
         #     Format for BackupDR backup:
         #     projects/\\{project}/locations/\\{location}/backupVaults/\\{backup_vault}/dataSources/\\{data_source}/backups/\\{backup}
         #
@@ -905,6 +1000,54 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for `RestoreVolume` API.
+        # @!attribute [rw] backup_source
+        #   @return [::Google::Cloud::NetApp::V1::BackupSource]
+        #     The backup source of the restore operation.
+        # @!attribute [rw] ontap_volume_target
+        #   @return [::Google::Cloud::NetApp::V1::OntapVolumeTarget]
+        #     The ONTAP volume target of the restore operation.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the ONTAP mode storage pool, in the format
+        #     of `projects/{project}/locations/{location}/storagePools/{storage_pool}`
+        class RestoreVolumeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the backup source of the restore operation.
+        # @!attribute [rw] backup
+        #   @return [::String]
+        #     Required. The backup resource name.
+        # @!attribute [rw] file_list
+        #   @return [::Array<::String>]
+        #     Optional. List of files to be restored in the form of their absolute path
+        #     as in source volume. If provided, only these files will be restored. If not
+        #     provided, the entire backup will be restored (Full Backup Restore)
+        class BackupSource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents the ONTAP volume target of the restore operation.
+        # @!attribute [rw] volume_uuid
+        #   @return [::String]
+        #     Required. The UUID of the ONTAP volume to restore to.
+        # @!attribute [rw] restore_destination_path
+        #   @return [::String]
+        #     Optional. Absolute directory path in the destination volume.
+        class OntapVolumeTarget
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for `RestoreVolume` API.
+        class RestoreVolumeResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # EstablishVolumePeeringRequest establishes cluster and svm peerings between
         # the source and destination clusters.
         # @!attribute [rw] name
@@ -921,12 +1064,46 @@ module Google
         #     destination vserver svm.
         # @!attribute [rw] peer_ip_addresses
         #   @return [::Array<::String>]
-        #     Optional. List of IPv4 ip addresses to be used for peering.
+        #     Optional. List of IPv4 IP addresses to be used for peering.
         # @!attribute [rw] peer_volume_name
         #   @return [::String]
         #     Required. Name of the user's local source volume to be peered with the
         #     destination volume.
         class EstablishVolumePeeringRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateBackupConfig
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the StoragePool, in the format:
+        #     projects/\\{projectNumber}/locations/\\{locationId}/storagePools/\\{poolId}
+        # @!attribute [rw] volume_uuid
+        #   @return [::String]
+        #     Required. The UUID of the ONTAP-mode volume.
+        # @!attribute [rw] backup_config
+        #   @return [::Google::Cloud::NetApp::V1::BackupConfig]
+        #     Required. Backup configuration to apply.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     BackupConfig for the Volume.
+        #     The fields specified in the update_mask are relative to the resource, not
+        #     the full request. A field will be overwritten if it is in the mask.
+        class UpdateBackupConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for UpdateBackupConfig
+        # @!attribute [rw] volume_uuid
+        #   @return [::String]
+        #     The UUID of the ONTAP-mode volume.
+        # @!attribute [rw] backup_config
+        #   @return [::Google::Cloud::NetApp::V1::BackupConfig]
+        #     The updated Backup configuration for the volume.
+        class UpdateBackupConfigResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -947,6 +1124,9 @@ module Google
 
           # ISCSI protocol
           ISCSI = 4
+
+          # NVMe protocol
+          NVME = 5
         end
 
         # AccessType is an enum of all the supported access types for a volume.
@@ -996,6 +1176,21 @@ module Google
 
           # Continuously available enumeration
           CONTINUOUSLY_AVAILABLE = 9
+        end
+
+        # Enum to indicate the state of the clone in relation to the split process.
+        module SplitState
+          # State is not specified.
+          SPLIT_STATE_UNSPECIFIED = 0
+
+          # The volume is a thin clone, sharing blocks with its source.
+          SPLIT_STATE_NOT_SPLITTING = 1
+
+          # A split operation is currently active and in progress.
+          SPLIT_STATE_IN_PROGRESS = 2
+
+          # The attempt to split the volume failed.
+          SPLIT_STATE_FAILED = 3
         end
 
         # The security style of the volume, can be either UNIX or NTFS.

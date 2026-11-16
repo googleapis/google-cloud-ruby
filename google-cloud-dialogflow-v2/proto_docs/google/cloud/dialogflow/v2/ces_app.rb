@@ -21,7 +21,9 @@ module Google
   module Cloud
     module Dialogflow
       module V2
+        # Deprecated: Use `CesToolSpec` instead.
         # Spec of CES app that the generator can choose from.
+        # @deprecated This message is deprecated and may be removed in the next major version update.
         # @!attribute [rw] ces_app
         #   @return [::String]
         #     Optional. Format: `projects/<Project ID>/locations/<Location ID>/apps/<app

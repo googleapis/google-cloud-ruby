@@ -8,7 +8,7 @@ require 'google/ads/admanager/v1/discount_type_enum_pb'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n0google/ads/admanager/v1/line_item_discount.proto\x12\x17google.ads.admanager.v1\x1a\x30google/ads/admanager/v1/discount_type_enum.proto\x1a\x1fgoogle/api/field_behavior.proto\"\xa6\x01\n\x10LineItemDiscount\x12W\n\rdiscount_type\x18\x01 \x01(\x0e\x32\x36.google.ads.admanager.v1.DiscountTypeEnum.DiscountTypeB\x03\xe0\x41\x01H\x00\x88\x01\x01\x12\x1a\n\x08\x64iscount\x18\x02 \x01(\x01\x42\x03\xe0\x41\x01H\x01\x88\x01\x01\x42\x10\n\x0e_discount_typeB\x0b\n\t_discountB\xc9\x01\n\x1b\x63om.google.ads.admanager.v1B\x15LineItemDiscountProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n0google/ads/admanager/v1/line_item_discount.proto\x12\x17google.ads.admanager.v1\x1a\x30google/ads/admanager/v1/discount_type_enum.proto\x1a\x1fgoogle/api/field_behavior.proto\"\xa8\x01\n\x10LineItemDiscount\x12X\n\rdiscount_type\x18\x01 \x01(\x0e\x32\x36.google.ads.admanager.v1.DiscountTypeEnum.DiscountTypeB\x04\xe2\x41\x01\x01H\x00\x88\x01\x01\x12\x1b\n\x08\x64iscount\x18\x02 \x01(\x01\x42\x04\xe2\x41\x01\x01H\x01\x88\x01\x01\x42\x10\n\x0e_discount_typeB\x0b\n\t_discountB\xc9\x01\n\x1b\x63om.google.ads.admanager.v1B\x15LineItemDiscountProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

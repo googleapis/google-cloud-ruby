@@ -852,6 +852,9 @@ module Google
         #     Optional. The processor version to use as a base for training. This
         #     processor version must be a child of `parent`. Format:
         #     `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processorVersion}`.
+        # @!attribute [rw] processor_version_overrides
+        #   @return [::Google::Cloud::DocumentAI::V1beta3::ProcessorVersionOverrides]
+        #     Optional. Options to override structures in the base processor version.
         class TrainProcessorVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

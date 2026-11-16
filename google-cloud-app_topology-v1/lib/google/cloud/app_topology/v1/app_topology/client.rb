@@ -78,6 +78,11 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.explore_schema.timeout = 60.0
+                default_config.rpcs.explore_schema.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config.rpcs.get_domain.timeout = 60.0
                 default_config.rpcs.get_domain.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -400,6 +405,124 @@ module Google
 
               @app_topology_stub.call_rpc :get_schema, request, options: options do |response, operation|
                 yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Explores the topology schema starting from given node types or label names
+            # up to a specified hop depth.
+            #
+            # @overload explore_schema(request, options = nil)
+            #   Pass arguments to `explore_schema` via a request object, either of type
+            #   {::Google::Cloud::AppTopology::V1::ExploreSchemaRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AppTopology::V1::ExploreSchemaRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload explore_schema(name: nil, start_labels: nil, depth: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `explore_schema` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the singleton domain schema resource.
+            #     Format: `projects/{project}/locations/{location}/domains/{domain}/schema`
+            #   @param start_labels [::Array<::String>]
+            #     Optional. Starting label names to begin traversal.
+            #     Substring, case-insensitive matches are performed against allowed label
+            #     names in the schema. A maximum of 10 `start_labels` can be specified;
+            #     providing more will result in an `INVALID_ARGUMENT` error.
+            #     If `start_labels` is unset or empty, all authorized node types will be used
+            #     as the starting set.
+            #   @param depth [::Integer]
+            #     Optional. The maximum depth of BFS traversal hops to perform from the
+            #     starting node types or label names. Defaults to 0 if unspecified.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of schema elements to return in a single page.
+            #
+            #     - The service might return fewer elements than this value if adding another
+            #       edge and its required endpoint nodes exceeds `page_size`.
+            #     - If omitted or set to 0, default (100) will be used.
+            #     - Minimum page_size is 3 to ensure at least one edge and its endpoint
+            #       nodes fit on a page; values below 3 (e.g. 1 or 2) are changed to 3.
+            #     - Maximum value is 500.
+            #   @param page_token [::String]
+            #     Optional. A page token received from a previous `ExploreSchema` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters (except page_size) provided to
+            #     `ExploreSchema` must match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AppTopology::V1::NodeType>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AppTopology::V1::NodeType>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/app_topology/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppTopology::V1::AppTopology::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppTopology::V1::ExploreSchemaRequest.new
+            #
+            #   # Call the explore_schema method.
+            #   result = client.explore_schema request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::AppTopology::V1::NodeType.
+            #     p item
+            #   end
+            #
+            def explore_schema request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AppTopology::V1::ExploreSchemaRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.explore_schema.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AppTopology::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.explore_schema.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.explore_schema.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @app_topology_stub.call_rpc :explore_schema, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @app_topology_stub, :explore_schema, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -791,6 +914,11 @@ module Google
                 #
                 attr_reader :get_schema
                 ##
+                # RPC-specific configuration for `explore_schema`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :explore_schema
+                ##
                 # RPC-specific configuration for `get_domain`
                 # @return [::Gapic::Config::Method]
                 #
@@ -807,6 +935,8 @@ module Google
                   @generate_discovered_resources_topology = ::Gapic::Config::Method.new generate_discovered_resources_topology_config
                   get_schema_config = parent_rpcs.get_schema if parent_rpcs.respond_to? :get_schema
                   @get_schema = ::Gapic::Config::Method.new get_schema_config
+                  explore_schema_config = parent_rpcs.explore_schema if parent_rpcs.respond_to? :explore_schema
+                  @explore_schema = ::Gapic::Config::Method.new explore_schema_config
                   get_domain_config = parent_rpcs.get_domain if parent_rpcs.respond_to? :get_domain
                   @get_domain = ::Gapic::Config::Method.new get_domain_config
                   list_domains_config = parent_rpcs.list_domains if parent_rpcs.respond_to? :list_domains

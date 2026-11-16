@@ -47,10 +47,12 @@ module Google
         #     Optional. Estimate for the in-target ratio given the line item's audience
         #     targeting. This field is only applicable if
         #     {::Google::Ads::AdManager::V1::GrpSettings#provider provider} is Nielsen,
-        #     [LineItem.primary_goal.unit_type][] is in-target impressions, and
-        #     [LineItemCostType] is in-target CPM. This field determines the in-target
-        #     ratio to use for pacing Nielsen line items before Nielsen reporting data is
-        #     available. Represented as a milli percent, so 55.7% becomes 55700.
+        #     {::Google::Ads::AdManager::V1::Goal#unit_type Goal.unitType} is in-target
+        #     impressions, and
+        #     {::Google::Ads::AdManager::V1::LineItemCostTypeEnum::LineItemCostType LineItemCostTypeEnum.LineItemCostType}
+        #     is in-target CPM. This field determines the in-target ratio to use for
+        #     pacing Nielsen line items before Nielsen reporting data is available.
+        #     Represented as a milli percent, so 55.7% becomes 55700.
         # @!attribute [rw] nielsen_ctv_pacing_type
         #   @return [::Google::Ads::AdManager::V1::NielsenCtvPacingEnum::NielsenCtvPacing]
         #     Optional. Specifies which pacing computation to apply in pacing to
@@ -63,7 +65,7 @@ module Google
         #   @return [::Boolean]
         #     Optional. Specifies whether to apply true coviewing in Nielsen Line Item
         #     auto pacing. This field can only be true if
-        #     {::Google::Ads::AdManager::V1::GrpSettings#nielsen_ctv_pacing_type nielsen_ctv_pacing_type}
+        #     {::Google::Ads::AdManager::V1::GrpSettings#nielsen_ctv_pacing_type nielsenCtvPacingType}
         #     is not NONE.
         class GrpSettings
           include ::Google::Protobuf::MessageExts

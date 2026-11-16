@@ -26,7 +26,7 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Identifier. The resource name of BackupPlanAssociation in
-        #     below format Format :
+        #     below format Format:
         #     projects/\\{project}/locations/\\{location}/backupPlanAssociations/\\{backupPlanAssociationId}
         # @!attribute [rw] resource_type
         #   @return [::String]
@@ -84,6 +84,11 @@ module Google
         #
         #     Format:
         #     `projects/{project}/locations/{location}/backupPlans/{backup_plan}/revisions/{revision_id}`
+        # @!attribute [r] auto_protection_policy_binding
+        #   @return [::String]
+        #     Output only. The resource name of the `AutoProtectionPolicyBinding` that
+        #     manages this association, if any. Format:
+        #     `projects/{project}/locations/{location}/autoProtectionPolicies/{policy}/bindings/{binding}`.
         class BackupPlanAssociation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -317,6 +322,13 @@ module Google
         #
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] auto_protection_policy_binding
+        #   @return [::String]
+        #     Optional. This field is exclusively used by Backup and DR's auto-protection
+        #     feature. The resource name of the `AutoProtectionPolicyBinding` that
+        #     triggered the deletion of this association.
+        #     Format:
+        #     `projects/{project}/locations/{location}/autoProtectionPolicies/{policy}/bindings/{binding}`.
         class DeleteBackupPlanAssociationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

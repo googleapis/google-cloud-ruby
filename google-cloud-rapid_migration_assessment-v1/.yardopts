@@ -1,12 +1,9 @@
 --no-private
---title="Rapid Migration Assessment V1 API"
---exclude _pb\.rb$
+--title="Obsolete Gem google-cloud-rapid_migration_assessment-v1"
 --markup markdown
 --markup-provider redcarpet
 
 ./lib/**/*.rb
-./proto_docs/**/*.rb
 -
 README.md
 LICENSE.md
-AUTHENTICATION.md

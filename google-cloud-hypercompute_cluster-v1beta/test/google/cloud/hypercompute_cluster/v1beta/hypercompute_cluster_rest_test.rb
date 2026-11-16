@@ -358,6 +358,64 @@ class ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Rest::C
     end
   end
 
+  def test_list_nodes
+    # Create test objects.
+    client_result = ::Google::Cloud::HypercomputeCluster::V1beta::ListNodesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_nodes_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Rest::ServiceStub.stub :transcode_list_nodes_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_nodes_client_stub do
+        # Create client
+        c = ::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_nodes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_nodes parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_nodes ::Google::Cloud::HypercomputeCluster::V1beta::ListNodesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_nodes({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_nodes(::Google::Cloud::HypercomputeCluster::V1beta::ListNodesRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_nodes_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

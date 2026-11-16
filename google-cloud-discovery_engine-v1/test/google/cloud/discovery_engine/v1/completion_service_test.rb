@@ -129,6 +129,82 @@ class ::Google::Cloud::DiscoveryEngine::V1::CompletionService::ClientTest < Mini
     end
   end
 
+  def test_advanced_complete_query
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    completion_config = "hello world"
+    query = "hello world"
+    query_model = "hello world"
+    user_pseudo_id = "hello world"
+    user_info = {}
+    include_tail_suggestions = true
+    boost_spec = {}
+    suggestion_types = [:SUGGESTION_TYPE_UNSPECIFIED]
+    suggestion_type_specs = [{}]
+    experiment_ids = ["hello world"]
+
+    advanced_complete_query_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :advanced_complete_query, name
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest, request
+      assert_equal "hello world", request["completion_config"]
+      assert_equal "hello world", request["query"]
+      assert_equal "hello world", request["query_model"]
+      assert_equal "hello world", request["user_pseudo_id"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::UserInfo), request["user_info"]
+      assert_equal true, request["include_tail_suggestions"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest::BoostSpec), request["boost_spec"]
+      assert_equal [:SUGGESTION_TYPE_UNSPECIFIED], request["suggestion_types"]
+      assert_kind_of ::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest::SuggestionTypeSpec, request["suggestion_type_specs"].first
+      assert_equal ["hello world"], request["experiment_ids"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, advanced_complete_query_client_stub do
+      # Create client
+      c = ::Google::Cloud::DiscoveryEngine::V1::CompletionService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.advanced_complete_query({ completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.advanced_complete_query completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.advanced_complete_query ::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest.new(completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.advanced_complete_query({ completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.advanced_complete_query(::Google::Cloud::DiscoveryEngine::V1::AdvancedCompleteQueryRequest.new(completion_config: completion_config, query: query, query_model: query_model, user_pseudo_id: user_pseudo_id, user_info: user_info, include_tail_suggestions: include_tail_suggestions, boost_spec: boost_spec, suggestion_types: suggestion_types, suggestion_type_specs: suggestion_type_specs, experiment_ids: experiment_ids), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, advanced_complete_query_client_stub.call_rpc_count
+    end
+  end
+
   def test_import_suggestion_deny_list_entries
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new

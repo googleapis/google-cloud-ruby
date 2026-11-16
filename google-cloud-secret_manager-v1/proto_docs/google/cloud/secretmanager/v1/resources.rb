@@ -590,6 +590,23 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # These are the credentials required for Cloud SQL DB for Single user
+        # Managed Rotation.
+        # @!attribute [rw] instance_id
+        #   @return [::String]
+        #     Required. Instance ID of the Cloud SQL instance.
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Required. Username of the Cloud SQL instance.
+        # @!attribute [rw] password
+        #   @return [::String]
+        #     Optional. Password of the Cloud SQL instance. If this is not provided,
+        #     a random password will be generated.
+        class CloudSqlSingleUserCredentials
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

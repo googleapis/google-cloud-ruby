@@ -4252,6 +4252,108 @@ module Google
             end
 
             ##
+            # Fetches a Workspace's history of commits.
+            #
+            # @overload fetch_workspace_history(request, options = nil)
+            #   Pass arguments to `fetch_workspace_history` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload fetch_workspace_history(name: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `fetch_workspace_history` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The workspace's name.
+            #   @param page_size [::Integer]
+            #     Optional. Maximum number of commits to return. The server may return fewer
+            #     items than requested. If unspecified, the server will pick an appropriate
+            #     default.
+            #   @param page_token [::String]
+            #     Optional. Page token received from a previous `FetchWorkspaceHistory` call.
+            #     Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `FetchWorkspaceHistory`,
+            #     with the exception of `page_size`, must match the call that provided the
+            #     page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::CommitLogEntry>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dataform::V1beta1::CommitLogEntry>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryRequest.new
+            #
+            #   # Call the fetch_workspace_history method.
+            #   result = client.fetch_workspace_history request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::Dataform::V1beta1::CommitLogEntry.
+            #     p item
+            #   end
+            #
+            def fetch_workspace_history request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::FetchWorkspaceHistoryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.fetch_workspace_history.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.fetch_workspace_history.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.fetch_workspace_history.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :fetch_workspace_history, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dataform_stub, :fetch_workspace_history, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Applies a Git commit for uncommitted files in a Workspace.
             #
             # @overload commit_workspace_changes(request, options = nil)
@@ -6098,6 +6200,104 @@ module Google
 
               @dataform_stub.call_rpc :create_compilation_result, request, options: options do |response, operation|
                 yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new CompilationResult in a given project and location
+            # asynchronously.
+            #
+            # @overload create_compilation_result_long_running(request, options = nil)
+            #   Pass arguments to `create_compilation_result_long_running` via a request object, either of type
+            #   {::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_compilation_result_long_running(parent: nil, compilation_result: nil)
+            #   Pass arguments to `create_compilation_result_long_running` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The repository in which to create the compilation result. Must be
+            #     in the format `projects/*/locations/*/repositories/*`.
+            #   @param compilation_result [::Google::Cloud::Dataform::V1beta1::CompilationResult, ::Hash]
+            #     Required. The compilation result to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataform/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest.new
+            #
+            #   # Call the create_compilation_result_long_running method.
+            #   result = client.create_compilation_result_long_running request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def create_compilation_result_long_running request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataform::V1beta1::CreateCompilationResultRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_compilation_result_long_running.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataform::V1beta1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_compilation_result_long_running.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_compilation_result_long_running.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataform_stub.call_rpc :create_compilation_result_long_running, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -8082,6 +8282,11 @@ module Google
                 #
                 attr_reader :fetch_git_ahead_behind
                 ##
+                # RPC-specific configuration for `fetch_workspace_history`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :fetch_workspace_history
+                ##
                 # RPC-specific configuration for `commit_workspace_changes`
                 # @return [::Gapic::Config::Method]
                 #
@@ -8181,6 +8386,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_compilation_result
+                ##
+                # RPC-specific configuration for `create_compilation_result_long_running`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_compilation_result_long_running
                 ##
                 # RPC-specific configuration for `query_compilation_result_actions`
                 # @return [::Gapic::Config::Method]
@@ -8353,6 +8563,8 @@ module Google
                   @fetch_file_git_statuses = ::Gapic::Config::Method.new fetch_file_git_statuses_config
                   fetch_git_ahead_behind_config = parent_rpcs.fetch_git_ahead_behind if parent_rpcs.respond_to? :fetch_git_ahead_behind
                   @fetch_git_ahead_behind = ::Gapic::Config::Method.new fetch_git_ahead_behind_config
+                  fetch_workspace_history_config = parent_rpcs.fetch_workspace_history if parent_rpcs.respond_to? :fetch_workspace_history
+                  @fetch_workspace_history = ::Gapic::Config::Method.new fetch_workspace_history_config
                   commit_workspace_changes_config = parent_rpcs.commit_workspace_changes if parent_rpcs.respond_to? :commit_workspace_changes
                   @commit_workspace_changes = ::Gapic::Config::Method.new commit_workspace_changes_config
                   reset_workspace_changes_config = parent_rpcs.reset_workspace_changes if parent_rpcs.respond_to? :reset_workspace_changes
@@ -8393,6 +8605,8 @@ module Google
                   @get_compilation_result = ::Gapic::Config::Method.new get_compilation_result_config
                   create_compilation_result_config = parent_rpcs.create_compilation_result if parent_rpcs.respond_to? :create_compilation_result
                   @create_compilation_result = ::Gapic::Config::Method.new create_compilation_result_config
+                  create_compilation_result_long_running_config = parent_rpcs.create_compilation_result_long_running if parent_rpcs.respond_to? :create_compilation_result_long_running
+                  @create_compilation_result_long_running = ::Gapic::Config::Method.new create_compilation_result_long_running_config
                   query_compilation_result_actions_config = parent_rpcs.query_compilation_result_actions if parent_rpcs.respond_to? :query_compilation_result_actions
                   @query_compilation_result_actions = ::Gapic::Config::Method.new query_compilation_result_actions_config
                   list_workflow_configs_config = parent_rpcs.list_workflow_configs if parent_rpcs.respond_to? :list_workflow_configs

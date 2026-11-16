@@ -37,7 +37,8 @@ module Google
             # https://support.google.com/admanager/answer/7519021#spotlight
             #
             # Cost per action. The line item
-            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::SPONSORSHIP LineItemTypeEnum.LineItemType.SPONSORSHIP}
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
@@ -46,7 +47,8 @@ module Google
             CPA = 1
 
             # Cost per click. The line item
-            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::SPONSORSHIP LineItemTypeEnum.LineItemType.SPONSORSHIP}
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
@@ -57,14 +59,16 @@ module Google
             CPC = 2
 
             # Cost per day. The line item
-            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::SPONSORSHIP LineItemTypeEnum.LineItemType.SPONSORSHIP}
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::NETWORK LineItemTypeEnum.LineItemType.NETWORK}
             CPD = 3
 
             # Cost per mille (thousand) impressions. The line item
-            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::SPONSORSHIP LineItemTypeEnum.LineItemType.SPONSORSHIP}
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
@@ -75,26 +79,29 @@ module Google
             CPM = 4
 
             # Cost per mille (thousand) Active View viewable impressions. The line item
-            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
             VCPM = 5
 
             # Cost per millie (thousand) in-target impressions. The line item
-            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
             CPM_IN_TARGET = 6
 
             # Cost for the entire flight of the deal. The line item
-            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be must be
-            # one of:
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # must be one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::SPONSORSHIP LineItemTypeEnum.LineItemType.SPONSORSHIP}
             CPF = 7
 
             # Cost per completed view. The line item
-            # {::Google::Ads::AdManager::V1::LineItem#line_item_type type} must be one of:
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}.
             CPCV = 8

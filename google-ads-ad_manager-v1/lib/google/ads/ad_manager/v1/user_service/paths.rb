@@ -25,6 +25,37 @@ module Google
           # Path helper methods for the UserService API.
           module Paths
             ##
+            # Create a fully-qualified Network resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}`
+            #
+            # @param network_code [String]
+            #
+            # @return [::String]
+            def network_path network_code:
+              "networks/#{network_code}"
+            end
+
+            ##
+            # Create a fully-qualified Role resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `networks/{network_code}/roles/{role}`
+            #
+            # @param network_code [String]
+            # @param role [String]
+            #
+            # @return [::String]
+            def role_path network_code:, role:
+              raise ::ArgumentError, "network_code cannot contain /" if network_code.to_s.include? "/"
+
+              "networks/#{network_code}/roles/#{role}"
+            end
+
+            ##
             # Create a fully-qualified User resource string.
             #
             # The resource will be in the following format:

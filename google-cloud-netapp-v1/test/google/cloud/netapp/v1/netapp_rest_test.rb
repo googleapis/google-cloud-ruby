@@ -797,6 +797,114 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_start_split
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    start_split_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_start_split_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, start_split_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.start_split({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.start_split name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.start_split ::Google::Cloud::NetApp::V1::StartSplitRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.start_split({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.start_split(::Google::Cloud::NetApp::V1::StartSplitRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, start_split_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_split_status
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::SplitStatus.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_split_status_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_get_split_status_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_split_status_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_split_status({ name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_split_status name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_split_status ::Google::Cloud::NetApp::V1::GetSplitStatusRequest.new(name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_split_status({ name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_split_status(::Google::Cloud::NetApp::V1::GetSplitStatusRequest.new(name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_split_status_client_stub.call_count
+      end
+    end
+  end
+
   def test_establish_volume_peering
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -4002,6 +4110,177 @@ class ::Google::Cloud::NetApp::V1::NetApp::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, execute_ontap_patch_client_stub.call_count
+      end
+    end
+  end
+
+  def test_restore_volume
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    backup_source = {}
+    ontap_volume_target = {}
+    name = "hello world"
+
+    restore_volume_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_restore_volume_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, restore_volume_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.restore_volume({ backup_source: backup_source, ontap_volume_target: ontap_volume_target, name: name }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.restore_volume backup_source: backup_source, ontap_volume_target: ontap_volume_target, name: name do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.restore_volume ::Google::Cloud::NetApp::V1::RestoreVolumeRequest.new(backup_source: backup_source, ontap_volume_target: ontap_volume_target, name: name) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.restore_volume({ backup_source: backup_source, ontap_volume_target: ontap_volume_target, name: name }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.restore_volume(::Google::Cloud::NetApp::V1::RestoreVolumeRequest.new(backup_source: backup_source, ontap_volume_target: ontap_volume_target, name: name), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, restore_volume_client_stub.call_count
+      end
+    end
+  end
+
+  def test_list_backup_configs
+    # Create test objects.
+    client_result = ::Google::Cloud::NetApp::V1::ListBackupConfigsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    order_by = "hello world"
+    filter = "hello world"
+
+    list_backup_configs_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_list_backup_configs_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_backup_configs_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_backup_configs({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_backup_configs parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_backup_configs ::Google::Cloud::NetApp::V1::ListBackupConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_backup_configs({ parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_backup_configs(::Google::Cloud::NetApp::V1::ListBackupConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token, order_by: order_by, filter: filter), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_backup_configs_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_backup_config
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    volume_uuid = "hello world"
+    backup_config = {}
+    update_mask = {}
+
+    update_backup_config_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::NetApp::V1::NetApp::Rest::ServiceStub.stub :transcode_update_backup_config_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_backup_config_client_stub do
+        # Create client
+        c = ::Google::Cloud::NetApp::V1::NetApp::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_backup_config({ name: name, volume_uuid: volume_uuid, backup_config: backup_config, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_backup_config name: name, volume_uuid: volume_uuid, backup_config: backup_config, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_backup_config ::Google::Cloud::NetApp::V1::UpdateBackupConfigRequest.new(name: name, volume_uuid: volume_uuid, backup_config: backup_config, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_backup_config({ name: name, volume_uuid: volume_uuid, backup_config: backup_config, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_backup_config(::Google::Cloud::NetApp::V1::UpdateBackupConfigRequest.new(name: name, volume_uuid: volume_uuid, backup_config: backup_config, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_backup_config_client_stub.call_count
       end
     end
   end

@@ -73,7 +73,7 @@ module Google
           if read_time
             batch_get_req[:read_time] = read_time_to_timestamp(read_time)
           end
-          firestore.batch_get_documents batch_get_req, call_options(parent: database_path)
+          firestore.batch_get_documents batch_get_req, call_options(parent: database_path, transaction: transaction)
         end
 
         ##
@@ -85,13 +85,16 @@ module Google
         # method.
         def list_documents parent, collection_id, token: nil, max: nil, read_time: nil
           mask = { field_paths: [] }
-          paged_enum = firestore.list_documents parent: parent,
-                                                collection_id: collection_id,
-                                                page_size: max,
-                                                page_token: token,
-                                                mask: mask,
-                                                show_missing: true,
-                                                read_time: read_time_to_timestamp(read_time)
+          list_docs_req = {
+            parent:        parent,
+            collection_id: collection_id,
+            page_size:     max,
+            page_token:    token,
+            mask:          mask,
+            show_missing:  true,
+            read_time:     read_time_to_timestamp(read_time)
+          }
+          paged_enum = firestore.list_documents list_docs_req, call_options(parent: database_path)
           paged_enum.response
         end
 
@@ -118,7 +121,7 @@ module Google
             page_size: max,
             read_time: read_time_to_timestamp(read_time)
           )
-          paged_enum = firestore.partition_query request
+          paged_enum = firestore.partition_query request, call_options(parent: database_path)
           paged_enum.response
         end
 
@@ -142,7 +145,7 @@ module Google
             run_query_req[:explain_options] = explain_options
           end
 
-          firestore.run_query run_query_req, call_options(parent: database_path)
+          firestore.run_query run_query_req, call_options(parent: database_path, transaction: transaction)
         end
 
         ##
@@ -160,7 +163,7 @@ module Google
           if explain_options
             request.explain_options = explain_options
           end
-          firestore.run_aggregation_query request
+          firestore.run_aggregation_query request, call_options(parent: database_path, transaction: transaction)
         end
 
         def listen enum
@@ -173,7 +176,7 @@ module Google
               database: database_path,
               options:  transaction_opt
             },
-            call_options(parent: database_path)
+            call_options(parent: database_path, transaction: transaction_opt)
           )
         end
 
@@ -184,7 +187,7 @@ module Google
           }
           commit_req[:transaction] = transaction if transaction
 
-          firestore.commit commit_req, call_options(parent: database_path)
+          firestore.commit commit_req, call_options(parent: database_path, transaction: transaction)
         end
 
         def rollback transaction
@@ -193,7 +196,7 @@ module Google
               database:    database_path,
               transaction: transaction
             },
-            call_options(parent: database_path)
+            call_options(parent: database_path, transaction: transaction)
           )
         end
 
@@ -236,15 +239,18 @@ module Google
 
         protected
 
-        def default_headers parent = nil
+        def default_headers parent = nil, transaction: nil
           parent ||= database_path
           routing_val = CGI.escapeURIComponent parent
-          { "x-goog-request-params" => "database=#{routing_val}" }
+          {
+            "x-goog-request-params" => "database=#{routing_val}",
+            "x-goog-is-transaction" => (!transaction.nil?).to_s
+          }
         end
 
-        def call_options parent: nil, token: nil
+        def call_options parent: nil, token: nil, transaction: nil
           Gapic::CallOptions.new(**{
-            metadata:   default_headers(parent),
+            metadata:   default_headers(parent, transaction: transaction),
             page_token: token
           }.compact)
         end

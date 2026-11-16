@@ -73,8 +73,18 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.rpcs.list_acl_policies.timeout = 60.0
+                  default_config.rpcs.list_acl_policies.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
                   default_config.rpcs.list_instances.timeout = 60.0
                   default_config.rpcs.list_instances.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.get_acl_policy.timeout = 60.0
+                  default_config.rpcs.get_acl_policy.retry_policy = {
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
@@ -83,9 +93,25 @@ module Google
                     initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                   }
 
+                  default_config.rpcs.create_acl_policy.timeout = 600.0
+
                   default_config.rpcs.create_instance.timeout = 600.0
 
+                  default_config.rpcs.update_acl_policy.timeout = 600.0
+
                   default_config.rpcs.update_instance.timeout = 600.0
+
+                  default_config.rpcs.delete_acl_policy.timeout = 600.0
+
+                  default_config.rpcs.get_acl_policy_revision.timeout = 60.0
+                  default_config.rpcs.get_acl_policy_revision.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
+
+                  default_config.rpcs.list_acl_policy_revisions.timeout = 60.0
+                  default_config.rpcs.list_acl_policy_revisions.retry_policy = {
+                    initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                  }
 
                   default_config.rpcs.delete_instance.timeout = 600.0
 
@@ -229,6 +255,113 @@ module Google
               # Service calls
 
               ##
+              # Lists all ACL policies owned by a project in either the specified
+              # location (region) or all locations.
+              #
+              # The location should have the following format:
+              #
+              # * `projects/{project_id}/locations/{location_id}`
+              #
+              # If `location_id` is specified as `-` (wildcard), then all regions
+              # available to the project are queried, and the results are aggregated.
+              #
+              # @overload list_acl_policies(request, options = nil)
+              #   Pass arguments to `list_acl_policies` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::ListAclPoliciesRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::ListAclPoliciesRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_acl_policies(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_acl_policies` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the ACL policy location using the form:
+              #         `projects/{project}/locations/{location}`
+              #     where `location` refers to a Google Cloud region.
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return.
+              #
+              #     If not specified, a default value of 1000 will be used by the service.
+              #     Regardless of the page_size value, the response may include a partial list
+              #     and a caller should only rely on response's
+              #     `next_page_token`
+              #     to determine if there are more ACL policies left to be queried.
+              #
+              #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     `ListAclPolicies` request, if any.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1::AclPolicy>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1::AclPolicy>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::ListAclPoliciesRequest.new
+              #
+              #   # Call the list_acl_policies method.
+              #   result = client.list_acl_policies request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Memorystore::V1::AclPolicy.
+              #     p item
+              #   end
+              #
+              def list_acl_policies request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::ListAclPoliciesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_acl_policies.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_acl_policies.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_acl_policies.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.list_acl_policies request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @memorystore_stub, :list_acl_policies, "acl_policies", request, result, options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Lists Instances in a given project and location.
               #
               # @overload list_instances(request, options = nil)
@@ -324,6 +457,86 @@ module Google
               end
 
               ##
+              # Gets the details of a specific Memorystore ACL policy.
+              #
+              # @overload get_acl_policy(request, options = nil)
+              #   Pass arguments to `get_acl_policy` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::GetAclPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::GetAclPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_acl_policy(name: nil)
+              #   Pass arguments to `get_acl_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Memorystore ACL policy resource name using the form:
+              #         `projects/{project}/locations/{location}/aclPolicies/{acl_policy}`
+              #     where `location` refers to a Google Cloud region.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Memorystore::V1::AclPolicy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Memorystore::V1::AclPolicy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::GetAclPolicyRequest.new
+              #
+              #   # Call the get_acl_policy method.
+              #   result = client.get_acl_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Memorystore::V1::AclPolicy.
+              #   p result
+              #
+              def get_acl_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::GetAclPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_acl_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_acl_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_acl_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.get_acl_policy request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Gets details of a single Instance.
               #
               # @overload get_instance(request, options = nil)
@@ -396,6 +609,102 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @memorystore_stub.get_instance request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Creates an ACL policy.
+              # The creation is executed synchronously and the policy is available for use
+              # immediately after the RPC returns.
+              #
+              # @overload create_acl_policy(request, options = nil)
+              #   Pass arguments to `create_acl_policy` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::CreateAclPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::CreateAclPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload create_acl_policy(parent: nil, acl_policy_id: nil, acl_policy: nil, request_id: nil)
+              #   Pass arguments to `create_acl_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the ACL policy location using the form:
+              #         `projects/{project}/locations/{location}`
+              #     where `location` refers to a Google Cloud region.
+              #   @param acl_policy_id [::String]
+              #     Required. The logical name of the ACL policy in the customer project
+              #     with the following restrictions:
+              #
+              #     * Must contain only lowercase letters, numbers, and hyphens.
+              #     * Must start with a letter.
+              #     * Must be between 1-63 characters.
+              #     * Must end with a number or a letter.
+              #     * Must be unique within the customer project / location
+              #   @param acl_policy [::Google::Cloud::Memorystore::V1::AclPolicy, ::Hash]
+              #     Required. The ACL policy that is to be created.
+              #   @param request_id [::String]
+              #     Optional. Idempotent request UUID.
+              #     .
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Memorystore::V1::AclPolicy]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Memorystore::V1::AclPolicy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::CreateAclPolicyRequest.new
+              #
+              #   # Call the create_acl_policy method.
+              #   result = client.create_acl_policy request
+              #
+              #   # The returned object is of type Google::Cloud::Memorystore::V1::AclPolicy.
+              #   p result
+              #
+              def create_acl_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::CreateAclPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.create_acl_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.create_acl_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.create_acl_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.create_acl_policy request, options do |result, operation|
                   yield result, operation if block_given?
                 end
               rescue ::Gapic::Rest::Error => e
@@ -518,6 +827,110 @@ module Google
               end
 
               ##
+              # Updates the ACL policy.
+              #
+              # The operation will apply the updated ACL policy to all the linked
+              # instances. The operation will return success if it successfully applied the
+              # policy to all the instances. If the operation completed with a failure, the
+              # service will continue to apply the policy via reconciliation for the failed
+              # instances even after operation completion to ensure eventual consistency.
+              #
+              # Completed longrunning.Operation will contain the new ACL policy object
+              # in the response field.
+              #
+              # @overload update_acl_policy(request, options = nil)
+              #   Pass arguments to `update_acl_policy` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::UpdateAclPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::UpdateAclPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload update_acl_policy(acl_policy: nil, update_mask: nil, request_id: nil)
+              #   Pass arguments to `update_acl_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param acl_policy [::Google::Cloud::Memorystore::V1::AclPolicy, ::Hash]
+              #     Required. The ACL policy to be updated.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Optional. Mask of fields to be updated. At least one path must be supplied
+              #     in this field. The elements of the repeated paths field may only include
+              #     these fields from `AclPolicy`:
+              #
+              #      *   `rules`
+              #   @param request_id [::String]
+              #     Optional. Idempotent request UUID.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::UpdateAclPolicyRequest.new
+              #
+              #   # Call the update_acl_policy method.
+              #   result = client.update_acl_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def update_acl_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::UpdateAclPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.update_acl_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.update_acl_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.update_acl_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.update_acl_policy request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Updates the parameters of a single Instance.
               #
               # @overload update_instance(request, options = nil)
@@ -614,6 +1027,272 @@ module Google
 
                 @memorystore_stub.update_instance request, options do |result, operation|
                   result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Deletes a specific ACL policy. This action will delete the ACL policy and
+              # all the rules associated with it. An ACL policy cannot be deleted if it is
+              # attached to an instance.
+              #
+              # @overload delete_acl_policy(request, options = nil)
+              #   Pass arguments to `delete_acl_policy` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::DeleteAclPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::DeleteAclPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload delete_acl_policy(name: nil, request_id: nil, etag: nil)
+              #   Pass arguments to `delete_acl_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Memorystore ACL policy resource name using the form:
+              #         `projects/{project}/locations/{location}/aclPolicies/{acl_policy_id}`
+              #     where `location` refers to a Google Cloud region.
+              #   @param request_id [::String]
+              #     Optional. Idempotent request UUID.
+              #   @param etag [::String]
+              #     Optional. Etag of the ACL policy. If this is different from the server's
+              #     etag, the request will fail with an ABORTED error.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Operation]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::DeleteAclPolicyRequest.new
+              #
+              #   # Call the delete_acl_policy method.
+              #   result = client.delete_acl_policy request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use it to
+              #   # check the status of an operation, cancel it, or wait for results.
+              #   # Here is how to wait for a response.
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "No response received."
+              #   end
+              #
+              def delete_acl_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::DeleteAclPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.delete_acl_policy.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.delete_acl_policy.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.delete_acl_policy.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.delete_acl_policy request, options do |result, operation|
+                  result = ::Gapic::Operation.new result, @operations_client, options: options
+                  yield result, operation if block_given?
+                  throw :response, result
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets details of a specific ACL policy revision.
+              #
+              # @overload get_acl_policy_revision(request, options = nil)
+              #   Pass arguments to `get_acl_policy_revision` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::GetAclPolicyRevisionRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::GetAclPolicyRevisionRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload get_acl_policy_revision(name: nil)
+              #   Pass arguments to `get_acl_policy_revision` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. Memorystore ACL policy revision resource name using the form:
+              #         `projects/{project}/locations/{location}/aclPolicies/{acl_policy}/revisions/{revision}`
+              #     where `location` refers to a Google Cloud region.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Google::Cloud::Memorystore::V1::AclPolicyRevision]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Google::Cloud::Memorystore::V1::AclPolicyRevision]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::GetAclPolicyRevisionRequest.new
+              #
+              #   # Call the get_acl_policy_revision method.
+              #   result = client.get_acl_policy_revision request
+              #
+              #   # The returned object is of type Google::Cloud::Memorystore::V1::AclPolicyRevision.
+              #   p result
+              #
+              def get_acl_policy_revision request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::GetAclPolicyRevisionRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_acl_policy_revision.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.get_acl_policy_revision.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.get_acl_policy_revision.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.get_acl_policy_revision request, options do |result, operation|
+                  yield result, operation if block_given?
+                end
+              rescue ::Gapic::Rest::Error => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Lists all ACL policy revisions in a given ACL policy.
+              #
+              # @overload list_acl_policy_revisions(request, options = nil)
+              #   Pass arguments to `list_acl_policy_revisions` via a request object, either of type
+              #   {::Google::Cloud::Memorystore::V1::ListAclPolicyRevisionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Memorystore::V1::ListAclPolicyRevisionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @overload list_acl_policy_revisions(parent: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_acl_policy_revisions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The resource name of the ACL policy to list revisions for.
+              #     Format: "projects/\\{project}/locations/\\{location}/aclPolicies/\\{acl_policy}"
+              #   @param page_size [::Integer]
+              #     Optional. The maximum number of items to return.
+              #   @param page_token [::String]
+              #     Optional. The `next_page_token` value returned from a previous
+              #     `ListAclPolicyRevisions` request, if any.
+              # @yield [result, operation] Access the result along with the TransportOperation object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1::AclPolicyRevision>]
+              # @yieldparam operation [::Gapic::Rest::TransportOperation]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Memorystore::V1::AclPolicyRevision>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/memorystore/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Memorystore::V1::ListAclPolicyRevisionsRequest.new
+              #
+              #   # Call the list_acl_policy_revisions method.
+              #   result = client.list_acl_policy_revisions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+              #   # over elements, and API calls will be issued to fetch pages as needed.
+              #   result.each do |item|
+              #     # Each element is of type ::Google::Cloud::Memorystore::V1::AclPolicyRevision.
+              #     p item
+              #   end
+              #
+              def list_acl_policy_revisions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Memorystore::V1::ListAclPolicyRevisionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.list_acl_policy_revisions.metadata.to_h
+
+                # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Memorystore::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                call_metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+                call_metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                options.apply_defaults timeout:      @config.rpcs.list_acl_policy_revisions.timeout,
+                                       metadata:     call_metadata,
+                                       retry_policy: @config.rpcs.list_acl_policy_revisions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @memorystore_stub.list_acl_policy_revisions request, options do |result, operation|
+                  result = ::Gapic::Rest::PagedEnumerable.new @memorystore_stub, :list_acl_policy_revisions, "acl_policy_revisions", request, result, options
                   yield result, operation if block_given?
                   throw :response, result
                 end
@@ -2569,17 +3248,17 @@ module Google
               # @example
               #
               #   # Modify the global config, setting the timeout for
-              #   # list_instances to 20 seconds,
+              #   # list_acl_policies to 20 seconds,
               #   # and all remaining timeouts to 10 seconds.
               #   ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.configure do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.list_instances.timeout = 20.0
+              #     config.rpcs.list_acl_policies.timeout = 20.0
               #   end
               #
               #   # Apply the above configuration only to a new client.
               #   client = ::Google::Cloud::Memorystore::V1::Memorystore::Rest::Client.new do |config|
               #     config.timeout = 10.0
-              #     config.rpcs.list_instances.timeout = 20.0
+              #     config.rpcs.list_acl_policies.timeout = 20.0
               #   end
               #
               # @!attribute [rw] endpoint
@@ -2709,25 +3388,60 @@ module Google
                 #
                 class Rpcs
                   ##
+                  # RPC-specific configuration for `list_acl_policies`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_acl_policies
+                  ##
                   # RPC-specific configuration for `list_instances`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list_instances
+                  ##
+                  # RPC-specific configuration for `get_acl_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_acl_policy
                   ##
                   # RPC-specific configuration for `get_instance`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_instance
                   ##
+                  # RPC-specific configuration for `create_acl_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :create_acl_policy
+                  ##
                   # RPC-specific configuration for `create_instance`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :create_instance
                   ##
+                  # RPC-specific configuration for `update_acl_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_acl_policy
+                  ##
                   # RPC-specific configuration for `update_instance`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :update_instance
+                  ##
+                  # RPC-specific configuration for `delete_acl_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :delete_acl_policy
+                  ##
+                  # RPC-specific configuration for `get_acl_policy_revision`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_acl_policy_revision
+                  ##
+                  # RPC-specific configuration for `list_acl_policy_revisions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_acl_policy_revisions
                   ##
                   # RPC-specific configuration for `delete_instance`
                   # @return [::Gapic::Config::Method]
@@ -2836,14 +3550,28 @@ module Google
 
                   # @private
                   def initialize parent_rpcs = nil
+                    list_acl_policies_config = parent_rpcs.list_acl_policies if parent_rpcs.respond_to? :list_acl_policies
+                    @list_acl_policies = ::Gapic::Config::Method.new list_acl_policies_config
                     list_instances_config = parent_rpcs.list_instances if parent_rpcs.respond_to? :list_instances
                     @list_instances = ::Gapic::Config::Method.new list_instances_config
+                    get_acl_policy_config = parent_rpcs.get_acl_policy if parent_rpcs.respond_to? :get_acl_policy
+                    @get_acl_policy = ::Gapic::Config::Method.new get_acl_policy_config
                     get_instance_config = parent_rpcs.get_instance if parent_rpcs.respond_to? :get_instance
                     @get_instance = ::Gapic::Config::Method.new get_instance_config
+                    create_acl_policy_config = parent_rpcs.create_acl_policy if parent_rpcs.respond_to? :create_acl_policy
+                    @create_acl_policy = ::Gapic::Config::Method.new create_acl_policy_config
                     create_instance_config = parent_rpcs.create_instance if parent_rpcs.respond_to? :create_instance
                     @create_instance = ::Gapic::Config::Method.new create_instance_config
+                    update_acl_policy_config = parent_rpcs.update_acl_policy if parent_rpcs.respond_to? :update_acl_policy
+                    @update_acl_policy = ::Gapic::Config::Method.new update_acl_policy_config
                     update_instance_config = parent_rpcs.update_instance if parent_rpcs.respond_to? :update_instance
                     @update_instance = ::Gapic::Config::Method.new update_instance_config
+                    delete_acl_policy_config = parent_rpcs.delete_acl_policy if parent_rpcs.respond_to? :delete_acl_policy
+                    @delete_acl_policy = ::Gapic::Config::Method.new delete_acl_policy_config
+                    get_acl_policy_revision_config = parent_rpcs.get_acl_policy_revision if parent_rpcs.respond_to? :get_acl_policy_revision
+                    @get_acl_policy_revision = ::Gapic::Config::Method.new get_acl_policy_revision_config
+                    list_acl_policy_revisions_config = parent_rpcs.list_acl_policy_revisions if parent_rpcs.respond_to? :list_acl_policy_revisions
+                    @list_acl_policy_revisions = ::Gapic::Config::Method.new list_acl_policy_revisions_config
                     delete_instance_config = parent_rpcs.delete_instance if parent_rpcs.respond_to? :delete_instance
                     @delete_instance = ::Gapic::Config::Method.new delete_instance_config
                     get_certificate_authority_config = parent_rpcs.get_certificate_authority if parent_rpcs.respond_to? :get_certificate_authority

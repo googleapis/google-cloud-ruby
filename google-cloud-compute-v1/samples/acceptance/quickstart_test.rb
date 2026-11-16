@@ -35,9 +35,10 @@ class ComputeQuickstartTest < Minitest::Test
     instance_name = random_instance_name
     @temp_instances << instance_name
 
-    assert_output(/Instance #{instance_name} created./) do
+    out, err = capture_io do
       create_instance project: project, zone: zone, instance_name: instance_name
     end
+    assert_match(/Instance #{instance_name} created./, out, "create_instance did not succeed. stderr:\n#{err}")
 
     assert_output(/Instances found in zone #{zone}:.+#{instance_name}/m) do
       list_instances project: project, zone: zone
@@ -47,8 +48,9 @@ class ComputeQuickstartTest < Minitest::Test
       list_all_instances project: project
     end
 
-    assert_output(/Instance #{instance_name} deleted./) do
+    out, err = capture_io do
       delete_instance project: project, zone: zone, instance_name: instance_name
     end
+    assert_match(/Instance #{instance_name} deleted./, out, "delete_instance did not succeed. stderr:\n#{err}")
   end
 end

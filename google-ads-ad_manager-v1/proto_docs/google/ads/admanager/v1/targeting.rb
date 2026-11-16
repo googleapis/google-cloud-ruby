@@ -22,12 +22,18 @@ module Google
     module AdManager
       module V1
         # Targeting expression.
+        # @!attribute [rw] inventory_url_targeting
+        #   @return [::Google::Ads::AdManager::V1::InventoryUrlTargeting]
+        #     Optional. Used to target/exclude specific websites.
         # @!attribute [rw] geo_targeting
         #   @return [::Google::Ads::AdManager::V1::GeoTargeting]
         #     Optional. Used to target/exclude various geo targets.
         # @!attribute [rw] technology_targeting
         #   @return [::Google::Ads::AdManager::V1::TechnologyTargeting]
         #     Optional. Used to target various technology targeting dimensions.
+        # @!attribute [rw] inventory_size_targeting
+        #   @return [::Google::Ads::AdManager::V1::InventorySizeTargeting]
+        #     Optional. Used to target/exclude ad requests for specific ad slot sizes.
         # @!attribute [rw] inventory_targeting
         #   @return [::Google::Ads::AdManager::V1::InventoryTargeting]
         #     Optional. Used to target/exclude various ad units and/or placements.
@@ -38,9 +44,18 @@ module Google
         #   @return [::Google::Ads::AdManager::V1::CustomTargeting]
         #     Optional. Used to target key/values, audience segments, and/or CMS
         #     metadata.
+        # @!attribute [rw] date_time_range_targeting
+        #   @return [::Google::Ads::AdManager::V1::DateTimeRangeTargeting]
+        #     Optional. Used to target a datetime range.
+        # @!attribute [rw] publisher_provided_signals_targeting
+        #   @return [::Google::Ads::AdManager::V1::PublisherProvidedSignalsTargeting]
+        #     Optional. Used to target publisher provided signals.
         # @!attribute [rw] user_domain_targeting
         #   @return [::Google::Ads::AdManager::V1::UserDomainTargeting]
         #     Optional. Used to target user domains.
+        # @!attribute [rw] contextual_targeting
+        #   @return [::Google::Ads::AdManager::V1::ContextualTargeting]
+        #     Optional. Used to target verticals / content labels
         # @!attribute [rw] video_position_targeting
         #   @return [::Google::Ads::AdManager::V1::VideoPositionTargeting]
         #     Optional. Used to target video positions.
@@ -56,7 +71,38 @@ module Google
         # @!attribute [rw] mobile_application_targeting
         #   @return [::Google::Ads::AdManager::V1::MobileApplicationTargeting]
         #     Optional. Used to target mobile applications.
+        # @!attribute [rw] day_part_targeting
+        #   @return [::Google::Ads::AdManager::V1::DayPartTargeting]
+        #     Optional. Used to target day parts.
+        # @!attribute [rw] buyer_user_list_targeting
+        #   @return [::Google::Ads::AdManager::V1::BuyerUserListTargeting]
+        #     Optional. Used to target buyer user lists.
         class Targeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a list of targeted and excluded sizes.
+        # @!attribute [rw] targeted_inventory_sizes
+        #   @return [::Array<::Google::Ads::AdManager::V1::Size>]
+        #     Optional. A list of sizes that should be targeted/included.
+        # @!attribute [rw] excluded_inventory_sizes
+        #   @return [::Array<::Google::Ads::AdManager::V1::Size>]
+        #     Optional. A list of sizes that should be excluded.
+        class InventorySizeTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a list of targeted and excluded inventory URLs and Sites.
+        # @!attribute [rw] targeted_inventory_urls
+        #   @return [::Array<::String>]
+        #     Optional. A list of inventory URL resource names that should be
+        #     targeted/included.
+        # @!attribute [rw] excluded_inventory_urls
+        #   @return [::Array<::String>]
+        #     Optional. A list of inventory URL resource names that should be excluded.
+        class InventoryUrlTargeting
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -380,6 +426,29 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Represents targeting for a range of datetimes.
+        # @!attribute [rw] targeted_range
+        #   @return [::Array<::Google::Type::Interval>]
+        #     Optional. The targeted datetime ranges.
+        class DateTimeRangeTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Publisher Provided Signals Targeting
+        # @!attribute [rw] targeted_taxonomy_categories
+        #   @return [::Array<::String>]
+        #     Optional. The resource names of the taxonomy categories that should be
+        #     targeted/included.
+        # @!attribute [rw] excluded_taxonomy_categories
+        #   @return [::Array<::String>]
+        #     Optional. The resource names of the taxonomy categories that should be
+        #     excluded.
+        class PublisherProvidedSignalsTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # User Domain Targeting
         # @!attribute [rw] targeted_user_domains
         #   @return [::Array<::String>]
@@ -388,6 +457,25 @@ module Google
         #   @return [::Array<::String>]
         #     Optional. A list of user domains that should be excluded.
         class UserDomainTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contextual Targeting
+        # @!attribute [rw] targeted_verticals
+        #   @return [::Array<::String>]
+        #     Optional. A list of verticals that should be targeted/included. Verticals
+        #     are `AdCategory` resources of type `VERTICAL`. Format:
+        #     `networks/{network_code}/adCategories/{ad_category_id}`
+        # @!attribute [rw] excluded_verticals
+        #   @return [::Array<::String>]
+        #     Optional. A list of verticals that should be excluded. Verticals are
+        #     `AdCategory` resources of type `VERTICAL`. Format:
+        #     `networks/{network_code}/adCategories/{ad_category_id}`
+        # @!attribute [rw] excluded_content_labels
+        #   @return [::Array<::String>]
+        #     Optional. A list of content labels that should be excluded.
+        class ContextualTargeting
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -415,9 +503,13 @@ module Google
         #     (e.g. midroll_index != 0).
         # @!attribute [rw] pod_position
         #   @return [::Integer]
-        #     Optional. The video position within a pod to target. This field must be
-        #     unset in order to target a specific video position (e.g. position_type),
-        #     bumper type (e.g. bumper_type), or custom ad spot (e.g. custom_spot_id).
+        #     Optional. The video position within a pod to target. If set, `adSpot`,
+        #     `bumperType`, and `positionType` must be unset.
+        # @!attribute [rw] ad_spot
+        #   @return [::String]
+        #     Optional. The resource name of the custom ad spot to target. If set,
+        #     `bumperType`, `podPosition`, and `positionType` must be unset. Format:
+        #     `networks/{network_code}/adSpots/{ad_spot_id}`
         # @!attribute [rw] position_type
         #   @return [::Google::Ads::AdManager::V1::VideoPositionEnum::VideoPosition]
         #     Optional. The position within a video to target. A video ad can target a
@@ -425,9 +517,8 @@ module Google
         #     index.
         # @!attribute [rw] bumper_type
         #   @return [::Google::Ads::AdManager::V1::TargetedVideoBumperTypeEnum::TargetedVideoBumperType]
-        #     Optional. The video bumper type to target. This field must be unset in
-        #     order to target a specific video position (e.g. position_type), pod
-        #     position (e.g. pod_position), or custom ad spot (e.g. custom_spot_id).
+        #     Optional. The video bumper type to target. If set, `adSpot`, `podPosition`,
+        #     and `positionType` must be unset.
         class VideoPosition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -539,6 +630,42 @@ module Google
         #     Optional. The resource names of the first-party applications that should be
         #     excluded.
         class FirstPartyMobileApplicationTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A day of the week and time interval within the day.
+        # @!attribute [rw] day_of_week
+        #   @return [::Google::Type::DayOfWeek]
+        #     Required. The day of the week.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Type::TimeOfDay]
+        #     Required. The start time of the day part.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Type::TimeOfDay]
+        #     Required. The end time of the day part.
+        class DayPart
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Day Part Targeting
+        # @!attribute [rw] targeted_day_parts
+        #   @return [::Array<::Google::Ads::AdManager::V1::DayPart>]
+        #     Optional. The targeted day parts.
+        # @!attribute [rw] dayparting_time_zone
+        #   @return [::Google::Ads::AdManager::V1::DaypartingTimeZoneEnum::DaypartingTimeZone]
+        #     Required. The time zone to use for the day parts.
+        class DayPartTargeting
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Buyer User List Targeting.
+        # @!attribute [r] has_buyer_user_list_targeting
+        #   @return [::Boolean]
+        #     Output only. Whether any buyer user lists are currently targeted.
+        class BuyerUserListTargeting
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

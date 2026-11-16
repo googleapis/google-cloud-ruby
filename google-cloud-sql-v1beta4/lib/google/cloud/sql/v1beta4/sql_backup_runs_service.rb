@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/sql/v1beta4/version"
 
 require "google/cloud/sql/v1beta4/sql_backup_runs_service/credentials"
+require "google/cloud/sql/v1beta4/sql_backup_runs_service/paths"
 require "google/cloud/sql/v1beta4/sql_backup_runs_service/client"
 require "google/cloud/sql/v1beta4/sql_backup_runs_service/rest"
 
@@ -31,6 +32,8 @@ module Google
     module Sql
       module V1beta4
         ##
+        # Service for managing database backups.
+        #
         # @example Load this service and instantiate a gRPC client
         #
         #     require "google/cloud/sql/v1beta4/sql_backup_runs_service"

@@ -72,7 +72,7 @@ instance_resource = {
       auto_delete: true,
       boot: true,
       initialize_params: {
-        source_image: "projects/debian-cloud/global/images/debian-11-bullseye-v20230306"
+        source_image: "projects/debian-cloud/global/images/family/debian-12"
       }
     }
   ],

@@ -22,16 +22,11 @@ module Google
     module BeyondCorp
       module AppConnectors
         module V1
-          # ResourceInfo represents the information/status of an app connector resource.
-          # Such as:
-          # - remote_agent
-          #   - container
-          #     - runtime
-          #     - appgateway
-          #       - appconnector
-          #         - appconnection
-          #           - tunnel
-          #       - logagent
+          # ResourceInfo represents the information or status of an app connector
+          # resource component that's used to report on various parts of the system. For
+          # example, ResourceInfo can be used to convey the status of a remote_agent,
+          # including the status of an appgateway for an runtime environment in a
+          # container instance.
           # @!attribute [rw] id
           #   @return [::String]
           #     Required. Unique Id for the resource.
@@ -50,6 +45,39 @@ module Google
           #   @return [::Array<::Google::Cloud::BeyondCorp::AppConnectors::V1::ResourceInfo>]
           #     List of Info for the sub level resources.
           class ResourceInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # ContainerHealthDetails reflects the health details of a container.
+          # @!attribute [rw] expected_config_version
+          #   @return [::String]
+          #     The version of the expected config.
+          # @!attribute [rw] current_config_version
+          #   @return [::String]
+          #     The version of the current config.
+          # @!attribute [rw] extended_status
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     The extended status. Such as ExitCode, StartedAt, FinishedAt, etc.
+          # @!attribute [rw] error_msg
+          #   @return [::String]
+          #     The latest error message.
+          class ContainerHealthDetails
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class ExtendedStatusEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+
+          # RemoteAgentDetails reflects the details of a remote agent.
+          class RemoteAgentDetails
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

@@ -66,11 +66,13 @@ module Google
           # @!attribute [rw] target_image
           #   @return [::String]
           #     The initial image the remote agent will attempt to run for the control
-          #     plane.
+          #     plane. Format would be a gcr image path, e.g.:
+          #     gcr.io/PROJECT-ID/my-image:tag1
           # @!attribute [rw] stable_image
           #   @return [::String]
           #     The stable image that the remote agent will fallback to if the target image
-          #     fails.
+          #     fails. Format would be a gcr image path, e.g.:
+          #     gcr.io/PROJECT-ID/my-image:tag1
           class ImageConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

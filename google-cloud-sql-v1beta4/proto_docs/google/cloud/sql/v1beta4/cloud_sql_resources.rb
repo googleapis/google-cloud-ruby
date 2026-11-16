@@ -806,6 +806,10 @@ module Google
         #     Input only. Determines whether an in-place major version upgrade of
         #     replicas happens when an in-place major version upgrade of a primary
         #     instance is initiated.
+        # @!attribute [rw] skip_precheck
+        #   @return [::Google::Protobuf::BoolValue]
+        #     Optional. Input only. Determines whether the precheck step is skipped
+        #     during a major version upgrade.
         # @!attribute [rw] tags
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Input only. Immutable. Tag keys and tag values that are bound to
@@ -830,6 +834,10 @@ module Google
         # @!attribute [r] dns_names
         #   @return [::Array<::Google::Cloud::Sql::V1beta4::DnsNameMapping>]
         #     Output only. The list of DNS names used by this instance.
+        # @!attribute [r] deployment_info
+        #   @return [::Google::Cloud::Sql::V1beta4::BlueGreenDeploymentInfo]
+        #     Output only. Deployment info for the instance. This is set if the instance
+        #     is currently part of any blue-green setup.
         # @!attribute [rw] database_center_integration_enabled
         #   @return [::Google::Protobuf::BoolValue]
         #     Optional. If true, instance metadata is sent to the Database Center. If
@@ -838,6 +846,15 @@ module Google
         #   @return [::Google::Cloud::Sql::V1beta4::DatabaseInstance::DatabaseCenterIntegration]
         #     Optional. State of the Database Center integration for this instance.
         #     When unspecified, Database Center integration is enabled by default.
+        # @!attribute [r] workload_replay_config
+        #   @return [::Google::Cloud::Sql::V1beta4::WorkloadReplayConfig]
+        #     Output only. The workload replay configuration for this instance. This
+        #     field is set only for workload replay instances.
+        # @!attribute [r] workload_capture_config
+        #   @return [::Google::Cloud::Sql::V1beta4::WorkloadCaptureConfig]
+        #     Output only. The workload capture configuration for this instance. This
+        #     field is set only when an active workload capture is present on the
+        #     instance.
         class DatabaseInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1007,6 +1024,191 @@ module Google
 
             # Database Center integration is disabled.
             DISABLED = 2
+          end
+        end
+
+        # Blue-green deployment metadata for a database instance. In a blue-green
+        # deployment, we maintain two environments, one of which is live.
+        # This message contains details about the blue-green deployment.
+        # @!attribute [r] deployment_id
+        #   @return [::String]
+        #     Output only. The resource ID of the blue-green deployment.
+        # @!attribute [r] source
+        #   @return [::Google::Cloud::Sql::V1beta4::BlueGreenDeploymentInfo::SourceRole]
+        #     Output only. The source instance for the Blue-Green deployment.
+        #
+        #     Note: The following fields are mutually exclusive: `source`, `target`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] target
+        #   @return [::Google::Cloud::Sql::V1beta4::BlueGreenDeploymentInfo::TargetRole]
+        #     Output only. The target instance for the Blue-Green deployment.
+        #
+        #     Note: The following fields are mutually exclusive: `target`, `source`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Sql::V1beta4::BlueGreenDeploymentInfo::State]
+        #     Output only. The current state of blue-green-deployment for UI tags
+        class BlueGreenDeploymentInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The source instance for the Blue-Green deployment.
+          # @!attribute [r] target_id
+          #   @return [::Google::Cloud::Sql::V1beta4::InstanceReference]
+          #     Output only. The target instance paired with this source instance in a
+          #     blue-green deployment.
+          class SourceRole
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The target instance for the Blue-Green deployment.
+          # @!attribute [r] source_id
+          #   @return [::Google::Cloud::Sql::V1beta4::InstanceReference]
+          #     Output only. The source instance paired with this target instance in a
+          #     blue-green deployment.
+          class TargetRole
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The state of blue-green-deployment for UI tags
+          module State
+            # The state of the deployment is unknown.
+            STATE_UNSPECIFIED = 0
+
+            # The deployment is pre-switchover.
+            PRE_SWITCHOVER = 1
+
+            # The deployment is post-switchover.
+            POST_SWITCHOVER = 2
+          end
+        end
+
+        # The workload replay configuration for a Cloud SQL replay instance.
+        # @!attribute [r] workload_id
+        #   @return [::String]
+        #     Output only. The ID of the captured workload being replayed.
+        # @!attribute [r] source_instance
+        #   @return [::String]
+        #     Output only. The name of the source instance, excluding the project ID,
+        #     where the workload was captured.
+        # @!attribute [r] replay_mode
+        #   @return [::Google::Cloud::Sql::V1beta4::WorkloadReplayConfig::ReplayMode]
+        #     Output only. The mode of the workload replay.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Sql::V1beta4::WorkloadReplayConfig::State]
+        #     Output only. The state of the workload replay.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The start time of the workload replay.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The end time of the workload replay. This field is unset while
+        #     the replay is running.
+        class WorkloadReplayConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The mode of workload replay.
+          module ReplayMode
+            # Default value. This value is unused.
+            REPLAY_MODE_UNSPECIFIED = 0
+
+            # Live workload replay mode.
+            LIVE = 1
+
+            # Offline (delayed) workload replay mode.
+            OFFLINE = 2
+          end
+
+          # The state of the workload replay.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # Workload replay is currently running.
+            RUNNING = 1
+
+            # Workload replay completed successfully. Cloud SQL sets this state when
+            # all captured workload files finish replaying or when you explicitly
+            # stop the replay.
+            COMPLETED = 2
+
+            # Workload replay failed.
+            FAILED = 3
+
+            # Workload replay was terminated automatically. Cloud SQL sets this state
+            # when it automatically stops the replay because of a conflicting
+            # operation.
+            TERMINATED = 4
+          end
+        end
+
+        # The workload capture configuration for a Cloud SQL primary instance.
+        # @!attribute [r] workload_id
+        #   @return [::String]
+        #     Output only. The ID of the captured workload.
+        # @!attribute [r] capture_mode
+        #   @return [::Google::Cloud::Sql::V1beta4::WorkloadCaptureConfig::CaptureMode]
+        #     Output only. The mode of the workload capture.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Sql::V1beta4::WorkloadCaptureConfig::State]
+        #     Output only. The state of the workload capture.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The start time of the workload capture.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The end time of the workload capture. This field is unset
+        #     while the capture is running.
+        # @!attribute [r] replay_instance
+        #   @return [::String]
+        #     Output only. The name of the replay instance, excluding the project ID, if
+        #     live replay is enabled.
+        # @!attribute [r] retention_days
+        #   @return [::Integer]
+        #     Output only. The retention period in days for the captured workload.
+        # @!attribute [r] backup_id
+        #   @return [::String]
+        #     Output only. The base backup ID associated with the workload capture.
+        # @!attribute [r] max_capture_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. The maximum duration for this workload capture.
+        class WorkloadCaptureConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The mode of workload capture.
+          module CaptureMode
+            # Default value. This value is unused.
+            CAPTURE_MODE_UNSPECIFIED = 0
+
+            # Captures the workload on the primary instance without live replay.
+            CAPTURE_ONLY = 1
+
+            # Captures the workload and simultaneously replays it on a live replay
+            # instance.
+            CAPTURE_AND_LIVE_REPLAY = 2
+          end
+
+          # The state of the workload capture.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # Workload capture is currently running.
+            RUNNING = 1
+
+            # Workload capture completed successfully. Cloud SQL sets this state when
+            # you explicitly stop the capture.
+            COMPLETED = 2
+
+            # Workload capture failed.
+            FAILED = 3
+
+            # Workload capture was terminated automatically. Cloud SQL sets this state
+            # when it automatically stops the capture because of a conflicting
+            # operation or because the capture reached its maximum duration.
+            TERMINATED = 4
           end
         end
 
@@ -1869,6 +2071,11 @@ module Google
         #     Optional. This field has the same purpose as restore_instance_settings,
         #     changes any instance settings stored in the backup you are restoring from.
         #     With the difference that these fields are cleared in the settings.
+        # @!attribute [rw] ignore_maintenance_version
+        #   @return [::Boolean]
+        #     Optional. If true, the restore operation proceeds even if the target
+        #     instance's maintenance version is older than the source instance's
+        #     maintenance version.
         class InstancesRestoreBackupRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2025,6 +2232,9 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     Optional. This is always `sql#preCheckMajorVersionUpgradeContext`.
+        # @!attribute [rw] max_runtime
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The maximum allowed runtime for the precheck operation.
         class PreCheckMajorVersionUpgradeContext
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2283,6 +2493,15 @@ module Google
             # The replication user is missing specific privileges to setup DDL
             # replication. (e.g. CREATE EVENT TRIGGER, CREATE SCHEMA) for PostgreSQL.
             PG_DDL_REPLICATION_INSUFFICIENT_PRIVILEGE = 58
+
+            # Read replicas of the Writable Destination instance will be recreated
+            # after external synchronization is complete, causing downtime on read
+            # replicas.
+            WRITABLE_DESTINATION_REPLICA_RECREATION_DOWNTIME = 59
+
+            # A warning that disk storage auto increase is disabled on the destination
+            # instance for a Writable Destination migration.
+            WRITABLE_DESTINATION_STORAGE_AUTO_INCREASE_DISABLED = 60
           end
         end
 
@@ -2469,7 +2688,7 @@ module Google
         #   @return [::String]
         #     Optional. The network attachment of the consumer network that the
         #     Private Service Connect enabled Cloud SQL instance is
-        #     authorized to connect via PSC interface.
+        #     authorized to connect using the PSC interface.
         #     format: projects/PROJECT/regions/REGION/networkAttachments/ID
         # @!attribute [rw] psc_auto_dns_enabled
         #   @return [::Boolean]
@@ -2792,6 +3011,15 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     This is always `sql#diskEncryptionConfiguration`.
+        # @!attribute [rw] confidential_mode
+        #   @return [::Boolean]
+        #     Optional. If true, enables Confidential Mode for the instance's Hyperdisk
+        #     Balanced volumes. Only supported for zonal C4A instances currently.
+        # @!attribute [rw] cmek_source_log_encryption_enforced
+        #   @return [::Boolean]
+        #     Optional. Whether to enforce CMEK log encryption at source. When enforced,
+        #     transaction logs are encrypted prior to being uploaded to Cloud Storage. If
+        #     not enforced, then CMEK logs are encrypted by the Cloud Storage service.
         class DiskEncryptionConfiguration
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2886,6 +3114,27 @@ module Google
         #     The PreCheckMajorVersionUpgradeContext message itself contains the details
         #     for that pre-check, such as the target database version for the upgrade
         #     and the results of the check (including any warnings or errors found).
+        # @!attribute [rw] start_workload_capture_context
+        #   @return [::Google::Cloud::Sql::V1beta4::StartWorkloadCaptureContext]
+        #     The context for the `StartWorkloadCapture` operation, which contains
+        #     details to start recording the workload (SQL queries) on a Cloud SQL
+        #     instance.
+        # @!attribute [rw] stop_workload_capture_context
+        #   @return [::Google::Cloud::Sql::V1beta4::StopWorkloadCaptureContext]
+        #     The context for the `StopWorkloadCapture` operation, which contains
+        #     details to stop recording the workload (SQL queries) on a Cloud SQL
+        #     instance.
+        # @!attribute [rw] start_workload_replay_context
+        #   @return [::Google::Cloud::Sql::V1beta4::StartWorkloadReplayContext]
+        #     The context for the `StartWorkloadReplay` operation, which contains details
+        #     about starting the execution of a captured workload (recorded read and
+        #     write SQL queries) on a replay instance (the Cloud SQL
+        #     instance where the recorded SQL queries are executed).
+        # @!attribute [rw] stop_workload_replay_context
+        #   @return [::Google::Cloud::Sql::V1beta4::StopWorkloadReplayContext]
+        #     The context for the `StopWorkloadReplay` operation, which contains details
+        #     about stopping the execution of a captured workload (recorded read and
+        #     write SQL queries) on a replay instance.
         # @!attribute [rw] name
         #   @return [::String]
         #     An identifier that uniquely identifies the operation. You can use this
@@ -3086,6 +3335,15 @@ module Google
             # Pre-checks for major version upgrade.
             PRE_CHECK_MAJOR_VERSION_UPGRADE = 54
 
+            # Creates a new Blue-Green deployment.
+            CREATE_BLUE_GREEN_DEPLOYMENT = 55
+
+            # Switches over a Blue-Green deployment.
+            SWITCHOVER_BLUE_GREEN_DEPLOYMENT = 56
+
+            # Deletes a Blue-Green deployment.
+            DELETE_BLUE_GREEN_DEPLOYMENT = 57
+
             # This operation type represents individual steps in a multi-step setup
             # migration workflow: including configuration, replication,
             # switchover/back, and data reseeding, as defined by operation's intent.
@@ -3093,6 +3351,10 @@ module Google
 
             # Sends a message to a Cloud SQL agent.
             AGENT_SEND_MESSAGE = 59
+
+            # Reconciles network infrastructure (e.g. Private Service Connect,
+            # Automated DNS Records).
+            RECONCILE_NETWORKING = 64
           end
 
           # The status of an operation.
@@ -3421,9 +3683,18 @@ module Google
         # @!attribute [rw] insights_config
         #   @return [::Google::Cloud::Sql::V1beta4::InsightsConfig]
         #     Insights configuration, for now relevant only for Postgres.
+        # @!attribute [rw] msdtc_enabled
+        #   @return [::Boolean]
+        #     Optional. Enables Microsoft Distributed Transaction Coordinator (MSDTC) for
+        #     SQL Server.
+        # @!attribute [rw] msdtc_rpc_auth_mode
+        #   @return [::Google::Cloud::Sql::V1beta4::Settings::MsdtcRpcAuthMode]
+        #     Optional. RPC authentication mode for Microsoft Distributed Transaction
+        #     Coordinator (MSDTC).
         # @!attribute [rw] password_validation_policy
         #   @return [::Google::Cloud::Sql::V1beta4::PasswordValidationPolicy]
-        #     The local user password validation policy of the instance.
+        #     The local user password validation policy of the instance for PostgreSQL
+        #     and MySQL.
         # @!attribute [rw] sql_server_audit_config
         #   @return [::Google::Cloud::Sql::V1beta4::SqlServerAuditConfig]
         #     SQL Server specific audit configuration.
@@ -3513,6 +3784,10 @@ module Google
         #   @return [::Google::Cloud::Sql::V1beta4::PerformanceCaptureConfig]
         #     Optional. Configuration for Performance Capture, provides diagnostic
         #     metrics during high load situations.
+        # @!attribute [rw] initial_users_config
+        #   @return [::Google::Cloud::Sql::V1beta4::InitialUsersConfig]
+        #     Optional. Input only. Users to be created on the instance during instance
+        #     creation.
         class Settings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3539,6 +3814,30 @@ module Google
 
             # The instance starts upon receiving requests.
             ON_DEMAND = 3
+          end
+
+          # RPC authentication modes for Microsoft Distributed Transaction Coordinator
+          # (MSDTC).
+          module MsdtcRpcAuthMode
+            # Unspecified RPC authentication mode.
+            MSDTC_RPC_AUTH_MODE_UNSPECIFIED = 0
+
+            # Allow only secure RPC calls. Both servers (caller and receiver) must
+            # successfully verify each other's identities, typically using Active
+            # Directory machine accounts and Kerberos Service Principal Names (SPNs).
+            # This is equivalent to Mutual Authentication in Microsoft SQL Server on
+            # Windows.
+            ALLOW_ONLY_SECURE_RPC_CALLS = 1
+
+            # Similar to Incoming authentication mode in Microsoft SQL Server on
+            # Windows, the caller authenticates to the receiver.
+            # The receiver verifies the caller's identity, but the Receiver does not
+            # authenticate itself back to the caller.
+            FALLBACK_TO_UNSECURE_RPC_IF_NECESSARY = 2
+
+            # No authentication. Highly insecure and thus should only be used on
+            # already secure networks and never over public IP.
+            TURN_OFF_RPC_SECURITY = 3
           end
 
           # The list of Cloud SQL editions available to users.
@@ -3734,6 +4033,54 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # DNS Entry for the primary instance in a replication topology.
+        # @!attribute [rw] dns
+        #   @return [::String]
+        #     Required. The DNS name.
+        # @!attribute [rw] ipv4_address
+        #   @return [::String]
+        #     Required. The IP address.
+        class DNSEntry
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A single certificate or key in a customer managed certificate bundle.
+        # @!attribute [rw] certificate_type
+        #   @return [::Google::Cloud::Sql::V1beta4::CertificateType]
+        #     Required. The certificate type.
+        # @!attribute [rw] content
+        #   @return [::String]
+        #     Required. Input only. The PEM-encoded certificate or key content in base64
+        #     format.
+        # @!attribute [r] file_path
+        #   @return [::String]
+        #     Output only. File path of the PEM-encoded certificate or key content.
+        class CustomerManagedCertificate
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Customer managed certificate SSL configuration.
+        # @!attribute [r] bundle
+        #   @return [::String]
+        #     Output only. The name of the customer managed certificate configuration.
+        #     This name will be used to identify a certificate bundle.
+        # @!attribute [rw] intent
+        #   @return [::Google::Cloud::Sql::V1beta4::Intent]
+        #     Required. The intent for this customer managed certificate configuration.
+        # @!attribute [rw] primary_dns_record
+        #   @return [::Google::Cloud::Sql::V1beta4::DNSEntry]
+        #     DNS name associated with the primary instance in a replication topology.
+        #     This is needed to insert a DNS entry in a replica VM.
+        # @!attribute [rw] customer_managed_certificates
+        #   @return [::Array<::Google::Cloud::Sql::V1beta4::CustomerManagedCertificate>]
+        #     Required. The server CA certificate, client key and client certificate.
+        class CustomerManagedCertificateConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # SslCerts create ephemeral certificate request.
         # @!attribute [rw] public_key
         #   @return [::String]
@@ -3914,6 +4261,68 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Configuration for users created during instance creation.
+        # @!attribute [rw] initial_users
+        #   @return [::Array<::Google::Cloud::Sql::V1beta4::InitialUsersConfig::InitialUser>]
+        #     Optional. List of IAM users to be created during instance creation.
+        #     A maximum of 5 users are allowed.
+        class InitialUsersConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for an IAM user created during instance creation.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The name of the user in the Cloud SQL instance.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Sql::V1beta4::InitialUsersConfig::InitialUser::SqlUserType]
+          #     Required. The user type. Cannot be BUILT_IN.
+          # @!attribute [rw] roles
+          #   @return [::Array<::String>]
+          #     Optional. The database roles to be assigned to the user. If empty, will
+          #     grant role `cloudsqlsuperuser`.
+          class InitialUser
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The user type.
+            module SqlUserType
+              # The database's built-in user type. Not supported for initial user
+              # creation.
+              BUILT_IN = 0
+
+              # Cloud IAM user.
+              # MySQL will truncate the @ and domain when it stores the user.
+              CLOUD_IAM_USER = 1
+
+              # Cloud IAM service account.
+              # For PostgreSQL, omit the .gserviceaccount.com suffix.
+              # MySQL will truncate the @ and domain when it stores the user.
+              CLOUD_IAM_SERVICE_ACCOUNT = 2
+
+              # Cloud IAM group.
+              CLOUD_IAM_GROUP = 3
+
+              # Login for a user that belongs to the Cloud IAM group. Not supported for
+              # initial user creation.
+              CLOUD_IAM_GROUP_USER = 4
+
+              # Login for a service account that belongs to the
+              # Cloud IAM group. Not supported for initial user creation.
+              CLOUD_IAM_GROUP_SERVICE_ACCOUNT = 5
+
+              # Cloud IAM workforce identity.
+              CLOUD_IAM_WORKFORCE_IDENTITY = 6
+
+              # Microsoft Entra ID user. Not supported for initial user creation.
+              ENTRAID_USER = 7
+
+              # Active Directory user. Not supported for initial user creation.
+              ACTIVE_DIRECTORY_USER = 8
+            end
+          end
+        end
+
         # Connection pool flags for Cloud SQL instances managed connection pool
         # configuration.
         # @!attribute [rw] name
@@ -4004,6 +4413,80 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The context for the `StartWorkloadCapture` operation, which contains
+        # details to start recording the workload (SQL queries) on a Cloud SQL
+        # instance.
+        # @!attribute [rw] enable_live_replay
+        #   @return [::Boolean]
+        #     Optional. If true, the captured workload is simultaneously executed on a
+        #     separate, ephemeral Cloud SQL instance. This "live replay" instance
+        #     is automatically provisioned and is cloned from the source instance. If
+        #     false (the default), the workload is only stored and no live replay occurs.
+        #     It can be replayed later using a separate `StartWorkloadReplayRequest`.
+        #     Note: The workload capture runs continuously until an explicit
+        #     `StopWorkloadCaptureRequest` is issued.
+        # @!attribute [rw] replay_instance
+        #   @return [::String]
+        #     Optional. Required if `enable_live_replay` is true.
+        #     The name of the Cloud SQL instance where the captured workload
+        #     (SQL queries) is being executed, excluding the project ID (for example,
+        #     `my-replay-instance`). The instance name must start with a lowercase letter
+        #     and contain only lowercase letters, numbers, and hyphens. The combined
+        #     length of `project-ID:instance-name` must be 98 characters or less.
+        class StartWorkloadCaptureContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The context for the `StopWorkloadCapture` operation, which contains
+        # details to stop recording the workload (SQL queries) on a Cloud SQL
+        # instance.
+        # @!attribute [rw] abort_live_replay
+        #   @return [::Boolean]
+        #     Optional. If true, immediately aborts the concurrent live replay and
+        #     discards any un-replayed traffic alongside stopping the capture. If false
+        #     (the default), the capture stops recording new traffic, but the live replay
+        #     will continue executing until the entire backlog of captured traffic has
+        #     been replayed.
+        class StopWorkloadCaptureContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The context for the `StartWorkloadReplay` operation, which contains details
+        # about starting the execution of a captured workload (recorded read and
+        # write SQL queries) on a replay instance (the Cloud SQL
+        # instance where the recorded SQL queries are executed).
+        # @!attribute [rw] replay_instance
+        #   @return [::String]
+        #     Required. The name of the Cloud SQL instance where the captured workload
+        #     (SQL queries) is being executed, excluding the project ID (for example,
+        #     `my-replay-instance`). The instance name must start with a lowercase letter
+        #     and contain only lowercase letters, numbers, and hyphens. The combined
+        #     length of `project-ID:instance-name` must be 98 characters or less.
+        # @!attribute [r] workload_id
+        #   @return [::String]
+        #     Output only. The ID of the workload to start executing on the replay
+        #     instance. Each workload capture generates a unique ID in the format
+        #     `workload-<epoch_timestamp>` (for example, `workload-1786046400`). Use this
+        #     ID to start executing the recorded SQL queries.
+        # @!attribute [r] source_instance
+        #   @return [::String]
+        #     Output only. The name of the source Cloud SQL instance where the workload
+        #     was captured, excluding the project ID (for example, `my-source-instance`).
+        class StartWorkloadReplayContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The context for the `StopWorkloadReplay` operation, which represents an
+        # operation that stops an active workload replay on a target Cloud SQL replay
+        # instance.
+        class StopWorkloadReplayContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         module SqlFileType
           # Unknown file type.
           SQL_FILE_TYPE_UNSPECIFIED = 0
@@ -4072,6 +4555,39 @@ module Google
           # maintenance, initiated by self-service. Maintenance is performed on groups
           # of replicas first, followed by the primary instance.
           REPLICA_INCLUDED_SELF_SERVICE_MAINTENANCE = 4
+        end
+
+        # Certificate type for customer managed certificates.
+        module CertificateType
+          # Unspecified certificate type.
+          CERTIFICATE_TYPE_UNSPECIFIED = 0
+
+          # The x509 PEM-encoded certificate of the CA that signed the source database
+          # server's certificate.
+          CERTIFICATE_TYPE_PEER_SERVER_CA = 1
+
+          # The unencrypted PKCS#1 or PKCS#8 PEM-encoded private key associated with
+          # the Client Certificate.
+          CERTIFICATE_TYPE_PEER_CLIENT_KEY = 2
+
+          # The x509 PEM-encoded certificate used by the client to authenticate
+          # against the source database server.
+          CERTIFICATE_TYPE_PEER_CLIENT_CERTIFICATE = 3
+        end
+
+        # Intent for the customer managed certificate configuration.
+        module Intent
+          # Unspecified intent.
+          INTENT_UNSPECIFIED = 0
+
+          # Configures customer-managed certificates for pg_logical extension to
+          # achieve mTLS authentication.
+          PG_LOGICAL = 1
+
+          # Configures customer-managed certificates for built-in PostgreSQL native
+          # replication to achieve mTLS authentication. Supported for Cloud SQL for
+          # PostgreSQL 10 and later.
+          NATIVE_REPLICATION = 2
         end
 
         # The status of a backup run.
@@ -4187,6 +4703,10 @@ module Google
 
           # A Cloud SQL read pool.
           READ_POOL_INSTANCE = 5
+
+          # A Cloud SQL instance acting as a Blue-Green deployment target primary.
+          # (MySQL only)
+          GREEN_INSTANCE = 7
         end
 
         # The database engine type and version.

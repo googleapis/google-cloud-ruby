@@ -48,7 +48,7 @@ class Google::Shopping::Merchant::DataSources::ClientConstructionMinitest < Mini
       client = Google::Shopping::Merchant::DataSources.data_sources_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Client, client
+      assert_kind_of Google::Shopping::Merchant::DataSources::V1::DataSourcesService::Client, client
     end
   end
 
@@ -58,7 +58,7 @@ class Google::Shopping::Merchant::DataSources::ClientConstructionMinitest < Mini
       client = Google::Shopping::Merchant::DataSources.data_sources_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::DataSources::V1beta::DataSourcesService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::DataSources::V1::DataSourcesService::Rest::Client, client
     end
   end
 
@@ -69,7 +69,7 @@ class Google::Shopping::Merchant::DataSources::ClientConstructionMinitest < Mini
       client = Google::Shopping::Merchant::DataSources.file_uploads_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::DataSources::V1beta::FileUploadsService::Client, client
+      assert_kind_of Google::Shopping::Merchant::DataSources::V1::FileUploadsService::Client, client
     end
   end
 
@@ -79,7 +79,7 @@ class Google::Shopping::Merchant::DataSources::ClientConstructionMinitest < Mini
       client = Google::Shopping::Merchant::DataSources.file_uploads_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::DataSources::V1beta::FileUploadsService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::DataSources::V1::FileUploadsService::Rest::Client, client
     end
   end
 end

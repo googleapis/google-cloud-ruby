@@ -8,7 +8,7 @@ require 'google/ads/admanager/v1/size_type_enum_pb'
 require 'google/api/field_behavior_pb'
 
 
-descriptor_data = "\n\"google/ads/admanager/v1/size.proto\x12\x17google.ads.admanager.v1\x1a,google/ads/admanager/v1/size_type_enum.proto\x1a\x1fgoogle/api/field_behavior.proto\"w\n\x04Size\x12\x12\n\x05width\x18\x01 \x01(\x05\x42\x03\xe0\x41\x02\x12\x13\n\x06height\x18\x02 \x01(\x05\x42\x03\xe0\x41\x02\x12\x46\n\tsize_type\x18\x03 \x01(\x0e\x32..google.ads.admanager.v1.SizeTypeEnum.SizeTypeB\x03\xe0\x41\x02\x42\xbd\x01\n\x1b\x63om.google.ads.admanager.v1B\tSizeProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
+descriptor_data = "\n\"google/ads/admanager/v1/size.proto\x12\x17google.ads.admanager.v1\x1a,google/ads/admanager/v1/size_type_enum.proto\x1a\x1fgoogle/api/field_behavior.proto\"z\n\x04Size\x12\x13\n\x05width\x18\x01 \x01(\x05\x42\x04\xe2\x41\x01\x02\x12\x14\n\x06height\x18\x02 \x01(\x05\x42\x04\xe2\x41\x01\x02\x12G\n\tsize_type\x18\x03 \x01(\x0e\x32..google.ads.admanager.v1.SizeTypeEnum.SizeTypeB\x04\xe2\x41\x01\x02\x42\xbd\x01\n\x1b\x63om.google.ads.admanager.v1B\tSizeProtoP\x01Z@google.golang.org/genproto/googleapis/ads/admanager/v1;admanager\xaa\x02\x17Google.Ads.AdManager.V1\xca\x02\x17Google\\Ads\\AdManager\\V1\xea\x02\x1aGoogle::Ads::AdManager::V1b\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

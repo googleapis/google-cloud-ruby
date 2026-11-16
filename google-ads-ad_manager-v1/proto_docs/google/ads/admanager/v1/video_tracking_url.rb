@@ -22,8 +22,8 @@ module Google
     module AdManager
       module V1
         # Represents a
-        # {::Google::Ads::AdManager::V1::ConversionEventEnum ConversionEventEnum} to URL
-        # pair that will be pinged when the event happens.
+        # {::Google::Ads::AdManager::V1::ConversionEventEnum::ConversionEvent ConversionEvent}
+        # to URL pair that will be pinged when the event happens.
         # @!attribute [rw] conversion_event
         #   @return [::Google::Ads::AdManager::V1::ConversionEventEnum::ConversionEvent]
         #     Required. All possible tracking event types.

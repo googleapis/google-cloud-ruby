@@ -43,13 +43,13 @@ describe "ACL Snippets" do
     bucket.files.each(&:delete)
     sleep 1
     # always reset the bucket permissions
-    bucket.default_acl.private!
+    retry_resource_exhaustion { bucket.default_acl.private! }
     sleep 1
-    bucket.acl.private!
+    retry_resource_exhaustion { bucket.acl.private! }
   end
 
   it "print_bucket_acl" do
-    bucket.acl.add_owner email
+    retry_resource_exhaustion { bucket.acl.add_owner email }
 
     out, _err = capture_io do
       StoragePrintBucketACL.new.print_bucket_acl bucket_name: bucket.name
@@ -60,7 +60,7 @@ describe "ACL Snippets" do
   end
 
   it "print_bucket_acl_for_user" do
-    bucket.acl.add_owner email
+    retry_resource_exhaustion { bucket.acl.add_owner email }
 
     expected_output = <<~OUTPUT
       Permissions for #{email}:
@@ -74,35 +74,43 @@ describe "ACL Snippets" do
   end
 
   it "add_bucket_owner" do
-    assert_output "Added OWNER permission for #{email} to #{bucket.name}\n" do
-      StorageAddBucketOwner.new.add_bucket_owner bucket_name: bucket.name,
-                                                 email:       email
+    retry_resource_exhaustion do
+      assert_output "Added OWNER permission for #{email} to #{bucket.name}\n" do
+        StorageAddBucketOwner.new.add_bucket_owner bucket_name: bucket.name,
+                                                   email:       email
+      end
     end
     assert_includes bucket.acl.owners, email
   end
 
   it "remove_bucket_acl" do
-    bucket.acl.add_owner email
-    assert_output "Removed ACL permissions for #{email} from #{bucket.name}\n" do
-      StorageRemoveBucketACL.new.remove_bucket_acl bucket_name: bucket.name,
-                                                   email:       email
+    retry_resource_exhaustion { bucket.acl.add_owner email }
+    retry_resource_exhaustion do
+      assert_output "Removed ACL permissions for #{email} from #{bucket.name}\n" do
+        StorageRemoveBucketACL.new.remove_bucket_acl bucket_name: bucket.name,
+                                                     email:       email
+      end
     end
     refute_includes bucket.acl.owners, email
   end
 
   it "add_bucket_default_owner" do
-    assert_output "Added default OWNER permission for #{email} to #{bucket.name}\n" do
-      StorageAddBucketDefaultOwner.new.add_bucket_default_owner bucket_name: bucket.name,
-                                                                email:       email
+    retry_resource_exhaustion do
+      assert_output "Added default OWNER permission for #{email} to #{bucket.name}\n" do
+        StorageAddBucketDefaultOwner.new.add_bucket_default_owner bucket_name: bucket.name,
+                                                                  email:       email
+      end
     end
     assert_includes bucket.default_acl.owners, email
   end
 
   it "remove_bucket_default_acl" do
-    bucket.default_acl.add_owner email
-    assert_output "Removed default ACL permissions for #{email} from #{bucket.name}\n" do
-      StorageRemoveBucketDefaultACL.new.remove_bucket_default_acl bucket_name: bucket.name,
-                                                                  email:       email
+    retry_resource_exhaustion { bucket.default_acl.add_owner email }
+    retry_resource_exhaustion do
+      assert_output "Removed default ACL permissions for #{email} from #{bucket.name}\n" do
+        StorageRemoveBucketDefaultACL.new.remove_bucket_default_acl bucket_name: bucket.name,
+                                                                    email:       email
+      end
     end
     refute_includes bucket.default_acl.owners, email
   end

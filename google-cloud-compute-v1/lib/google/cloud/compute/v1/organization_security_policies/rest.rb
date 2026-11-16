@@ -32,6 +32,8 @@ module Google
         ##
         # The OrganizationSecurityPolicies API.
         #
+        # This client uses OrganizationSecurityPolicies version 2026-11-01.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/organization_security_policies/rest"

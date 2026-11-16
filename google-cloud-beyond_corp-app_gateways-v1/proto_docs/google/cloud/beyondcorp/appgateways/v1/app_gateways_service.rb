@@ -33,8 +33,8 @@ module Google
           #     If not specified, a default value of 50 will be used by the service.
           #     Regardless of the page_size value, the response may include a partial list
           #     and a caller should only rely on response's
-          #     [next_page_token][BeyondCorp.ListAppGatewaysResponse.next_page_token] to
-          #     determine if there are more instances left to be queried.
+          #     {::Google::Cloud::BeyondCorp::AppGateways::V1::ListAppGatewaysResponse#next_page_token next_page_token}
+          #     to determine if there are more instances left to be queried.
           # @!attribute [rw] page_token
           #   @return [::String]
           #     Optional. The next_page_token value returned from a previous
@@ -100,8 +100,8 @@ module Google
           #     ignore the request if it has already been completed. The server will
           #     guarantee that for at least 60 minutes since the first request.
           #
-          #     For example, consider a situation where you make an initial request and t
-          #     he request times out. If you make the request again with the same request
+          #     For example, consider a situation where you make an initial request and
+          #     the request times out. If you make the request again with the same request
           #     ID, the server can check if original operation with the same request ID
           #     was received, and if so, will ignore the second request. This prevents
           #     clients from accidentally creating duplicate commitments.
@@ -129,8 +129,8 @@ module Google
           #     ignore the request if it has already been completed. The server will
           #     guarantee that for at least 60 minutes after the first request.
           #
-          #     For example, consider a situation where you make an initial request and t
-          #     he request times out. If you make the request again with the same request
+          #     For example, consider a situation where you make an initial request and
+          #     the request times out. If you make the request again with the same request
           #     ID, the server can check if original operation with the same request ID
           #     was received, and if so, will ignore the second request. This prevents
           #     clients from accidentally creating duplicate commitments.
@@ -186,6 +186,12 @@ module Google
           # @!attribute [rw] host_type
           #   @return [::Google::Cloud::BeyondCorp::AppGateways::V1::AppGateway::HostType]
           #     Required. The type of hosting used by the AppGateway.
+          # @!attribute [r] satisfies_pzs
+          #   @return [::Boolean]
+          #     Output only. Reserved for future use.
+          # @!attribute [r] satisfies_pzi
+          #   @return [::Boolean]
+          #     Output only. Reserved for future use.
           class AppGateway
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -274,9 +280,10 @@ module Google
           #   @return [::Boolean]
           #     Output only. Identifies whether the user has requested cancellation
           #     of the operation. Operations that have successfully been cancelled
-          #     have [Operation.error][] value with a
-          #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
-          #     `Code.CANCELLED`.
+          #     have
+          #     {::Google::Longrunning::Operation#error google.longrunning.Operation.error}
+          #     value with a {::Google::Rpc::Status#code google.rpc.Status.code} of `1`,
+          #     corresponding to `Code.CANCELLED`.
           # @!attribute [r] api_version
           #   @return [::String]
           #     Output only. API version used to start the operation.

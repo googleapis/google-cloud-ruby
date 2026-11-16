@@ -144,6 +144,26 @@
               "methods": [
                 "delete_application"
               ]
+            },
+            "GetBoundary": {
+              "methods": [
+                "get_boundary"
+              ]
+            },
+            "UpdateBoundary": {
+              "methods": [
+                "update_boundary"
+              ]
+            },
+            "GetExtendedMetadataSchema": {
+              "methods": [
+                "get_extended_metadata_schema"
+              ]
+            },
+            "ListExtendedMetadataSchemas": {
+              "methods": [
+                "list_extended_metadata_schemas"
+              ]
             }
           }
         }

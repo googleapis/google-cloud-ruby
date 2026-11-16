@@ -24,14 +24,15 @@ module Google
         # An AutoprotectionPolicyBinding (APPA) acts as the bridge between an
         # AutoprotectionPolicy and the scope (Project, Folder, or Organization) where
         # the policy should be applied.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     Identifier. The resource name of the AutoProtectionPolicyBinding.
-        #     Format:
+        #     Output only. Identifier. The resource name of the
+        #     AutoProtectionPolicyBinding. Format:
         #     `projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}/bindings/{binding}`
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. A description of the binding.
+        #     Optional. A description of the binding. The description must be at most
+        #     2048 characters.
         # @!attribute [r] state
         #   @return [::Google::Cloud::BackupDR::V1beta::AutoProtectionPolicyBinding::State]
         #     Output only. The current state of the AutoProtectionPolicyBinding.
@@ -51,7 +52,7 @@ module Google
         #     Output only. The timestamp when the binding was last updated.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Optional. Output only. The etag for the binding.
+        #     Output only. The etag for the binding.
         #     If this is provided on update, it must match the server's etag.
         class AutoProtectionPolicyBinding
           include ::Google::Protobuf::MessageExts
@@ -102,9 +103,21 @@ module Google
         #   @return [::String]
         #     Required. The ID to use for the binding.
         #     This will become the final component of the binding's resource name.
+        #
+        #     This value must start with a lowercase letter followed by up to 62
+        #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
         # @!attribute [rw] auto_protection_policy_binding
         #   @return [::Google::Cloud::BackupDR::V1beta::AutoProtectionPolicyBinding]
         #     Required. The AutoProtectionPolicyBinding resource to create.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
         class CreateAutoProtectionPolicyBindingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -170,6 +183,20 @@ module Google
         #     Required. The name of the binding to delete.
         #     Format:
         #     projects/\\{project}/locations/\\{location}/autoProtectionPolicies/\\{auto_protection_policy}/bindings/\\{binding}
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     Optional. The current etag of the AutoProtectionPolicyBinding.
+        #     If an etag is provided and does not match the current etag of the
+        #     binding, deletion will be blocked and an ABORTED error will be returned.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
         class InitiateDeleteAutoProtectionPolicyBindingRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

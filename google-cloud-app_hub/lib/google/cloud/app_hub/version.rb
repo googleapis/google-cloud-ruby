@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module AppHub
-      VERSION = "2.2.2"
+      VERSION = "2.3.0"
     end
   end
 end

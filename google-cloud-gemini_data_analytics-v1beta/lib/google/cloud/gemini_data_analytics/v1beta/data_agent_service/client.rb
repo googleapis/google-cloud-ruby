@@ -71,7 +71,7 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 600.0
+                default_config.timeout = 1800.0
                 default_config.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
@@ -1363,8 +1363,7 @@ module Google
 
             ##
             # Enables/Disables required GCP services and configures AgentOps
-            # observability settings calling the Admin Settings executable node to
-            # update the AgentOps Observability feature.
+            # observability settings.
             #
             # @overload set_agent_ops_observability(request, options = nil)
             #   Pass arguments to `set_agent_ops_observability` via a request object, either of type

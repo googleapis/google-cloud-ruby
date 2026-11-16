@@ -1,12 +1,9 @@
 --no-private
---title="Area120 Tables V1ALPHA1 API"
---exclude _pb\.rb$
+--title="Obsolete Gem google-area120-tables-v1alpha1"
 --markup markdown
 --markup-provider redcarpet
 
 ./lib/**/*.rb
-./proto_docs/**/*.rb
 -
 README.md
 LICENSE.md
-AUTHENTICATION.md

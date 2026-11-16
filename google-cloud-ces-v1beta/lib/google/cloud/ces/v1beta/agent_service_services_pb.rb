@@ -126,6 +126,8 @@ module Google
             rpc :GetAppVersion, ::Google::Cloud::Ces::V1beta::GetAppVersionRequest, ::Google::Cloud::Ces::V1beta::AppVersion
             # Creates a new app version in the given app.
             rpc :CreateAppVersion, ::Google::Cloud::Ces::V1beta::CreateAppVersionRequest, ::Google::Cloud::Ces::V1beta::AppVersion
+            # Updates the specified app version.
+            rpc :UpdateAppVersion, ::Google::Cloud::Ces::V1beta::UpdateAppVersionRequest, ::Google::Cloud::Ces::V1beta::AppVersion
             # Deletes the specified app version.
             rpc :DeleteAppVersion, ::Google::Cloud::Ces::V1beta::DeleteAppVersionRequest, ::Google::Protobuf::Empty
             # Restores the specified app version.

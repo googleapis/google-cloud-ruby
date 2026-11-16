@@ -129,12 +129,30 @@ module Google
         #     agent when the session control is transferred to the remote agent.
         # @!attribute [rw] enable_text_streaming
         #   @return [::Boolean]
-        #     Optional. Whether to enable streaming text outputs from the model.
-        #     By default, text outputs from the model are collected before sending to the
-        #     client.
-        #     NOTE: This is only supported for text (non-voice) sessions via
+        #     Optional. Whether to stream text output from the model to the client
+        #     incrementally as it is generated. Defaults to `false`.
+        #
+        #     * When disabled, the model's text output is buffered, and each text output
+        #       sent to the client is a complete sentence. Clients can render each text
+        #       output on a new line.
+        #     * When enabled, each text output may contain only part of a sentence.
+        #       Clients should concatenate consecutive text outputs to render the
+        #       complete response.
+        #
+        #     NOTE: This is only supported for text (non-voice) sessions using
         #     {::Google::Cloud::Ces::V1beta::SessionService::Client#stream_run_session StreamRunSession}
         #     or {::Google::Cloud::Ces::V1beta::SessionService::Client#bidi_run_session BidiRunSession}.
+        # @!attribute [rw] include_llm_thought_summary
+        #   @return [::Boolean]
+        #     Optional. Whether to include LLM thought summaries in the session outputs.
+        # @!attribute [rw] exclude_diagnostic_info
+        #   @return [::Boolean]
+        #     Optional. Whether to exclude diagnostic info from the session output.
+        # @!attribute [rw] include_progress_update
+        #   @return [::Boolean]
+        #     Optional. Whether to include intermediate processing update to the client.
+        #     If enabled, the update will be sent back in
+        #     {::Google::Cloud::Ces::V1beta::SessionOutput#progress SessionOutput.progress}.
         class SessionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -193,6 +211,9 @@ module Google
         # @!attribute [rw] cited_chunks
         #   @return [::Array<::Google::Cloud::Ces::V1beta::Citations::CitedChunk>]
         #     List of cited pieces of information.
+        # @!attribute [rw] inline_citations
+        #   @return [::Array<::Google::Cloud::Ces::V1beta::Citations::InlineCitation>]
+        #     Optional. List of inline citations in the agent response.
         class Citations
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -214,12 +235,31 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # An inline citation in the response text.
+          # @!attribute [rw] start_index
+          #   @return [::Integer]
+          #     The starting index (in bytes) of the text segment in the agent response.
+          # @!attribute [rw] end_index
+          #   @return [::Integer]
+          #     The ending index (in bytes) of the text segment in the agent response.
+          # @!attribute [rw] cited_chunk_indices
+          #   @return [::Array<::Integer>]
+          #     The indices of the cited chunks that back this text segment.
+          #     Indices refer to the elements in `cited_chunks`.
+          class InlineCitation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Event input.
         # @!attribute [rw] event
         #   @return [::String]
         #     Required. The name of the event.
+        # @!attribute [rw] variables
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional. Additional variables associated with the event.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -281,9 +321,44 @@ module Google
         #
         #     NOTE: This field does not apply to audio and DTMF inputs, as they are
         #     always processed automatically based on the endpointing signal.
+        # @!attribute [rw] recording_control
+        #   @return [::Google::Cloud::Ces::V1beta::SessionInput::RecordingControl]
+        #     Optional. Whether the conversation may be recorded and logged from here on.
+        #
+        #     Use this when the app, rather than the agent, decides what may be kept:
+        #     for example when the end user has to consent to being recorded before
+        #     anything about the call can be stored.
+        #
+        #     The value stays in effect until the client sends a different one, so it
+        #     only needs to be sent when the answer changes. Whatever is in effect when
+        #     a turn completes decides that turn, both whether its audio reaches the
+        #     recording bucket and whether its transcript reaches conversation history,
+        #     BigQuery and Cloud Logging. It covers the agent's side of the turn as well
+        #     as the end user's.
+        #
+        #     Turns that complete before the client first sends this are recorded
+        #     according to the app's logging settings, as though the field did not
+        #     exist.
+        #
+        #     If more than one input in the same request sets it, the last one wins.
         class SessionInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # What the app has decided may be recorded and logged.
+          #
+          # This enum is extensible; new values may be added in the future.
+          module RecordingControl
+            # The app is not controlling recording. The app's logging settings decide,
+            # as they do for every session that never sets this field.
+            RECORDING_CONTROL_UNSPECIFIED = 0
+
+            # The conversation may be recorded and logged from here on.
+            RECORDING_ENABLED = 1
+
+            # The conversation may not be recorded or logged from here on.
+            RECORDING_DISABLED = 2
+          end
         end
 
         # Output for the session.
@@ -291,39 +366,49 @@ module Google
         #   @return [::String]
         #     Output text from the CES agent.
         #
-        #     Note: The following fields are mutually exclusive: `text`, `audio`, `tool_calls`, `citations`, `google_search_suggestions`, `end_session`, `payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `text`, `audio`, `tool_calls`, `citations`, `google_search_suggestions`, `end_session`, `payload`, `image`, `progress`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] audio
         #   @return [::String]
         #     Output audio from the CES agent.
         #
-        #     Note: The following fields are mutually exclusive: `audio`, `text`, `tool_calls`, `citations`, `google_search_suggestions`, `end_session`, `payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `audio`, `text`, `tool_calls`, `citations`, `google_search_suggestions`, `end_session`, `payload`, `image`, `progress`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] tool_calls
         #   @return [::Google::Cloud::Ces::V1beta::ToolCalls]
         #     Request for the client to execute the tools.
         #
-        #     Note: The following fields are mutually exclusive: `tool_calls`, `text`, `audio`, `citations`, `google_search_suggestions`, `end_session`, `payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `tool_calls`, `text`, `audio`, `citations`, `google_search_suggestions`, `end_session`, `payload`, `image`, `progress`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] citations
         #   @return [::Google::Cloud::Ces::V1beta::Citations]
         #     Citations that provide the source information for the agent's generated
         #     text.
         #
-        #     Note: The following fields are mutually exclusive: `citations`, `text`, `audio`, `tool_calls`, `google_search_suggestions`, `end_session`, `payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `citations`, `text`, `audio`, `tool_calls`, `google_search_suggestions`, `end_session`, `payload`, `image`, `progress`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] google_search_suggestions
         #   @return [::Google::Cloud::Ces::V1beta::GoogleSearchSuggestions]
         #     The suggestions returned from Google Search as a result of invoking the
         #     {::Google::Cloud::Ces::V1beta::GoogleSearchTool GoogleSearchTool}.
         #
-        #     Note: The following fields are mutually exclusive: `google_search_suggestions`, `text`, `audio`, `tool_calls`, `citations`, `end_session`, `payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `google_search_suggestions`, `text`, `audio`, `tool_calls`, `citations`, `end_session`, `payload`, `image`, `progress`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] end_session
         #   @return [::Google::Cloud::Ces::V1beta::EndSession]
         #     Indicates the session has ended.
         #
-        #     Note: The following fields are mutually exclusive: `end_session`, `text`, `audio`, `tool_calls`, `citations`, `google_search_suggestions`, `payload`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `end_session`, `text`, `audio`, `tool_calls`, `citations`, `google_search_suggestions`, `payload`, `image`, `progress`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] payload
         #   @return [::Google::Protobuf::Struct]
         #     Custom payload with structured output from the CES agent.
         #
-        #     Note: The following fields are mutually exclusive: `payload`, `text`, `audio`, `tool_calls`, `citations`, `google_search_suggestions`, `end_session`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `payload`, `text`, `audio`, `tool_calls`, `citations`, `google_search_suggestions`, `end_session`, `image`, `progress`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] image
+        #   @return [::Google::Cloud::Ces::V1beta::Image]
+        #     Output image from the CES agent.
+        #
+        #     Note: The following fields are mutually exclusive: `image`, `text`, `audio`, `tool_calls`, `citations`, `google_search_suggestions`, `end_session`, `payload`, `progress`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] progress
+        #   @return [::String]
+        #     Intermediate progress update from the CES agent.
+        #
+        #     Note: The following fields are mutually exclusive: `progress`, `text`, `audio`, `tool_calls`, `citations`, `google_search_suggestions`, `end_session`, `payload`, `image`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] turn_index
         #   @return [::Integer]
         #     Indicates the sequential order of conversation turn to which this output
@@ -474,6 +559,659 @@ module Google
         class BidiSessionServerMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Ces::V1beta::SessionService::Client#stream_chat_ai_assistant SessionService.StreamChatAiAssistant}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The assistant session to be used to run the assistant.
+        #     Format:
+        #     `projects/{project}/locations/{location}/apps/{app}/assistantSessions/{assistant_session}`
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     Optional. The message to send to the assistant agent. May be empty when
+        #     `confirmation_response` is set (answering a pending confirmation without
+        #     adding a new message); at least one of the two must be provided.
+        # @!attribute [rw] attached_gcs_uris
+        #   @return [::Array<::String>]
+        #     Optional. Cloud Storage URIs for files uploaded by the user during this
+        #     turn. Example: "gs://cxas-transient-uploads/uuid/prd.pdf"
+        # @!attribute [rw] context_token
+        #   @return [::String]
+        #     Optional. Opaque onboarding context token returned by
+        #     {::Google::Cloud::Ces::V1beta::SessionService::Client#generate_onboarding_suggestions SessionService.GenerateOnboardingSuggestions}.
+        #     When set and still fresh, the server reuses the onboarding snapshot
+        #     computed for the zero state instead of recomputing it for the first
+        #     conversation turn.
+        # @!attribute [rw] confirmation_response
+        #   @return [::Google::Cloud::Ces::V1beta::AssistantConfirmationResponse]
+        #     Optional. The user's answer to a pending
+        #     {::Google::Cloud::Ces::V1beta::AssistantConfirmationRequest AssistantConfirmationRequest}.
+        #     When set, the server resumes the paused agent with this answer instead of
+        #     (or in addition to) starting a new prompt turn.
+        # @!attribute [rw] client_capabilities
+        #   @return [::Array<::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest::ClientCapability>]
+        #     Optional. Response features this client can render. The server only emits
+        #     events that need a capability (e.g. `confirmation_request`) when the
+        #     capability is declared, so older clients never receive events they would
+        #     silently drop.
+        # @!attribute [rw] operation_completed_event
+        #   @return [::Google::Cloud::Ces::V1beta::OperationCompletedEvent]
+        #     Optional. Resumes an assistant session paused waiting for a client-managed
+        #     long-running operation to complete.
+        # @!attribute [rw] resume_from_sequence_number
+        #   @return [::Integer]
+        #     Optional. Optional cursor to resume and replay events from an in-flight or
+        #     completed turn.
+        # @!attribute [rw] attach_only
+        #   @return [::Boolean]
+        #     Optional. Optional flag to attach to an existing in-flight turn without
+        #     submitting a new message.
+        class StreamChatAiAssistantRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Response features a client can declare.
+          module ClientCapability
+            # Unspecified capability; ignored.
+            CLIENT_CAPABILITY_UNSPECIFIED = 0
+
+            # The client renders
+            # {::Google::Cloud::Ces::V1beta::AssistantConfirmationRequest AssistantConfirmationRequest}
+            # cards and answers them via `confirmation_response`.
+            CONFIRMATION_CARDS = 1
+
+            # The client manages long-running operations out-of-band by polling the
+            # operation and sending `operation_completed_event` to resume the turn.
+            # If not declared, the server manages LRO polling and completes the turn
+            # inline.
+            CLIENT_MANAGED_LRO = 2
+          end
+        end
+
+        # A single personalized onboarding suggestion chip for Arc's
+        # zero state.
+        # @!attribute [rw] seed_prompt
+        #   @return [::String]
+        #     Prefill the composer with this text; the user reviews and sends.
+        #
+        #     Note: The following fields are mutually exclusive: `seed_prompt`, `load_session`, `send_message`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] load_session
+        #   @return [::Google::Cloud::Ces::V1beta::AssistantSuggestion::LoadSession]
+        #     Open an existing assistant session.
+        #
+        #     Note: The following fields are mutually exclusive: `load_session`, `seed_prompt`, `send_message`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] send_message
+        #   @return [::String]
+        #     Prefill the composer with this text and submit immediately. Only used
+        #     for quick-reply chips inside an active onboarding conversation.
+        #
+        #     Note: The following fields are mutually exclusive: `send_message`, `seed_prompt`, `load_session`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] suggestion_id
+        #   @return [::String]
+        #     Stable identifier for this suggestion, round-tripped by clients in
+        #     interaction logging.
+        # @!attribute [rw] label
+        #   @return [::String]
+        #     Chip label shown to the user (at most 60 characters).
+        # @!attribute [rw] rationale
+        #   @return [::String]
+        #     Optional short explanation of why this suggestion is shown (tooltip /
+        #     rationale popover).
+        # @!attribute [rw] icon
+        #   @return [::Google::Cloud::Ces::V1beta::AssistantSuggestion::Icon]
+        #     Icon hint for the chip.
+        # @!attribute [rw] source
+        #   @return [::Google::Cloud::Ces::V1beta::AssistantSuggestion::Source]
+        #     How this suggestion was produced.
+        # @!attribute [rw] candidate_type
+        #   @return [::String]
+        #     Rule-table candidate type in kebab-case (e.g. "resume-pending-review"),
+        #     for metrics.
+        class AssistantSuggestion
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Parameters for the load_session action.
+          # @!attribute [rw] assistant_session_id
+          #   @return [::String]
+          #     Identifier of the assistant session to open (the final segment of the
+          #     AssistantSession resource name).
+          class LoadSession
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Icon hint for the chip.
+          module Icon
+            # Unspecified icon.
+            ICON_UNSPECIFIED = 0
+
+            # Resume a previous session.
+            RESUME = 1
+
+            # Build something new.
+            BUILD = 2
+
+            # Evaluation-related suggestion.
+            EVALUATE = 3
+
+            # Deployment-related suggestion.
+            DEPLOY = 4
+
+            # Exploration / discovery suggestion.
+            EXPLORE = 5
+
+            # Fix an error or failing state.
+            FIX = 6
+          end
+
+          # How this suggestion was produced.
+          module Source
+            # Unspecified source.
+            SOURCE_UNSPECIFIED = 0
+
+            # Deterministic rule-table candidate with template phrasing.
+            RULE = 1
+
+            # Rule-table candidate re-ranked and phrased by the LLM phrasing step.
+            LLM_RANKED = 2
+          end
+        end
+
+        # Request message for
+        # {::Google::Cloud::Ces::V1beta::SessionService::Client#generate_onboarding_suggestions SessionService.GenerateOnboardingSuggestions}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The app whose zero state is being rendered.
+        #     Format: `projects/{project}/locations/{location}/apps/{app}`
+        # @!attribute [rw] max_suggestions
+        #   @return [::Integer]
+        #     Optional. Maximum number of suggestions to return. Defaults to 4 when
+        #     unset.
+        class GenerateOnboardingSuggestionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Ces::V1beta::SessionService::Client#generate_onboarding_suggestions SessionService.GenerateOnboardingSuggestions}.
+        # @!attribute [rw] user_profile
+        #   @return [::Google::Cloud::Ces::V1beta::GenerateOnboardingSuggestionsResponse::UserProfile]
+        #     Classification of the requesting user's history.
+        # @!attribute [rw] suggestions
+        #   @return [::Array<::Google::Cloud::Ces::V1beta::AssistantSuggestion>]
+        #     Personalized suggestions, ranked most relevant first.
+        # @!attribute [rw] context_token
+        #   @return [::String]
+        #     Opaque token capturing the onboarding snapshot used to generate these
+        #     suggestions. Clients echo it on the first
+        #     {::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest StreamChatAiAssistantRequest}
+        #     so the server can reuse the snapshot.
+        class GenerateOnboardingSuggestionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Classification of the requesting user's history with the assistant in
+          # this app.
+          module UserProfile
+            # Unspecified profile.
+            USER_PROFILE_UNSPECIFIED = 0
+
+            # No assistant sessions containing messages.
+            NEW = 1
+
+            # One or two assistant sessions containing messages.
+            EXPLORING = 2
+
+            # More than two assistant sessions containing messages.
+            RETURNING = 3
+          end
+        end
+
+        # A streamed fragment of a document artifact (e.g. a markdown TDD) that the
+        # assistant is generating. Content deltas stream while the document is being
+        # written so clients can render a live preview; the FINALIZED chunk carries
+        # the GCS URI once the file has been persisted.
+        # @!attribute [rw] artifact_id
+        #   @return [::String]
+        #     Identifier of the artifact, stable across all chunks of one artifact
+        #     within the stream.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The file name shown to the user, e.g. "hotel_booking_tdd.md". Set on
+        #     STARTED (and repeated on FINALIZED).
+        # @!attribute [rw] mime_type
+        #   @return [::String]
+        #     The IANA media type of the artifact content, e.g. "text/markdown".
+        # @!attribute [rw] content_delta
+        #   @return [::String]
+        #     Incremental artifact content. Set on DELTA chunks.
+        # @!attribute [rw] gcs_uri
+        #   @return [::String]
+        #     The GCS object the artifact was persisted to. Set on FINALIZED chunks.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Ces::V1beta::ArtifactChunk::State]
+        #     Lifecycle position of this chunk.
+        class ArtifactChunk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Lifecycle position of this chunk within the artifact's stream.
+          module State
+            # Unused default.
+            STATE_UNSPECIFIED = 0
+
+            # The assistant started generating the artifact.
+            STARTED = 1
+
+            # A content increment; content_delta is set.
+            DELTA = 2
+
+            # The artifact was persisted; gcs_uri is set.
+            FINALIZED = 3
+
+            # Generation or persistence failed; the artifact was not saved.
+            FAILED = 4
+
+            # The document finished streaming: its content was fully delivered via
+            # content_delta chunks. Persistence may still follow; a FINALIZED chunk
+            # with a gcs_uri is sent if and when the artifact is saved.
+            CLOSED = 5
+          end
+        end
+
+        # Structured clarification options the assistant asks the user to choose
+        # among, transduced server-side out of the model's turn (the option block is
+        # stripped from the streamed and persisted text). The console renders a
+        # keyboard-navigable option list docked above the composer.
+        # @!attribute [rw] questions
+        #   @return [::Array<::Google::Cloud::Ces::V1beta::OptionQuestionsChunk::Question>]
+        #     The questions asked this turn. More than one entry drives the console's
+        #     "1 of N" pager.
+        class OptionQuestionsChunk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A single selectable option.
+          # @!attribute [rw] title
+          #   @return [::String]
+          #     Short plain-text option title (no markdown, no numbering).
+          # @!attribute [rw] details
+          #   @return [::String]
+          #     Optional trade-off details shown as secondary text.
+          # @!attribute [rw] submit_text
+          #   @return [::String]
+          #     Optional message text to send when the option is chosen; defaults to
+          #     `title` when empty.
+          class Option
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # One question with its options.
+          # @!attribute [rw] question
+          #   @return [::String]
+          #     The question header text.
+          # @!attribute [rw] options
+          #   @return [::Array<::Google::Cloud::Ces::V1beta::OptionQuestionsChunk::Option>]
+          #     The selectable options, in presentation order.
+          class Question
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A blocking question or confirmation the assistant needs answered before an
+        # agent action can proceed. The requesting agent is paused and resumes only
+        # when the answer arrives on a later
+        # {::Google::Cloud::Ces::V1beta::StreamChatAiAssistantRequest#confirmation_response StreamChatAiAssistantRequest.confirmation_response}.
+        # @!attribute [rw] confirmation_id
+        #   @return [::String]
+        #     Identifier correlating this request with its response. Opaque to
+        #     clients; must be echoed verbatim on the answering request.
+        # @!attribute [rw] context
+        #   @return [::String]
+        #     Context describing what is being confirmed (e.g. the action the agent
+        #     wants to take, or the question it needs answered). Rendered as plain
+        #     text, not Markdown.
+        # @!attribute [rw] positive_label
+        #   @return [::String]
+        #     Label for the approving action of a binary confirmation (e.g. "Publish").
+        #     Unset when `questions` is populated.
+        # @!attribute [rw] negative_label
+        #   @return [::String]
+        #     Label for the declining action of a binary confirmation (e.g. "Not yet").
+        #     Unset when `questions` is populated.
+        # @!attribute [rw] questions
+        #   @return [::Array<::Google::Cloud::Ces::V1beta::OptionQuestionsChunk::Question>]
+        #     Multi-choice form of the confirmation. When populated, the card renders
+        #     a selectable option list and the chosen option's submit_text (or
+        #     free-form user text) is returned as
+        #     {::Google::Cloud::Ces::V1beta::AssistantConfirmationResponse#answer_text AssistantConfirmationResponse.answer_text}.
+        # @!attribute [rw] tool
+        #   @return [::String]
+        #     Name of the tool call the agent paused on (e.g. "update_app"), for the
+        #     card header. Unset for pure questions.
+        # @!attribute [rw] agent_name
+        #   @return [::String]
+        #     Display label of the agent that raised the confirmation (e.g.
+        #     `"Contract Architect"`), for the card header.
+        # @!attribute [rw] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Time after which this confirmation can no longer be answered. An expired
+        #     card renders as inactive, and the server declines the confirmation on the
+        #     next turn so the paused agent does not wait indefinitely.
+        class AssistantConfirmationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The user's answer to an
+        # {::Google::Cloud::Ces::V1beta::AssistantConfirmationRequest AssistantConfirmationRequest},
+        # sent on the next
+        # {::Google::Cloud::Ces::V1beta::SessionService::Client#stream_chat_ai_assistant SessionService.StreamChatAiAssistant}
+        # call to resume the paused agent.
+        # @!attribute [rw] confirmed
+        #   @return [::Boolean]
+        #     Binary answer: true approves the paused action, false declines it.
+        #
+        #     Note: The following fields are mutually exclusive: `confirmed`, `answer_text`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] answer_text
+        #   @return [::String]
+        #     The chosen option's submit_text, or free-form user text. The paused
+        #     action is cancelled and the text is handed to the agent to act on.
+        #
+        #     Note: The following fields are mutually exclusive: `answer_text`, `confirmed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] confirmation_id
+        #   @return [::String]
+        #     The
+        #     {::Google::Cloud::Ces::V1beta::AssistantConfirmationRequest#confirmation_id AssistantConfirmationRequest.confirmation_id}
+        #     being answered.
+        class AssistantConfirmationResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Event sent by the client or background worker to resume an assistant session
+        # after an asynchronous Long-Running Operation (LRO) completes.
+        # @!attribute [rw] operation_name
+        #   @return [::String]
+        #     The operation resource name (e.g. `operations/{op}`).
+        # @!attribute [rw] target_resource_name
+        #   @return [::String]
+        #     The primary resource targeted or produced by the operation
+        #     (e.g. evaluation run ID, app ID, dataset ID).
+        # @!attribute [rw] operation_type
+        #   @return [::String]
+        #     The operation type or tool name (e.g. "run_evaluation", "copy_app",
+        #     "export_app").
+        # @!attribute [rw] status
+        #   @return [::String]
+        #     Status of the operation run (e.g. "SUCCEEDED", "FAILED", "CANCELLED").
+        # @!attribute [rw] deduplication_token
+        #   @return [::String]
+        #     Optional deduplication token (e.g. UUID) to prevent duplicate turn
+        #     execution from concurrent browser tabs.
+        # @!attribute [rw] error
+        #   @return [::Google::Rpc::Status]
+        #     Optional canonical error status if the operation failed.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Protobuf::Struct]
+        #     Optional structured result metadata (e.g. pass_rate, total_examples,
+        #     export_uri).
+        class OperationCompletedEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Turn-level metadata and intent categorization.
+        # @!attribute [rw] contract_related
+        #   @return [::Boolean]
+        #     Indicates whether this assistant turn was contract-related (e.g. contract
+        #     drafting, alignment, extraction, or revision).
+        # @!attribute [rw] contract_finalized
+        #   @return [::Boolean]
+        #     Set on the final artifact event of a turn whose contract draft was
+        #     published (a revision was activated). Terminal for the clarification
+        #     flow of this draft: contract_progress is authoritative and complete.
+        # @!attribute [rw] contract_streaming_phase
+        #   @return [::Google::Cloud::Ces::V1beta::TurnMetadata::ContractStreamingPhase]
+        #     Set only on in-flight progress estimates emitted while a contract
+        #     artifact fence is streaming, and on the revision-turn-start event.
+        #     Unset on authoritative payloads.
+        # @!attribute [rw] contract_draft_complete
+        #   @return [::Boolean]
+        #     Set on the terminal event of a contract draft whose every placeholder is
+        #     resolved (contract_progress is 100%), whether or not the draft was
+        #     published. Clients complete and dismiss the contract progress display on
+        #     it; publication is reported separately by contract_finalized.
+        class TurnMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Streaming phase of the contract progress payload.
+          module ContractStreamingPhase
+            # The payload is authoritative (computed from a complete contract
+            # document, a persisted snapshot, or the pre-draft state). Clients must
+            # replace any previously received progress with it.
+            CONTRACT_STREAMING_PHASE_UNSPECIFIED = 0
+
+            # An initial contract draft is streaming. contract_progress is an
+            # in-flight estimate: non-decreasing within one artifact fence, capped
+            # below the authoritative range, with pillar_breakdowns carrying
+            # total_item_count == 0 to mark estimated pillar states.
+            DRAFTING = 1
+
+            # A revision of an existing contract is streaming (for example after an
+            # annotation submission). Same estimate semantics as DRAFTING.
+            REVISING = 2
+          end
+        end
+
+        # Response message for
+        # {::Google::Cloud::Ces::V1beta::SessionService::Client#stream_chat_ai_assistant SessionService.StreamChatAiAssistant}.
+        # @!attribute [rw] text_chunk
+        #   @return [::String]
+        #     Text Token (for streaming Gemini responses word-by-word).
+        #
+        #     Note: The following fields are mutually exclusive: `text_chunk`, `status`, `thought_chunk`, `tool_call`, `tool_response`, `artifact_chunk`, `option_questions_chunk`, `confirmation_request`, `session_checkpoint`, `resume_snapshot`, `handoff`, `turn_completed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] status
+        #   @return [::Google::Rpc::Status]
+        #     Simple status update.
+        #
+        #     Note: The following fields are mutually exclusive: `status`, `text_chunk`, `thought_chunk`, `tool_call`, `tool_response`, `artifact_chunk`, `option_questions_chunk`, `confirmation_request`, `session_checkpoint`, `resume_snapshot`, `handoff`, `turn_completed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] thought_chunk
+        #   @return [::String]
+        #     Thought text chunk (agent's reasoning before generating response).
+        #
+        #     Note: The following fields are mutually exclusive: `thought_chunk`, `text_chunk`, `status`, `tool_call`, `tool_response`, `artifact_chunk`, `option_questions_chunk`, `confirmation_request`, `session_checkpoint`, `resume_snapshot`, `handoff`, `turn_completed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] tool_call
+        #   @return [::Google::Cloud::Ces::V1beta::ToolCall]
+        #     Tool call execution event.
+        #
+        #     Note: The following fields are mutually exclusive: `tool_call`, `text_chunk`, `status`, `thought_chunk`, `tool_response`, `artifact_chunk`, `option_questions_chunk`, `confirmation_request`, `session_checkpoint`, `resume_snapshot`, `handoff`, `turn_completed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] tool_response
+        #   @return [::Google::Cloud::Ces::V1beta::ToolResponse]
+        #     Tool call response event.
+        #
+        #     Note: The following fields are mutually exclusive: `tool_response`, `text_chunk`, `status`, `thought_chunk`, `tool_call`, `artifact_chunk`, `option_questions_chunk`, `confirmation_request`, `session_checkpoint`, `resume_snapshot`, `handoff`, `turn_completed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] artifact_chunk
+        #   @return [::Google::Cloud::Ces::V1beta::ArtifactChunk]
+        #     Generated-document artifact event (live preview deltas + final GCS
+        #     pointer).
+        #
+        #     Note: The following fields are mutually exclusive: `artifact_chunk`, `text_chunk`, `status`, `thought_chunk`, `tool_call`, `tool_response`, `option_questions_chunk`, `confirmation_request`, `session_checkpoint`, `resume_snapshot`, `handoff`, `turn_completed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] option_questions_chunk
+        #   @return [::Google::Cloud::Ces::V1beta::OptionQuestionsChunk]
+        #     Structured clarification options parsed out of the model turn. The
+        #     console renders these as a selectable option list instead of raw text.
+        #
+        #     Note: The following fields are mutually exclusive: `option_questions_chunk`, `text_chunk`, `status`, `thought_chunk`, `tool_call`, `tool_response`, `artifact_chunk`, `confirmation_request`, `session_checkpoint`, `resume_snapshot`, `handoff`, `turn_completed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] confirmation_request
+        #   @return [::Google::Cloud::Ces::V1beta::AssistantConfirmationRequest]
+        #     A blocking confirmation the agent paused on. The agent resumes when the
+        #     answer arrives on a later request's `confirmation_response`. Only sent
+        #     to clients that declared the CONFIRMATION_CARDS capability on the
+        #     request.
+        #
+        #     Note: The following fields are mutually exclusive: `confirmation_request`, `text_chunk`, `status`, `thought_chunk`, `tool_call`, `tool_response`, `artifact_chunk`, `option_questions_chunk`, `session_checkpoint`, `resume_snapshot`, `handoff`, `turn_completed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] session_checkpoint
+        #   @return [::Google::Cloud::Ces::V1beta::SessionCheckpoint]
+        #     Session checkpoint/compaction recap event containing user intent and
+        #     rolling summary.
+        #
+        #     Note: The following fields are mutually exclusive: `session_checkpoint`, `text_chunk`, `status`, `thought_chunk`, `tool_call`, `tool_response`, `artifact_chunk`, `option_questions_chunk`, `confirmation_request`, `resume_snapshot`, `handoff`, `turn_completed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] resume_snapshot
+        #   @return [::Google::Cloud::Ces::V1beta::TurnResumeSnapshot]
+        #     A compacted replay of an in-flight turn, sent as the first event of
+        #     every attach or resume before any live event. The client replaces any
+        #     locally rendered state for this turn with the snapshot's contents.
+        #
+        #     Note: The following fields are mutually exclusive: `resume_snapshot`, `text_chunk`, `status`, `thought_chunk`, `tool_call`, `tool_response`, `artifact_chunk`, `option_questions_chunk`, `confirmation_request`, `session_checkpoint`, `handoff`, `turn_completed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] handoff
+        #   @return [::Google::Cloud::Ces::V1beta::TurnHandoffEvent]
+        #     Tells the client to silently reconnect with
+        #     resume_from_sequence_number: the task serving this stream is going
+        #     away and the turn will continue elsewhere. Not an error; the stream
+        #     completes normally after this event.
+        #
+        #     Note: The following fields are mutually exclusive: `handoff`, `text_chunk`, `status`, `thought_chunk`, `tool_call`, `tool_response`, `artifact_chunk`, `option_questions_chunk`, `confirmation_request`, `session_checkpoint`, `resume_snapshot`, `turn_completed`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] turn_completed
+        #   @return [::Google::Cloud::Ces::V1beta::TurnCompletedEvent]
+        #     The turn has ended. Sent as the last event of every turn, on the original
+        #     stream and on every attached or resumed stream, so clients can end the
+        #     turn on an explicit signal instead of inferring it from stream closure.
+        #
+        #     Note: The following fields are mutually exclusive: `turn_completed`, `text_chunk`, `status`, `thought_chunk`, `tool_call`, `tool_response`, `artifact_chunk`, `option_questions_chunk`, `confirmation_request`, `session_checkpoint`, `resume_snapshot`, `handoff`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] event_id
+        #   @return [::String]
+        #     Unique identifier for the event.
+        # @!attribute [rw] event_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Timestamp when the event occurred.
+        # @!attribute [rw] ui_event
+        #   @return [::Google::Cloud::Ces::V1beta::UiEvent]
+        #     Optional. UI event payload.
+        # @!attribute [rw] turn_metadata
+        #   @return [::Google::Cloud::Ces::V1beta::TurnMetadata]
+        #     Optional. Turn-level metadata and intent categorization.
+        # @!attribute [rw] sequence_number
+        #   @return [::Integer]
+        #     Optional. Monotonically increasing sequence number for this session turn.
+        # @!attribute [rw] turn_in_progress
+        #   @return [::Boolean]
+        #     Optional. Indicates whether the turn is still actively running in the
+        #     background.
+        class StreamChatAiAssistantResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to cancel an assistant session's in-flight turn.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The assistant session whose in-flight turn to cancel.
+        # @!attribute [rw] turn_id
+        #   @return [::String]
+        #     Optional. The turn to cancel; empty cancels whichever turn is running. A
+        #     cancel naming a turn that is no longer the running one is a no-op.
+        class CancelAssistantTurnRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for CancelAssistantTurn.
+        # @!attribute [rw] cancelled
+        #   @return [::Boolean]
+        #     Whether an in-flight turn was found and asked to stop (directly on this
+        #     task, or through an epoch preemption for a turn hosted elsewhere).
+        class CancelAssistantTurnResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A compacted replay of an in-flight turn: everything needed to render the
+        # turn's visible output so far, plus the position live events continue from.
+        # @!attribute [rw] turn_id
+        #   @return [::String]
+        #     Identifies the turn being attached to.
+        # @!attribute [rw] resolved_sequence_number
+        #   @return [::Integer]
+        #     The position this snapshot represents. Live events follow with
+        #     sequence_number strictly greater than this. When lower than the
+        #     resume_from_sequence_number the client requested, flushed progress lags
+        #     what the client already rendered: the client must discard its rendered
+        #     content of this turn beyond this position before applying the snapshot.
+        # @!attribute [rw] events
+        #   @return [::Array<::Google::Cloud::Ces::V1beta::StreamChatAiAssistantResponse>]
+        #     Compacted events reconstructing the turn's visible output, in render
+        #     order, using the same event shapes as live streaming.
+        # @!attribute [rw] orphan_deadline_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     When the turn will be wound down if no client remains attached.
+        class TurnResumeSnapshot
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Emitted before this task stops serving the stream mid-turn (e.g. a server
+        # restart). The turn's state is persisted; a reconnect carrying
+        # resume_from_sequence_number continues it on another task.
+        # @!attribute [rw] turn_id
+        #   @return [::String]
+        #     Identifies the turn to resume.
+        # @!attribute [rw] reason
+        #   @return [::Google::Cloud::Ces::V1beta::TurnHandoffEvent::Reason]
+        #     Why the stream is handing off.
+        class TurnHandoffEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Why the stream is handing off.
+          module Reason
+            # Unspecified.
+            REASON_UNSPECIFIED = 0
+
+            # The serving task is shutting down (release push or rescheduling).
+            SERVER_RESTART = 1
+          end
+        end
+
+        # Terminal event of a turn (see StreamChatAiAssistantResponse.turn_completed).
+        # @!attribute [rw] turn_id
+        #   @return [::String]
+        #     Identifier of the turn that ended; matches
+        #     TurnResumeSnapshot.turn_id and ActiveTurnInfo.turn_id.
+        # @!attribute [rw] reason
+        #   @return [::Google::Cloud::Ces::V1beta::TurnCompletedEvent::Reason]
+        #     Why the turn ended.
+        # @!attribute [rw] final_sequence_number
+        #   @return [::Integer]
+        #     Sequence number of the last event the turn produced. A client whose cursor
+        #     is lower missed content and should reload the session to see it.
+        class TurnCompletedEvent
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Why the turn ended, so a client that attached late can word the outcome
+          # instead of guessing from an empty stream.
+          module Reason
+            # Unspecified.
+            REASON_UNSPECIFIED = 0
+
+            # The turn ran to completion; the session holds its committed output.
+            COMPLETED = 1
+
+            # No task was driving the turn any more; it was sealed to a committed
+            # partial and cannot be continued.
+            ABANDONED = 2
+
+            # This server does not serve attach or resume for the session, so nothing
+            # was tailed; the client should reload the session instead.
+            RESUME_UNAVAILABLE = 3
+          end
         end
 
         # AudioEncoding specifies the encoding format for audio data.

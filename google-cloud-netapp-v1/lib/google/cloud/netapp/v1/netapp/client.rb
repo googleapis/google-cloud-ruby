@@ -1628,6 +1628,192 @@ module Google
             end
 
             ##
+            # Splits a clone volume from its source volume.
+            # This operation will only work for volumes which have clone_details
+            # set(clones).
+            # For volumes that are not clones, this operation will return an error.
+            #
+            # @overload start_split(request, options = nil)
+            #   Pass arguments to `start_split` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::StartSplitRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::StartSplitRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload start_split(name: nil)
+            #   Pass arguments to `start_split` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The full name of the clone volume to be split from its source.
+            #     Format: projects/\\{project_number}/locations/\\{location}/volumes/\\{volume_id}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::StartSplitRequest.new
+            #
+            #   # Call the start_split method.
+            #   result = client.start_split request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def start_split request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::StartSplitRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.start_split.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.start_split.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.start_split.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :start_split, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Retrieves the current state, progress, and details of a split operation for
+            # a volume. This method is relevant when the volume is a clone. For volumes
+            # that are not clones, this method will return an error.
+            #
+            # @overload get_split_status(request, options = nil)
+            #   Pass arguments to `get_split_status` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::GetSplitStatusRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::GetSplitStatusRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_split_status(name: nil)
+            #   Pass arguments to `get_split_status` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The full name of the volume.
+            #     Format: projects/\\{project_number}/locations/\\{location}/volumes/\\{volume_id}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::NetApp::V1::SplitStatus]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::NetApp::V1::SplitStatus]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::GetSplitStatusRequest.new
+            #
+            #   # Call the get_split_status method.
+            #   result = client.get_split_status request
+            #
+            #   # The returned object is of type Google::Cloud::NetApp::V1::SplitStatus.
+            #   p result
+            #
+            def get_split_status request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::GetSplitStatusRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_split_status.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_split_status.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_split_status.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :get_split_status, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Establish volume peering. This is used to establish cluster and svm
             # peerings between the GCNV and OnPrem clusters.
             #
@@ -1656,7 +1842,7 @@ module Google
             #     Required. Name of the user's local source vserver svm to be peered with the
             #     destination vserver svm.
             #   @param peer_ip_addresses [::Array<::String>]
-            #     Optional. List of IPv4 ip addresses to be used for peering.
+            #     Optional. List of IPv4 IP addresses to be used for peering.
             #   @param peer_volume_name [::String]
             #     Required. Name of the user's local source volume to be peered with the
             #     destination volume.
@@ -6873,7 +7059,7 @@ module Google
             end
 
             ##
-            # `ExecuteOntapPost` dispatches the ONTAP `POST` request to the
+            # `ExecuteOntapPost` sends the ONTAP `POST` request to the
             # `StoragePool` cluster.
             #
             # @overload execute_ontap_post(request, options = nil)
@@ -6904,7 +7090,7 @@ module Google
             #     }
             #     ```
             #   @param ontap_path [::String]
-            #     Required. The resource path of the ONTAP resource.
+            #     Required. The path of the ONTAP resource.
             #     Format:
             #     `projects/{project_number}/locations/{location_id}/storagePools/{storage_pool_id}/ontap/{ontap_resource_path}`.
             #     For example:
@@ -6975,7 +7161,7 @@ module Google
             end
 
             ##
-            # `ExecuteOntapGet` dispatches the ONTAP `GET` request to the
+            # `ExecuteOntapGet` sends the ONTAP `GET` request to the
             # `StoragePool` cluster.
             #
             # @overload execute_ontap_get(request, options = nil)
@@ -7065,7 +7251,7 @@ module Google
             end
 
             ##
-            # `ExecuteOntapDelete` dispatches the ONTAP `DELETE` request to the
+            # `ExecuteOntapDelete` sends the ONTAP `DELETE` request to the
             # `StoragePool` cluster.
             #
             # @overload execute_ontap_delete(request, options = nil)
@@ -7155,7 +7341,7 @@ module Google
             end
 
             ##
-            # `ExecuteOntapPatch` dispatches the ONTAP `PATCH` request to the
+            # `ExecuteOntapPatch` sends the ONTAP `PATCH` request to the
             # `StoragePool` cluster.
             #
             # @overload execute_ontap_patch(request, options = nil)
@@ -7251,6 +7437,313 @@ module Google
 
               @net_app_stub.call_rpc :execute_ontap_patch, request, options: options do |response, operation|
                 yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Restores a backup to an ONTAP-mode volume.
+            #
+            # @overload restore_volume(request, options = nil)
+            #   Pass arguments to `restore_volume` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::RestoreVolumeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::RestoreVolumeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload restore_volume(backup_source: nil, ontap_volume_target: nil, name: nil)
+            #   Pass arguments to `restore_volume` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param backup_source [::Google::Cloud::NetApp::V1::BackupSource, ::Hash]
+            #     The backup source of the restore operation.
+            #   @param ontap_volume_target [::Google::Cloud::NetApp::V1::OntapVolumeTarget, ::Hash]
+            #     The ONTAP volume target of the restore operation.
+            #   @param name [::String]
+            #     Required. The resource name of the ONTAP mode storage pool, in the format
+            #     of `projects/{project}/locations/{location}/storagePools/{storage_pool}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::RestoreVolumeRequest.new
+            #
+            #   # Call the restore_volume method.
+            #   result = client.restore_volume request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def restore_volume request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::RestoreVolumeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.restore_volume.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.restore_volume.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.restore_volume.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :restore_volume, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists backup configurations for all volumes in an ONTAP-mode Storage Pool.
+            #
+            # @overload list_backup_configs(request, options = nil)
+            #   Pass arguments to `list_backup_configs` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::ListBackupConfigsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::ListBackupConfigsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_backup_configs(parent: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `list_backup_configs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The ONTAP StoragePool for which to retrieve backup configuration
+            #     information, in the format
+            #     `projects/{project}/locations/{location}/storagePools/{storage_pool}`.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of items to return. The service may return
+            #     fewer than this value. The maximum value is 1000; values above 1000 will be
+            #     coerced to 1000. If unspecified or set to 0, a default of 50 will be used.
+            #   @param page_token [::String]
+            #     Optional. The next_page_token value to use if there are additional
+            #     results to retrieve for this list request.
+            #   @param order_by [::String]
+            #     Optional. Sort results. Supported values are "volume_id" or ""
+            #   @param filter [::String]
+            #     Optional. The standard list filter.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::NetApp::V1::VolumeBackupConfig>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::NetApp::V1::VolumeBackupConfig>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::ListBackupConfigsRequest.new
+            #
+            #   # Call the list_backup_configs method.
+            #   result = client.list_backup_configs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::NetApp::V1::VolumeBackupConfig.
+            #     p item
+            #   end
+            #
+            def list_backup_configs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::ListBackupConfigsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_backup_configs.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_backup_configs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_backup_configs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :list_backup_configs, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @net_app_stub, :list_backup_configs, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the backup configuration for an ONTAP-mode volume.
+            #
+            # @overload update_backup_config(request, options = nil)
+            #   Pass arguments to `update_backup_config` via a request object, either of type
+            #   {::Google::Cloud::NetApp::V1::UpdateBackupConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::NetApp::V1::UpdateBackupConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_backup_config(name: nil, volume_uuid: nil, backup_config: nil, update_mask: nil)
+            #   Pass arguments to `update_backup_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the StoragePool, in the format:
+            #     projects/\\{projectNumber}/locations/\\{locationId}/storagePools/\\{poolId}
+            #   @param volume_uuid [::String]
+            #     Required. The UUID of the ONTAP-mode volume.
+            #   @param backup_config [::Google::Cloud::NetApp::V1::BackupConfig, ::Hash]
+            #     Required. Backup configuration to apply.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. Field mask is used to specify the fields to be overwritten in the
+            #     BackupConfig for the Volume.
+            #     The fields specified in the update_mask are relative to the resource, not
+            #     the full request. A field will be overwritten if it is in the mask.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/netapp/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetApp::V1::NetApp::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetApp::V1::UpdateBackupConfigRequest.new
+            #
+            #   # Call the update_backup_config method.
+            #   result = client.update_backup_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use it to
+            #   # check the status of an operation, cancel it, or wait for results.
+            #   # Here is how to wait for a response.
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "No response received."
+            #   end
+            #
+            def update_backup_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::NetApp::V1::UpdateBackupConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_backup_config.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::NetApp::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_backup_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_backup_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @net_app_stub.call_rpc :update_backup_config, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                throw :response, response
               end
             rescue ::GRPC::BadStatus => e
               raise ::Google::Cloud::Error.from_error(e)
@@ -7506,6 +7999,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :revert_volume
+                ##
+                # RPC-specific configuration for `start_split`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :start_split
+                ##
+                # RPC-specific configuration for `get_split_status`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_split_status
                 ##
                 # RPC-specific configuration for `establish_volume_peering`
                 # @return [::Gapic::Config::Method]
@@ -7796,6 +8299,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :execute_ontap_patch
+                ##
+                # RPC-specific configuration for `restore_volume`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :restore_volume
+                ##
+                # RPC-specific configuration for `list_backup_configs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_backup_configs
+                ##
+                # RPC-specific configuration for `update_backup_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_backup_config
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -7825,6 +8343,10 @@ module Google
                   @delete_volume = ::Gapic::Config::Method.new delete_volume_config
                   revert_volume_config = parent_rpcs.revert_volume if parent_rpcs.respond_to? :revert_volume
                   @revert_volume = ::Gapic::Config::Method.new revert_volume_config
+                  start_split_config = parent_rpcs.start_split if parent_rpcs.respond_to? :start_split
+                  @start_split = ::Gapic::Config::Method.new start_split_config
+                  get_split_status_config = parent_rpcs.get_split_status if parent_rpcs.respond_to? :get_split_status
+                  @get_split_status = ::Gapic::Config::Method.new get_split_status_config
                   establish_volume_peering_config = parent_rpcs.establish_volume_peering if parent_rpcs.respond_to? :establish_volume_peering
                   @establish_volume_peering = ::Gapic::Config::Method.new establish_volume_peering_config
                   list_snapshots_config = parent_rpcs.list_snapshots if parent_rpcs.respond_to? :list_snapshots
@@ -7941,6 +8463,12 @@ module Google
                   @execute_ontap_delete = ::Gapic::Config::Method.new execute_ontap_delete_config
                   execute_ontap_patch_config = parent_rpcs.execute_ontap_patch if parent_rpcs.respond_to? :execute_ontap_patch
                   @execute_ontap_patch = ::Gapic::Config::Method.new execute_ontap_patch_config
+                  restore_volume_config = parent_rpcs.restore_volume if parent_rpcs.respond_to? :restore_volume
+                  @restore_volume = ::Gapic::Config::Method.new restore_volume_config
+                  list_backup_configs_config = parent_rpcs.list_backup_configs if parent_rpcs.respond_to? :list_backup_configs
+                  @list_backup_configs = ::Gapic::Config::Method.new list_backup_configs_config
+                  update_backup_config_config = parent_rpcs.update_backup_config if parent_rpcs.respond_to? :update_backup_config
+                  @update_backup_config = ::Gapic::Config::Method.new update_backup_config_config
 
                   yield self if block_given?
                 end

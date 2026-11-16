@@ -32,8 +32,8 @@ module Google
         # Create a new client object for AggregateProductStatusesService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::IssueResolution::V1beta::AggregateProductStatusesService::Client](https://rubydoc.info/gems/google-shopping-merchant-issue_resolution-v1beta/Google/Shopping/Merchant/IssueResolution/V1beta/AggregateProductStatusesService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::IssueResolution::V1::AggregateProductStatusesService::Client](https://rubydoc.info/gems/google-shopping-merchant-issue_resolution-v1/Google/Shopping/Merchant/IssueResolution/V1/AggregateProductStatusesService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the AggregateProductStatusesService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -51,11 +51,11 @@ module Google
         # Service to manage aggregate product statuses.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.aggregate_product_statuses_service version: :v1beta, transport: :grpc, &block
+        def self.aggregate_product_statuses_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/issue_resolution/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::IssueResolution
@@ -75,11 +75,11 @@ module Google
         # or if the versioned client gem needs an update to support the AggregateProductStatusesService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.aggregate_product_statuses_service_available? version: :v1beta, transport: :grpc
+        def self.aggregate_product_statuses_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/issue_resolution/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::IssueResolution
                          .constants
@@ -102,8 +102,8 @@ module Google
         # Create a new client object for IssueResolutionService.
         #
         # By default, this returns an instance of
-        # [Google::Shopping::Merchant::IssueResolution::V1beta::IssueResolutionService::Client](https://rubydoc.info/gems/google-shopping-merchant-issue_resolution-v1beta/Google/Shopping/Merchant/IssueResolution/V1beta/IssueResolutionService/Client)
-        # for a gRPC client for version V1beta of the API.
+        # [Google::Shopping::Merchant::IssueResolution::V1::IssueResolutionService::Client](https://rubydoc.info/gems/google-shopping-merchant-issue_resolution-v1/Google/Shopping/Merchant/IssueResolution/V1/IssueResolutionService/Client)
+        # for a gRPC client for version V1 of the API.
         # However, you can specify a different API version by passing it in the
         # `version` parameter. If the IssueResolutionService service is
         # supported by that API version, and the corresponding gem is available, the
@@ -122,11 +122,11 @@ module Google
         # issues.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [::Object] A client object for the specified version.
         #
-        def self.issue_resolution_service version: :v1beta, transport: :grpc, &block
+        def self.issue_resolution_service version: :v1, transport: :grpc, &block
           require "google/shopping/merchant/issue_resolution/#{version.to_s.downcase}"
 
           package_name = Google::Shopping::Merchant::IssueResolution
@@ -146,11 +146,11 @@ module Google
         # or if the versioned client gem needs an update to support the IssueResolutionService service.
         #
         # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v1beta`.
+        #   Defaults to `:v1`.
         # @param transport [:grpc, :rest] The transport to use. Defaults to `:grpc`.
         # @return [boolean] Whether the service is available.
         #
-        def self.issue_resolution_service_available? version: :v1beta, transport: :grpc
+        def self.issue_resolution_service_available? version: :v1, transport: :grpc
           require "google/shopping/merchant/issue_resolution/#{version.to_s.downcase}"
           package_name = Google::Shopping::Merchant::IssueResolution
                          .constants

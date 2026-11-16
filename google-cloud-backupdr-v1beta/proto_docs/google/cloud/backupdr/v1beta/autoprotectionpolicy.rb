@@ -25,14 +25,15 @@ module Google
         # management, moving from manual per-resource protection to a bulk approach.
         # The policy dynamically discovers and applies a specified backup plan to all
         # eligible resources that match its defined scope and criteria.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     Identifier. The resource name of the AutoprotectionPolicy.
+        #     Output only. Identifier. The resource name of the AutoprotectionPolicy.
         #     Format:
         #     `projects/{project}/locations/{location}/autoProtectionPolicies/{auto_protection_policy}`
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. A description of the policy.
+        #     Optional. A description of the policy. The description must be at most 2048
+        #     characters.
         # @!attribute [rw] backup_plan_details
         #   @return [::Array<::Google::Cloud::BackupDR::V1beta::BackupPlanDetail>]
         #     Required. The backup plan details for matching resources.
@@ -160,7 +161,7 @@ module Google
         # @!attribute [rw] values
         #   @return [::Array<::String>]
         #     Required. The values of the label to match.
-        #     There will be explicit “OR” between values of array.
+        #     There will be explicit "OR" between values of array.
         #     Each value must be in the format `{label_value}`.
         #     The value must match the regex
         #     Format: `[\\p{Ll}\\p{Lo}\\p{N}_-]{1,63}`.
@@ -178,9 +179,21 @@ module Google
         #   @return [::String]
         #     Required. The ID to use for the policy.
         #     This will become the final component of the policy's resource name.
+        #
+        #     This value must start with a lowercase letter followed by up to 62
+        #     lowercase letters, numbers, or hyphens, and cannot end with a hyphen.
         # @!attribute [rw] auto_protection_policy
         #   @return [::Google::Cloud::BackupDR::V1beta::AutoProtectionPolicy]
         #     Required. The AutoProtectionPolicy resource to create.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
         class CreateAutoProtectionPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -203,11 +216,20 @@ module Google
         #     Required. The policy to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. Field mask is used to specify the fields to be overwritten in the
+        #     Optional. Field mask is used to specify the fields to be overwritten in the
         #     AutoProtectionPolicy resource by the update.
         #     The fields specified in the update_mask are relative to the resource, not
         #     the full request. A field will be overwritten if it is in the mask. If the
         #     user does not provide a mask then all fields will be overwritten.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
         class UpdateAutoProtectionPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -221,9 +243,18 @@ module Google
         #     projects/\\{project}/locations/\\{location}/autoProtectionPolicies/\\{auto_protection_policy}
         # @!attribute [rw] etag
         #   @return [::String]
-        #     The current etag of the AutoProtectionPolicy.
+        #     Optional. The current etag of the AutoProtectionPolicy.
         #     If an etag is provided and does not match the current etag of the
         #     connection, the request will be rejected with an ABORTED error.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional request ID to identify requests. Specify a unique
+        #     request ID so that if you must retry your request, the server will know to
+        #     ignore the request if it has already been completed. The server will
+        #     guarantee that for at least 60 minutes since the first request.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
         class DeleteAutoProtectionPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -266,7 +297,7 @@ module Google
         #     If this field is omitted, there are no subsequent pages.
         # @!attribute [rw] unreachable
         #   @return [::Array<::String>]
-        #     Locations that could not be reached.
+        #     Unordered list. Locations that could not be reached.
         class ListAutoProtectionPoliciesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

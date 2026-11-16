@@ -33,8 +33,9 @@ module Google
             GOAL_TYPE_UNSPECIFIED = 0
 
             # No goal is specified for the number of ads delivered.
-            # The line item {::Google::Ads::AdManager::V1::LineItem#line_item_type type}
-            # must be one of:
+            # The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::PRICE_PRIORITY LineItemTypeEnum.LineItemType.PRICE_PRIORITY}
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::AD_EXCHANGE LineItemTypeEnum.LineItemType.AD_EXCHANGE}
@@ -43,8 +44,9 @@ module Google
 
             # There is a goal on the number of ads delivered for this line item during
             # its entire lifetime.
-            # The line item {::Google::Ads::AdManager::V1::LineItem#line_item_type type}
-            # must be one of:
+            # The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::BULK LineItemTypeEnum.LineItemType.BULK}
@@ -56,8 +58,9 @@ module Google
             LIFETIME = 2
 
             # There is a daily goal on the number of ads delivered for this line item.
-            # The line item {::Google::Ads::AdManager::V1::LineItem#line_item_type type}
-            # must be one of:
+            # The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::SPONSORSHIP LineItemTypeEnum.LineItemType.SPONSORSHIP}
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::NETWORK LineItemTypeEnum.LineItemType.NETWORK}
@@ -78,7 +81,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Indicates the type of unit used for defining a reservation. The
-          # {::Google::Ads::AdManager::V1::LineItem#cost_type LineItem.cost_type} can differ
+          # {::Google::Ads::AdManager::V1::LineItem#cost_type LineItem.costType} can differ
           # from the UnitType - an ad can have an impression goal, but be billed by its
           # click. Usually CostType and UnitType will refer to the same unit.
           module UnitType
@@ -90,8 +93,9 @@ module Google
             IMPRESSIONS = 1
 
             # The number of clicks reported by creatives associated with the line item.
-            # The line item {::Google::Ads::AdManager::V1::LineItem#line_item_type type}
-            # must be one of:
+            # The line item
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type lineItemType} must be
+            # one of:
             #
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}
             # * {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::BULK LineItemTypeEnum.LineItemType.BULK}
@@ -101,32 +105,33 @@ module Google
             # The number of click-through Cost-Per-Action (CPA) conversions from
             # creatives associated with the line item. This is only supported as
             # secondary goal and the
-            # {::Google::Ads::AdManager::V1::LineItem#cost_type LineItem.cost_type} must be
+            # {::Google::Ads::AdManager::V1::LineItem#cost_type LineItem.costType} must be
             # [CostTypeEnum.CostType.CPA][].
             CLICK_THROUGH_CPA_CONVERSIONS = 3
 
             # The number of view-through Cost-Per-Action (CPA) conversions from
             # creatives associated with the line item. This is only supported as
             # secondary goal and the
-            # {::Google::Ads::AdManager::V1::LineItem#cost_type LineItem.cost_type} must be
-            # [CostTypeEnum.CostType.CPA}.
+            # {::Google::Ads::AdManager::V1::LineItem#cost_type LineItem.costType} must be
+            # [CostTypeEnum.CostType.CPA][].
             VIEW_THROUGH_CPA_CONVERSIONS = 4
 
             # The number of total Cost-Per-Action (CPA) conversions from creatives
             # associated with the line item. This is only supported as secondary goal
-            # and the [LineItem.cost_type} must be [CostTypeEnum.CostType.CPA}.
+            # and the {::Google::Ads::AdManager::V1::LineItem#cost_type LineItem.costType}
+            # must be [CostTypeEnum.CostType.CPA][].
             TOTAL_CPA_CONVERSIONS = 5
 
             # The number of viewable impressions reported by creatives associated with
             # the line item. The
-            # {::Google::Ads::AdManager::V1::LineItem#line_item_type LineItem.line_item_type}
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type LineItem.lineItemType}
             # must be
             # {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}.
             VIEWABLE_IMPRESSIONS = 6
 
             # The number of in-target impressions reported by third party measurements.
             # The
-            # {::Google::Ads::AdManager::V1::LineItem#line_item_type LineItem.line_item_type}
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type LineItem.lineItemType}
             # must be
             # {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}.
             IN_TARGET_IMPRESSIONS = 7
@@ -135,7 +140,7 @@ module Google
             # line item. A completed view is defined as having watched the entirety of
             # the in-stream video ad and is only supported for standard reservation
             # video line items. The
-            # {::Google::Ads::AdManager::V1::LineItem#line_item_type LineItem.line_item_type}
+            # {::Google::Ads::AdManager::V1::LineItem#line_item_type LineItem.lineItemType}
             # must be
             # {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType::STANDARD LineItemTypeEnum.LineItemType.STANDARD}.
             COMPLETED_VIEWS = 8

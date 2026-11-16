@@ -83,6 +83,19 @@ module Google
         #     Note: "property graph" is the former name for BigQuery Graph. The field and
         #     message names retain the original term for backward compatibility; both
         #     refer to the same resource.
+        # @!attribute [rw] search_scope
+        #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::SearchScope]
+        #     Optional. Search over BigQuery resources to discover most relevant tables
+        #     to the query.
+        #
+        #     When set, at least one of `include_project_ids` or
+        #     `include_dataset_references` must be populated with non-blank identifiers.
+        #     Matches from the two fields are unioned (OR-ed).
+        #
+        #     Note: `search_scope` is only supported for standalone conversations
+        #     (`ChatRequest.inline_context` or
+        #     `ClientManagedResourceContext.inline_context`) and is not supported in
+        #     {::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent DataAgent}.
         # @!attribute [rw] agent_context_reference
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::AgentContextReference]
         #     Optional. Parameters for retrieving data from Agent Context.
@@ -105,6 +118,39 @@ module Google
         #   @return [::Google::Cloud::GeminiDataAnalytics::V1beta::Schema]
         #     Optional. The schema of the datasource.
         class BigQueryTableReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message representing a reference to a single BigQuery dataset.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Required. The project ID that the dataset belongs to.
+        # @!attribute [rw] dataset_id
+        #   @return [::String]
+        #     Required. The dataset ID.
+        class BigQueryDatasetReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Message representing filters to apply to search over BigQuery tables.
+        #
+        # At least one of `include_project_ids` or `include_dataset_references` must be
+        # populated with non-blank identifiers. Tables matching either field are
+        # included, so the two fields are unioned (OR-ed) rather than intersected.
+        #
+        # Note: `SearchScope` is only supported for standalone conversations
+        # (`ChatRequest.inline_context` or
+        # `ClientManagedResourceContext.inline_context`) and is not supported in
+        # {::Google::Cloud::GeminiDataAnalytics::V1beta::DataAgent DataAgent}.
+        # @!attribute [rw] include_project_ids
+        #   @return [::Array<::String>]
+        #     Optional. The BigQuery project ids to search over.
+        # @!attribute [rw] include_dataset_references
+        #   @return [::Array<::Google::Cloud::GeminiDataAnalytics::V1beta::BigQueryDatasetReference>]
+        #     Optional. The BigQuery dataset references to search over.
+        class SearchScope
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -319,6 +365,9 @@ module Google
         #   @return [::String]
         #     Tag to be attached to all queries to Spanner. Allows to identify and
         #     monitor queries sent to Spanner by the GDA service.
+        # @!attribute [rw] graph_ids
+        #   @return [::Array<::String>]
+        #     Optional. The graph IDs to query.
         class SpannerDatabaseReference
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -55,13 +55,20 @@ module Google
         #      See syntax details at
         #      https://developers.google.com/ad-manager/api/beta/filters
         #
+        #     Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+        #     timestamps, full resource names on reference fields (for example, `order =
+        #     "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+        #     wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+        #     repeated-field matching, unquoted enums and booleans, uppercase
+        #     `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+        #     (...)`).
+        #
         #     **Filterable fields:**
         #
         #     * `archived`
         #     * `contractedUnitsBought`
         #     * `costType`
         #     * `createTime`
-        #     * `creativePlaceholders.size.canonicalName`
         #     * `dealInfo.externalDealId`
         #     * `deliveryRateType`
         #     * `displayName`
@@ -69,7 +76,6 @@ module Google
         #     * `environmentType`
         #     * `externalLineItemId`
         #     * `goal.units`
-        #     * `grpSettings.growbirdNielsenEnabled`
         #     * `grpSettings.inTargetRatioEstimateMilliPercent`
         #     * `lineItemType`
         #     * `missingCreatives`
@@ -80,7 +86,6 @@ module Google
         #     * `priority`
         #     * `roadblockingType`
         #     * `startTime`
-        #     * `stats.clickThroughRate`
         #     * `stats.clicksDelivered`
         #     * `stats.impressionsDelivered`
         #     * `stats.viewableImpressionsDelivered`
@@ -127,6 +132,277 @@ module Google
         #     For more information, see
         #     https://developers.google.com/ad-manager/api/beta/field-masks
         class ListLineItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `CreateLineItem` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where this `LineItem` will be created.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] line_item
+        #   @return [::Google::Ads::AdManager::V1::LineItem]
+        #     Required. The `LineItem` to create.
+        class CreateLineItemRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchCreateLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be created.
+        #     Format: `networks/{network_code}`
+        #     The parent field in the CreateLineItemRequest must match this
+        #     field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::CreateLineItemRequest>]
+        #     Required. The `LineItem` objects to create.
+        #     A maximum of 100 objects can be created in a batch.
+        class BatchCreateLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchCreateLineItems` method.
+        # @!attribute [rw] line_items
+        #   @return [::Array<::Google::Ads::AdManager::V1::LineItem>]
+        #     The `LineItem` objects created.
+        class BatchCreateLineItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `UpdateLineItem` method.
+        # @!attribute [rw] line_item
+        #   @return [::Google::Ads::AdManager::V1::LineItem]
+        #     Required. The `LineItem` to update.
+        #
+        #     The `LineItem`'s `name` is used to identify the `LineItem` to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. The list of fields to update.
+        class UpdateLineItemRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUpdateLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be updated.
+        #     Format: `networks/{network_code}`
+        #     The parent segment of the `line_item.name` in each `UpdateLineItemRequest`
+        #     must match this field.
+        # @!attribute [rw] requests
+        #   @return [::Array<::Google::Ads::AdManager::V1::UpdateLineItemRequest>]
+        #     Required. The `LineItem` objects to update.
+        #     A maximum of 100 objects can be updated in a batch.
+        class BatchUpdateLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUpdateLineItems` method.
+        # @!attribute [rw] line_items
+        #   @return [::Array<::Google::Ads::AdManager::V1::LineItem>]
+        #     The `LineItem` objects updated.
+        class BatchUpdateLineItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchActivateLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be updated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItem` objects to activate.
+        #     Format: `networks/{network_code}/lineItems/{line_item}`
+        class BatchActivateLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchActivateLineItems` method.
+        class BatchActivateLineItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchPauseLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be updated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItem` objects to pause.
+        #     Format: `networks/{network_code}/lineItems/{line_item}`
+        class BatchPauseLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchPauseLineItems` method.
+        class BatchPauseLineItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchResumeLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be updated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItem` objects to resume.
+        #     Format: `networks/{network_code}/lineItems/{line_item}`
+        class BatchResumeLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchResumeLineItems` method.
+        class BatchResumeLineItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchResumeAndOverbookLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be updated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItem` objects to resume and overbook.
+        #     Format: `networks/{network_code}/lineItems/{line_item}`
+        class BatchResumeAndOverbookLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchResumeAndOverbookLineItems` method.
+        class BatchResumeAndOverbookLineItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchDeleteLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be updated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItem` objects to delete.
+        #     Format: `networks/{network_code}/lineItems/{line_item}`
+        class BatchDeleteLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchReserveLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be updated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItem` objects to reserve.
+        #     Format: `networks/{network_code}/lineItems/{line_item}`
+        class BatchReserveLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchReserveLineItems` method.
+        class BatchReserveLineItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchReserveAndOverbookLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be updated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItem` objects to reserve and overbook.
+        #     Format: `networks/{network_code}/lineItems/{line_item}`
+        class BatchReserveAndOverbookLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchReserveAndOverbookLineItems` method.
+        class BatchReserveAndOverbookLineItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchReleaseLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be updated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItem` objects to release.
+        #     Format: `networks/{network_code}/lineItems/{line_item}`
+        class BatchReleaseLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchReleaseLineItems` method.
+        class BatchReleaseLineItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchArchiveLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be updated.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItem` objects to archive.
+        #     Format: `networks/{network_code}/lineItems/{line_item}`
+        class BatchArchiveLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchArchiveLineItems` method.
+        class BatchArchiveLineItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request object for `BatchUnarchiveLineItems` method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource where `LineItems` will be unarchived.
+        #     Format: `networks/{network_code}`
+        # @!attribute [rw] names
+        #   @return [::Array<::String>]
+        #     Required. The names of the `LineItem` objects to extract.
+        #     Format: `networks/{network_code}/lineItems/{line_item}`
+        class BatchUnarchiveLineItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response object for `BatchUnarchiveLineItems` method.
+        class BatchUnarchiveLineItemsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

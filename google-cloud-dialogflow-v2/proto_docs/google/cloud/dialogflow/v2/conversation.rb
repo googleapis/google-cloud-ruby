@@ -162,8 +162,7 @@ module Google
             #     relevant context reference.
             # @!attribute [rw] answer_record
             #   @return [::String]
-            #     If the context content was generated from a tool call, specify the
-            #     answer record associated with the tool call.
+            #     Optional. The answer record of the tool execution result.
             #     Format: `projects/<Project ID>/locations/<Location
             #     ID>/answerRecords/<Answer Record ID>`.
             class ContextContent

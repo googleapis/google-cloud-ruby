@@ -58,17 +58,48 @@ module Google
               # If `location_id` is specified as `-` (wildcard), then all regions
               # available to the project are queried, and the results are aggregated.
               rpc :ListClusters, ::Google::Cloud::Redis::Cluster::V1::ListClustersRequest, ::Google::Cloud::Redis::Cluster::V1::ListClustersResponse
+              # Lists all ACL policies owned by a project in either the specified
+              # location (region) or all locations.
+              #
+              # The location should have the following format:
+              #
+              # * `projects/{project_id}/locations/{location_id}`
+              #
+              # If `location_id` is specified as `-` (wildcard), then all regions
+              # available to the project are queried, and the results are aggregated.
+              rpc :ListAclPolicies, ::Google::Cloud::Redis::Cluster::V1::ListAclPoliciesRequest, ::Google::Cloud::Redis::Cluster::V1::ListAclPoliciesResponse
               # Gets the details of a specific Redis cluster.
               rpc :GetCluster, ::Google::Cloud::Redis::Cluster::V1::GetClusterRequest, ::Google::Cloud::Redis::Cluster::V1::Cluster
+              # Gets the details of a specific Redis Cluster ACL policy.
+              rpc :GetAclPolicy, ::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRequest, ::Google::Cloud::Redis::Cluster::V1::AclPolicy
               # Updates the metadata and configuration of a specific Redis cluster.
               #
               # Completed longrunning.Operation will contain the new cluster object
               # in the response field. The returned operation is automatically deleted
               # after a few hours, so there is no need to call DeleteOperation.
               rpc :UpdateCluster, ::Google::Cloud::Redis::Cluster::V1::UpdateClusterRequest, ::Google::Longrunning::Operation
+              # Updates the ACL policy.
+              #
+              # The operation applies the updated ACL policy to all of the linked clusters.
+              # If Memorystore can apply the policy to all clusters, then the operation
+              # returns a SUCCESS status. If Memorystore can't apply the policy to all
+              # clusters, then to ensure eventual consistency, Memorystore uses
+              # reconciliation to apply the policy to the failed clusters.
+              #
+              # Completed longrunning.Operation will contain the new ACL policy object in
+              # the response field.
+              rpc :UpdateAclPolicy, ::Google::Cloud::Redis::Cluster::V1::UpdateAclPolicyRequest, ::Google::Longrunning::Operation
               # Deletes a specific Redis cluster. Cluster stops serving and data is
               # deleted.
               rpc :DeleteCluster, ::Google::Cloud::Redis::Cluster::V1::DeleteClusterRequest, ::Google::Longrunning::Operation
+              # Deletes a specific ACL policy. This action will delete the ACL policy and
+              # all the rules associated with it. An ACL policy cannot be deleted if it is
+              # attached to a cluster.
+              rpc :DeleteAclPolicy, ::Google::Cloud::Redis::Cluster::V1::DeleteAclPolicyRequest, ::Google::Longrunning::Operation
+              # Gets details of a specific ACL policy revision.
+              rpc :GetAclPolicyRevision, ::Google::Cloud::Redis::Cluster::V1::GetAclPolicyRevisionRequest, ::Google::Cloud::Redis::Cluster::V1::AclPolicyRevision
+              # Lists all ACL policy revisions in a given ACL policy.
+              rpc :ListAclPolicyRevisions, ::Google::Cloud::Redis::Cluster::V1::ListAclPolicyRevisionsRequest, ::Google::Cloud::Redis::Cluster::V1::ListAclPolicyRevisionsResponse
               # Creates a Redis cluster based on the specified properties.
               # The creation is executed asynchronously and callers may check the returned
               # operation to track its progress. Once the operation is completed the Redis
@@ -78,6 +109,10 @@ module Google
               # The returned operation is automatically deleted after a few hours, so there
               # is no need to call DeleteOperation.
               rpc :CreateCluster, ::Google::Cloud::Redis::Cluster::V1::CreateClusterRequest, ::Google::Longrunning::Operation
+              # Creates an ACL policy.
+              # The creation is executed synchronously and the policy is available for use
+              # immediately after the RPC returns.
+              rpc :CreateAclPolicy, ::Google::Cloud::Redis::Cluster::V1::CreateAclPolicyRequest, ::Google::Cloud::Redis::Cluster::V1::AclPolicy
               # Gets the details of certificate authority information for Redis cluster.
               rpc :GetClusterCertificateAuthority, ::Google::Cloud::Redis::Cluster::V1::GetClusterCertificateAuthorityRequest, ::Google::Cloud::Redis::Cluster::V1::CertificateAuthority
               # Gets the details of regional certificate authority information for Redis
@@ -114,6 +149,22 @@ module Google
               # require critical update. After preview, there will be no critical update
               # needed for backup.
               rpc :BackupCluster, ::Google::Cloud::Redis::Cluster::V1::BackupClusterRequest, ::Google::Longrunning::Operation
+              # Lists all the token auth users for a token based auth enabled cluster.
+              rpc :ListTokenAuthUsers, ::Google::Cloud::Redis::Cluster::V1::ListTokenAuthUsersRequest, ::Google::Cloud::Redis::Cluster::V1::ListTokenAuthUsersResponse
+              # Gets a specific token auth user for a basic auth enabled cluster.
+              rpc :GetTokenAuthUser, ::Google::Cloud::Redis::Cluster::V1::GetTokenAuthUserRequest, ::Google::Cloud::Redis::Cluster::V1::TokenAuthUser
+              # Lists all the auth tokens for a specific token auth user.
+              rpc :ListAuthTokens, ::Google::Cloud::Redis::Cluster::V1::ListAuthTokensRequest, ::Google::Cloud::Redis::Cluster::V1::ListAuthTokensResponse
+              # Gets a specific auth token for a specific token auth user.
+              rpc :GetAuthToken, ::Google::Cloud::Redis::Cluster::V1::GetAuthTokenRequest, ::Google::Cloud::Redis::Cluster::V1::AuthToken
+              # Adds a token auth user for a token based auth enabled cluster.
+              rpc :AddTokenAuthUser, ::Google::Cloud::Redis::Cluster::V1::AddTokenAuthUserRequest, ::Google::Longrunning::Operation
+              # Deletes a token auth user for a token based auth enabled cluster.
+              rpc :DeleteTokenAuthUser, ::Google::Cloud::Redis::Cluster::V1::DeleteTokenAuthUserRequest, ::Google::Longrunning::Operation
+              # Adds a auth token for a user of a token based auth enabled cluster.
+              rpc :AddAuthToken, ::Google::Cloud::Redis::Cluster::V1::AddAuthTokenRequest, ::Google::Longrunning::Operation
+              # Removes a auth token for a user of a token based auth enabled instance.
+              rpc :DeleteAuthToken, ::Google::Cloud::Redis::Cluster::V1::DeleteAuthTokenRequest, ::Google::Longrunning::Operation
             end
 
             Stub = Service.rpc_stub_class

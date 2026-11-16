@@ -1,8 +1,7 @@
 # Ruby Client for the Cluster Director V1BETA API
 
-API Client library for the Cluster Director V1BETA API
+The Cluster Director API lets you deploy, manage, and monitor clusters that run artificial intelligence (AI), machine learning (ML), or high performance computing (HPC) workloads.
 
-google-cloud-hypercompute_cluster-v1beta is the official client library for the Cluster Director V1BETA API.
 
 https://github.com/googleapis/google-cloud-ruby
 
@@ -40,7 +39,7 @@ response = client.list_clusters request
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-hypercompute_cluster-v1beta/latest)
 for class and method documentation.
 
-See also the [Product Documentation](https://cloud.google.com/blog/products/compute/managed-slurm-and-other-cluster-director-enhancements)
+See also the [Product Documentation](https://cloud.google.com/cluster-director/docs)
 for general usage information.
 
 ## Debug Logging
@@ -88,12 +87,10 @@ To browse ready to use code samples check [Google Cloud Samples](https://cloud.g
 
 This library is supported on Ruby 3.2+.
 
-Google provides official support for Ruby versions that are actively supported
-by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Older versions of Ruby _may_
-still work, but are unsupported and not recommended. See
-https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
-support schedule.
+Google provides official support for Ruby versions as described in the
+[Supported Ruby versions](https://docs.cloud.google.com/ruby/getting-started/supported-ruby-versions)
+policy. Older versions of Ruby _may_ still work, but are unsupported and not
+recommended.
 
 ## Which client should I use?
 

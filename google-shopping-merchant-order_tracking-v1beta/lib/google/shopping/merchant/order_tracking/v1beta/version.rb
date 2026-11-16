@@ -22,7 +22,7 @@ module Google
     module Merchant
       module OrderTracking
         module V1beta
-          VERSION = "0.4.0"
+          VERSION = "1.0.0"
         end
       end
     end

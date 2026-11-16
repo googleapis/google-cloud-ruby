@@ -48,7 +48,7 @@ module Google
         #     it represents the percentage of remaining impressions reserved. <p>If this
         #     is an impression cap goal, it represents the number of impressions or
         #     conversions that the line item will stop serving at if reached. For valid
-        #     line item types, see [LineItem.impressions_cap][].
+        #     line item types, see [LineItem.impressionsCap][LineItem.impressions_cap].
         class Goal
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -36,6 +36,9 @@ module Google
         # @!attribute [rw] report_definition
         #   @return [::Google::Ads::AdManager::V1::ReportDefinition]
         #     Required. The report definition of the report.
+        # @!attribute [rw] draft_report_definition
+        #   @return [::Google::Ads::AdManager::V1::ReportDefinition]
+        #     Optional. The draft report definition of the report.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Optional. Display name for the report.

@@ -175,7 +175,7 @@ module Google
         #
         #     Note that this value might not be what was used
         #     as input. For example, if ALPHA was provided as input in the parent
-        #     resource, but only BETA and GA-level features are were, this field will be
+        #     resource, but only BETA and GA-level features are used, this field will be
         #     BETA.
         # @!attribute [r] job
         #   @return [::String]
@@ -232,6 +232,12 @@ module Google
         # @!attribute [r] satisfies_pzs
         #   @return [::Boolean]
         #     Output only. Reserved for future use.
+        # @!attribute [r] client
+        #   @return [::String]
+        #     Output only. Arbitrary identifier for the API client.
+        # @!attribute [r] client_version
+        #   @return [::String]
+        #     Output only. Arbitrary version identifier for the API client.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the

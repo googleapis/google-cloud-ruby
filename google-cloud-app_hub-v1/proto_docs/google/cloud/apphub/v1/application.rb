@@ -57,6 +57,13 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::AppHub::V1::Application::State]
         #     Output only. Application state.
+        # @!attribute [r] application_properties
+        #   @return [::Google::Cloud::AppHub::V1::ApplicationProperties]
+        #     Output only. Properties of an underlying cloud resource that can comprise
+        #     an Application.
+        # @!attribute [r] application_type
+        #   @return [::Google::Cloud::AppHub::V1::ApplicationType]
+        #     Output only. Application type.
         class Application
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -74,6 +81,24 @@ module Google
 
             # The Application is being deleted.
             DELETING = 3
+          end
+        end
+
+        # Application type.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::AppHub::V1::ApplicationType::Type]
+        #     The type of the application.
+        class ApplicationType
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Application type enum.
+          module Type
+            # Unspecified type.
+            TYPE_UNSPECIFIED = 0
+
+            # AI Application type.
+            AI_APPLICATION = 1
           end
         end
 
@@ -95,6 +120,27 @@ module Google
 
             # Global type.
             GLOBAL = 2
+          end
+        end
+
+        # Additional system properties of an Application.
+        # @!attribute [r] extended_metadata
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AppHub::V1::ExtendedMetadata}]
+        #     Output only. Additional metadata specific to the App Hub application.
+        #     The key is a string that identifies the type of metadata and the value is
+        #     the metadata contents specific to that type.
+        #     Key format: `apphub.googleapis.com/{metadataType}`
+        class ApplicationProperties
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::AppHub::V1::ExtendedMetadata]
+          class ExtendedMetadataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
       end

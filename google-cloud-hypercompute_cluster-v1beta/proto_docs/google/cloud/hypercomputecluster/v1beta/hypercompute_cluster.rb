@@ -34,7 +34,8 @@ module Google
         #     `projects/{project}/locations/{location}/clusters/{cluster}`.
         # @!attribute [rw] description
         #   @return [::String]
-        #     Optional. User-provided description of the cluster.
+        #     Optional. A description for your cluster. You can use up to 2,048
+        #     characters.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional.
@@ -54,7 +55,7 @@ module Google
         #     cluster's intended state.
         # @!attribute [rw] network_resources
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::HypercomputeCluster::V1beta::NetworkResource}]
-        #     Optional. Network resources available to the cluster. Must contain at most
+        #     Optional. Network resources available to the cluster. Must contain exactly
         #     one value. Keys specify the ID of the network resource by which it can be
         #     referenced elsewhere, and must conform to
         #     [RFC-1034](https://datatracker.ietf.org/doc/html/rfc1034) (lower-case,
@@ -75,6 +76,9 @@ module Google
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::Orchestrator]
         #     Optional. Orchestrator that is responsible for scheduling and running jobs
         #     on the cluster.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. The globally unique identifier for this Cluster.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -188,9 +192,10 @@ module Google
         #     format `projects/{project}/locations/{location}`.
         # @!attribute [rw] cluster_id
         #   @return [::String]
-        #     Required. ID of the cluster to create. Must conform to
-        #     [RFC-1034](https://datatracker.ietf.org/doc/html/rfc1034) (lower-case,
-        #     alphanumeric, and at most 63 characters).
+        #     Required. The ID of the cluster to create.
+        #     The cluster ID must start with a lowercase letter (`a`-`z`), use only
+        #     lowercase letters or numbers, and contain up to 10 characters. For example,
+        #     specify `cluster001`.
         # @!attribute [rw] cluster
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::Cluster]
         #     Required. Cluster to create.
@@ -240,11 +245,59 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # {::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client#list_nodes ListNodes}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Parent cluster of the nodes to list, in the format
+        #     `projects/{project}/locations/{location}/clusters/{cluster}`.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of nodes to return. The service may return fewer
+        #     than this value.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token received from a previous `ListNodes` call. Provide
+        #     this to retrieve the subsequent page. When paginating, all other parameters
+        #     provided to `ListNodes` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. [Filter](https://google.aip.dev/160) to apply to the returned
+        #     results.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. How to order the resulting nodes. Must be one of the following
+        #     strings:
+        #
+        #     * `name`
+        #     * `name desc`
+        #
+        #     If not specified, nodes will be returned in an arbitrary order.
+        class ListNodesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::HypercomputeCluster::V1beta::HypercomputeCluster::Client#list_nodes ListNodes}.
+        # @!attribute [rw] nodes
+        #   @return [::Array<::Google::Cloud::HypercomputeCluster::V1beta::Node>]
+        #     Nodes in the specified cluster.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that can be sent as `page_token` to retrieve the next page. If this
+        #     field is absent, there are no subsequent pages.
+        class ListNodesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A resource representing a network that connects the various components of a
         # cluster together.
-        # @!attribute [rw] network
+        # @!attribute [r] network
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::NetworkReference]
-        #     Reference to a network in Google Compute Engine.
+        #     Output only. A reference to a network in Google Compute Engine.
         # @!attribute [rw] config
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::NetworkResourceConfig]
         #     Immutable. Configuration for this network resource, which describes how it
@@ -325,24 +378,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A resource representing a form of persistent storage that is accessible to
-        # compute resources in the cluster.
-        # @!attribute [rw] filestore
+        # Represents a form of persistent storage that you can mount onto compute
+        # resources in the cluster.
+        # @!attribute [r] filestore
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::FilestoreReference]
-        #     Reference to a Filestore instance. Populated if and only if the storage
-        #     resource was configured to use Filestore.
+        #     Output only. A reference to a Filestore instance. Populated if and only
+        #     if the storage resource was configured to use Filestore.
         #
         #     Note: The following fields are mutually exclusive: `filestore`, `bucket`, `lustre`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] bucket
+        # @!attribute [r] bucket
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::BucketReference]
-        #     Reference to a Google Cloud Storage bucket. Populated if and only if the
-        #     storage resource was configured to use Google Cloud Storage.
+        #     Output only. A reference to a Google Cloud Storage bucket. Populated if
+        #     and only if the storage resource was configured to use Google Cloud
+        #     Storage.
         #
         #     Note: The following fields are mutually exclusive: `bucket`, `filestore`, `lustre`. If a field in that set is populated, all other fields in the set will automatically be cleared.
-        # @!attribute [rw] lustre
+        # @!attribute [r] lustre
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::LustreReference]
-        #     Reference to a Managed Lustre instance. Populated if and only if the
-        #     storage resource was configured to use Managed Lustre.
+        #     Output only. A reference to a Managed Lustre instance. Populated if and
+        #     only if the storage resource was configured to use Managed Lustre.
         #
         #     Note: The following fields are mutually exclusive: `lustre`, `filestore`, `bucket`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] config
@@ -396,37 +450,43 @@ module Google
         #     Optional. Immutable. If set, indicates that a new Filestore instance
         #     should be created.
         #
-        #     Note: The following fields are mutually exclusive: `new_filestore`, `existing_filestore`, `new_bucket`, `existing_bucket`, `new_lustre`, `existing_lustre`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `new_filestore`, `existing_filestore`, `new_bucket`, `existing_bucket`, `new_lustre`, `existing_lustre`, `existing_nfs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] existing_filestore
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::ExistingFilestoreConfig]
         #     Optional. Immutable. If set, indicates that an existing Filestore
         #     instance should be imported.
         #
-        #     Note: The following fields are mutually exclusive: `existing_filestore`, `new_filestore`, `new_bucket`, `existing_bucket`, `new_lustre`, `existing_lustre`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `existing_filestore`, `new_filestore`, `new_bucket`, `existing_bucket`, `new_lustre`, `existing_lustre`, `existing_nfs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] new_bucket
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::NewBucketConfig]
         #     Optional. Immutable. If set, indicates that a new Cloud Storage bucket
         #     should be created.
         #
-        #     Note: The following fields are mutually exclusive: `new_bucket`, `new_filestore`, `existing_filestore`, `existing_bucket`, `new_lustre`, `existing_lustre`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `new_bucket`, `new_filestore`, `existing_filestore`, `existing_bucket`, `new_lustre`, `existing_lustre`, `existing_nfs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] existing_bucket
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::ExistingBucketConfig]
         #     Optional. Immutable. If set, indicates that an existing Cloud Storage
         #     bucket should be imported.
         #
-        #     Note: The following fields are mutually exclusive: `existing_bucket`, `new_filestore`, `existing_filestore`, `new_bucket`, `new_lustre`, `existing_lustre`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `existing_bucket`, `new_filestore`, `existing_filestore`, `new_bucket`, `new_lustre`, `existing_lustre`, `existing_nfs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] new_lustre
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::NewLustreConfig]
         #     Optional. Immutable. If set, indicates that a new Managed Lustre instance
         #     should be created.
         #
-        #     Note: The following fields are mutually exclusive: `new_lustre`, `new_filestore`, `existing_filestore`, `new_bucket`, `existing_bucket`, `existing_lustre`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `new_lustre`, `new_filestore`, `existing_filestore`, `new_bucket`, `existing_bucket`, `existing_lustre`, `existing_nfs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         # @!attribute [rw] existing_lustre
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::ExistingLustreConfig]
         #     Optional. Immutable. If set, indicates that an existing Managed Lustre
         #     instance should be imported.
         #
-        #     Note: The following fields are mutually exclusive: `existing_lustre`, `new_filestore`, `existing_filestore`, `new_bucket`, `existing_bucket`, `new_lustre`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        #     Note: The following fields are mutually exclusive: `existing_lustre`, `new_filestore`, `existing_filestore`, `new_bucket`, `existing_bucket`, `new_lustre`, `existing_nfs`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] existing_nfs
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::ExistingNfsConfig]
+        #     Optional. Immutable. If set, indicates that an existing NFS share should
+        #     be imported.
+        #
+        #     Note: The following fields are mutually exclusive: `existing_nfs`, `new_filestore`, `existing_filestore`, `new_bucket`, `existing_bucket`, `new_lustre`, `existing_lustre`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class StorageResourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -439,7 +499,7 @@ module Google
         # @!attribute [rw] filestore
         #   @return [::String]
         #     Required. Immutable. Name of the Filestore instance to create, in the
-        #     format `projects/{project}/locations/{location}/instances/{instance}`
+        #     format `projects/{project}/locations/{location}/instances/{instance}`.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. Immutable. Description of the instance. Maximum of 2048
@@ -561,6 +621,9 @@ module Google
             # Lowest-cost storage for data archiving, online backup, and disaster
             # recovery.
             ARCHIVE = 4
+
+            # Storage class optimized for I/O intensive workloads.
+            RAPID = 5
           end
         end
 
@@ -579,6 +642,12 @@ module Google
           module TerminalStorageClass
             # Unspecified terminal storage class
             TERMINAL_STORAGE_CLASS_UNSPECIFIED = 0
+
+            # Nearline terminal storage class
+            NEARLINE = 1
+
+            # Archive terminal storage class
+            ARCHIVE = 2
           end
         end
 
@@ -625,6 +694,12 @@ module Google
         #   @return [::Integer]
         #     Required. Immutable. Storage capacity of the instance in gibibytes (GiB).
         #     Allowed values are between 18000 and 7632000.
+        # @!attribute [rw] per_unit_storage_throughput
+        #   @return [::Integer]
+        #     Optional. Immutable. Throughput of the instance in MB/s/TiB. Valid values
+        #     are 125, 250, 500, 1000. See [Performance tiers and maximum storage
+        #     capacities](https://cloud.google.com/managed-lustre/docs/create-instance#performance-tiers)
+        #     for more information.
         class NewLustreConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -640,6 +715,24 @@ module Google
         #     Required. Immutable. Name of the Managed Lustre instance to import, in the
         #     format `projects/{project}/locations/{location}/instances/{instance}`
         class ExistingLustreConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in a
+        # {::Google::Cloud::HypercomputeCluster::V1beta::StorageResourceConfig StorageResourceConfig},
+        # indicates that an existing NFS share should be imported.
+        # @!attribute [rw] server_ip_address
+        #   @return [::String]
+        #     Required. Immutable. Server IP address of the NFS share.
+        # @!attribute [rw] remote_mount
+        #   @return [::String]
+        #     Required. Immutable. Remote mount path of the NFS share.
+        # @!attribute [rw] mount_options
+        #   @return [::String]
+        #     Optional. Immutable. Options to mount the NFS share, as expected by
+        #     fs_mntops field infstab(5), for example: "rw,vers=4.1,nconnect=2,noatime".
+        class ExistingNfsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -699,6 +792,10 @@ module Google
         #     Required. Immutable. Name of the Compute Engine [machine
         #     type](https://cloud.google.com/compute/docs/machine-resource) to use, e.g.
         #     `n2-standard-2`.
+        # @!attribute [rw] network_tags
+        #   @return [::Array<::String>]
+        #     Optional. Immutable. A list of network tags to attach to the VM instances.
+        #     A maximum of 64 network tags are allowed.
         class NewOnDemandInstancesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -719,9 +816,29 @@ module Google
         #     Required. Immutable. Name of the Compute Engine [machine
         #     type](https://cloud.google.com/compute/docs/machine-resource) to use, e.g.
         #     `n2-standard-2`.
+        # @!attribute [rw] termination_action
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::NewSpotInstancesConfig::TerminationAction]
+        #     Optional. Termination action for the instance. If not specified, Compute
+        #     Engine sets the termination action to DELETE.
+        # @!attribute [rw] network_tags
+        #   @return [::Array<::String>]
+        #     Optional. Immutable. A list of network tags to attach to the VM instances.
+        #     A maximum of 64 network tags are allowed.
         class NewSpotInstancesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the termination action of the instance.
+          module TerminationAction
+            # Not set.
+            TERMINATION_ACTION_UNSPECIFIED = 0
+
+            # Compute Engine stops the Spot VM on preemption.
+            STOP = 1
+
+            # Compute Engine deletes the Spot VM on preemption.
+            DELETE = 2
+          end
         end
 
         # When set in a
@@ -733,6 +850,26 @@ module Google
         #     Optional. Immutable. Name of the reservation from which VM instances
         #     should be created, in the format
         #     `projects/{project}/zones/{zone}/reservations/{reservation}`.
+        #
+        #     Note: The following fields are mutually exclusive: `reservation`, `reservation_block`, `reservation_sub_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] reservation_block
+        #   @return [::String]
+        #     Optional. Immutable. Name of the reservation block from which VM
+        #     instances should be created, in the format
+        #     `projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservation_block}`.
+        #
+        #     Note: The following fields are mutually exclusive: `reservation_block`, `reservation`, `reservation_sub_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] reservation_sub_block
+        #   @return [::String]
+        #     Optional. Immutable. Name of the reservation sub block from which VM
+        #     instances should be created, in the format
+        #     `projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservation_block}/reservationSubBlocks/{reservation_sub_block}`.
+        #
+        #     Note: The following fields are mutually exclusive: `reservation_sub_block`, `reservation`, `reservation_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] network_tags
+        #   @return [::Array<::String>]
+        #     Optional. Immutable. A list of network tags to attach to the VM instances.
+        #     A maximum of 64 network tags are allowed.
         class NewReservedInstancesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -756,6 +893,10 @@ module Google
         #   @return [::Google::Protobuf::Duration]
         #     Required. Immutable. Specifies the time limit for created instances.
         #     Instances will be terminated at the end of this duration.
+        # @!attribute [rw] network_tags
+        #   @return [::Array<::String>]
+        #     Optional. Immutable. A list of network tags to attach to the VM instances.
+        #     A maximum of 64 network tags are allowed.
         class NewFlexStartInstancesConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -765,12 +906,22 @@ module Google
         # boot disk for a Compute Engine VM instance.
         # @!attribute [rw] type
         #   @return [::String]
-        #     Required. Immutable. [Persistent disk
+        #     Optional. [Persistent disk
         #     type](https://cloud.google.com/compute/docs/disks#disk-types), in the
         #     format `projects/{project}/zones/{zone}/diskTypes/{disk_type}`.
         # @!attribute [rw] size_gb
         #   @return [::Integer]
-        #     Required. Immutable. Size of the disk in gigabytes. Must be at least 10GB.
+        #     Optional. The size of the disk in gigabytes (GB), which must be at least 40
+        #     GB.
+        # @!attribute [rw] storage_pools
+        #   @return [::Array<::String>]
+        #     Optional. The [storage
+        #     pools](https://docs.cloud.google.com/compute/docs/disks/storage-pools) used
+        #     for creating the boot disk, in the format:
+        #     `projects/{project}/zones/{zone}/storagePools/{storage_pool}`.
+        #
+        #     Currently, only one Hyperdisk Balanced storage pool is supported.
+        #     The storage pool must reside in the same zone as the compute instance.
         class BootDisk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -783,6 +934,14 @@ module Google
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::SlurmOrchestrator]
         #     Optional. If set, indicates that the cluster should use Slurm as the
         #     orchestrator.
+        #
+        #     Note: The following fields are mutually exclusive: `slurm`, `compute_engine`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] compute_engine
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::ComputeEngineOrchestrator]
+        #     Optional. If set, indicates that the cluster should use Compute Engine as
+        #     the orchestrator.
+        #
+        #     Note: The following fields are mutually exclusive: `compute_engine`, `slurm`. If a field in that set is populated, all other fields in the set will automatically be cleared.
         class Orchestrator
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -798,13 +957,14 @@ module Google
         #     cluster over SSH.
         # @!attribute [rw] node_sets
         #   @return [::Array<::Google::Cloud::HypercomputeCluster::V1beta::SlurmNodeSet>]
-        #     Required. Configuration of Slurm nodesets, which define groups of compute
-        #     resources that can be used by Slurm. At least one compute node is required.
+        #     Optional. Compute resource configuration for the Slurm nodesets in your
+        #     cluster. If not specified, the cluster won't create any nodes.
         # @!attribute [rw] partitions
         #   @return [::Array<::Google::Cloud::HypercomputeCluster::V1beta::SlurmPartition>]
-        #     Required. Configuration of Slurm partitions, which group one or more
-        #     nodesets. Acts as a queue against which jobs can be submitted. At least one
-        #     partition is required.
+        #     Optional. Configuration for the Slurm partitions in your cluster. Each
+        #     partition can contain one or more nodesets, and you can submit separate
+        #     jobs on each partition. If you don't specify at least one partition in your
+        #     cluster, you can't submit jobs to the cluster.
         # @!attribute [rw] default_partition
         #   @return [::String]
         #     Optional. Default partition to use for submitted jobs that do not
@@ -836,15 +996,15 @@ module Google
         #     Engine instances.
         # @!attribute [rw] id
         #   @return [::String]
-        #     Required. Identifier for the nodeset, which allows it to be referenced by
-        #     partitions. Must conform to
-        #     [RFC-1034](https://datatracker.ietf.org/doc/html/rfc1034) (lower-case,
-        #     alphanumeric, and at most 63 characters).
+        #     Required. The ID for the nodeset, which allows it to be referenced by
+        #     cluster partitions. The nodeset ID must start with a lowercase letter
+        #     (`a`-`z`), use only lowercase letters or numbers, and contain up to 15
+        #     characters. For example, specify `nodeset001`.
         # @!attribute [rw] compute_id
         #   @return [::String]
-        #     Optional. ID of the compute resource on which this nodeset will run. Must
+        #     Required. The ID of the compute resource on which this nodeset runs. Must
         #     match a key in the cluster's
-        #     [compute_resources](Cluster.compute_resources).
+        #     {::Google::Cloud::HypercomputeCluster::V1beta::Cluster#compute_resources compute_resources}.
         # @!attribute [rw] storage_configs
         #   @return [::Array<::Google::Cloud::HypercomputeCluster::V1beta::StorageConfig>]
         #     Optional. How [storage
@@ -862,6 +1022,9 @@ module Google
         #     the number of additional nodes the cluster can bring online. Leave empty if
         #     you do not want the cluster to create nodes dynamically, and instead rely
         #     only on static nodes.
+        # @!attribute [rw] resource_policy_config
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::ResourcePolicyConfig]
+        #     Optional. Resource policy configuration for the nodeset.
         class SlurmNodeSet
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -895,6 +1058,17 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Policy describing how VM instances should be created.
+        # @!attribute [rw] accelerator_topology
+        #   @return [::String]
+        #     Optional. Specifies the topology required to create a partition for VMs
+        #     that have interconnected accelerators, in the format `AxB` or `AxBxC`,
+        #     where `A`, `B`, and `C` are integers.
+        class ResourcePolicyConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Configuration for Slurm partitions in the cluster. Partitions are groups of
@@ -936,6 +1110,9 @@ module Google
         #     Optional. [Startup
         #     script](https://cloud.google.com/compute/docs/instances/startup-scripts/linux)
         #     to be run on each login node instance. Max 256KB.
+        #     The script must complete within the system-defined default timeout of 5
+        #     minutes. For tasks that require more time, consider running them in the
+        #     background using methods such as `&` or `nohup`.
         # @!attribute [rw] enable_os_login
         #   @return [::Boolean]
         #     Optional. Whether [OS Login](https://cloud.google.com/compute/docs/oslogin)
@@ -961,6 +1138,10 @@ module Google
         # @!attribute [rw] boot_disk
         #   @return [::Google::Cloud::HypercomputeCluster::V1beta::BootDisk]
         #     Optional. Boot disk for the login node.
+        # @!attribute [rw] network_tags
+        #   @return [::Array<::String>]
+        #     Optional. Network tags to be applied to each login node instance.
+        #     A maximum of 64 network tags are allowed.
         class SlurmLoginNodes
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -975,13 +1156,26 @@ module Google
           end
         end
 
+        # Service account email and scopes
+        # @!attribute [rw] email
+        #   @return [::String]
+        #     Optional. Service account email
+        # @!attribute [rw] scopes
+        #   @return [::Array<::String>]
+        #     Optional. Service account scopes
+        class ServiceAccount
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Description of how a [storage
         # resource][google.cloud.hypercomputecluster.v1beta.StorageResource] should be
         # mounted on a VM instance.
         # @!attribute [rw] id
         #   @return [::String]
         #     Required. ID of the storage resource to mount, which must match a key in
-        #     the cluster's [storage_resources](Cluster.storage_resources).
+        #     the cluster's
+        #     {::Google::Cloud::HypercomputeCluster::V1beta::Cluster#storage_resources storage_resources}.
         # @!attribute [rw] local_mount
         #   @return [::String]
         #     Required. A directory inside the VM instance's file system where the
@@ -1000,6 +1194,388 @@ module Google
         class ComputeInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A resource representing a compute node managed by Cluster Director.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifier. [Relative resource name](https://google.aip.dev/122) of the
+        #     node, in the format
+        #     `projects/{project}/locations/{location}/clusters/{cluster}/nodes/{node}`.
+        # @!attribute [r] zone
+        #   @return [::String]
+        #     Output only. Name of the zone in which the node is running, e.g.
+        #     `us-central1-a`.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::Node::State]
+        #     Output only. High-level lifecycle state of the node.
+        # @!attribute [r] state_message
+        #   @return [::String]
+        #     Output only. Human-readable message providing extra information about the
+        #     current state.
+        # @!attribute [r] running_jobs
+        #   @return [::Boolean]
+        #     Output only. Indicates whether the node is currently executing workloads.
+        # @!attribute [r] accepting_jobs
+        #   @return [::Boolean]
+        #     Output only. Indicates whether the node is available for new job
+        #     allocations.
+        # @!attribute [r] provisioning_model
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::Node::ProvisioningModel]
+        #     Output only. Provisioning model of the node.
+        # @!attribute [r] slurm_details
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::SlurmNodeDetails]
+        #     Output only. Slurm-specific details for the node.
+        # @!attribute [r] compute_engine_details
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::ComputeEngineNodeDetails]
+        #     Output only. Compute Engine-specific details for the node.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time that the node was originally created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time that the node was most recently updated.
+        class Node
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # High-level lifecycle state of the node.
+          module State
+            # Not set.
+            STATE_UNSPECIFIED = 0
+
+            # The node is being provisioned at the infrastructure layer or
+            # initialized by the orchestrator.
+            CREATING = 1
+
+            # The node is healthy and operational.
+            ACTIVE = 2
+
+            # The node is transitioning to a stopped or suspended state.
+            SUSPENDING = 3
+
+            # The node is suspended or stopped and not consuming compute resources.
+            SUSPENDED = 4
+
+            # The node is undergoing maintenance or automatic recovery.
+            REPAIRING = 5
+
+            # The node is in an unhealthy or terminal error state.
+            FAILED = 6
+
+            # The node is being deleted.
+            DELETING = 7
+
+            # The node has no VM assigned to it.
+            UNPROVISIONED = 8
+          end
+
+          # Provisioning model of the node.
+          module ProvisioningModel
+            # Not set.
+            PROVISIONING_MODEL_UNSPECIFIED = 0
+
+            # The node is provisioned on demand. User controlled runtime, no discounts.
+            ON_DEMAND = 1
+
+            # The node is provisioned as a spot VM. Heavily discounted, no guaranteed
+            # runtime.
+            SPOT = 2
+
+            # The node is provisioned as a reservation-bound VM. Bound to the lifecycle
+            # of the reservation in which it is provisioned.
+            RESERVATION_BOUND = 3
+
+            # The node is provisioned as a flex-start VM. Has a limited runtime.
+            FLEX_START = 4
+          end
+        end
+
+        # Slurm-specific details for a Node.
+        # @!attribute [r] states
+        #   @return [::Array<::String>]
+        #     Output only. Raw state flags directly from Slurm.
+        # @!attribute [r] reason
+        #   @return [::String]
+        #     Output only. User-readable reason for the current state.
+        # @!attribute [r] partitions
+        #   @return [::Array<::String>]
+        #     Output only. Slurm partitions this node belongs to.
+        # @!attribute [r] nodeset
+        #   @return [::String]
+        #     Output only. The ID of the nodeset this node belongs to.
+        # @!attribute [r] comment
+        #   @return [::String]
+        #     Output only. System comments from Slurm.
+        class SlurmNodeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Compute Engine-specific details for a Node.
+        # @!attribute [r] instance
+        #   @return [::String]
+        #     Output only. [Relative resource name](https://google.aip.dev/122) of the VM
+        #     instance, in the format
+        #     `projects/{project}/zones/{zone}/instances/{instance}`.
+        # @!attribute [r] machine_type
+        #   @return [::String]
+        #     Output only. Name of the Compute Engine [machine
+        #     type](https://cloud.google.com/compute/docs/machine-resource) to use, e.g.
+        #     `n2-standard-2`.
+        # @!attribute [r] state
+        #   @return [::String]
+        #     Output only. The Compute Engine VM [instance lifecycle
+        #     state](https://cloud.google.com/compute/docs/instances/instance-lifecycle).
+        # @!attribute [r] instance_group_manager
+        #   @return [::String]
+        #     Output only. [Relative resource name](https://google.aip.dev/122) of the
+        #     managed instance group, in the format
+        #     `projects/{project}/zones/{zone}/instanceGroupManagers/{instance_group_manager}`.
+        #     or
+        #     `projects/{project}/regions/{region}/instanceGroupManagers/{instance_group_manager}`
+        class ComputeEngineNodeDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # When set in
+        # {::Google::Cloud::HypercomputeCluster::V1beta::Orchestrator Orchestrator},
+        # indicates that the cluster should create nodes using Compute Engine.
+        # @!attribute [rw] managed_instance_groups
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::HypercomputeCluster::V1beta::ManagedInstanceGroup}]
+        #     Optional. Managed instance groups that should be created by the
+        #     orchestrator. Keys must conform to
+        #     [RFC-1034](https://datatracker.ietf.org/doc/html/rfc1034) (lower-case,
+        #     alphanumeric, and at most 63 characters).
+        # @!attribute [rw] existing_instances
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::HypercomputeCluster::V1beta::ExistingInstances}]
+        #     Optional. Existing instances that will be governed by the orchestrator.
+        #     Keys must conform to
+        #     [RFC-1034](https://datatracker.ietf.org/doc/html/rfc1034) (lower-case,
+        #     alphanumeric, and at most 63 characters).
+        class ComputeEngineOrchestrator
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::HypercomputeCluster::V1beta::ManagedInstanceGroup]
+          class ManagedInstanceGroupsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::HypercomputeCluster::V1beta::ExistingInstances]
+          class ExistingInstancesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A managed instance group based on a compute resource.
+        # @!attribute [r] instance_group_manager
+        #   @return [::String]
+        #     Output only. Name of the managed instance group, in the format
+        #     `projects/{project}/zones/{zone}/instanceGroupManagers/{instance_group_manager}`.
+        #     or
+        #     `projects/{project}/regions/{region}/instanceGroupManagers/{instance_group_manager}`
+        # @!attribute [rw] compute_id
+        #   @return [::String]
+        #     Required. ID of the compute resource used to create this managed instance
+        #     group.
+        # @!attribute [rw] target_size
+        #   @return [::Integer]
+        #     Optional. Target number of running instances for this managed instance
+        #     group.
+        # @!attribute [rw] storage_configs
+        #   @return [::Array<::Google::Cloud::HypercomputeCluster::V1beta::StorageConfig>]
+        #     Optional. How [storage
+        #     resources][google.cloud.hypercomputecluster.v1beta.StorageResource] should
+        #     be mounted on each instance in this managed instance group.
+        # @!attribute [r] instance_template
+        #   @return [::String]
+        #     Output only. Instance template used to create instances in this group.
+        # @!attribute [rw] resource_policy_config
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::ResourcePolicyConfig]
+        #     Optional. Resource policy configuration for this managed instance group.
+        # @!attribute [rw] boot_disk
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::BootDisk]
+        #     Optional. Boot disk for the managed instance group.
+        # @!attribute [rw] additional_disks
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::HypercomputeCluster::V1beta::Disk}]
+        #     Optional. Additional disks for the managed instance group. Each VM of the
+        #     MIG will have its own clone of each disk described in the additional_disks
+        #     map. The disks themselves live as long as the MIG and if a VM is replaced
+        #     by a new VM of the same name then the replacement VM attaches to the same
+        #     disks as the VM it replaced. Each disk has a custom device name matching
+        #     the key in the map.
+        # @!attribute [rw] startup_script
+        #   @return [::String]
+        #     Optional. Startup script to be run on each VM instance in the nodeset.
+        # @!attribute [rw] enable_public_ips
+        #   @return [::Boolean]
+        #     Optional. Whether to enable public IPs for the instances in the managed
+        #     instance group.
+        # @!attribute [rw] enable_os_login
+        #   @return [::Boolean]
+        #     Optional. Whether [OS Login](https://cloud.google.com/compute/docs/oslogin)
+        #     should be enabled on instances in this managed instance group.
+        # @!attribute [rw] startup_script_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. The maximum time to wait for the startup script to complete. If
+        #     the script exceeds this duration, the instance setup will be considered
+        #     failed. This value must be positive. If this value is unset, a default
+        #     timeout of 5 minutes (300 seconds) will be used by the system.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Custom
+        #     [metadata](https://cloud.google.com/compute/docs/metadata/overview)
+        #     key-value pairs to be applied to each VM instance in the managed instance
+        #     group.
+        # @!attribute [rw] service_account
+        #   @return [::Google::Cloud::HypercomputeCluster::V1beta::ServiceAccount]
+        #     Required. Immutable. Service account to be used by the instances in the
+        #     managed instance group.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional.
+        #     [Labels](https://cloud.google.com/compute/docs/labeling-resources) that
+        #     should be applied to each VM instance in the managed instance group.
+        class ManagedInstanceGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::HypercomputeCluster::V1beta::Disk]
+          class AdditionalDisksEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class MetadataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Additional disk for managed instance groups.
+        # @!attribute [rw] image
+        #   @return [::String]
+        #     Optional. Source image for the disk.
+        #
+        #     Note: The following fields are mutually exclusive: `image`, `snapshot`, `existing_disk`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] snapshot
+        #   @return [::String]
+        #     Optional. Source snapshot for the disk.
+        #
+        #     Note: The following fields are mutually exclusive: `snapshot`, `image`, `existing_disk`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] existing_disk
+        #   @return [::String]
+        #     Optional. An existing persistent disk to attach read-only to all VMs in
+        #     the managed instance group, in the format
+        #     `projects/{project}/zones/{zone}/disks/{disk}`.
+        #
+        #     Note: The following fields are mutually exclusive: `existing_disk`, `image`, `snapshot`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     Optional. [Persistent disk
+        #     type](https://cloud.google.com/compute/docs/disks#disk-types), in the
+        #     format `projects/{project}/zones/{zone}/diskTypes/{disk_type}`.
+        #     This field is required when creating a new disk.
+        # @!attribute [rw] size_gb
+        #   @return [::Integer]
+        #     Optional. Size of the disk in GB.
+        #     This field is required when creating a new disk.
+        class Disk
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ExistingInstances defines a list of existing VM instances to include in
+        # the cluster.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Optional. Immutable. Project containing the instances, in the format
+        #     `projects/{project}`.
+        #
+        #     Note: The following fields are mutually exclusive: `project`, `instance_group_manager`, `region_instance_group_manager`, `reservation`, `reservation_block`, `reservation_sub_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] instance_group_manager
+        #   @return [::String]
+        #     Optional. Immutable. Managed instance group containing the instances, in
+        #     the format
+        #     `projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}`.
+        #
+        #     Note: The following fields are mutually exclusive: `instance_group_manager`, `project`, `region_instance_group_manager`, `reservation`, `reservation_block`, `reservation_sub_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] region_instance_group_manager
+        #   @return [::String]
+        #     Optional. Immutable. Regional managed instance group containing the
+        #     instances, in the format
+        #     `projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}`.
+        #
+        #     Note: The following fields are mutually exclusive: `region_instance_group_manager`, `project`, `instance_group_manager`, `reservation`, `reservation_block`, `reservation_sub_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] reservation
+        #   @return [::String]
+        #     Optional. Immutable. Reservation containing the instances, in the format
+        #     `projects/{project}/zones/{zone}/reservations/{reservation}`.
+        #
+        #     Note: The following fields are mutually exclusive: `reservation`, `project`, `instance_group_manager`, `region_instance_group_manager`, `reservation_block`, `reservation_sub_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] reservation_block
+        #   @return [::String]
+        #     Optional. Immutable. Reservation block containing the instances, in the
+        #     format
+        #     `projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservationBlock}`.
+        #
+        #     Note: The following fields are mutually exclusive: `reservation_block`, `project`, `instance_group_manager`, `region_instance_group_manager`, `reservation`, `reservation_sub_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] reservation_sub_block
+        #   @return [::String]
+        #     Optional. Immutable. Reservation sub block containing the instances, in
+        #     the format
+        #     `projects/{project}/zones/{zone}/reservations/{reservation}/reservationBlocks/{reservationBlock}/reservationSubBlocks/{reservationSubBlock}`.
+        #
+        #     Note: The following fields are mutually exclusive: `reservation_sub_block`, `project`, `instance_group_manager`, `region_instance_group_manager`, `reservation`, `reservation_block`. If a field in that set is populated, all other fields in the set will automatically be cleared.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Immutable. Labels specifying the instances to include. Instances
+        #     from the source will be included only if they contain each of these labels.
+        #     If no labels are specified, all instances from the source will be included.
+        #     Example: \\{"env": "prod", "app": "worker"}
+        # @!attribute [r] networks
+        #   @return [::Array<::Google::Cloud::HypercomputeCluster::V1beta::NetworkReference>]
+        #     Output only. Networks stores the list of [VPC
+        #     networks](https://cloud.google.com/vpc/docs/vpc) attached to these existing
+        #     instances, discovered during the cluster creation and update.
+        class ExistingInstances
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

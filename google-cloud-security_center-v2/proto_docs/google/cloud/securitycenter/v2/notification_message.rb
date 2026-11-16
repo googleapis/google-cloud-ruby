@@ -32,6 +32,9 @@ module Google
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::SecurityCenter::V2::Resource]
         #     The Cloud resource tied to this notification's Finding.
+        # @!attribute [rw] deleted_finding
+        #   @return [::Boolean]
+        #     Indicates whether the finding is deleted.
         class NotificationMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

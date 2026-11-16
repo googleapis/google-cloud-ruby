@@ -39,7 +39,7 @@ require "google/cloud/compute/v1"
 #         on machine types.
 # @param [String] source_image path to the operating system image to mount on your boot
 #         disk. This can be one of the public images
-#         (like "projects/debian-cloud/global/images/family/debian-11")
+#         (like "projects/debian-cloud/global/images/family/debian-12")
 #         or a private image you have access to.
 #         See https://cloud.google.com/compute/docs/images for more information on available images.
 # @param [String] network_name name of the network you want the new instance to use.
@@ -47,7 +47,7 @@ require "google/cloud/compute/v1"
 #         network interface, which is created automatically for each project.
 def create_instance project:, zone:, instance_name:,
                     machine_type: "n2-standard-2",
-                    source_image: "projects/debian-cloud/global/images/family/debian-11",
+                    source_image: "projects/debian-cloud/global/images/family/debian-12",
                     network_name: "global/networks/default"
   # Initialize client that will be used to send requests. This client only needs to be created
   # once, and can be reused for multiple requests.
@@ -81,10 +81,10 @@ def create_instance project:, zone:, instance_name:,
     # Wait for the create operation to complete.
     operation = wait_until_done operation: operation
 
+    compute_operation = operation.operation
     if operation.error?
-      warn "Error during creation:", operation.error
+      warn "Error during creation:", compute_operation.error.errors.map { |e| "#{e.code}: #{e.message}" }
     else
-      compute_operation = operation.operation
       warn "Warning during creation:", compute_operation.warnings unless compute_operation.warnings.empty?
       puts "Instance #{instance_name} created."
     end
@@ -165,11 +165,11 @@ def delete_instance project:, zone:, instance_name:
     # Wait for the delete operation to complete.
     operation = wait_until_done operation: operation
 
+    compute_operation = operation.operation
     if operation.error?
-      warn "Error during deletion:", operation.error
+      warn "Error during deletion:", compute_operation.error.errors.map { |e| "#{e.code}: #{e.message}" }
     else
-      compute_operation = operation.operation
-      warn "Warning during creation:", compute_operation.warnings unless compute_operation.warnings.empty?
+      warn "Warning during deletion:", compute_operation.warnings unless compute_operation.warnings.empty?
       puts "Instance #{instance_name} deleted."
     end
   rescue ::Google::Cloud::Error => e

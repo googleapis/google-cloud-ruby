@@ -135,6 +135,63 @@ class ::Google::Cloud::Run::V2::Instances::Rest::ClientTest < Minitest::Test
     end
   end
 
+  def test_update_instance
+    # Create test objects.
+    client_result = ::Google::Longrunning::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    instance = {}
+    validate_only = true
+    allow_missing = true
+
+    update_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Run::V2::Instances::Rest::ServiceStub.stub :transcode_update_instance_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_instance_client_stub do
+        # Create client
+        c = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_instance({ update_mask: update_mask, instance: instance, validate_only: validate_only, allow_missing: allow_missing }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_instance update_mask: update_mask, instance: instance, validate_only: validate_only, allow_missing: allow_missing do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_instance ::Google::Cloud::Run::V2::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, validate_only: validate_only, allow_missing: allow_missing) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_instance({ update_mask: update_mask, instance: instance, validate_only: validate_only, allow_missing: allow_missing }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_instance(::Google::Cloud::Run::V2::UpdateInstanceRequest.new(update_mask: update_mask, instance: instance, validate_only: validate_only, allow_missing: allow_missing), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_instance_client_stub.call_count
+      end
+    end
+  end
+
   def test_delete_instance
     # Create test objects.
     client_result = ::Google::Longrunning::Operation.new
@@ -410,6 +467,172 @@ class ::Google::Cloud::Run::V2::Instances::Rest::ClientTest < Minitest::Test
 
         # Verify method calls
         assert_equal 5, start_instance_client_stub.call_count
+      end
+    end
+  end
+
+  def test_get_iam_policy
+    # Create test objects.
+    client_result = ::Google::Iam::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    options = {}
+
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Run::V2::Instances::Rest::ServiceStub.stub :transcode_get_iam_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.get_iam_policy({ resource: resource, options: options }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.get_iam_policy resource: resource, options: options do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.get_iam_policy ::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.get_iam_policy({ resource: resource, options: options }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.get_iam_policy(::Google::Iam::V1::GetIamPolicyRequest.new(resource: resource, options: options), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, get_iam_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_set_iam_policy
+    # Create test objects.
+    client_result = ::Google::Iam::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    policy = {}
+    update_mask = {}
+
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Run::V2::Instances::Rest::ServiceStub.stub :transcode_set_iam_policy_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
+        # Create client
+        c = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.set_iam_policy resource: resource, policy: policy, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.set_iam_policy ::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.set_iam_policy({ resource: resource, policy: policy, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.set_iam_policy(::Google::Iam::V1::SetIamPolicyRequest.new(resource: resource, policy: policy, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, set_iam_policy_client_stub.call_count
+      end
+    end
+  end
+
+  def test_test_iam_permissions
+    # Create test objects.
+    client_result = ::Google::Iam::V1::TestIamPermissionsResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    resource = "hello world"
+    permissions = ["hello world"]
+
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Cloud::Run::V2::Instances::Rest::ServiceStub.stub :transcode_test_iam_permissions_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
+        # Create client
+        c = ::Google::Cloud::Run::V2::Instances::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.test_iam_permissions({ resource: resource, permissions: permissions }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.test_iam_permissions resource: resource, permissions: permissions do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.test_iam_permissions ::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.test_iam_permissions({ resource: resource, permissions: permissions }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.test_iam_permissions(::Google::Iam::V1::TestIamPermissionsRequest.new(resource: resource, permissions: permissions), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, test_iam_permissions_client_stub.call_count
       end
     end
   end

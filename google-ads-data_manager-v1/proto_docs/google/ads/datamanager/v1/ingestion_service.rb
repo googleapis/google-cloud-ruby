@@ -200,6 +200,71 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request to upload users to the provided destinations.
+        # @!attribute [rw] destinations
+        #   @return [::Array<::Google::Ads::DataManager::V1::Destination>]
+        #     Required. The list of possible ingestion destinations.
+        # @!attribute [rw] users
+        #   @return [::Array<::Google::Ads::DataManager::V1::User>]
+        #     Required. The list of users to ingest.
+        # @!attribute [rw] encryption_info
+        #   @return [::Google::Ads::DataManager::V1::EncryptionInfo]
+        #     Optional. Encryption information about encryption keys which are used to
+        #     encrypt the data.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If `true`, the request is validated but not executed.
+        # @!attribute [rw] encoding
+        #   @return [::Google::Ads::DataManager::V1::Encoding]
+        #     Required. The encoding type of the user identifiers. For encrypted user
+        #     identifiers, this only applies to the outer encoding.
+        class IngestUsersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response from the IngestUsersRequest.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     The generated request id of the Ingestion Request.
+        class IngestUsersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to remove users from the provided destinations.
+        # @!attribute [rw] destinations
+        #   @return [::Array<::Google::Ads::DataManager::V1::Destination>]
+        #     Required. The list of possible ingestion destinations.
+        # @!attribute [rw] user_data
+        #   @return [::Array<::Google::Ads::DataManager::V1::UserData>]
+        #     Required. The individual bits of UserData that act as keys for the users to
+        #     remove.
+        # @!attribute [rw] encryption_info
+        #   @return [::Google::Ads::DataManager::V1::EncryptionInfo]
+        #     Optional. Encryption information about encryption keys which are used to
+        #     encrypt the data.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. If `true`, the request is validated but not executed.
+        # @!attribute [rw] encoding
+        #   @return [::Google::Ads::DataManager::V1::Encoding]
+        #     Required. The encoding type of the user identifiers. For encrypted user
+        #     identifiers, this only applies to the outer encoding.
+        class RemoveUsersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response from the RemoveUsersRequest.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     The generated request id of the Ingestion Request.
+        class RemoveUsersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request to upload ad events.
         # @!attribute [rw] ad_events
         #   @return [::Array<::Google::Ads::DataManager::V1::AdEvent>]

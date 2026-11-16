@@ -106,9 +106,11 @@ module Google
           #   @return [::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest::ToolsSpec::WebGroundingSpec]
           #     Optional. Specification of the web grounding tool.
           #     If field is present, enables grounding with web search. Works only if
-          #     [Assistant.web_grounding_type][google.cloud.discoveryengine.v1.Assistant.web_grounding_type]
-          #     is [WEB_GROUNDING_TYPE_GOOGLE_SEARCH][] or
-          #     [WEB_GROUNDING_TYPE_ENTERPRISE_WEB_SEARCH][].
+          #     {::Google::Cloud::DiscoveryEngine::V1::Assistant#web_grounding_type Assistant.web_grounding_type}
+          #     is
+          #     {::Google::Cloud::DiscoveryEngine::V1::Assistant::WebGroundingType::WEB_GROUNDING_TYPE_GOOGLE_SEARCH WEB_GROUNDING_TYPE_GOOGLE_SEARCH}
+          #     or
+          #     {::Google::Cloud::DiscoveryEngine::V1::Assistant::WebGroundingType::WEB_GROUNDING_TYPE_ENTERPRISE_WEB_SEARCH WEB_GROUNDING_TYPE_ENTERPRISE_WEB_SEARCH}.
           # @!attribute [rw] image_generation_spec
           #   @return [::Google::Cloud::DiscoveryEngine::V1::StreamAssistRequest::ToolsSpec::ImageGenerationSpec]
           #     Optional. Specification of the image generation tool.
@@ -198,18 +200,33 @@ module Google
         #     see if more parts are to be expected. While the state is `IN_PROGRESS`, the
         #     {::Google::Cloud::DiscoveryEngine::V1::AssistAnswer#replies AssistAnswer.replies}
         #     field in each response will contain replies (reply fragments) to be
-        #     appended to the ones received in previous responses. [AssistAnswer.name][]
+        #     appended to the ones received in previous responses.
+        #     {::Google::Cloud::DiscoveryEngine::V1::AssistAnswer#name AssistAnswer.name}
         #     won't be filled.
         #
         #     If the state is `SUCCEEDED`, `FAILED` or `SKIPPED`, the response
-        #     is the last response and [AssistAnswer.name][] will have a value.
+        #     is the last response and
+        #     {::Google::Cloud::DiscoveryEngine::V1::AssistAnswer#name AssistAnswer.name} will
+        #     have a value.
         # @!attribute [rw] session_info
         #   @return [::Google::Cloud::DiscoveryEngine::V1::StreamAssistResponse::SessionInfo]
-        #     Session information.
+        #     Session information. Only included in the final StreamAssistResponse of the
+        #     response stream.
         # @!attribute [rw] assist_token
         #   @return [::String]
         #     A global unique ID that identifies the current pair of request and stream
         #     of responses. Used for feedback and support.
+        # @!attribute [rw] invocation_tools
+        #   @return [::Array<::String>]
+        #     The tool names of the tools that were invoked.
+        # @!attribute [rw] invoked_skills
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::StreamAssistResponse::InvokedSkill>]
+        #     The skills executed during the turn.
+        # @!attribute [rw] connector_auth_errors
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::StreamAssistResponse::ConnectorAuthError>]
+        #     Per-connector authentication errors encountered during the request.
+        #     Present when one or more connectors failed authentication but the
+        #     request proceeded with the remaining connectors.
         class StreamAssistResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -225,6 +242,162 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # Represents a skill used during the assist call.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The resource name of the skill.
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     The display name of the skill.
+          class InvokedSkill
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Describes an authentication error for a specific data connector.
+          # @!attribute [rw] data_connector
+          #   @return [::String]
+          #     Resource name of the data connector that failed authentication.
+          # @!attribute [rw] error_message
+          #   @return [::String]
+          #     Human-readable error message describing the auth failure.
+          class ConnectorAuthError
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Request for the
+        # {::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#create_assistant AssistantService.CreateAssistant}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource name.
+        #     Format:
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+        # @!attribute [rw] assistant
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::Assistant]
+        #     Required. The {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant} to
+        #     create.
+        # @!attribute [rw] assistant_id
+        #   @return [::String]
+        #     Required. The ID to use for the
+        #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}, which will become
+        #     the final component of the
+        #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}'s resource name.
+        #
+        #     This field must conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
+        #     with a length limit of 63 characters.
+        class CreateAssistantRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the
+        # {::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#delete_assistant AssistantService.DeleteAssistant}
+        # method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of
+        #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}. Format:
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}`
+        #
+        #     If the caller does not have permission to delete the
+        #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}, regardless of
+        #     whether or not it exists, a PERMISSION_DENIED error is returned.
+        #
+        #     If the {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant} to delete
+        #     does not exist, a NOT_FOUND error is returned.
+        class DeleteAssistantRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the
+        # {::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#get_assistant AssistantService.GetAssistant}
+        # method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Resource name of
+        #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}. Format:
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}`
+        class GetAssistantRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the
+        # {::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#list_assistants AssistantService.ListAssistants}
+        # method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource name.
+        #     Format:
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}s
+        #     to return. If unspecified, defaults to 100. The maximum allowed value is
+        #     1000; anything above that will be coerced down to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token
+        #     {::Google::Cloud::DiscoveryEngine::V1::ListAssistantsResponse#next_page_token ListAssistantsResponse.next_page_token},
+        #     received from a previous
+        #     {::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#list_assistants AssistantService.ListAssistants}
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     {::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#list_assistants ListAssistants}
+        #     must match the call that provided the page token.
+        class ListAssistantsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for the
+        # {::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#list_assistants AssistantService.ListAssistants}
+        # method.
+        # @!attribute [rw] assistants
+        #   @return [::Array<::Google::Cloud::DiscoveryEngine::V1::Assistant>]
+        #     All the customer's {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}s.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that can be sent as
+        #     {::Google::Cloud::DiscoveryEngine::V1::ListAssistantsRequest#page_token ListAssistantsRequest.page_token}
+        #     to retrieve the next page. If this field is omitted, there are no
+        #     subsequent pages.
+        class ListAssistantsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for the
+        # {::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#update_assistant AssistantService.UpdateAssistant}
+        # method.
+        # @!attribute [rw] assistant
+        #   @return [::Google::Cloud::DiscoveryEngine::V1::Assistant]
+        #     Required. The {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant} to
+        #     update.
+        #
+        #     The {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}'s `name` field
+        #     is used to identify the
+        #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant} to update. Format:
+        #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}`
+        #
+        #     If the caller does not have permission to update the
+        #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}, regardless of
+        #     whether or not it exists, a PERMISSION_DENIED error is returned.
+        #
+        #     If the {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant} to update
+        #     does not exist, a NOT_FOUND error is returned.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of fields to update.
+        class UpdateAssistantRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

@@ -67,6 +67,7 @@ module Google
       #     description: "App profile for user data instance"
       #   )
       #   puts app_profile.routing_policy
+      # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
       #
       class RoutingPolicy
       end
@@ -95,6 +96,7 @@ module Google
       #     description: "App profile for user data instance"
       #   )
       #   puts app_profile.routing_policy
+      # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
       #
       class MultiClusterRoutingUseAny < RoutingPolicy
         # @private
@@ -139,6 +141,7 @@ module Google
       #     allowed by this app profile. It is unsafe to send these requests to
       #     the same table/row/column in multiple clusters.
       #     Default value is false.
+      # @deprecated Use {Google::Cloud::Bigtable::Project#instance_admin_client} instead.
       #
       class SingleClusterRouting < RoutingPolicy
         attr_reader :cluster_id

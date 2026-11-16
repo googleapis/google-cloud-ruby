@@ -130,6 +130,10 @@ module Google
         # @!attribute [r] validation_errors
         #   @return [::Array<::String>]
         #     Output only. Misconfigurations or warnings in the app.
+        # @!attribute [rw] dashboard_settings
+        #   @return [::Google::Cloud::Ces::V1beta::DashboardSettings]
+        #     Optional. App-specific dashboard settings for linking and configuring
+        #     Contact Center Insights dashboards.
         class App
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -179,6 +183,20 @@ module Google
           end
         end
 
+        # Settings for dashboards associated with the app, that show up in the
+        # Monitoring view.
+        # @!attribute [rw] default_dashboard
+        #   @return [::String]
+        #     Optional. The resource name of the default Contact Center Insights
+        #     dashboard associated with the app. This is the dashboard that will be
+        #     displayed when users navigate to the Monitoring view for the app.
+        #
+        #     Format: `projects/{project}/locations/{location}/dashboards/{dashboard}`
+        class DashboardSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # TimeZone settings of the app.
         # @!attribute [rw] time_zone
         #   @return [::String]
@@ -200,8 +218,8 @@ module Google
         #     `default_language_code`.
         # @!attribute [rw] enable_multilingual_support
         #   @return [::Boolean]
-        #     Optional. Enables multilingual support. If true, agents in the app will use
-        #     pre-built instructions to improve handling of multilingual input.
+        #     Optional. Enables multilingual support. If `true`, agents in the app will
+        #     use pre-built instructions to improve handling of multilingual input.
         # @!attribute [rw] fallback_action
         #   @deprecated This field is deprecated and may be removed in the next major version update.
         #   @return [::String]
@@ -221,6 +239,79 @@ module Google
         class LanguageSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for a custom voice sample used for voice cloning.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Optional. The user-defined name for the custom voice sample.
+        # @!attribute [rw] voice_sample_gcs_uri
+        #   @return [::String]
+        #     Optional. The Cloud Storage URI to the audio sample for voice cloning. The
+        #     audio sample should be a mono-channel, 24kHz WAV file.
+        # @!attribute [rw] consent_audio_gcs_uri
+        #   @return [::String]
+        #     Optional. Consent audio for voice cloning.
+        # @!attribute [rw] voice_instruction
+        #   @return [::String]
+        #     Optional. Natural language instructions for voice style, tone, pacing, or
+        #     pronunciation.
+        # @!attribute [r] preview_audio_content
+        #   @return [::String]
+        #     Output only. Synthesized preview audio for custom voice, formatted as
+        #     canonical WAV (LINEAR16, 24kHz, 16-bit, mono).
+        # @!attribute [rw] preview_text
+        #   @return [::String]
+        #     Optional. Text for synthesizing preview audio for custom voice.
+        # @!attribute [r] warnings
+        #   @return [::Array<::Google::Cloud::Ces::V1beta::CustomVoiceSample::Warning>]
+        #     Output only. Warning messages encountered during voice clone processing
+        #     (e.g. low audio level).
+        # @!attribute [rw] voice_instruction_mode
+        #   @return [::Google::Cloud::Ces::V1beta::CustomVoiceSample::VoiceInstructionMode]
+        #     Optional. Instruction mode for the voice sample. If unspecified, defaults
+        #     to NO_INSTRUCTION.
+        class CustomVoiceSample
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A warning message encountered during voice sample processing.
+          # @!attribute [r] message
+          #   @return [::String]
+          #     Output only. A human-readable description of the warning.
+          # @!attribute [r] type
+          #   @return [::Google::Cloud::Ces::V1beta::CustomVoiceSample::Warning::WarningType]
+          #     Output only. The type of the warning.
+          class Warning
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Type of warning encountered during voice sample processing.
+            module WarningType
+              # Unspecified warning type.
+              WARNING_TYPE_UNSPECIFIED = 0
+
+              # The audio level of the voice sample is too low (e.g. low RMS
+              # amplitude).
+              LOW_AUDIO_LEVEL = 1
+            end
+          end
+
+          # Instruction mode for the voice sample.
+          module VoiceInstructionMode
+            # Unspecified instruction mode. Defaults to NO_INSTRUCTION.
+            VOICE_INSTRUCTION_MODE_UNSPECIFIED = 0
+
+            # No voice instruction will be used.
+            NO_INSTRUCTION = 1
+
+            # Voice instruction will be automatically generated by AI from the audio
+            # sample.
+            GENERATE_INSTRUCTION = 2
+
+            # Custom voice instruction provided by the user.
+            CUSTOM_INSTRUCTION = 3
+          end
         end
 
         # Configuration for how the input and output audio should be processed and
@@ -249,6 +340,9 @@ module Google
         #   @return [::Google::Cloud::Ces::V1beta::AmbientSoundConfig]
         #     Optional. Configuration for the ambient sound to be played with the
         #     synthesized agent response, to enhance the naturalness of the conversation.
+        # @!attribute [rw] custom_voice_samples
+        #   @return [::Array<::Google::Cloud::Ces::V1beta::CustomVoiceSample>]
+        #     Optional. Configures custom voice samples for voice cloning.
         class AudioProcessingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -443,6 +537,20 @@ module Google
         #   @return [::Google::Cloud::Ces::V1beta::MetricAnalysisSettings]
         #     Optional. Settings to describe the conversation data collection behaviors
         #     for the LLM analysis pipeline for the app.
+        # @!attribute [rw] required_recording_consent
+        #   @return [::Boolean]
+        #     Optional. Whether the app has to say what may be recorded before anything
+        #     is kept.
+        #
+        #     When true, a session starts with recording off and stays off until the
+        #     client sends
+        #     [SessionInput.recording_control][google.cloud.ces.v1main.SessionInput.recording_control],
+        #     which then decides every turn from that point on. This covers audio
+        #     recording as well as conversation history, BigQuery export and Cloud
+        #     Logging.
+        #
+        #     When `false`, the default, the settings above decide on their own and the
+        #     client does not have to send anything.
         class LoggingSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -780,8 +888,9 @@ module Google
         # Configuration to instruct how sensitive data should be handled.
         # @!attribute [rw] enable_redaction
         #   @return [::Boolean]
-        #     Optional. If true, redaction will be applied in various logging scenarios,
-        #     including conversation history, Cloud Logging and audio recording.
+        #     Optional. If `true`, redaction will be applied in various logging
+        #     scenarios, including conversation history, Cloud Logging and audio
+        #     recording.
         # @!attribute [rw] inspect_template
         #   @return [::String]
         #     Optional. [DLP](https://cloud.google.com/dlp/docs) inspect template name to

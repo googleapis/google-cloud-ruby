@@ -81,6 +81,12 @@ module Google
                   initial_delay: 1.0, max_delay: 30.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.create_assistant.timeout = 30.0
+
+                default_config.rpcs.delete_assistant.timeout = 30.0
+
+                default_config.rpcs.update_assistant.timeout = 30.0
+
                 default_config
               end
               yield @configure if block_given?
@@ -323,6 +329,493 @@ module Google
             end
 
             ##
+            # Creates an {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}.
+            #
+            # @overload create_assistant(request, options = nil)
+            #   Pass arguments to `create_assistant` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1::CreateAssistantRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1::CreateAssistantRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_assistant(parent: nil, assistant: nil, assistant_id: nil)
+            #   Pass arguments to `create_assistant` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource name.
+            #     Format:
+            #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+            #   @param assistant [::Google::Cloud::DiscoveryEngine::V1::Assistant, ::Hash]
+            #     Required. The {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant} to
+            #     create.
+            #   @param assistant_id [::String]
+            #     Required. The ID to use for the
+            #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}, which will become
+            #     the final component of the
+            #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}'s resource name.
+            #
+            #     This field must conform to [RFC-1034](https://tools.ietf.org/html/rfc1034)
+            #     with a length limit of 63 characters.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1::Assistant]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DiscoveryEngine::V1::Assistant]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1::CreateAssistantRequest.new
+            #
+            #   # Call the create_assistant method.
+            #   result = client.create_assistant request
+            #
+            #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::Assistant.
+            #   p result
+            #
+            def create_assistant request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::CreateAssistantRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_assistant.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_assistant.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_assistant.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @assistant_service_stub.call_rpc :create_assistant, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes an {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}.
+            #
+            # @overload delete_assistant(request, options = nil)
+            #   Pass arguments to `delete_assistant` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1::DeleteAssistantRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1::DeleteAssistantRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_assistant(name: nil)
+            #   Pass arguments to `delete_assistant` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name of
+            #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}. Format:
+            #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}`
+            #
+            #     If the caller does not have permission to delete the
+            #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}, regardless of
+            #     whether or not it exists, a PERMISSION_DENIED error is returned.
+            #
+            #     If the {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant} to delete
+            #     does not exist, a NOT_FOUND error is returned.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1::DeleteAssistantRequest.new
+            #
+            #   # Call the delete_assistant method.
+            #   result = client.delete_assistant request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_assistant request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::DeleteAssistantRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_assistant.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_assistant.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_assistant.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @assistant_service_stub.call_rpc :delete_assistant, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates an {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}
+            #
+            # @overload update_assistant(request, options = nil)
+            #   Pass arguments to `update_assistant` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1::UpdateAssistantRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1::UpdateAssistantRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_assistant(assistant: nil, update_mask: nil)
+            #   Pass arguments to `update_assistant` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param assistant [::Google::Cloud::DiscoveryEngine::V1::Assistant, ::Hash]
+            #     Required. The {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant} to
+            #     update.
+            #
+            #     The {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}'s `name` field
+            #     is used to identify the
+            #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant} to update. Format:
+            #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}`
+            #
+            #     If the caller does not have permission to update the
+            #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}, regardless of
+            #     whether or not it exists, a PERMISSION_DENIED error is returned.
+            #
+            #     If the {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant} to update
+            #     does not exist, a NOT_FOUND error is returned.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The list of fields to update.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1::Assistant]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DiscoveryEngine::V1::Assistant]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1::UpdateAssistantRequest.new
+            #
+            #   # Call the update_assistant method.
+            #   result = client.update_assistant request
+            #
+            #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::Assistant.
+            #   p result
+            #
+            def update_assistant request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::UpdateAssistantRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_assistant.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.assistant&.name
+                header_params["assistant.name"] = request.assistant.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_assistant.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_assistant.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @assistant_service_stub.call_rpc :update_assistant, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets an {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}.
+            #
+            # @overload get_assistant(request, options = nil)
+            #   Pass arguments to `get_assistant` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1::GetAssistantRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1::GetAssistantRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_assistant(name: nil)
+            #   Pass arguments to `get_assistant` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Resource name of
+            #     {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}. Format:
+            #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}/assistants/{assistant}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::DiscoveryEngine::V1::Assistant]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::DiscoveryEngine::V1::Assistant]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1::GetAssistantRequest.new
+            #
+            #   # Call the get_assistant method.
+            #   result = client.get_assistant request
+            #
+            #   # The returned object is of type Google::Cloud::DiscoveryEngine::V1::Assistant.
+            #   p result
+            #
+            def get_assistant request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::GetAssistantRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_assistant.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_assistant.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_assistant.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @assistant_service_stub.call_rpc :get_assistant, request, options: options do |response, operation|
+                yield response, operation if block_given?
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists all {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}s under an
+            # {::Google::Cloud::DiscoveryEngine::V1::Engine Engine}.
+            #
+            # @overload list_assistants(request, options = nil)
+            #   Pass arguments to `list_assistants` via a request object, either of type
+            #   {::Google::Cloud::DiscoveryEngine::V1::ListAssistantsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::DiscoveryEngine::V1::ListAssistantsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_assistants(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_assistants` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource name.
+            #     Format:
+            #     `projects/{project}/locations/{location}/collections/{collection}/engines/{engine}`
+            #   @param page_size [::Integer]
+            #     Maximum number of {::Google::Cloud::DiscoveryEngine::V1::Assistant Assistant}s
+            #     to return. If unspecified, defaults to 100. The maximum allowed value is
+            #     1000; anything above that will be coerced down to 1000.
+            #   @param page_token [::String]
+            #     A page token
+            #     {::Google::Cloud::DiscoveryEngine::V1::ListAssistantsResponse#next_page_token ListAssistantsResponse.next_page_token},
+            #     received from a previous
+            #     {::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#list_assistants AssistantService.ListAssistants}
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     {::Google::Cloud::DiscoveryEngine::V1::AssistantService::Client#list_assistants ListAssistants}
+            #     must match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::Assistant>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::DiscoveryEngine::V1::Assistant>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/discovery_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DiscoveryEngine::V1::AssistantService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DiscoveryEngine::V1::ListAssistantsRequest.new
+            #
+            #   # Call the list_assistants method.
+            #   result = client.list_assistants request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can iterate
+            #   # over elements, and API calls will be issued to fetch pages as needed.
+            #   result.each do |item|
+            #     # Each element is of type ::Google::Cloud::DiscoveryEngine::V1::Assistant.
+            #     p item
+            #   end
+            #
+            def list_assistants request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::DiscoveryEngine::V1::ListAssistantsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_assistants.metadata.to_h
+
+              # Set x-goog-api-client, x-goog-user-project and x-goog-api-version headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::DiscoveryEngine::V1::VERSION
+              metadata[:"x-goog-api-version"] = API_VERSION unless API_VERSION.empty?
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_assistants.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_assistants.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @assistant_service_stub.call_rpc :list_assistants, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @assistant_service_stub, :list_assistants, request, response, operation, options
+                yield response, operation if block_given?
+                throw :response, response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AssistantService API.
             #
             # This class represents the configuration for AssistantService,
@@ -512,11 +1005,46 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :stream_assist
+                ##
+                # RPC-specific configuration for `create_assistant`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_assistant
+                ##
+                # RPC-specific configuration for `delete_assistant`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_assistant
+                ##
+                # RPC-specific configuration for `update_assistant`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_assistant
+                ##
+                # RPC-specific configuration for `get_assistant`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_assistant
+                ##
+                # RPC-specific configuration for `list_assistants`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_assistants
 
                 # @private
                 def initialize parent_rpcs = nil
                   stream_assist_config = parent_rpcs.stream_assist if parent_rpcs.respond_to? :stream_assist
                   @stream_assist = ::Gapic::Config::Method.new stream_assist_config
+                  create_assistant_config = parent_rpcs.create_assistant if parent_rpcs.respond_to? :create_assistant
+                  @create_assistant = ::Gapic::Config::Method.new create_assistant_config
+                  delete_assistant_config = parent_rpcs.delete_assistant if parent_rpcs.respond_to? :delete_assistant
+                  @delete_assistant = ::Gapic::Config::Method.new delete_assistant_config
+                  update_assistant_config = parent_rpcs.update_assistant if parent_rpcs.respond_to? :update_assistant
+                  @update_assistant = ::Gapic::Config::Method.new update_assistant_config
+                  get_assistant_config = parent_rpcs.get_assistant if parent_rpcs.respond_to? :get_assistant
+                  @get_assistant = ::Gapic::Config::Method.new get_assistant_config
+                  list_assistants_config = parent_rpcs.list_assistants if parent_rpcs.respond_to? :list_assistants
+                  @list_assistants = ::Gapic::Config::Method.new list_assistants_config
 
                   yield self if block_given?
                 end

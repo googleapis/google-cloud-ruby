@@ -184,6 +184,59 @@ module Google
         # @!attribute [rw] auxiliary_node_groups
         #   @return [::Array<::Google::Cloud::Dataproc::V1::AuxiliaryNodeGroup>]
         #     Optional. The node group settings.
+        # @!attribute [rw] master_flexible_config
+        #   @return [::Google::Cloud::Dataproc::V1::FlexibleInstanceGroupConfig]
+        #     Optional. The High Obtainability (HO) config settings for the cluster's
+        #     master instances.
+        #
+        #     In High Obtainability (HO) mode, flexible configs are the single source of
+        #     truth for desired cluster configuration across node groups:
+        #     * For single-node clusters: `master_flexible_config` must be specified, and
+        #       no worker configs should be set.
+        #     * For multi-node (standard) clusters: both `master_flexible_config` and
+        #       {::Google::Cloud::Dataproc::V1::ClusterConfig#worker_flexible_config worker_flexible_config}
+        #       must be specified. Mixing standard and flexible configs across node
+        #       groups is not allowed.
+        #
+        #     Only one of
+        #     {::Google::Cloud::Dataproc::V1::ClusterConfig#master_config master_config} or
+        #     `master_flexible_config` can be set.
+        # @!attribute [rw] worker_flexible_config
+        #   @return [::Google::Cloud::Dataproc::V1::FlexibleInstanceGroupConfig]
+        #     Optional. The High Obtainability (HO) config settings for the cluster's
+        #     worker instances.
+        #
+        #     In High Obtainability (HO) mode, flexible configs are the single source of
+        #     truth for desired cluster configuration. `num_instances` represents the
+        #     desired capacity of the worker group and is mutable via cluster updates and
+        #     autoscaling.
+        #
+        #     Only one of
+        #     {::Google::Cloud::Dataproc::V1::ClusterConfig#worker_config worker_config} or
+        #     `worker_flexible_config` can be set.
+        #
+        #     In High Obtainability (HO) mode, for multi-node (standard) clusters, both
+        #     {::Google::Cloud::Dataproc::V1::ClusterConfig#master_flexible_config master_flexible_config}
+        #     and `worker_flexible_config` must be specified. Mixing standard and
+        #     flexible configs across node groups is not allowed. Single-node clusters do
+        #     not specify worker configs.
+        # @!attribute [rw] secondary_worker_flexible_config
+        #   @return [::Google::Cloud::Dataproc::V1::FlexibleInstanceGroupConfig]
+        #     Optional. The High Obtainability (HO) config settings for a cluster's
+        #     secondary worker instances.
+        #
+        #     In High Obtainability (HO) mode, flexible configs are the single source of
+        #     truth for desired cluster configuration. `num_instances` represents the
+        #     desired capacity of the secondary worker group and is mutable via cluster
+        #     updates and autoscaling.
+        #
+        #     Only one of
+        #     {::Google::Cloud::Dataproc::V1::ClusterConfig#secondary_worker_config secondary_worker_config}
+        #     or `secondary_worker_flexible_config` can be set.
+        #
+        #     In High Obtainability (HO) mode, secondary workers are optional. If
+        #     secondary workers are used in an HO cluster, they must be configured using
+        #     `secondary_worker_flexible_config` (not `secondary_worker_config`).
         class ClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -363,6 +416,11 @@ module Google
         #     * `https://www.googleapis.com/compute/v1/projects/[project_id]/zones/[zone]`
         #     * `projects/[project_id]/zones/[zone]`
         #     * `[zone]`
+        # @!attribute [rw] multi_zone_config
+        #   @return [::Google::Cloud::Dataproc::V1::MultiZoneConfig]
+        #     Optional. Controls how instances within this Cluster are allowed to exist
+        #     in multiple Zones within the Region. Only one of `zone_uri` or
+        #     `multi_zone_config` must be set.
         # @!attribute [rw] network_uri
         #   @return [::String]
         #     Optional. The Compute Engine network to be used for machine
@@ -512,6 +570,25 @@ module Google
             # Enables bidirectional private IPv6 access between Google Services and the
             # Dataproc cluster.
             BIDIRECTIONAL = 3
+          end
+        end
+
+        # Configuration for multi-zonal clusters that can create instances across
+        # multiple Zones within the Region.
+        # @!attribute [rw] target_shape
+        #   @return [::Google::Cloud::Dataproc::V1::MultiZoneConfig::TargetShape]
+        #     Optional. The distribution shape of the nodes in the multi-zonal cluster.
+        class MultiZoneConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The distribution shape of the nodes in the multi-zonal cluster.
+          module TargetShape
+            # Target shape is unspecified. Setting this will cause error.
+            TARGET_SHAPE_UNSPECIFIED = 0
+
+            # Instances may exist in any Zones within the Region.
+            ANY = 1
           end
         end
 
@@ -853,6 +930,69 @@ module Google
           class InstanceSelectionResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # The configuration for High Obtainability (HO) flexible instance groups.
+        # Flexible instance group configs serve as the single source of truth for
+        # desired state.
+        # @!attribute [rw] num_instances
+        #   @return [::Integer]
+        #     Optional. The number of VM instances requested.
+        #
+        #     For master instances, this must be 1. For worker and secondary worker
+        #     instances, this represents the desired capacity of the group and is mutable
+        #     via cluster update operations and autoscaling.
+        # @!attribute [rw] core_count
+        #   @return [::Integer]
+        #     Optional. The number of vCPUs per instance. Must be a power of 2
+        #     (2, 4, 8, 16, 32). This is a create-time specification and is not currently
+        #     mutable via update masks.
+        # @!attribute [rw] boot_disk_size_gb
+        #   @return [::Integer]
+        #     Optional. The boot disk size in GB. This is a create-time specification and
+        #     is not currently mutable via update masks.
+        # @!attribute [rw] hardware_class
+        #   @return [::Google::Cloud::Dataproc::V1::FlexibleInstanceGroupConfig::HardwareClass]
+        #     Optional. The hardware class of the instances. This is a create-time
+        #     specification and is not currently mutable via update masks.
+        class FlexibleInstanceGroupConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Controls the hardware class for the flexible instance group.
+          module HardwareClass
+            # Unspecified hardware class.
+            HARDWARE_CLASS_UNSPECIFIED = 0
+
+            # Standard hardware class.
+            # Provides a balanced compute configuration with approximately 4GB of
+            # memory per vCPU and standard disk storage tiers.
+            #
+            # Candidate machine types include `n4-standard`, `n4d-standard`,
+            # `n2-standard`, and `n2d-standard` (Rank 0), and `c4-standard` and
+            # `c4d-standard` (Rank 1) (for requested core counts 2, 4, 8, 16, 32).
+            #
+            # Warning: The specific machine families and types selected for this
+            # hardware class are subject to change. Users should not take a
+            # dependency on the underlying machine type selection.
+            STANDARD = 1
+
+            # Performance hardware class.
+            # Provides a high-performance configuration with approximately 8GB of
+            # memory per vCPU (e.g. high-memory machine types) and higher-tier disk
+            # configurations (e.g. higher IOPS and throughput).
+            #
+            # Candidate machine types include `n4-highmem`, `n4d-highmem`,
+            # `n2-highmem`, and `n2d-highmem` (Rank 0), and `c4-highmem` and
+            # `c4d-highmem` (Rank 1) (for requested core counts 2, 4, 8, 16, 32).
+            # `n4`, `n4d`, `c4`, and `c4d` use Hyperdisk Balanced with provisioned
+            # storage, whereas `n2` and `n2d` use SSD persistent disks.
+            #
+            # Warning: The specific machine families and types selected for this
+            # hardware class are subject to change. Users should not take a
+            # dependency on the underlying machine type selection.
+            PERFORMANCE = 2
           end
         end
 

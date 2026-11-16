@@ -5,30 +5,6 @@
   "protoPackage": "google.cloud.geminidataanalytics.v1beta",
   "libraryPackage": "::Google::Cloud::GeminiDataAnalytics::V1beta",
   "services": {
-    "DataA2AService": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::GeminiDataAnalytics::V1beta::DataA2AService::Client",
-          "rpcs": {
-            "SendMessage": {
-              "methods": [
-                "send_message"
-              ]
-            },
-            "SendStreamingMessage": {
-              "methods": [
-                "send_streaming_message"
-              ]
-            },
-            "GetAgentCard": {
-              "methods": [
-                "get_agent_card"
-              ]
-            }
-          }
-        }
-      }
-    },
     "DataAgentService": {
       "clients": {
         "grpc": {

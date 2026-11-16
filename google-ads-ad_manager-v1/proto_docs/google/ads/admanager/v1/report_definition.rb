@@ -623,17 +623,6 @@ module Google
             # Data format: `STRING`
             ADVERTISER_CREDIT_STATUS_NAME = 476
 
-            # The domain name of the advertiser.
-            #
-            #
-            #
-            # Corresponds to "Landing page domain" in the Ad Manager UI.
-            #
-            # Compatible with the following report types: `HISTORICAL`, `REACH`
-            #
-            # Data format: `STRING`
-            ADVERTISER_DOMAIN_NAME = 242
-
             # The ID used in an external system for advertiser identification
             #
             #
@@ -837,6 +826,94 @@ module Google
             #
             # Data format: `STRING`
             AD_LOCATION_NAME = 391
+
+            # The ID of an ad product add-on.
+            #
+            #
+            #
+            # Corresponds to "Ad product add-on ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            AD_PRODUCT_ADD_ON_ID = 846
+
+            # The list of IDs of ad product add-ons.
+            #
+            #
+            #
+            # Corresponds to "Ad product add-on ID (all)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER_LIST`
+            AD_PRODUCT_ADD_ON_ID_ALL = 847
+
+            # The name of an ad product add-on.
+            #
+            #
+            #
+            # Corresponds to "Ad product add-on" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            AD_PRODUCT_ADD_ON_NAME = 848
+
+            # The list of names of ad product add-ons.
+            #
+            #
+            #
+            # Corresponds to "Ad product add-on (all)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING_LIST`
+            AD_PRODUCT_ADD_ON_NAME_ALL = 849
+
+            # The ID of an ad product.
+            #
+            #
+            #
+            # Corresponds to "Ad product ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            AD_PRODUCT_ID = 850
+
+            # The name of an ad product.
+            #
+            #
+            #
+            # Corresponds to "Ad product" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            AD_PRODUCT_NAME = 851
+
+            # The ID of an ad product rate card.
+            #
+            #
+            #
+            # Corresponds to "Ad product rate card ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            AD_PRODUCT_RATE_CARD_ID = 852
+
+            # The name of an ad product rate card.
+            #
+            #
+            #
+            # Corresponds to "Ad product rate card" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            AD_PRODUCT_RATE_CARD_NAME = 853
 
             # Multi-size inventory in an ad request.
             #
@@ -2102,6 +2179,20 @@ module Google
             # Data format: `STRING`
             BIDDER_ENCRYPTED_ID = 493
 
+            # Represents a single Bidder integration, like Open Bidding, SDK
+            #  Bidding, or Authorized Buying.
+            #
+            #
+            #
+            # Corresponds to "Bidder ID" in the Ad Manager UI (when showing API
+            # fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`,
+            # `REVENUE_VERIFICATION`, `ADS_TRAFFIC_NAVIGATOR`
+            #
+            # Data format: `IDENTIFIER`
+            BIDDER_ID = 445
+
             # The name of the bidder.
             #
             #
@@ -2743,6 +2834,9 @@ module Google
             # Compatible with the following report types: `HISTORICAL`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # {::Google::Ads::AdManager::V1::CreativeSslOverrideEnum::CreativeSslOverride CreativeSslOverride}
             CREATIVE_SSL_COMPLIANCE_OVERRIDE = 784
 
             # Localized name of the creative SSL compliance override.
@@ -2766,6 +2860,9 @@ module Google
             # Compatible with the following report types: `HISTORICAL`
             #
             # Data format: `ENUM`
+            #
+            # Values:
+            # {::Google::Ads::AdManager::V1::CreativeSslScanResultEnum::CreativeSslScanResult CreativeSslScanResult}
             CREATIVE_SSL_SCAN_RESULT = 785
 
             # Localized name of the creative SSL scan result.
@@ -3180,7 +3277,8 @@ module Google
             # Data format: `STRING`
             DEMAND_SUBCHANNEL_NAME = 23
 
-            # The device on which an ad was served.
+            # Deprecated: Use `DEVICE_MANUFACTURER_ID` and `DEVICE_MODEL_ID` instead.
+            #   The device on which an ad was served.
             #
             #
             #
@@ -3266,7 +3364,9 @@ module Google
             # Data format: `STRING`
             DEVICE_MODEL_NAME = 528
 
-            # The localized name of the device on which an ad was served.
+            # Deprecated: Use `DEVICE_MANUFACTURER_NAME` and `DEVICE_MODEL_NAME`
+            #  instead.
+            #   The localized name of the device on which an ad was served.
             #
             #
             #
@@ -3870,7 +3970,14 @@ module Google
             KEY_VALUES_SET = 713
 
             # The landing page domain name of the advertiser.
-            # This will eventually replace ADVERTISER_DOMAIN_NAME.
+            #
+            #
+            #
+            # Corresponds to "Landing page domain" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`, `REACH`
+            #
+            # Data format: `STRING`
             LANDING_PAGE_DOMAIN = 242
 
             # The agency of the order associated with the line item.
@@ -4575,6 +4682,42 @@ module Google
             # {::Google::Ads::AdManager::V1::LineItemTypeEnum::LineItemType LineItemType}
             LINE_ITEM_TYPE = 193
 
+            # Expanded line item type ENUM value in the Ads traffic navigator report.
+            #
+            #
+            #
+            # Corresponds to "Expanded line item type value" in the Ad Manager UI (when
+            # showing API fields).
+            #
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
+            #
+            # Data format: `ENUM`
+            LINE_ITEM_TYPE_EXTENDED = 874
+
+            # List of expanded line item types considered at auction in the Ads traffic
+            #  navigator report.
+            #
+            #
+            #
+            # Corresponds to "Expanded line item type (all)" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
+            #
+            # Data format: `STRING_LIST`
+            LINE_ITEM_TYPE_EXTENDED_ALL = 875
+
+            # Localized expanded line item type name in the Ads traffic navigator
+            #  report.
+            #
+            #
+            #
+            # Corresponds to "Expanded line item type" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `ADS_TRAFFIC_NAVIGATOR`
+            #
+            # Data format: `STRING`
+            LINE_ITEM_TYPE_EXTENDED_NAME = 876
+
             # Localized line item type name.
             #
             #
@@ -5051,6 +5194,33 @@ module Google
             #
             # Data format: `STRING`
             NIELSEN_SITE_URL = 700
+
+            # Deal priority tier for non-guaranteed deals.
+            #
+            #
+            #
+            # Corresponds to "Non-guaranteed deal priority tier" in the Ad Manager UI
+            # (when showing API fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `ENUM`
+            #
+            # Values:
+            # {::Google::Ads::AdManager::V1::DealPriorityTierEnum::DealPriorityTier DealPriorityTier}
+            NON_GUARANTEED_DEAL_PRIORITY_TIER = 859
+
+            # The localized name of the deal priority tier for non-guaranteed deals.
+            #
+            #
+            #
+            # Corresponds to "Non-guaranteed deal priority tier (Name)" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            NON_GUARANTEED_DEAL_PRIORITY_TIER_NAME = 860
 
             # No fill reason category name in the Ads traffic navigator report.
             #
@@ -6194,6 +6364,172 @@ module Google
             # Data format: `STRING`
             SITE = 387
 
+            # The brand of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product brand" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_BRAND = 807
+
+            # The category of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product category" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_CATEGORY = 808
+
+            # The level 1 category of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product category level 1" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_CATEGORY_LEVEL1 = 809
+
+            # The level 2 category of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product category level 2" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_CATEGORY_LEVEL2 = 810
+
+            # The level 3 category of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product category level 3" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_CATEGORY_LEVEL3 = 811
+
+            # The level 4 category of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product category level 4" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_CATEGORY_LEVEL4 = 812
+
+            # The level 5 category of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product category level 5" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_CATEGORY_LEVEL5 = 813
+
+            # The GTIN of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product GTIN" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_GTIN = 814
+
+            # The ID of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_ID = 815
+
+            # Enum value of the sponsored product inventory.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product inventory value" in the Ad Manager UI
+            # (when showing API fields).
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `ENUM`
+            SPONSORED_PRODUCT_INVENTORY = 822
+
+            # The name of the sponsored product inventory.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product inventory" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_INVENTORY_NAME = 823
+
+            # The item group ID of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product item group ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_ITEM_GROUP_ID = 816
+
+            # The merchant ID of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product merchant ID" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `IDENTIFIER`
+            SPONSORED_PRODUCT_MERCHANT_ID = 817
+
+            # The title of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product title" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `STRING`
+            SPONSORED_PRODUCT_TITLE = 818
+
+            # The update time of the sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product update time" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `TIMESTAMP`
+            SPONSORED_PRODUCT_UPDATE_TIME = 819
+
             # The ID of the browser, device or other environment into which a line item
             #  or creative was served.
             #
@@ -6279,7 +6615,8 @@ module Google
             # Data format: `STRING`
             THIRD_PARTY_ID_STATUS_NAME = 403
 
-            # Reports the status of Topics in the ad request.
+            # Deprecated: No longer supported.
+            #   Reports the status of Topics in the ad request.
             #
             #
             #
@@ -6291,7 +6628,8 @@ module Google
             # Data format: `ENUM`
             TOPICS_STATUS = 504
 
-            # The localized name of the status of Topics in the ad request.
+            # Deprecated: No longer supported.
+            #   The localized name of the status of Topics in the ad request.
             #
             #
             #
@@ -6953,6 +7291,10 @@ module Google
             #
             # Data format: `STRING`
             YOUTUBE_AD_TYPE_NAME = 400
+
+            # Deprecated: Use `LANDING_PAGE_DOMAIN` instead.
+            # The domain name of the advertiser.
+            ADVERTISER_DOMAIN_NAME = 242
 
             # Custom field option ID for Line Item with custom field ID equal to the ID
             # in index 0 of `ReportDefinition.line_item_custom_field_ids`.
@@ -8698,6 +9040,18 @@ module Google
             # Data format: `MONEY`
             ADSENSE_AVERAGE_ECPM = 26
 
+            # Total impressions counted when creative begins to render for AdSense.
+            #
+            #
+            #
+            # Corresponds to "AdSense begin to render impressions" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            ADSENSE_BEGIN_TO_RENDER_IMPRESSIONS = 749
+
             # Number of clicks delivered by AdSense demand channel.
             #
             #
@@ -8803,6 +9157,18 @@ module Google
             #
             # Data format: `MONEY`
             ADSENSE_REVENUE = 25
+
+            # The cost per item purchased.
+            #
+            #
+            #
+            # Corresponds to "Advertiser cost per attributed item purchased" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `MONEY`
+            ADVERTISER_COST_PER_ATTRIBUTED_ITEM_PURCHASED = 747
 
             # Active View AdExchange average time in seconds that specific impressions
             #  are reported as being viewable.
@@ -8955,6 +9321,18 @@ module Google
             #
             # Data format: `MONEY`
             AD_EXCHANGE_AVERAGE_ECPM = 18
+
+            # The impressions counted when creative begins to render for Ad Exchange.
+            #
+            #
+            #
+            # Corresponds to "Ad Exchange begin to render impressions" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            AD_EXCHANGE_BEGIN_TO_RENDER_IMPRESSIONS = 706
 
             # Number of clicks delivered by the Ad Exchange.
             #
@@ -9845,7 +10223,7 @@ module Google
             # Data format: `INTEGER`
             AD_SERVER_UNFILTERED_DOWNLOADED_IMPRESSIONS = 260
 
-            # Deprecated. This metric has been renamed to
+            # Deprecated: This metric has been renamed to
             # `AD_SERVER_UNFILTERED_DOWNLOADED_IMPRESSIONS`.
             # The server will normalize any requests using this value to
             # `AD_SERVER_UNFILTERED_DOWNLOADED_IMPRESSIONS`.
@@ -10551,6 +10929,31 @@ module Google
             # Data format: `INTEGER`
             ATN_YIELD_GROUP_MEDIATION_PASSBACKS = 390
 
+            # The number of purchased items that were attributed to a view or click as
+            #  defined by the sponsored product ad's line item settings.
+            #
+            #
+            #
+            # Corresponds to "Attributed items purchased" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            ATTRIBUTED_ITEMS_PURCHASED = 745
+
+            # The percent of revenue the retailer made on attributed items purchased
+            #  compared to the advertiser's ad spend for those items. Return on Ad
+            #  Spend
+            #
+            #
+            #
+            # Corresponds to "Attributed items purchased ROAS" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `PERCENT`
+            ATTRIBUTED_ITEMS_PURCHASED_ROAS = 748
+
             # Cost of the audience segment.
             #
             #
@@ -10653,6 +11056,17 @@ module Google
             #
             # Data format: `DOUBLE`
             AVERAGE_SESSION_SECONDS = 228
+
+            # Total impressions counted when creative begins to render.
+            #
+            #
+            #
+            # Corresponds to "Total begin to render impressions" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            BEGIN_TO_RENDER_IMPRESSIONS = 751
 
             # The number of bids.
             #
@@ -11096,6 +11510,19 @@ module Google
             # Data format: `PERCENT`
             EUROPEAN_REGULATIONS_CUSTOM_CONSENT_RATE = 271
 
+            # Number of times a European regulations fallback message was shown to
+            #  users.
+            #
+            #
+            #
+            # Corresponds to "European regulations fallback messages shown" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `PRIVACY_AND_MESSAGING`
+            #
+            # Data format: `INTEGER`
+            EUROPEAN_REGULATIONS_FALLBACK_MESSAGES_SHOWN = 766
+
             # Number of times a European regulations message was shown to users.
             #
             #
@@ -11107,6 +11534,19 @@ module Google
             #
             # Data format: `INTEGER`
             EUROPEAN_REGULATIONS_MESSAGES_SHOWN = 272
+
+            # Number of times a non-blocking European regulations message was shown to
+            #  users.
+            #
+            #
+            #
+            # Corresponds to "European regulations non-blocking messages shown" in the
+            # Ad Manager UI.
+            #
+            # Compatible with the following report types: `PRIVACY_AND_MESSAGING`
+            #
+            # Data format: `INTEGER`
+            EUROPEAN_REGULATIONS_NON_BLOCKING_MESSAGES_SHOWN = 767
 
             # Percentage of European regulations messages where the user rejected all
             #  purposes and vendors.
@@ -11662,6 +12102,78 @@ module Google
             # Data format: `MONEY`
             OFF_PROPERTY_SPEND_ECPM = 403
 
+            # The number of times the video played to completion for off-property
+            #  campaigns.
+            #
+            #
+            #
+            # Corresponds to "Off-property completes" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_COMPLETES = 754
+
+            # The number of engaged views for off-property campaigns: ad is viewed
+            #  to completion or for 30s, whichever comes first.
+            #
+            #
+            #
+            # Corresponds to "Off-property engaged views" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_ENGAGED_VIEWS = 755
+
+            # The number of times the video played to 25% of its length for
+            #  off-property campaigns.
+            #
+            #
+            #
+            # Corresponds to "Off-property first quartiles" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_FIRST_QUARTILES = 756
+
+            # The number of times the video reached its midpoint during play for off-
+            #  property campaigns.
+            #
+            #
+            #
+            # Corresponds to "Off-property midpoints" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_MIDPOINTS = 757
+
+            # The number of impressions where the video was played for off-property
+            #  campaigns.
+            #
+            #
+            #
+            # Corresponds to "Off-property starts" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_STARTS = 753
+
+            # The number of times the video played to 75% of its length for
+            #  off-property campaigns.
+            #
+            #
+            #
+            # Corresponds to "Off-property third quartiles" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `OFF_PROPERTY_CAMPAIGNS`
+            #
+            # Data format: `INTEGER`
+            OFF_PROPERTY_VIDEO_THIRD_QUARTILES = 758
+
             # Average effective cost-per-thousand-impressions earned from the mediation
             #  on-platform multiple call, excluding CPD value.
             #
@@ -12116,6 +12628,20 @@ module Google
             #
             # Data format: `MONEY`
             REVENUE = 36
+
+            # The total amount users paid for items that were attributed to a view or
+            #  click as defined by the sponsored product ad's line item settings. This
+            #  value is revenue for the retailer.
+            #
+            #
+            #
+            # Corresponds to "Revenue on attributed items purchased" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `MONEY`
+            REVENUE_ON_ATTRIBUTED_ITEMS_PURCHASED = 746
 
             # The total revenue accrued in the child network's own account but paid to
             #  their parent network through auto-payment. This metric is only relevant
@@ -12644,6 +13170,66 @@ module Google
             #
             # Data format: `INTEGER`
             SESSIONS = 239
+
+            # The number of successfully matched ad requests for sponsored placement.
+            #
+            #
+            #
+            # Corresponds to "Sponsored placement matched ad requests" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            SPONSORED_PLACEMENT_MATCHED_AD_REQUESTS = 725
+
+            # The number of successfully matched requests for sponsored placement
+            #  divided by the total number of requests for sponsored placement.
+            #
+            #
+            #
+            # Corresponds to "Sponsored placement slot fill rate" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `PERCENT`
+            SPONSORED_PLACEMENT_SLOT_FILL_RATE = 726
+
+            # The total number of ad requests for sponsored placement.
+            #
+            #
+            #
+            # Corresponds to "Sponsored placement total ad requests" in the Ad Manager
+            # UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            SPONSORED_PLACEMENT_TOTAL_AD_REQUESTS = 727
+
+            # The number of unmatched ad requests for sponsored placement.
+            #
+            #
+            #
+            # Corresponds to "Sponsored placement unmatched ad requests" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            SPONSORED_PLACEMENT_UNMATCHED_AD_REQUESTS = 728
+
+            # The number of successfully matched requests for sponsored product
+            #  divided by the total number of requests for sponsored product.
+            #
+            #
+            #
+            # Corresponds to "Sponsored product match rate" in the Ad Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `PERCENT`
+            SPONSORED_PRODUCT_MATCH_RATE = 729
 
             # Percent of tag load time to 1st ad request in [0, 500ms) range.
             #
@@ -14366,6 +14952,18 @@ module Google
             #
             # Data format: `INTEGER`
             YIELD_GROUP_AUCTIONS_WON = 80
+
+            # Total yield group impressions counted when creative begins to render.
+            #
+            #
+            #
+            # Corresponds to "Yield group begin to render impressions" in the Ad
+            # Manager UI.
+            #
+            # Compatible with the following report types: `HISTORICAL`
+            #
+            # Data format: `INTEGER`
+            YIELD_GROUP_BEGIN_TO_RENDER_IMPRESSIONS = 743
 
             # Number of bids received from Open Bidding buyers, regardless of whether
             #  the returned bid competes in an auction.

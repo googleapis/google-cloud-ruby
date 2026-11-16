@@ -132,6 +132,395 @@ class ::Google::Ads::AdManager::V1::UserService::Rest::ClientTest < Minitest::Te
     end
   end
 
+  def test_list_users
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::ListUsersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+    skip = 42
+
+    list_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::UserService::Rest::ServiceStub.stub :transcode_list_users_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, list_users_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::UserService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.list_users parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.list_users ::Google::Ads::AdManager::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.list_users({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.list_users(::Google::Ads::AdManager::V1::ListUsersRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, skip: skip), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, list_users_client_stub.call_count
+      end
+    end
+  end
+
+  def test_create_user
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::User.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    user = {}
+
+    create_user_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::UserService::Rest::ServiceStub.stub :transcode_create_user_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, create_user_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::UserService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.create_user({ parent: parent, user: user }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.create_user parent: parent, user: user do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.create_user ::Google::Ads::AdManager::V1::CreateUserRequest.new(parent: parent, user: user) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.create_user({ parent: parent, user: user }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.create_user(::Google::Ads::AdManager::V1::CreateUserRequest.new(parent: parent, user: user), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, create_user_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_create_users
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchCreateUsersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_create_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::UserService::Rest::ServiceStub.stub :transcode_batch_create_users_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_create_users_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::UserService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_create_users({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_create_users parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_create_users ::Google::Ads::AdManager::V1::BatchCreateUsersRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_create_users({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_create_users(::Google::Ads::AdManager::V1::BatchCreateUsersRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_create_users_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_activate_users
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchActivateUsersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_activate_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::UserService::Rest::ServiceStub.stub :transcode_batch_activate_users_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_activate_users_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::UserService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_activate_users({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_activate_users parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_activate_users ::Google::Ads::AdManager::V1::BatchActivateUsersRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_activate_users({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_activate_users(::Google::Ads::AdManager::V1::BatchActivateUsersRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_activate_users_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_deactivate_users
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchDeactivateUsersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    names = ["hello world"]
+
+    batch_deactivate_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::UserService::Rest::ServiceStub.stub :transcode_batch_deactivate_users_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_deactivate_users_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::UserService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_deactivate_users({ parent: parent, names: names }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_deactivate_users parent: parent, names: names do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_deactivate_users ::Google::Ads::AdManager::V1::BatchDeactivateUsersRequest.new(parent: parent, names: names) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_deactivate_users({ parent: parent, names: names }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_deactivate_users(::Google::Ads::AdManager::V1::BatchDeactivateUsersRequest.new(parent: parent, names: names), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_deactivate_users_client_stub.call_count
+      end
+    end
+  end
+
+  def test_update_user
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::User.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    user = {}
+    update_mask = {}
+
+    update_user_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::UserService::Rest::ServiceStub.stub :transcode_update_user_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, update_user_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::UserService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.update_user({ user: user, update_mask: update_mask }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.update_user user: user, update_mask: update_mask do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.update_user ::Google::Ads::AdManager::V1::UpdateUserRequest.new(user: user, update_mask: update_mask) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.update_user({ user: user, update_mask: update_mask }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.update_user(::Google::Ads::AdManager::V1::UpdateUserRequest.new(user: user, update_mask: update_mask), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, update_user_client_stub.call_count
+      end
+    end
+  end
+
+  def test_batch_update_users
+    # Create test objects.
+    client_result = ::Google::Ads::AdManager::V1::BatchUpdateUsersResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    requests = [{}]
+
+    batch_update_users_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:, method_name:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    ::Google::Ads::AdManager::V1::UserService::Rest::ServiceStub.stub :transcode_batch_update_users_request, ["", "", {}] do
+      Gapic::Rest::ClientStub.stub :new, batch_update_users_client_stub do
+        # Create client
+        c = ::Google::Ads::AdManager::V1::UserService::Rest::Client.new do |config|
+          config.credentials = :dummy_value
+        end
+
+        # Use hash object
+        c.batch_update_users({ parent: parent, requests: requests }) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use named arguments
+        c.batch_update_users parent: parent, requests: requests do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object
+        c.batch_update_users ::Google::Ads::AdManager::V1::BatchUpdateUsersRequest.new(parent: parent, requests: requests) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use hash object with options
+        c.batch_update_users({ parent: parent, requests: requests }, call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Use protobuf object with options
+        c.batch_update_users(::Google::Ads::AdManager::V1::BatchUpdateUsersRequest.new(parent: parent, requests: requests), call_options) do |_result, response|
+          assert_equal http_response, response.underlying_op
+        end
+
+        # Verify method calls
+        assert_equal 5, batch_update_users_client_stub.call_count
+      end
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

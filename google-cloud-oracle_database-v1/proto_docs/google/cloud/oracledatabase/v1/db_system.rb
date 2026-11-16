@@ -29,10 +29,10 @@ module Google
         #     projects/\\{project}/locations/\\{region}/dbSystems/\\{db_system}
         # @!attribute [rw] properties
         #   @return [::Google::Cloud::OracleDatabase::V1::DbSystemProperties]
-        #     Optional. The properties of the DbSystem.
+        #     Optional. Immutable. The properties of the DbSystem.
         # @!attribute [rw] gcp_oracle_zone
         #   @return [::String]
-        #     Optional. The GCP Oracle zone where Oracle DbSystem is hosted.
+        #     Optional. Immutable. The GCP Oracle zone where Oracle DbSystem is hosted.
         #     Example: us-east4-b-r2.
         #     If not specified, the system will pick a zone based on availability.
         # @!attribute [rw] labels
@@ -40,14 +40,15 @@ module Google
         #     Optional. The labels or tags associated with the DbSystem.
         # @!attribute [rw] odb_network
         #   @return [::String]
-        #     Optional. The name of the OdbNetwork associated with the DbSystem.
-        #     Format: projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}
-        #     It is optional but if specified, this should match the parent ODBNetwork of
-        #     the OdbSubnet.
+        #     Optional. Immutable. The name of the OdbNetwork associated with the
+        #     DbSystem. Format:
+        #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network} It is
+        #     optional but if specified, this should match the parent ODBNetwork of the
+        #     OdbSubnet.
         # @!attribute [rw] odb_subnet
         #   @return [::String]
-        #     Required. The name of the OdbSubnet associated with the DbSystem for IP
-        #     allocation. Format:
+        #     Required. Immutable. The name of the OdbSubnet associated with the DbSystem
+        #     for IP allocation. Format:
         #     projects/\\{project}/locations/\\{location}/odbNetworks/\\{odb_network}/odbSubnets/\\{odb_subnet}
         # @!attribute [r] entitlement_id
         #   @return [::String]
@@ -55,8 +56,8 @@ module Google
         #     DbSystem
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Required. The display name for the System db. The name does not have to
-        #     be unique within your project.
+        #     Required. Immutable. The display name for the System db. The name does not
+        #     have to be unique within your project.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The date and time that the DbSystem was created.
@@ -333,6 +334,37 @@ module Google
         #     The request ID must be a valid UUID with the exception that zero UUID is
         #     not supported (00000000-0000-0000-0000-000000000000).
         class DeleteDbSystemRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request for `DbSystem.Update`.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Optional. A mask specifying which fields in the DbSystem should be updated.
+        #     A field specified in the mask is updated. If a mask isn't provided, the
+        #     service treats this as an implied field mask equivalent to all fields that
+        #     are populated (have a non-empty value).
+        # @!attribute [rw] db_system
+        #   @return [::Google::Cloud::OracleDatabase::V1::DbSystem]
+        #     Required. The resource being updated. Note only labels can be updated.
+        #     The provided labels will completely replace the existing labels.
+        #     Any existing label keys that are not included in the update request will be
+        #     deleted. Not providing labels and update_mask will not update the labels.
+        #     To clear all labels, specify `labels` in the `update_mask` and omit or
+        #     leave the `labels` field empty in the update request. To clear or unset a
+        #     field, the field must be explicitly specified in the `update_mask`.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Optional. An optional ID to identify the request. This value is used to
+        #     identify duplicate requests. If you make a request with the same request ID
+        #     and the original request is still in progress or completed, the server
+        #     ignores the second request. This prevents clients from
+        #     accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpdateDbSystemRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

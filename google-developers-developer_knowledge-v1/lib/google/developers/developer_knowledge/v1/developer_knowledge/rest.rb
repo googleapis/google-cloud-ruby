@@ -40,11 +40,14 @@ module Google
         #
         # A typical use case is to first use
         # {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client#search_document_chunks DeveloperKnowledge.SearchDocumentChunks}
-        # to find relevant page URIs based on a query, and then use
+        # to find relevant document chunks based on a query, and then use
         # {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client#get_document DeveloperKnowledge.GetDocument}
         # or
         # {::Google::Developers::DeveloperKnowledge::V1::DeveloperKnowledge::Client#batch_get_documents DeveloperKnowledge.BatchGetDocuments}
-        # to fetch the full content of the top results.
+        # with document resource names (such as
+        # {::Google::Developers::DeveloperKnowledge::V1::DocumentChunk#parent DocumentChunk.parent}
+        # or `documents/{uri_without_scheme}`) to fetch the full content of the top
+        # results.
         #
         # All document content is provided in Markdown format.
         #

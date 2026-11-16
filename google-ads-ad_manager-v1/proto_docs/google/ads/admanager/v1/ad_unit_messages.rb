@@ -153,7 +153,7 @@ module Google
         #   @return [::Array<::Google::Ads::AdManager::V1::Size>]
         #     The companions for this ad unit size. Companions are only valid if the
         #     environment is
-        #     {::Google::Ads::AdManager::V1::EnvironmentTypeEnum::EnvironmentType VIDEO_PLAYER}.
+        #     {::Google::Ads::AdManager::V1::EnvironmentTypeEnum::EnvironmentType::VIDEO_PLAYER VIDEO_PLAYER}.
         class AdUnitSize
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

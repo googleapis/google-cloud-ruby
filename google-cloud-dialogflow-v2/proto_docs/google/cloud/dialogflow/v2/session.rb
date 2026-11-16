@@ -673,8 +673,9 @@ module Google
         # Represents the natural language text to be processed.
         # @!attribute [rw] text
         #   @return [::String]
-        #     Required. The UTF-8 encoded natural language text to be processed.
+        #     Optional. The UTF-8 encoded natural language text to be processed.
         #     Text length must not exceed 256 characters for virtual agent interactions.
+        #     Only one of `text` and `companion_query` should be set - not both.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Required. The language of this conversational query. See [Language
@@ -753,6 +754,11 @@ module Google
         # @!attribute [rw] query_text_sentiment
         #   @return [::Google::Cloud::Dialogflow::V2::Sentiment]
         #     The sentiment analysis result for `query_text`.
+        # @!attribute [r] status
+        #   @return [::Google::Rpc::Status]
+        #     Output only. The status of the sentiment analysis operation.
+        #     If the operation failed, this field will contain the error details.
+        #     For example, it might indicate a quota issue (RESOURCE_EXHAUSTED).
         class SentimentAnalysisResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

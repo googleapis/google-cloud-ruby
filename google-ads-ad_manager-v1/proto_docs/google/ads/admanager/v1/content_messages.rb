@@ -45,9 +45,10 @@ module Google
         #   @return [::Array<::Google::Ads::AdManager::V1::DaiIngestError>]
         #     Output only. The list of any errors that occurred during the most recent
         #     DAI ingestion process of the HLS media. This attribute will be empty if the
-        #     hlsIngestStatus is [DaiIngestStatus.SUCCESS][] or if the `Content` is
-        #     not eligible for dynamic ad insertion or if the `Content` does not have
-        #     HLS media.
+        #     {::Google::Ads::AdManager::V1::Content#hls_ingest_status hlsIngestStatus} is
+        #     {::Google::Ads::AdManager::V1::DaiIngestStatusEnum::DaiIngestStatus::SUCCESS DaiIngestStatusEnum.DaiIngestStatus.SUCCESS}
+        #     or if the `Content` is not eligible for dynamic ad insertion or if the
+        #     `Content` does not have HLS media.
         # @!attribute [r] last_hls_ingest_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp at which this `Content`'s HLS media was last
@@ -63,9 +64,11 @@ module Google
         #   @return [::Array<::Google::Ads::AdManager::V1::DaiIngestError>]
         #     Output only. The list of any errors that occurred during the most recent
         #     DAI ingestion process of the DASH media. This attribute will be empty if
-        #     the hlsIngestStatus is [DaiIngestStatus.SUCCESS][] or if the `Content` is
-        #     not eligible for dynamic ad insertion or if the `Content` does not have
-        #     DASH media.
+        #     the {::Google::Ads::AdManager::V1::Content#dash_ingest_status dashIngestStatus}
+        #     is
+        #     {::Google::Ads::AdManager::V1::DaiIngestStatusEnum::DaiIngestStatus::SUCCESS DaiIngestStatusEnum.DaiIngestStatus.SUCCESS}
+        #     or if the `Content` is not eligible for dynamic ad insertion or if the
+        #     `Content` does not have DASH media.
         # @!attribute [r] last_dash_ingest_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The timestamp at which this `Content`'s DASH media was last

@@ -347,7 +347,12 @@ module Google
               @request_queue = EnumeratorQueue.new self
               @request_queue.push initial_input_request
               old_queue.each do |obj|
-                @request_queue.push obj unless obj == self
+                next if obj == self
+                # Drop the previous stream's initial request if it was never sent. Only the first request on a
+                # stream may set protocol_version, so the server rejects it with INVALID_ARGUMENT, and the new
+                # initial request already carries its subscription settings and inventory modacks.
+                next unless obj.subscription.empty?
+                @request_queue.push obj
               end
             end
 

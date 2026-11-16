@@ -249,12 +249,15 @@ module Google
             # Cloud IAM group.
             CLOUD_IAM_GROUP_SERVICE_ACCOUNT = 5
 
-            # Cloud IAM workforce identity user managed via workforce identity
-            # federation.
+            # Cloud IAM workforce identity managed by Workforce Identity
+            # Federation.
             CLOUD_IAM_WORKFORCE_IDENTITY = 6
 
             # Microsoft Entra ID user.
             ENTRAID_USER = 7
+
+            # Active Directory user.
+            ACTIVE_DIRECTORY_USER = 8
           end
 
           # The type of retained password.
@@ -293,10 +296,10 @@ module Google
         # Represents a Sql Server user on the Cloud SQL instance.
         # @!attribute [rw] disabled
         #   @return [::Boolean]
-        #     If the user has been disabled
+        #     Indicates if the user has been disabled.
         # @!attribute [rw] server_roles
         #   @return [::Array<::String>]
-        #     The server roles for this user
+        #     Indicates the server roles for this user.
         class SqlServerUserDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

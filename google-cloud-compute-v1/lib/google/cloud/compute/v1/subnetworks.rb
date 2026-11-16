@@ -31,6 +31,8 @@ module Google
         ##
         # The Subnetworks API.
         #
+        # This client uses Subnetworks version 2026-11-01.
+        #
         # @example Load this service and instantiate a REST client
         #
         #     require "google/cloud/compute/v1/subnetworks/rest"

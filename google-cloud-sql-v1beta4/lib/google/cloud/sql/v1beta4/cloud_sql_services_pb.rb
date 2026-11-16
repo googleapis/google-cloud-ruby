@@ -24,6 +24,7 @@ module Google
     module Sql
       module V1beta4
         module SqlBackupRunsService
+          # Service for managing database backups.
           class Service
 
             include ::GRPC::GenericService
@@ -47,6 +48,7 @@ module Google
           Stub = Service.rpc_stub_class
         end
         module SqlDatabasesService
+          # Service to manage databases.
           class Service
 
             include ::GRPC::GenericService
@@ -78,6 +80,7 @@ module Google
           Stub = Service.rpc_stub_class
         end
         module SqlFlagsService
+          # Service to manage database flags for Cloud SQL instances.
           class Service
 
             include ::GRPC::GenericService
@@ -93,6 +96,7 @@ module Google
           Stub = Service.rpc_stub_class
         end
         module SqlInstancesService
+          # Service to manage Cloud SQL instances.
           class Service
 
             include ::GRPC::GenericService
@@ -188,6 +192,10 @@ module Google
             rpc :ResetSslConfig, ::Google::Cloud::Sql::V1beta4::SqlInstancesResetSslConfigRequest, ::Google::Cloud::Sql::V1beta4::Operation
             # Restarts a Cloud SQL instance.
             rpc :Restart, ::Google::Cloud::Sql::V1beta4::SqlInstancesRestartRequest, ::Google::Cloud::Sql::V1beta4::Operation
+            # Starts a Cloud SQL instance.
+            rpc :Start, ::Google::Cloud::Sql::V1beta4::SqlInstancesStartRequest, ::Google::Cloud::Sql::V1beta4::Operation
+            # Stops a Cloud SQL instance.
+            rpc :Stop, ::Google::Cloud::Sql::V1beta4::SqlInstancesStopRequest, ::Google::Cloud::Sql::V1beta4::Operation
             # Restores a backup of a Cloud SQL instance. Using this operation might cause
             # your instance to restart.
             rpc :RestoreBackup, ::Google::Cloud::Sql::V1beta4::SqlInstancesRestoreBackupRequest, ::Google::Cloud::Sql::V1beta4::Operation
@@ -232,6 +240,8 @@ module Google
             rpc :ResetReplicaSize, ::Google::Cloud::Sql::V1beta4::SqlInstancesResetReplicaSizeRequest, ::Google::Cloud::Sql::V1beta4::Operation
             # Get Latest Recovery Time for a given instance.
             rpc :GetLatestRecoveryTime, ::Google::Cloud::Sql::V1beta4::SqlInstancesGetLatestRecoveryTimeRequest, ::Google::Cloud::Sql::V1beta4::SqlInstancesGetLatestRecoveryTimeResponse
+            # Execute SQL statements in read-only mode.
+            rpc :ExecuteSqlReadOnly, ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyRequest, ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlReadOnlyResponse
             # Execute SQL statements.
             rpc :ExecuteSql, ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlRequest, ::Google::Cloud::Sql::V1beta4::SqlInstancesExecuteSqlResponse
             # Acquire a lease for the setup of SQL Server Reporting Services (SSRS).
@@ -243,11 +253,17 @@ module Google
             # Point in time restore for an instance managed by Google Cloud Backup and
             # Disaster Recovery.
             rpc :PointInTimeRestore, ::Google::Cloud::Sql::V1beta4::SqlInstancesPointInTimeRestoreRequest, ::Google::Cloud::Sql::V1beta4::Operation
+            # Repairs and recreates networking resources for a Cloud SQL instance. For
+            # Private Service Connect (PSC), this operation recreates PSC DNS write
+            # endpoints on specified VPC networks and reconciles Private Service Connect
+            # connectivity infrastructure for the instance.
+            rpc :ReconcileNetworking, ::Google::Cloud::Sql::V1beta4::SqlInstancesReconcileNetworkingRequest, ::Google::Cloud::Sql::V1beta4::Operation
           end
 
           Stub = Service.rpc_stub_class
         end
         module SqlOperationsService
+          # Service to fetch operations for database instances.
           class Service
 
             include ::GRPC::GenericService
@@ -269,6 +285,7 @@ module Google
           Stub = Service.rpc_stub_class
         end
         module SqlSslCertsService
+          # Service to manage SSL certs for Cloud SQL instances.
           class Service
 
             include ::GRPC::GenericService
@@ -290,11 +307,21 @@ module Google
             rpc :Insert, ::Google::Cloud::Sql::V1beta4::SqlSslCertsInsertRequest, ::Google::Cloud::Sql::V1beta4::SslCertsInsertResponse
             # Lists all of the current SSL certificates for the instance.
             rpc :List, ::Google::Cloud::Sql::V1beta4::SqlSslCertsListRequest, ::Google::Cloud::Sql::V1beta4::SslCertsListResponse
+            # Upload and update customer managed certificate bundle for an existing
+            # Cloud SQL instance.
+            rpc :UpdateCustomerManagedCertificate, ::Google::Cloud::Sql::V1beta4::UpdateCustomerManagedCertificateRequest, ::Google::Cloud::Sql::V1beta4::Operation
+            # Delete customer managed certificate bundle for an existing Cloud SQL
+            # instance.
+            rpc :DeleteCustomerManagedCertificate, ::Google::Cloud::Sql::V1beta4::DeleteCustomerManagedCertificateRequest, ::Google::Cloud::Sql::V1beta4::Operation
+            # List all customer managed certificate bundles for an existing Cloud SQL
+            # instance.
+            rpc :ListCustomerManagedCertificates, ::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesRequest, ::Google::Cloud::Sql::V1beta4::ListCustomerManagedCertificatesResponse
           end
 
           Stub = Service.rpc_stub_class
         end
         module SqlBackupsService
+          # Service for managing database backups for Cloud SQL instances.
           class Service
 
             include ::GRPC::GenericService

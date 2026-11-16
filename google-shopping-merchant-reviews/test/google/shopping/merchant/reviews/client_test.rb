@@ -41,27 +41,6 @@ class Google::Shopping::Merchant::Reviews::ClientConstructionMinitest < Minitest
     end
   end
 
-  def test_merchant_reviews_service_grpc
-    skip unless Google::Shopping::Merchant::Reviews.merchant_reviews_service_available? transport: :grpc
-    Gapic::ServiceStub.stub :new, DummyStub.new do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Shopping::Merchant::Reviews.merchant_reviews_service transport: :grpc do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Shopping::Merchant::Reviews::V1beta::MerchantReviewsService::Client, client
-    end
-  end
-
-  def test_merchant_reviews_service_rest
-    skip unless Google::Shopping::Merchant::Reviews.merchant_reviews_service_available? transport: :rest
-    Gapic::Rest::ClientStub.stub :new, DummyStub.new do
-      client = Google::Shopping::Merchant::Reviews.merchant_reviews_service transport: :rest do |config|
-        config.credentials = :dummy_credentials
-      end
-      assert_kind_of Google::Shopping::Merchant::Reviews::V1beta::MerchantReviewsService::Rest::Client, client
-    end
-  end
-
   def test_product_reviews_service_grpc
     skip unless Google::Shopping::Merchant::Reviews.product_reviews_service_available? transport: :grpc
     Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -69,7 +48,7 @@ class Google::Shopping::Merchant::Reviews::ClientConstructionMinitest < Minitest
       client = Google::Shopping::Merchant::Reviews.product_reviews_service transport: :grpc do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Shopping::Merchant::Reviews::V1beta::ProductReviewsService::Client, client
+      assert_kind_of Google::Shopping::Merchant::Reviews::V1::ProductReviewsService::Client, client
     end
   end
 
@@ -79,7 +58,7 @@ class Google::Shopping::Merchant::Reviews::ClientConstructionMinitest < Minitest
       client = Google::Shopping::Merchant::Reviews.product_reviews_service transport: :rest do |config|
         config.credentials = :dummy_credentials
       end
-      assert_kind_of Google::Shopping::Merchant::Reviews::V1beta::ProductReviewsService::Rest::Client, client
+      assert_kind_of Google::Shopping::Merchant::Reviews::V1::ProductReviewsService::Rest::Client, client
     end
   end
 end

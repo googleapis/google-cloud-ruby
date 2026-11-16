@@ -11,7 +11,7 @@ require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 
 
-descriptor_data = "\n1google/cloud/ces/v1beta/omnichannel_service.proto\x12\x17google.cloud.ces.v1beta\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xc9\x01\n\x1cOmnichannelOperationMetadata\x12\x34\n\x0b\x63reate_time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x31\n\x08\x65nd_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x03\xe0\x41\x03\x12\x1b\n\x0estatus_message\x18\x03 \x01(\tB\x03\xe0\x41\x03\x12#\n\x16requested_cancellation\x18\x04 \x01(\x08\x42\x03\xe0\x41\x03\x42g\n\x1b\x63om.google.cloud.ces.v1betaB\x17OmnichannelServiceProtoP\x01Z-cloud.google.com/go/ces/apiv1beta/cespb;cespbb\x06proto3"
+descriptor_data = "\n1google/cloud/ces/v1beta/omnichannel_service.proto\x12\x17google.cloud.ces.v1beta\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xcd\x01\n\x1cOmnichannelOperationMetadata\x12\x35\n\x0b\x63reate_time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x04\xe2\x41\x01\x03\x12\x32\n\x08\x65nd_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x04\xe2\x41\x01\x03\x12\x1c\n\x0estatus_message\x18\x03 \x01(\tB\x04\xe2\x41\x01\x03\x12$\n\x16requested_cancellation\x18\x04 \x01(\x08\x42\x04\xe2\x41\x01\x03\x42g\n\x1b\x63om.google.cloud.ces.v1betaB\x17OmnichannelServiceProtoP\x01Z-cloud.google.com/go/ces/apiv1beta/cespb;cespbb\x06proto3"
 
 pool = ::Google::Protobuf::DescriptorPool.generated_pool
 pool.add_serialized_file(descriptor_data)

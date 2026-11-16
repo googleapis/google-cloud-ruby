@@ -278,25 +278,33 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent, which owns this collection of
-              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s. Format:
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers}. Format:
               #     `networks/{network_code}`
               #   @param page_size [::Integer]
               #     Optional. The maximum number of
-              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s to return. The
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} to return. The
               #     service may return fewer than this value. If unspecified, at most 50
-              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s will be returned.
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} will be returned.
               #     The maximum value is 1000; values greater than 1000 will be coerced to
               #     1000.
               #   @param page_token [::String]
-              #     Optional. A page token, received from a previous [ListChildPublishers][]
+              #     Optional. A page token, received from a previous `ListChildPublishers`
               #     call. Provide this to retrieve the subsequent page.
               #
-              #     When paginating, all other parameters provided to [ListChildPublishers][]
+              #     When paginating, all other parameters provided to `ListChildPublishers`
               #     must match the call that provided the page token.
               #   @param filter [::String]
               #     Optional. Expression to filter the response.
               #      See syntax details at
               #      https://developers.google.com/ad-manager/api/beta/filters
+              #
+              #     Syntax summary: double-quoted `"..."` (never `'...'`) strings and RFC 3339
+              #     timestamps, full resource names on reference fields (for example, `order =
+              #     "networks/123/orders/456"`, not `*Id` or bare IDs), prefix or suffix `*`
+              #     wildcards with `=` (`displayName = "foo*"`), `:` for substring or
+              #     repeated-field matching, unquoted enums and booleans, uppercase
+              #     `AND`/`OR`/`NOT`, and standalone `IN(field, SET(v1, v2))` (not `field IN
+              #     (...)`).
               #
               #     **Filterable fields:**
               #
@@ -488,10 +496,9 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource where
-              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s will be created.
-              #     Format: `networks/{network_code}`
-              #     The parent field in the CreateChildPublisherRequest must match this
-              #     field.
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} will be created.
+              #     Format: `networks/{network_code}` The parent field in the
+              #     CreateChildPublisherRequest must match this field.
               #   @param requests [::Array<::Google::Ads::AdManager::V1::CreateChildPublisherRequest, ::Hash>]
               #     Required. The {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}
               #     objects to create. A maximum of 100 objects can be created in a batch.
@@ -659,10 +666,9 @@ module Google
               #
               #   @param parent [::String]
               #     Required. The parent resource where
-              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s will be updated.
-              #     Format: `networks/{network_code}`
-              #     The parent field in the UpdateChildPublisherRequest must match this
-              #     field.
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} will be updated.
+              #     Format: `networks/{network_code}` The parent field in the
+              #     UpdateChildPublisherRequest must match this field.
               #   @param requests [::Array<::Google::Ads::AdManager::V1::UpdateChildPublisherRequest, ::Hash>]
               #     Required. The {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}
               #     objects to update. A maximum of 100 objects can be updated in a batch.
@@ -752,7 +758,7 @@ module Google
               #     Required. Format: `networks/{network_code}`
               #   @param names [::Array<::String>]
               #     Required. Resource names of the
-              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s that should be
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} that should be
               #     resent invitation emails. Format:
               #     `networks/{network_code}/childPublisher/{child_publisher_id}`
               # @yield [result, operation] Access the result along with the TransportOperation object
@@ -914,7 +920,7 @@ module Google
               # associated with an Ad Manager network.
               #
               # To sever the relationship from the parent publisher's side, use
-              # [BatchWithdrawChildPublisher][].
+              # `BatchWithdrawChildPublishers`.
               #
               # @overload batch_reject_child_publishers(request, options = nil)
               #   Pass arguments to `batch_reject_child_publishers` via a request object, either of type
@@ -935,7 +941,7 @@ module Google
               #     Required. Format: `networks/{network_code}`
               #   @param names [::Array<::String>]
               #     Required. Resource names of the
-              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s to reject.
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} to reject.
               #     Format: `networks/{network_code}/childPublisher/{child_publisher_id}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::BatchRejectChildPublishersResponse]
@@ -996,12 +1002,12 @@ module Google
               end
 
               ##
-              # Batch withdraws {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s.
+              # Batch withdraws {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers}.
               #
               # Only expired, pending, and accepted
-              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s can be withdrawn.
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} can be withdrawn.
               # Rejected or withdrawn
-              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s will be ignored.
+              # {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} will be ignored.
               #
               # @overload batch_withdraw_child_publishers(request, options = nil)
               #   Pass arguments to `batch_withdraw_child_publishers` via a request object, either of type
@@ -1022,7 +1028,7 @@ module Google
               #     Required. Format: `networks/{network_code}`
               #   @param names [::Array<::String>]
               #     Required. Resource names of the
-              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublisher}s to withdraw.
+              #     {::Google::Ads::AdManager::V1::ChildPublisher ChildPublishers} to withdraw.
               #     Format: `networks/{network_code}/childPublisher/{child_publisher_id}`
               # @yield [result, operation] Access the result along with the TransportOperation object
               # @yieldparam result [::Google::Ads::AdManager::V1::BatchWithdrawChildPublishersResponse]

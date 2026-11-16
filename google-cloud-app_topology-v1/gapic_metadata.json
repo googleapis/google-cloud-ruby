@@ -20,6 +20,11 @@
                 "get_schema"
               ]
             },
+            "ExploreSchema": {
+              "methods": [
+                "explore_schema"
+              ]
+            },
             "GetDomain": {
               "methods": [
                 "get_domain"

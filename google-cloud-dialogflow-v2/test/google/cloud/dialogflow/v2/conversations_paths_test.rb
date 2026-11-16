@@ -56,6 +56,21 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientPathsTest < Minitest
     end
   end
 
+  def test_answer_record_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.answer_record_path project: "value0", answer_record: "value1"
+      assert_equal "projects/value0/answerRecords/value1", path
+
+      path = client.answer_record_path project: "value0", location: "value1", answer_record: "value2"
+      assert_equal "projects/value0/locations/value1/answerRecords/value2", path
+    end
+  end
+
   def test_app_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, DummyStub.new do
@@ -77,6 +92,18 @@ class ::Google::Cloud::Dialogflow::V2::Conversations::ClientPathsTest < Minitest
 
       path = client.cx_security_settings_path project: "value0", location: "value1", security_settings: "value2"
       assert_equal "projects/value0/locations/value1/securitySettings/value2", path
+    end
+  end
+
+  def test_companion_agent_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, DummyStub.new do
+      client = ::Google::Cloud::Dialogflow::V2::Conversations::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.companion_agent_path project: "value0", location: "value1", companion_agent: "value2"
+      assert_equal "projects/value0/locations/value1/companionAgents/value2", path
     end
   end
 

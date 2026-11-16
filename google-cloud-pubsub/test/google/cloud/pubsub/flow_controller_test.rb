@@ -420,7 +420,6 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       adding_initial_done = Concurrent::Event.new
       adding_large_done = Concurrent::Event.new
       adding_busy_done = Concurrent::Event.new
-      releasing_busy_done = Concurrent::Event.new
       releasing_large_done = Concurrent::Event.new
       releasing_initial_done = Concurrent::Event.new
 
@@ -433,18 +432,28 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
       _(flow_controller.outstanding_bytes).must_equal 50 # Implementation detail
 
       run_in_thread flow_controller, :acquire, large_msg, adding_large_done
+      wait_until max: 100, msg: "Large message did not enter awaiting queue." do
+        flow_controller.awaiting.count == 1 # Implementation detail
+      end
 
       # Continuously keep adding more messages after the large one.
       messages = Array.new(10) { 10 }
-      run_in_thread flow_controller, :acquire, messages, adding_busy_done, action_pause: 0.1
+      run_in_thread flow_controller, :acquire, messages, adding_busy_done
+      wait_until max: 100, msg: "Small messages did not queue behind large message." do
+        flow_controller.awaiting.count == 2 # Implementation detail
+      end
+      # The small message waits behind the large one even though it would fit.
+      _(flow_controller.outstanding_bytes).must_equal 50 # Implementation detail
 
-      # At the same time, gradually keep releasing the messages - the released
-      # capacity should be consumed by the large message, not the other small messages
-      # being added after it.
-      run_in_thread flow_controller, :release, messages, releasing_busy_done, action_pause: 0.1
-
-      # Sanity check - releasing should have completed by now.
-      assert releasing_busy_done.wait(2), "Releasing messages blocked or errored."
+      # Gradually release the messages, each one only after the waiter at the head of
+      # the queue blocks again. The released capacity should be consumed by the large
+      # message, not the other small messages being added after it.
+      messages.each do |msg|
+        wait_until max: 100, msg: "Waiter did not block before next release." do
+          flow_controller.awaiting.first&.set? == false # Implementation detail
+        end
+        flow_controller.release msg
+      end
 
       # Enough messages released, the large message should have come through in the meantime.
       assert adding_large_done.wait(0.1), "A thread adding a large message starved."

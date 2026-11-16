@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/sql/v1/version"
 
 require "google/cloud/sql/v1/sql_backup_runs_service/credentials"
+require "google/cloud/sql/v1/sql_backup_runs_service/paths"
 require "google/cloud/sql/v1/sql_backup_runs_service/rest/client"
 
 module Google

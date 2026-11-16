@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the Dataform API.
           module Paths
             ##
+            # Create a fully-qualified AccountConnector resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/accountConnectors/{account_connector}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param account_connector [String]
+            #
+            # @return [::String]
+            def account_connector_path project:, location:, account_connector:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/accountConnectors/#{account_connector}"
+            end
+
+            ##
             # Create a fully-qualified CompilationResult resource string.
             #
             # The resource will be in the following format:

@@ -176,7 +176,8 @@ class MockFirestore < Minitest::Spec
   let(:full_doc_paths) {
     ["#{documents_path}/users/alice", "#{documents_path}/users/bob", "#{documents_path}/users/carol"]
   }
-  let(:default_options) { Gapic::CallOptions.new(metadata: { "x-goog-request-params" => "database=#{CGI.escapeURIComponent(database_path)}"}, retry_policy: {}) }
+  let(:default_options) { Gapic::CallOptions.new(metadata: { "x-goog-request-params" => "database=#{CGI.escapeURIComponent(database_path)}", "x-goog-is-transaction" => "false" }, retry_policy: {}) }
+  let(:transaction_options) { Gapic::CallOptions.new(metadata: { "x-goog-request-params" => "database=#{CGI.escapeURIComponent(database_path)}", "x-goog-is-transaction" => "true" }, retry_policy: {}) }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }
   let(:firestore) { Google::Cloud::Firestore::Client.new(Google::Cloud::Firestore::Service.new(project, credentials, database: database)) }
   let(:secondary_firestore) { Google::Cloud::Firestore::Client.new(Google::Cloud::Firestore::Service.new(project, credentials, database: secondary_database)) }
@@ -219,7 +220,7 @@ class MockFirestore < Minitest::Spec
     req[:transaction] = transaction if transaction
     req[:new_transaction] = new_transaction if new_transaction
     req[:read_time] = read_time if read_time
-    [req, default_options]
+    [req, transaction || new_transaction ? transaction_options : default_options]
   end
 
   def commit_args database: database_path,
@@ -230,7 +231,7 @@ class MockFirestore < Minitest::Spec
       writes: writes
     }
     req[:transaction] = transaction if transaction
-    [req, default_options]
+    [req, transaction ? transaction_options : default_options]
   end
 
   def list_collection_ids_args parent: "projects/#{project}/databases/(default)/documents",
@@ -258,7 +259,7 @@ class MockFirestore < Minitest::Spec
     req[:new_transaction] = new_transaction if new_transaction
     req[:read_time] = firestore.service.read_time_to_timestamp(read_time) if read_time
     req[:explain_options] = explain_options if explain_options
-    [req, default_options]
+    [req, transaction || new_transaction ? transaction_options : default_options]
   end
 
   def partition_query_args query_grpc,
@@ -275,7 +276,8 @@ class MockFirestore < Minitest::Spec
         page_token: page_token,
         page_size: page_size,
         read_time: read_time
-      )
+      ),
+      default_options
     ]
   end
 

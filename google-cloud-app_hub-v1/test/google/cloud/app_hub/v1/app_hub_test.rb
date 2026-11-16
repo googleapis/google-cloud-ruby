@@ -1810,6 +1810,256 @@ class ::Google::Cloud::AppHub::V1::AppHub::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_boundary
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AppHub::V1::Boundary.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_boundary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_boundary, name
+      assert_kind_of ::Google::Cloud::AppHub::V1::GetBoundaryRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_boundary_client_stub do
+      # Create client
+      c = ::Google::Cloud::AppHub::V1::AppHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_boundary({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_boundary name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_boundary ::Google::Cloud::AppHub::V1::GetBoundaryRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_boundary({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_boundary(::Google::Cloud::AppHub::V1::GetBoundaryRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_boundary_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_boundary
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    update_mask = {}
+    boundary = {}
+    request_id = "hello world"
+
+    update_boundary_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_boundary, name
+      assert_kind_of ::Google::Cloud::AppHub::V1::UpdateBoundaryRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AppHub::V1::Boundary), request["boundary"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_boundary_client_stub do
+      # Create client
+      c = ::Google::Cloud::AppHub::V1::AppHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.update_boundary({ update_mask: update_mask, boundary: boundary, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.update_boundary update_mask: update_mask, boundary: boundary, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.update_boundary ::Google::Cloud::AppHub::V1::UpdateBoundaryRequest.new(update_mask: update_mask, boundary: boundary, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.update_boundary({ update_mask: update_mask, boundary: boundary, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.update_boundary(::Google::Cloud::AppHub::V1::UpdateBoundaryRequest.new(update_mask: update_mask, boundary: boundary, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_boundary_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_extended_metadata_schema
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AppHub::V1::ExtendedMetadataSchema.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_extended_metadata_schema_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_extended_metadata_schema, name
+      assert_kind_of ::Google::Cloud::AppHub::V1::GetExtendedMetadataSchemaRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_extended_metadata_schema_client_stub do
+      # Create client
+      c = ::Google::Cloud::AppHub::V1::AppHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.get_extended_metadata_schema({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.get_extended_metadata_schema name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.get_extended_metadata_schema ::Google::Cloud::AppHub::V1::GetExtendedMetadataSchemaRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.get_extended_metadata_schema({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.get_extended_metadata_schema(::Google::Cloud::AppHub::V1::GetExtendedMetadataSchemaRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_extended_metadata_schema_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_extended_metadata_schemas
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AppHub::V1::ListExtendedMetadataSchemasResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_extended_metadata_schemas_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_extended_metadata_schemas, name
+      assert_kind_of ::Google::Cloud::AppHub::V1::ListExtendedMetadataSchemasRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_extended_metadata_schemas_client_stub do
+      # Create client
+      c = ::Google::Cloud::AppHub::V1::AppHub::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      c.list_extended_metadata_schemas({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      c.list_extended_metadata_schemas parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      c.list_extended_metadata_schemas ::Google::Cloud::AppHub::V1::ListExtendedMetadataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      c.list_extended_metadata_schemas({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      c.list_extended_metadata_schemas(::Google::Cloud::AppHub::V1::ListExtendedMetadataSchemasRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_extended_metadata_schemas_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

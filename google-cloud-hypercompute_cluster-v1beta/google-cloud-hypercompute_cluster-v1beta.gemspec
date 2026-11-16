@@ -9,8 +9,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "google-cloud-hypercompute_cluster-v1beta is the official client library for the Cluster Director V1BETA API. Note that google-cloud-hypercompute_cluster-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-hypercompute_cluster instead. See the readme for more details."
-  gem.summary       = "API Client library for the Cluster Director V1BETA API"
+  gem.description   = "The Cluster Director API lets you deploy, manage, and monitor clusters that run artificial intelligence (AI), machine learning (ML), or high performance computing (HPC) workloads. Note that google-cloud-hypercompute_cluster-v1beta is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-hypercompute_cluster instead. See the readme for more details."
+  gem.summary       = "The Cluster Director API lets you deploy, manage, and monitor clusters that run artificial intelligence (AI), machine learning (ML), or high performance computing (HPC) workloads."
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"
 
@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 3.2"
 
-  gem.add_dependency "gapic-common", "~> 1.3"
+  gem.add_dependency "gapic-common", "~> 1.6"
   gem.add_dependency "google-cloud-errors", "~> 1.0"
   gem.add_dependency "google-cloud-location", "~> 1.0"
 end

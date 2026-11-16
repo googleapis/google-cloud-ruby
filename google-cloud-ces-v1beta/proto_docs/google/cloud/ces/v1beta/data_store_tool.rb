@@ -275,6 +275,19 @@ module Google
             end
           end
 
+          # Snippets configuration.
+          # @!attribute [rw] enable_snippets
+          #   @return [::Boolean]
+          #     Optional. Whether snippets are enabled.
+          # @!attribute [rw] max_snippets
+          #   @return [::Integer]
+          #     Optional. Number of snippets to return per query.
+          #     If unset, returns all snippets from the service by default.
+          class SnippetsConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # If specified, will apply the given configuration for the specified
           # modality.
           # @!attribute [rw] modality_type
@@ -289,6 +302,9 @@ module Google
           # @!attribute [rw] grounding_config
           #   @return [::Google::Cloud::Ces::V1beta::DataStoreTool::GroundingConfig]
           #     Optional. The grounding configuration.
+          # @!attribute [rw] snippets_config
+          #   @return [::Google::Cloud::Ces::V1beta::DataStoreTool::SnippetsConfig]
+          #     Optional. The snippets configuration.
           class ModalityConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

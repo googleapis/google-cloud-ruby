@@ -23,5 +23,5 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 3.2"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-secret_manager-v1", "~> 1.2"
+  gem.add_dependency "google-cloud-secret_manager-v1", "~> 2.0"
 end
