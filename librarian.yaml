@@ -190,10 +190,6 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::AIPlatform
             ruby-cloud-service-override: AiPlatform=AIPlatform
     keep:
-      - samples/Gemfile
-      - samples/Rakefile
-      - samples/acceptance/predict_text_prompt_test.rb
-      - samples/predict_text_prompt.rb
       - test/README.md
     ruby:
       wrapper_of:
