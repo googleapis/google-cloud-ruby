@@ -16,6 +16,8 @@ require_relative "regional_helper"
 
 describe "#update_regional_secret_with_managed_rotation_schedule", :regional_secret_manager_snippet do
   it "reconfigures the recurring rotation schedule" do
+    skip_unless_cloud_sql_configured
+
     enable_sample = SampleLoader.load "enable_regional_secret_managed_rotation.rb"
     update_sample = SampleLoader.load "update_regional_secret_with_managed_rotation_schedule.rb"
 

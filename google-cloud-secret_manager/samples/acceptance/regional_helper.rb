@@ -56,8 +56,15 @@ class RegionalSecretManagerSnippetSpec < Minitest::Spec
   # rotation tests create.
   CLOUD_SQL_ROLE = "roles/cloudsql.admin".freeze
 
-  let(:cloud_sql_instance_id) { ENV["CLOUD_SQL_INSTANCE"] || raise("missing CLOUD_SQL_INSTANCE") }
-  let(:cloud_sql_username) { ENV["CLOUD_SQL_USER"] || raise("missing CLOUD_SQL_USER") }
+  let(:cloud_sql_instance_id) { ENV["CLOUD_SQL_INSTANCE"] }
+  let(:cloud_sql_username) { ENV["CLOUD_SQL_USER"] }
+
+  # Skips the current test unless a Cloud SQL instance and user are configured
+  # (CLOUD_SQL_INSTANCE and CLOUD_SQL_USER), e.g. in environments without one.
+  def skip_unless_cloud_sql_configured
+    return unless cloud_sql_instance_id.to_s.empty? || cloud_sql_username.to_s.empty?
+    skip "CLOUD_SQL_INSTANCE and CLOUD_SQL_USER must be set to run Cloud SQL managed rotation tests"
+  end
   let(:projects_client) { Google::Cloud::ResourceManager::V3::Projects::Client.new }
 
   # A Cloud SQL DB credentials secret, created at the shared secret_name so

@@ -16,6 +16,8 @@ require_relative "regional_helper"
 
 describe "#rotate_regional_secret", :regional_secret_manager_snippet do
   it "triggers a rotation, creating a new secret version" do
+    skip_unless_cloud_sql_configured
+
     enable_sample = SampleLoader.load "enable_regional_secret_managed_rotation.rb"
     rotate_sample = SampleLoader.load "rotate_regional_secret.rb"
 

@@ -16,6 +16,8 @@ require_relative "regional_helper"
 
 describe "#enable_regional_secret_managed_rotation", :regional_secret_manager_snippet do
   it "enables managed rotation and creates the first secret version" do
+    skip_unless_cloud_sql_configured
+
     sample = SampleLoader.load "enable_regional_secret_managed_rotation.rb"
 
     # Grant the secret's identity Cloud SQL IAM permissions.
