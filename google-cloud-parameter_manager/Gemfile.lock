@@ -1,7 +1,7 @@
 PATH
   remote: ../google-cloud-parameter_manager-v1
   specs:
-    google-cloud-parameter_manager-v1 (1.0.0)
+    google-cloud-parameter_manager-v1 (1.1.0)
       gapic-common (~> 1.3)
       google-cloud-errors (~> 1.0)
       google-cloud-location (~> 1.0)
@@ -10,7 +10,7 @@ PATH
 PATH
   remote: .
   specs:
-    google-cloud-parameter_manager (1.0.0)
+    google-cloud-parameter_manager (1.0.1)
       google-cloud-core (~> 1.6)
       google-cloud-parameter_manager-v1 (>= 0.0, < 2.a)
 
@@ -147,10 +147,10 @@ GEM
     minitest-focus (1.4.1)
       minitest (> 5.0)
     minitest-mock (5.27.0)
-    minitest-reporters (1.5.0)
+    minitest-reporters (1.8.0)
       ansi
       builder
-      minitest (>= 5.0)
+      minitest (>= 5.0, < 7)
       ruby-progressbar
     minitest-rg (5.4.0)
       minitest (>= 5.0, < 7)
@@ -229,7 +229,7 @@ DEPENDENCIES
   minitest (~> 6.0.2)
   minitest-focus (~> 1.4)
   minitest-mock (~> 5.27)
-  minitest-reporters (~> 1.5.0)
+  minitest-reporters (~> 1.8.0)
   minitest-rg (~> 5.3)
   ostruct (~> 0.5.5)
   rake (>= 13.0)
@@ -254,8 +254,8 @@ CHECKSUMS
   google-cloud-env (2.4.0) sha256=01cb35ecee5d1c4d1cd4deaed8bb5bddc838e296bcc2a35c5d1ddd07ce40d28d
   google-cloud-errors (1.7.0) sha256=6e682f42d89aae08689f36f28495de629d756da076bafff0003bac7f8042ebb3
   google-cloud-location (1.5.0) sha256=336f94609b1fb18fce1929048fac964f4d5a87d27c1e5444bfed3605469c7532
-  google-cloud-parameter_manager (1.0.0)
-  google-cloud-parameter_manager-v1 (1.0.0)
+  google-cloud-parameter_manager (1.0.1)
+  google-cloud-parameter_manager-v1 (1.1.0)
   google-logging-utils (0.2.0) sha256=675462b4ea5affa825a3442694ca2d75d0069455a1d0956127207498fca3df7b
   google-protobuf (4.35.1) sha256=a3a6471331d918f58dfa4d014a8f6286f0af2cf4840216bde52fcf2ea3fe3726
   google-protobuf (4.35.1-aarch64-linux-gnu) sha256=50ca44d0eeff3f8475e630a1accdd974256f3510694d574e2c9d6119ea8bc9e1
@@ -290,7 +290,7 @@ CHECKSUMS
   minitest (6.0.6) sha256=153ea36d1d987a62942382b61075745042a2b3123b1cd48f4c3675af9cc7d6f1
   minitest-focus (1.4.1) sha256=394517cbe2dcb2d992d8ffc41a3b2b6315777a4daa69239de4fefe7110dd810e
   minitest-mock (5.27.0) sha256=7040ed7185417a966920987eaa6eaf1be4ea1fc5b25bb03ff4703f98564a55b0
-  minitest-reporters (1.5.0) sha256=a693acddc67987cde96d33ad6766b8d3e8522bb4c8a20628352950c30d42f0a3
+  minitest-reporters (1.8.0) sha256=8ce5280fb73ad3178ae525454df169b6f28c1b38b1d088ea91815d3a370ba384
   minitest-rg (5.4.0) sha256=54d42bb8ce876381245be5866f3c1dd704ef79c06ba5c9ff280c0aa28c56effb
   net-http (0.9.1) sha256=25ba0b67c63e89df626ed8fac771d0ad24ad151a858af2cc8e6a716ca4336996
   os (1.1.4) sha256=57816d6a334e7bd6aed048f4b0308226c5fb027433b67d90a9ab435f35108d3f
