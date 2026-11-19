@@ -1,5 +1,11 @@
 # Release History
 
+### 1.63.0 (2026-11-19)
+
+#### Features
+
+* support bucket ip filter ([#34612](https://github.com/googleapis/google-cloud-ruby/issues/34612)) 
+
 ### 1.62.2 (2026-11-11)
 
 #### Documentation
