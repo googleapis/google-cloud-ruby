@@ -36,39 +36,6 @@ require "ostruct"
 require "google/cloud/firestore"
 require "google/cloud/firestore/rate_limiter"
 
-##
-# Monkey-Patch CallOptions to support Mocks
-#
-class Gapic::CallOptions
-  ##
-  # Minitest Mock depends on === to match same-value objects.
-  # By default, CallOptions objects do not match with ===.
-  # Therefore, we must add this capability.
-  def === other
-    return false unless other.is_a? Gapic::CallOptions
-    timeout === other.timeout &&
-      retry_policy === other.retry_policy &&
-      metadata === other.metadata
-  end
-  def == other
-    return false unless other.is_a? Gapic::CallOptions
-    timeout === other.timeout &&
-      retry_policy === other.retry_policy &&
-      metadata === other.metadata
-  end
-
-  class RetryPolicy
-    def === other
-      return false unless other.is_a? Gapic::CallOptions::RetryPolicy
-      retry_codes === other.retry_codes &&
-        initial_delay === other.initial_delay &&
-        multiplier === other.multiplier &&
-        max_delay === other.max_delay &&
-        delay === other.delay
-    end
-  end
-end
-
 class StreamingListenStub
   attr_reader :requests, :responses
 
