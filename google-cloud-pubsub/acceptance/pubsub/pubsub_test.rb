@@ -52,12 +52,6 @@ describe Google::Cloud::PubSub, :pubsub do
     end
   end
 
-  it "should raise when endpoint is not the Pub/Sub service" do
-    skip("https://github.com/googleapis/google-cloud-ruby/issues/18275")
-    pubsub_invalid_endpoint = Google::Cloud::PubSub.new endpoint: "example.com"
-    expect { pubsub_invalid_endpoint.topics }.must_raise Google::Cloud::UnimplementedError
-  end
-
   describe "Topic", :pubsub do
     it "should be listed" do
       topics = $topic_admin.list_topics(project: pubsub.project_path)
