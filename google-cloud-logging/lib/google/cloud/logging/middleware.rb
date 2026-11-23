@@ -62,8 +62,10 @@ module Google
           logger ||= Middleware.logger
           logger ||= begin
             log_name = configuration.log_name
-            logging = Logging.new project_id:  configuration.project_id,
-                                  credentials: configuration.credentials
+            logging = Logging.new project_id:      configuration.project_id,
+                                  credentials:     configuration.credentials,
+                                  endpoint:        configuration.endpoint,
+                                  universe_domain: configuration.universe_domain
             resource = Middleware.build_monitored_resource(
               configuration.monitored_resource.type,
               configuration.monitored_resource.labels
@@ -278,6 +280,12 @@ module Google
 
           creds = kwargs[:credentials] || kwargs[:keyfile]
           configuration.credentials = creds unless creds.nil?
+
+          endpoint = kwargs[:endpoint]
+          configuration.endpoint = endpoint unless endpoint.nil?
+
+          universe_domain = kwargs[:universe_domain]
+          configuration.universe_domain = universe_domain unless universe_domain.nil?
 
           log_name_map = kwargs[:log_name_map]
           configuration.log_name_map = log_name_map unless log_name_map.nil?

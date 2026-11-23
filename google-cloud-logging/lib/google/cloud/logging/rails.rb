@@ -65,13 +65,17 @@ module Google
         def self.init_middleware app
           project_id = Logging.configure.project_id
           credentials = Logging.configure.credentials
+          endpoint = Logging.configure.endpoint
+          universe_domain = Logging.configure.universe_domain
           resource_type = Logging.configure.monitored_resource.type
           resource_labels = Logging.configure.monitored_resource.labels
           log_name = Logging.configure.log_name
           labels = Logging.configure.labels
 
-          logging = Google::Cloud::Logging.new project_id:  project_id,
-                                               credentials: credentials
+          logging = Google::Cloud::Logging.new project_id:      project_id,
+                                               credentials:     credentials,
+                                               endpoint:        endpoint,
+                                               universe_domain: universe_domain
           resource =
             Logging::Middleware.build_monitored_resource resource_type,
                                                          resource_labels
@@ -172,6 +176,8 @@ module Google
             config.credentials ||= config.keyfile
             config.credentials ||= log_config.credentials || log_config.keyfile
             config.credentials ||= gcp_config.credentials || gcp_config.keyfile
+            config.endpoint ||= log_config.endpoint
+            config.universe_domain ||= log_config.universe_domain || gcp_config.universe_domain
             config.log_name ||= log_config.log_name
             config.labels ||= log_config.labels
             config.log_name_map ||= log_config.log_name_map
