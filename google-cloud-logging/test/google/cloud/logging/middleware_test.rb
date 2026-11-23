@@ -47,11 +47,21 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
   }
 
   before do
+    @original_env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
+    ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    Google::Cloud::Logging::Middleware.logger = nil
     # Clear configuration values between each test
     Google::Cloud.configure.reset!
   end
 
   after do
+    Google::Cloud::Logging::Middleware.logger&.writer&.stop!
+    Google::Cloud::Logging::Middleware.logger = nil
+    if @original_env_universe.nil?
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    else
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = @original_env_universe
+    end
     # Clear configuration values between each test
     Google::Cloud.configure.reset!
   end
@@ -89,6 +99,70 @@ describe Google::Cloud::Logging::Middleware, :mock_logging do
         rack_app, logger: logger, on_init: on_init_callback
 
       mock.verify
+    end
+
+    it "configures endpoint and universe_domain from explicit kwargs" do
+      custom_universe = "myuniverse.com"
+      custom_endpoint = "custom.example.com"
+      creds = LoggingTestHelpers.build_logging_credentials project_id: project, universe_domain: custom_universe
+
+      middleware = Google::Cloud::Logging::Middleware.new(
+        rack_app,
+        project_id: project,
+        credentials: creds,
+        endpoint: custom_endpoint,
+        universe_domain: custom_universe
+      )
+
+      project_client = middleware.logger.writer.logging
+      _(project_client.universe_domain).must_equal custom_universe
+      _(project_client.service.host).must_equal custom_endpoint
+      _(project_client.service.logging.universe_domain).must_equal custom_universe
+      _(project_client.service.logging.logging_service_stub.endpoint).must_equal custom_endpoint
+    ensure
+      middleware&.logger&.writer&.stop!
+    end
+
+    it "picks up endpoint and universe_domain from Logging.configure when kwargs are omitted" do
+      custom_universe = "myuniverse.com"
+      custom_endpoint = "custom.example.com"
+      creds = LoggingTestHelpers.build_logging_credentials project_id: project, universe_domain: custom_universe
+
+      Google::Cloud::Logging.configure do |config|
+        config.endpoint = custom_endpoint
+        config.universe_domain = custom_universe
+      end
+
+      middleware = Google::Cloud::Logging::Middleware.new(
+        rack_app,
+        project_id: project,
+        credentials: creds
+      )
+
+      project_client = middleware.logger.writer.logging
+      _(project_client.universe_domain).must_equal custom_universe
+      _(project_client.service.host).must_equal custom_endpoint
+      _(project_client.service.logging.universe_domain).must_equal custom_universe
+      _(project_client.service.logging.logging_service_stub.endpoint).must_equal custom_endpoint
+    ensure
+      middleware&.logger&.writer&.stop!
+    end
+
+    it "raises Gapic::UniverseDomainMismatch when credentials mismatch configured universe_domain" do
+      mismatched_creds = LoggingTestHelpers.build_logging_credentials project_id: project, universe_domain: "otheruniverse.com"
+
+      middleware = Google::Cloud::Logging::Middleware.new(
+        rack_app,
+        project_id: project,
+        credentials: mismatched_creds,
+        universe_domain: "myuniverse.com"
+      )
+
+      expect do
+        middleware.logger.writer.logging.service.logging
+      end.must_raise Gapic::UniverseDomainMismatch
+    ensure
+      middleware&.logger&.writer&.stop!
     end
   end
 
