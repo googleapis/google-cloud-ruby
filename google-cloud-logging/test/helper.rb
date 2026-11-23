@@ -35,6 +35,49 @@ require "base64"
 require "google/cloud/logging"
 require "grpc"
 
+module LoggingTestHelpers
+  def self.rsa_key
+    @rsa_key ||= begin
+      require "openssl"
+      OpenSSL::PKey::RSA.new 2048
+    end
+  end
+
+  def self.sa_key_hash project_id: "test", universe_domain: "googleapis.com"
+    {
+      "type" => "service_account",
+      "project_id" => project_id,
+      "private_key_id" => "key-id",
+      "private_key" => rsa_key.to_pem,
+      "client_email" => "test-sa@#{project_id}.iam.gserviceaccount.com",
+      "client_id" => "1234567890",
+      "auth_uri" => "https://accounts.google.com/o/oauth2/auth",
+      "token_uri" => "https://oauth2.#{universe_domain}/token",
+      "universe_domain" => universe_domain
+    }
+  end
+
+  def self.build_sa_credentials project_id: "test", universe_domain: "googleapis.com",
+                                scope: Google::Cloud::Logging.configure.scope
+    require "stringio"
+    json = JSON.generate sa_key_hash(project_id: project_id, universe_domain: universe_domain)
+    Google::Auth::ServiceAccountCredentials.make_creds(
+      json_key_io: StringIO.new(json),
+      scope: scope
+    )
+  end
+
+  def self.build_logging_credentials project_id: "test", universe_domain: "googleapis.com",
+                                     scope: Google::Cloud::Logging.configure.scope
+    sa_creds = build_sa_credentials(
+      project_id: project_id,
+      universe_domain: universe_domain,
+      scope: scope
+    )
+    Google::Cloud::Logging::Credentials.new sa_creds
+  end
+end
+
 class MockLogging < Minitest::Spec
   let(:project) { "test" }
   let(:credentials) { OpenStruct.new(client: OpenStruct.new(updater_proc: Proc.new {})) }

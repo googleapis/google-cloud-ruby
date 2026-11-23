@@ -15,9 +15,32 @@
 require "helper"
 
 describe Google::Cloud::Logging::Project, :mock_logging do
+  before do
+    Google::Cloud.configure.reset!
+  end
+
+  after do
+    Google::Cloud.configure.reset!
+  end
+
   it "knows the project identifier" do
     _(logging).must_be_kind_of Google::Cloud::Logging::Project
     _(logging.project).must_equal project
+  end
+
+  it "returns the default universe domain" do
+    ENV.stub :[], nil do
+      _(logging.universe_domain).must_equal "googleapis.com"
+    end
+  end
+
+  it "returns a custom universe domain" do
+    ENV.stub :[], nil do
+      universe = "myuniverse.com"
+      service = Google::Cloud::Logging::Service.new project, credentials, universe_domain: universe
+      custom_logging = Google::Cloud::Logging::Project.new service
+      _(custom_logging.universe_domain).must_equal universe
+    end
   end
 
   it "creates an empty entry" do
