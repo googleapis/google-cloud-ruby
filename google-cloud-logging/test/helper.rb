@@ -33,6 +33,7 @@ require "ostruct"
 require "json"
 require "base64"
 require "google/cloud/logging"
+require "gapic/universe_domain_concerns"
 require "grpc"
 
 module LoggingTestHelpers
