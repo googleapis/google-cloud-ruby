@@ -32,11 +32,19 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, timeout: nil, host: nil
+        def initialize project, credentials, timeout: nil, host: nil, universe_domain: nil
           @project = project
           @credentials = credentials
           @timeout = timeout
           @host = host
+          @universe_domain = universe_domain
+        end
+
+        def universe_domain
+          @universe_domain ||
+            Google::Cloud.configure.logging.universe_domain ||
+            ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] ||
+            "googleapis.com"
         end
 
         def logging
@@ -46,6 +54,7 @@ module Google
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout
               config.endpoint = host if host
+              config.universe_domain = @universe_domain if @universe_domain
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::Logging::VERSION
               config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
@@ -60,6 +69,7 @@ module Google
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout
               config.endpoint = host if host
+              config.universe_domain = @universe_domain if @universe_domain
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::Logging::VERSION
               config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
@@ -74,6 +84,7 @@ module Google
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout
               config.endpoint = host if host
+              config.universe_domain = @universe_domain if @universe_domain
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::Logging::VERSION
               config.metadata = { "google-cloud-resource-prefix" => "projects/#{@project}" }
