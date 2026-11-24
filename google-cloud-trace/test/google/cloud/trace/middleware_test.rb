@@ -78,13 +78,24 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
   }
 
   before do
+    @original_env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
+    ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
     # Clear configuration values between each test
     Google::Cloud.configure.reset!
+    Google::Cloud::Trace::V1::TraceService::Client.configure.endpoint = nil
+    Google::Cloud::Trace::V1::TraceService::Client.configure.universe_domain = nil
   end
 
   after do
+    if @original_env_universe.nil?
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    else
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = @original_env_universe
+    end
     # Clear configuration values between each test
     Google::Cloud.configure.reset!
+    Google::Cloud::Trace::V1::TraceService::Client.configure.endpoint = nil
+    Google::Cloud::Trace::V1::TraceService::Client.configure.universe_domain = nil
   end
 
   def base_app(&block)
@@ -124,6 +135,77 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
         middleware = Google::Cloud::Trace::Middleware.new base_app, credentials: credentials
         _(middleware.instance_variable_get(:@service)).must_be_kind_of Google::Cloud::Trace::AsyncReporter
       end
+    end
+
+    it "configures endpoint and universe_domain from explicit kwargs" do
+      custom_universe = "myuniverse.com"
+      custom_endpoint = "custom.example.com"
+      creds = TraceTestHelpers.build_trace_credentials project_id: project, universe_domain: custom_universe
+
+      Google::Cloud::Trace.configure do |config|
+        config.project_id = project
+        config.credentials = creds
+      end
+
+      middleware = Google::Cloud::Trace::Middleware.new(
+        base_app,
+        endpoint: custom_endpoint,
+        universe_domain: custom_universe
+      )
+
+      reporter = middleware.instance_variable_get :@service
+      _(reporter).must_be_kind_of Google::Cloud::Trace::AsyncReporter
+      _(reporter.service.universe_domain).must_equal custom_universe
+      _(reporter.service.host).must_equal custom_endpoint
+      _(reporter.service.lowlevel_client.universe_domain).must_equal custom_universe
+      _(reporter.service.lowlevel_client.trace_service_stub.endpoint).must_equal custom_endpoint
+    ensure
+      reporter&.stop!
+    end
+
+    it "picks up endpoint and universe_domain from Trace.configure when kwargs are omitted" do
+      custom_universe = "myuniverse.com"
+      custom_endpoint = "custom.example.com"
+      creds = TraceTestHelpers.build_trace_credentials project_id: project, universe_domain: custom_universe
+
+      Google::Cloud::Trace.configure do |config|
+        config.project_id = project
+        config.credentials = creds
+        config.endpoint = custom_endpoint
+        config.universe_domain = custom_universe
+      end
+
+      middleware = Google::Cloud::Trace::Middleware.new base_app
+
+      reporter = middleware.instance_variable_get :@service
+      _(reporter).must_be_kind_of Google::Cloud::Trace::AsyncReporter
+      _(reporter.service.universe_domain).must_equal custom_universe
+      _(reporter.service.host).must_equal custom_endpoint
+      _(reporter.service.lowlevel_client.universe_domain).must_equal custom_universe
+      _(reporter.service.lowlevel_client.trace_service_stub.endpoint).must_equal custom_endpoint
+    ensure
+      reporter&.stop!
+    end
+
+    it "raises Gapic::UniverseDomainMismatch when credentials mismatch configured universe_domain" do
+      mismatched_creds = TraceTestHelpers.build_trace_credentials project_id: project, universe_domain: "otheruniverse.com"
+
+      Google::Cloud::Trace.configure do |config|
+        config.project_id = project
+        config.credentials = mismatched_creds
+      end
+
+      middleware = Google::Cloud::Trace::Middleware.new(
+        base_app,
+        universe_domain: "myuniverse.com"
+      )
+
+      reporter = middleware.instance_variable_get :@service
+      expect do
+        reporter.service.lowlevel_client
+      end.must_raise Gapic::UniverseDomainMismatch
+    ensure
+      reporter&.stop!
     end
   end
 
@@ -226,6 +308,40 @@ describe Google::Cloud::Trace::Middleware, :mock_trace do
       end
 
       mock.verify
+    end
+
+    it "routes background credential universe mismatch to Trace.configure.on_error as AsyncPatchTracesError" do
+      mismatched_creds = TraceTestHelpers.build_trace_credentials project_id: project, universe_domain: "otheruniverse.com"
+      errors = Queue.new
+
+      Google::Cloud::Trace.configure do |config|
+        config.project_id = project
+        config.credentials = mismatched_creds
+        config.universe_domain = "myuniverse.com"
+        config.sampler = sampler
+        config.span_id_generator = mock_span_id_generator
+        config.on_error = proc { |error| errors << error }
+      end
+
+      middleware = Google::Cloud::Trace::Middleware.new base_app
+      reporter = middleware.instance_variable_get :@service
+      env = rack_env sample: true, span_id: nil
+
+      result = ::Time.stub :now, start_time do
+        middleware.call env
+      end
+      _(result[0]).must_equal "200"
+
+      reporter.flush!
+      reporter.stop! 5
+
+      _(errors.size).must_equal 1
+      error = errors.pop
+      _(error).must_be_kind_of Google::Cloud::Trace::AsyncPatchTracesError
+      _(error.message).must_include "myuniverse.com"
+      _(error.message).must_include "otheruniverse.com"
+    ensure
+      reporter&.stop!
     end
   end
 end
