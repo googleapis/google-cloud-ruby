@@ -58,13 +58,26 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
   }
 
   before do
+    @original_env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
+    ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    ErrorReportingTestHelpers.reset_default_reporter!
     # Clear configuration values between each test
     Google::Cloud.configure.reset!
+    Google::Cloud::ErrorReporting.configure.reset!
+    ErrorReportingTestHelpers.reset_v1beta1_client_configs!
   end
 
   after do
+    ErrorReportingTestHelpers.reset_default_reporter!
+    if @original_env_universe.nil?
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    else
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = @original_env_universe
+    end
     # Clear configuration values between each test
     Google::Cloud.configure.reset!
+    Google::Cloud::ErrorReporting.configure.reset!
+    ErrorReportingTestHelpers.reset_v1beta1_client_configs!
   end
 
   describe "#initialize" do
@@ -105,6 +118,116 @@ describe Google::Cloud::ErrorReporting::Middleware, :mock_error_reporting do
       _(Google::Cloud::ErrorReporting.configure.credentials).must_equal credentials
       _(Google::Cloud::ErrorReporting.configure.service_name).must_equal service_name
       _(Google::Cloud::ErrorReporting.configure.service_version).must_equal service_version
+    end
+
+    it "configures endpoint and universe_domain from explicit kwargs" do
+      custom_universe = "myuniverse.com"
+      custom_endpoint = "custom.example.com"
+      creds = ErrorReportingTestHelpers.build_error_reporting_credentials(
+        project_id: project_id,
+        universe_domain: custom_universe
+      )
+
+      mw = Google::Cloud::ErrorReporting::Middleware.new(
+        rack_app,
+        project_id: project_id,
+        credentials: creds,
+        endpoint: custom_endpoint,
+        universe_domain: custom_universe
+      )
+
+      _(Google::Cloud::ErrorReporting.configure.endpoint).must_equal custom_endpoint
+      _(Google::Cloud::ErrorReporting.configure.universe_domain).must_equal custom_universe
+
+      project_client = mw.error_reporting.error_reporting
+      _(project_client.universe_domain).must_equal custom_universe
+      _(project_client.service.host).must_equal custom_endpoint
+      _(project_client.service.error_reporting.universe_domain).must_equal custom_universe
+      _(project_client.service.error_reporting.report_errors_service_stub.endpoint).must_equal custom_endpoint
+    ensure
+      mw&.error_reporting&.stop!
+    end
+
+    it "picks up endpoint and universe_domain from ErrorReporting.configure when kwargs are omitted" do
+      custom_universe = "myuniverse.com"
+      custom_endpoint = "custom.example.com"
+      creds = ErrorReportingTestHelpers.build_error_reporting_credentials(
+        project_id: project_id,
+        universe_domain: custom_universe
+      )
+
+      Google::Cloud::ErrorReporting.configure do |config|
+        config.endpoint = custom_endpoint
+        config.universe_domain = custom_universe
+      end
+
+      mw = Google::Cloud::ErrorReporting::Middleware.new(
+        rack_app,
+        project_id: project_id,
+        credentials: creds
+      )
+
+      project_client = mw.error_reporting.error_reporting
+      _(project_client.universe_domain).must_equal custom_universe
+      _(project_client.service.host).must_equal custom_endpoint
+      _(project_client.service.error_reporting.universe_domain).must_equal custom_universe
+      _(project_client.service.error_reporting.report_errors_service_stub.endpoint).must_equal custom_endpoint
+    ensure
+      mw&.error_reporting&.stop!
+    end
+
+    it "propagates ENV['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] when endpoint and universe_domain are unset" do
+      custom_universe = "myuniverse.com"
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = custom_universe
+      creds = ErrorReportingTestHelpers.build_error_reporting_credentials(
+        project_id: project_id,
+        universe_domain: custom_universe
+      )
+
+      mw = Google::Cloud::ErrorReporting::Middleware.new(
+        rack_app,
+        project_id: project_id,
+        credentials: creds
+      )
+
+      project_client = mw.error_reporting.error_reporting
+      _(project_client.universe_domain).must_equal custom_universe
+      _(project_client.service.host).must_be :nil?
+      _(project_client.service.error_reporting.universe_domain).must_equal custom_universe
+      _(project_client.service.error_reporting.report_errors_service_stub.endpoint).must_equal(
+        "clouderrorreporting.#{custom_universe}"
+      )
+    ensure
+      mw&.error_reporting&.stop!
+    end
+
+    it "raises Gapic::UniverseDomainMismatch and routes ErrorReporterError on mismatched credentials" do
+      mismatched_creds = ErrorReportingTestHelpers.build_error_reporting_credentials(
+        project_id: project_id,
+        universe_domain: "otheruniverse.com"
+      )
+
+      mw = Google::Cloud::ErrorReporting::Middleware.new(
+        rack_app,
+        project_id: project_id,
+        credentials: mismatched_creds,
+        universe_domain: "myuniverse.com"
+      )
+
+      expect do
+        mw.error_reporting.error_reporting.service.error_reporting
+      end.must_raise Gapic::UniverseDomainMismatch
+
+      captured_errors = []
+      mw.error_reporting.on_error { |error| captured_errors << error }
+      expect { mw.call rack_env }.must_raise StandardError
+      mw.error_reporting.stop! 10
+
+      _(captured_errors.size).must_equal 1
+      _(captured_errors.first).must_be_kind_of Google::Cloud::ErrorReporting::ErrorReporterError
+      _(captured_errors.first.message).must_include "universe"
+    ensure
+      mw&.error_reporting&.stop!
     end
   end
 
