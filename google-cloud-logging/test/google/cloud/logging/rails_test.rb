@@ -35,11 +35,21 @@ describe Google::Cloud::Logging::Railtie do
   end
 
   before do
+    @original_env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
+    ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    Google::Cloud::Logging::Middleware.logger = nil
     # Clear configuration values between each test
     Google::Cloud.configure.reset!
   end
 
   after do
+    Google::Cloud::Logging::Middleware.logger&.writer&.stop!
+    Google::Cloud::Logging::Middleware.logger = nil
+    if @original_env_universe.nil?
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    else
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = @original_env_universe
+    end
     # Clear configuration values between each test
     Google::Cloud.configure.reset!
   end
@@ -110,6 +120,110 @@ describe Google::Cloud::Logging::Railtie do
           _(Google::Cloud.configure.use_logging).must_equal true
         end
       end
+    end
+
+    it "merges endpoint and universe_domain with logging.universe_domain taking precedence" do
+      rails_config.google_cloud.logging.endpoint = "custom.example.com"
+      rails_config.google_cloud.universe_domain = "fallback.example.com"
+      rails_config.google_cloud.logging.universe_domain = "myuniverse.com"
+
+      $stdout.stub :puts, nil do
+        Google::Cloud::Logging::Railtie.consolidate_rails_config rails_config
+
+        Google::Cloud::Logging.configure do |config|
+          _(config.endpoint).must_equal "custom.example.com"
+          _(config.universe_domain).must_equal "myuniverse.com"
+        end
+      end
+    end
+
+    it "falls back to config.google_cloud.universe_domain when logging.universe_domain is unset" do
+      rails_config.google_cloud.universe_domain = "myuniverse.com"
+
+      $stdout.stub :puts, nil do
+        Google::Cloud::Logging::Railtie.consolidate_rails_config rails_config
+
+        _(Google::Cloud::Logging.configure.universe_domain).must_equal "myuniverse.com"
+      end
+    end
+
+    it "doesn't override Logging.configure endpoint or universe_domain" do
+      Google::Cloud::Logging.configure do |config|
+        config.endpoint = "configured.example.com"
+        config.universe_domain = "configured.myuniverse.com"
+      end
+
+      rails_config.google_cloud.logging.endpoint = "rails.example.com"
+      rails_config.google_cloud.universe_domain = "rails-gcp.myuniverse.com"
+      rails_config.google_cloud.logging.universe_domain = "rails-logging.myuniverse.com"
+
+      $stdout.stub :puts, nil do
+        Google::Cloud::Logging::Railtie.consolidate_rails_config rails_config
+
+        Google::Cloud::Logging.configure do |config|
+          _(config.endpoint).must_equal "configured.example.com"
+          _(config.universe_domain).must_equal "configured.myuniverse.com"
+        end
+      end
+    end
+  end
+
+  describe ".init_middleware" do
+    let(:fake_app) do
+      inserted = []
+      middleware_stack = Object.new
+      middleware_stack.define_singleton_method(:insert_before) do |*args, **kwargs|
+        inserted << [args, kwargs]
+      end
+      app = OpenStruct.new middleware: middleware_stack
+      app.define_singleton_method(:inserted) { inserted }
+      app
+    end
+
+    it "forwards endpoint and universe_domain from consolidated Rails config to Middleware.logger" do
+      custom_universe = "myuniverse.com"
+      custom_endpoint = "custom.example.com"
+      creds = LoggingTestHelpers.build_logging_credentials project_id: "test-project", universe_domain: custom_universe
+
+      rails_config.google_cloud.credentials = creds
+      rails_config.google_cloud.logging.endpoint = custom_endpoint
+      rails_config.google_cloud.logging.universe_domain = custom_universe
+      rails_config.google_cloud.use_logging = true
+
+      Google::Cloud::Logging::Railtie.consolidate_rails_config rails_config
+      _(Google::Cloud.configure.use_logging).must_equal true
+
+      Google::Cloud::Logging::Railtie.init_middleware fake_app
+
+      _(fake_app.inserted.size).must_equal 1
+      args, kwargs = fake_app.inserted.first
+      _(args).must_equal [Rails::Rack::Logger, Google::Cloud::Logging::Middleware]
+      _(kwargs[:logger]).must_equal Google::Cloud::Logging::Middleware.logger
+
+      project_client = Google::Cloud::Logging::Middleware.logger.writer.logging
+      _(project_client.universe_domain).must_equal custom_universe
+      _(project_client.service.host).must_equal custom_endpoint
+      _(project_client.service.logging.universe_domain).must_equal custom_universe
+      _(project_client.service.logging.logging_service_stub.endpoint).must_equal custom_endpoint
+    end
+
+    it "resolves Logging.configure.universe_domain set in an initializer after init_middleware" do
+      custom_universe = "myuniverse.com"
+      creds = LoggingTestHelpers.build_logging_credentials project_id: "test-project", universe_domain: custom_universe
+
+      rails_config.google_cloud.credentials = creds
+      rails_config.google_cloud.use_logging = true
+
+      Google::Cloud::Logging::Railtie.consolidate_rails_config rails_config
+      Google::Cloud::Logging::Railtie.init_middleware fake_app
+
+      Google::Cloud::Logging.configure.universe_domain = custom_universe
+
+      project_client = Google::Cloud::Logging::Middleware.logger.writer.logging
+      _(project_client.universe_domain).must_equal custom_universe
+      v2_client = project_client.service.logging
+      _(v2_client.universe_domain).must_equal custom_universe
+      _(v2_client.logging_service_stub.endpoint).must_equal "logging.#{custom_universe}"
     end
   end
 

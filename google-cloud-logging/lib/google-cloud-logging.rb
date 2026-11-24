@@ -165,7 +165,8 @@ Google::Cloud.configure.add_config! :logging do |config|
   config.add_field! :scope, default_scopes, match: [String, Array]
   config.add_field! :quota_project, nil, match: String
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :endpoint, "logging.googleapis.com", match: String
+  config.add_field! :endpoint, nil, match: String, allow_nil: true
+  config.add_field! :universe_domain, nil, match: String, allow_nil: true
   config.add_field! :log_name, nil, match: String
   config.add_field! :log_name_map, nil, match: Hash
   config.add_field! :labels, nil, match: Hash

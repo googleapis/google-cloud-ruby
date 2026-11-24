@@ -83,6 +83,9 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
+      # @param [String] universe_domain Override of the universe domain. Optional.
+      #   If the param is nil, uses the configured `universe_domain`,
+      #   `ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]`, or `"googleapis.com"`.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -104,13 +107,15 @@ module Google
                    scope: nil,
                    timeout: nil,
                    endpoint: nil,
+                   universe_domain: nil,
                    project: nil,
                    keyfile: nil
-        project_id    ||= project || default_project_id
-        scope         ||= configure.scope
-        timeout       ||= configure.timeout
-        endpoint      ||= configure.endpoint
-        credentials   ||= keyfile || default_credentials(scope: scope)
+        project_id      ||= project || default_project_id
+        scope           ||= configure.scope
+        timeout         ||= configure.timeout
+        endpoint        ||= configure.endpoint
+        universe_domain ||= configure.universe_domain
+        credentials     ||= keyfile || default_credentials(scope: scope)
 
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Logging::Credentials.new credentials, scope: scope
@@ -122,7 +127,9 @@ module Google
         project_id = project_id.to_s # Always cast to a string
         raise ArgumentError, "project_id is missing" if project_id.empty?
 
-        service = Logging::Service.new project_id, credentials, host: endpoint, timeout: timeout
+        service = Logging::Service.new project_id, credentials,
+                                       host: endpoint, timeout: timeout,
+                                       universe_domain: universe_domain
         Logging::Project.new service
       end
 
@@ -147,6 +154,9 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
+      # * `universe_domain` - (String) Override of the universe domain, or
+      #   `nil` to use `ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]` or the default
+      #   universe domain (`"googleapis.com"`).
       # * `log_name` - (String) Name of the application log file. Default:
       #   `"ruby_app_log"`
       # * `log_name_map` - (Hash) Map specific request routes to other log.

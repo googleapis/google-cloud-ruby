@@ -77,6 +77,15 @@ module Google
         alias project project_id
 
         ##
+        # The universe domain the client is connected to.
+        #
+        # @return [String]
+        #
+        def universe_domain
+          service.universe_domain
+        end
+
+        ##
         # Lists log entries. Use this method to retrieve log entries from Cloud
         # Logging.
         #
