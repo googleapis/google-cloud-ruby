@@ -15,6 +15,14 @@
 require "helper"
 
 describe Google::Cloud::Trace::Project, :mock_trace do
+  before do
+    Google::Cloud.configure.reset!
+  end
+
+  after do
+    Google::Cloud.configure.reset!
+  end
+
   MockPagedEnum = ::Struct.new :page
 
   let(:simple_trace_id) { "0123456789abcdef0123456789abcdef" }
@@ -112,6 +120,21 @@ describe Google::Cloud::Trace::Project, :mock_trace do
   it "knows the project identifier" do
     _(tracer).must_be_kind_of Google::Cloud::Trace::Project
     _(tracer.project).must_equal project
+  end
+
+  it "returns the default universe domain" do
+    ENV.stub :[], nil do
+      _(tracer.universe_domain).must_equal "googleapis.com"
+    end
+  end
+
+  it "returns a custom universe domain" do
+    ENV.stub :[], nil do
+      universe = "myuniverse.com"
+      service = Google::Cloud::Trace::Service.new project, credentials, universe_domain: universe
+      custom_tracer = Google::Cloud::Trace::Project.new service
+      _(custom_tracer.universe_domain).must_equal universe
+    end
   end
 
   it "gets a single trace" do
