@@ -33,13 +33,24 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials, timeout: nil, host: nil, quota_project: nil
+        def initialize project, credentials, timeout: nil, host: nil,
+                       quota_project: nil, universe_domain: nil
           @project = project
           @credentials = credentials
           @timeout = timeout
           @host = host
           @quota_project = quota_project
           @quota_project ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+          @universe_domain = universe_domain
+        end
+
+        def universe_domain
+          @error_reporting&.universe_domain ||
+            @universe_domain ||
+            V1beta1::ReportErrorsService::Client.configure.universe_domain ||
+            Google::Cloud.configure.error_reporting.universe_domain ||
+            ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] ||
+            "googleapis.com"
         end
 
         def error_reporting
@@ -50,6 +61,7 @@ module Google
               config.timeout = timeout if timeout
               config.endpoint = host if host
               config.quota_project = quota_project if quota_project
+              config.universe_domain = @universe_domain if @universe_domain
               config.lib_name = "gccl"
               config.lib_version = Google::Cloud::ErrorReporting::VERSION
             end

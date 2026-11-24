@@ -64,6 +64,9 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
+      # @param [String] universe_domain Override of the universe domain. Optional.
+      #   If the param is nil, uses the configured `universe_domain`,
+      #   `ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]`, or `"googleapis.com"`.
       # @param [String] project Alias for the `project_id` argument. Deprecated.
       # @param [String] keyfile Alias for the `credentials` argument.
       #   Deprecated.
@@ -81,14 +84,16 @@ module Google
                    scope: nil,
                    timeout: nil,
                    endpoint: nil,
+                   universe_domain: nil,
                    project: nil,
                    keyfile: nil
-        project_id    ||= project
-        project_id    ||= ErrorReporting::Project.default_project_id
-        scope         ||= configure.scope
-        timeout       ||= configure.timeout
-        endpoint      ||= configure.endpoint
-        credentials   ||= keyfile || default_credentials(scope: scope)
+        project_id      ||= project
+        project_id      ||= ErrorReporting::Project.default_project_id
+        scope           ||= configure.scope
+        timeout         ||= configure.timeout
+        endpoint        ||= configure.endpoint
+        universe_domain ||= configure.universe_domain
+        credentials     ||= keyfile || default_credentials(scope: scope)
 
         credentials = resolve_credentials credentials, scope
         project_id = resolve_project_id project_id, credentials
@@ -96,7 +101,8 @@ module Google
         quota_project = configure.quota_project
         service = ErrorReporting::Service.new project_id, credentials,
                                               host: endpoint, timeout: timeout,
-                                              quota_project: quota_project
+                                              quota_project: quota_project,
+                                              universe_domain: universe_domain
         ErrorReporting::Project.new service
       end
 
@@ -123,6 +129,9 @@ module Google
       # * `timeout` - (Integer) Default timeout to use in requests.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
+      # * `universe_domain` - (String) Override of the universe domain, or
+      #   `nil` to use `ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]` or the default
+      #   universe domain (`"googleapis.com"`).
       # * `service_name` - (String) Name for the application.
       # * `service_version` - (String) Version identifier for the application.
       # * `ignore_classes` - (Array<Exception>) Array of exception types that
