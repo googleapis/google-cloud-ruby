@@ -41,7 +41,9 @@ module Google
         end
 
         def universe_domain
-          @universe_domain ||
+          @logging&.universe_domain ||
+            @universe_domain ||
+            V2::LoggingService::Client.configure.universe_domain ||
             Google::Cloud.configure.logging.universe_domain ||
             ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] ||
             "googleapis.com"
