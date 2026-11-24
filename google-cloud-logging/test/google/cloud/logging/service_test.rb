@@ -188,6 +188,35 @@ describe Google::Cloud::Logging::Service do
     _(service.metrics.universe_domain).must_equal default_universe
   end
 
+  it "reads V2::LoggingService::Client.configure.universe_domain without leaking to sinks or metrics" do
+    Google::Cloud::Logging::V2::LoggingService::Client.configure.universe_domain = custom_universe
+    service = Google::Cloud::Logging::Service.new project, credentials
+    project_client = Google::Cloud::Logging::Project.new service
+
+    _(service.universe_domain).must_equal custom_universe
+    _(project_client.universe_domain).must_equal custom_universe
+
+    _(service.logging.universe_domain).must_equal custom_universe
+    _(service.universe_domain).must_equal custom_universe
+    _(project_client.universe_domain).must_equal custom_universe
+    _(service.sinks.universe_domain).must_equal default_universe
+    _(service.metrics.universe_domain).must_equal default_universe
+  end
+
+  it "keeps universe_domain consistent with memoized logging client when config or ENV changes" do
+    service = Google::Cloud::Logging::Service.new project, credentials
+    project_client = Google::Cloud::Logging::Project.new service
+    v2_client = service.logging
+    _(v2_client.universe_domain).must_equal default_universe
+
+    Google::Cloud::Logging.configure.universe_domain = custom_universe
+    Google::Cloud::Logging::V2::LoggingService::Client.configure.universe_domain = other_universe
+    ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = "env.example.com"
+
+    _(service.universe_domain).must_equal v2_client.universe_domain
+    _(project_client.universe_domain).must_equal v2_client.universe_domain
+  end
+
   # Guards against Google::Cloud::Logging.configure.endpoint polluting V2 @parent_config.
   it "resolves direct V2 clients endpoints under ENV['GOOGLE_CLOUD_UNIVERSE_DOMAIN']" do
     ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = custom_universe
