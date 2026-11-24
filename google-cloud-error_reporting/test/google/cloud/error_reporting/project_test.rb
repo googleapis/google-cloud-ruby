@@ -18,11 +18,22 @@ require "helper"
 
 describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
   before do
+    @original_env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
+    ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
     Google::Cloud.configure.reset!
+    Google::Cloud::ErrorReporting.configure.reset!
+    ErrorReportingTestHelpers.reset_v1beta1_client_configs!
   end
 
   after do
+    if @original_env_universe.nil?
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    else
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = @original_env_universe
+    end
     Google::Cloud.configure.reset!
+    Google::Cloud::ErrorReporting.configure.reset!
+    ErrorReportingTestHelpers.reset_v1beta1_client_configs!
   end
 
   it "knows the project identifier" do

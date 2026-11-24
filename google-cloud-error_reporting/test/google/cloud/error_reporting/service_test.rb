@@ -406,7 +406,7 @@ describe Google::Cloud::ErrorReporting::Service do # rubocop:disable Metrics/Blo
 
         wrapped_base = Google::Auth::GCECredentials.new
         wrapped_base.disable_universe_domain_check = false
-        wrapped_creds = Google::Cloud::ErrorReporting::Credentials.new wrapped_base
+        wrapped_creds = Google::Cloud::ErrorReporting::Credentials.new wrapped_base, project_id: project
         error_reporting = Google::Cloud::ErrorReporting.new project_id: project,
                                                             credentials: wrapped_creds,
                                                             universe_domain: custom_universe
@@ -431,7 +431,7 @@ describe Google::Cloud::ErrorReporting::Service do # rubocop:disable Metrics/Blo
 
         wrapped_base = Google::Auth::GCECredentials.new
         wrapped_base.disable_universe_domain_check = false
-        wrapped_creds = Google::Cloud::ErrorReporting::Credentials.new wrapped_base
+        wrapped_creds = Google::Cloud::ErrorReporting::Credentials.new wrapped_base, project_id: project
         error_reporting = Google::Cloud::ErrorReporting.new project_id: project,
                                                             credentials: wrapped_creds,
                                                             universe_domain: other_universe
@@ -449,11 +449,54 @@ describe Google::Cloud::ErrorReporting::Service do # rubocop:disable Metrics/Blo
 
       wrapped_base = Google::Auth::GCECredentials.new
       wrapped_base.disable_universe_domain_check = true
-      wrapped_creds = Google::Cloud::ErrorReporting::Credentials.new wrapped_base
+      wrapped_creds = Google::Cloud::ErrorReporting::Credentials.new wrapped_base, project_id: project
       error_reporting = Google::Cloud::ErrorReporting.new project_id: project,
                                                           credentials: wrapped_creds,
                                                           universe_domain: custom_universe
       _(error_reporting.service.error_reporting.universe_domain).must_equal custom_universe
+    end
+
+    it "safely falls back when Google::Cloud lacks configure or error_reporting subconfig" do
+      service = Google::Cloud::ErrorReporting::Service.new project, insecure_credentials
+
+      empty_config = Google::Cloud::Config.new
+      Google::Cloud.stub :configure, empty_config do
+        _(service.universe_domain).must_equal default_universe
+        ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = custom_universe
+        _(service.universe_domain).must_equal custom_universe
+      end
+
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+      orig_respond_to = Google::Cloud.method :respond_to?
+      Google::Cloud.stub :respond_to?, ->(name, *args) { name == :configure ? false : orig_respond_to.call(name, *args) } do
+        _(service.universe_domain).must_equal default_universe
+      end
+    end
+
+    it "honors ErrorReporting.configure.universe_domain even when V1beta1 Client.configure @parent_config is nil" do
+      client_config = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client.configure
+      orig_parent = client_config.instance_variable_get :@parent_config
+      begin
+        client_config.instance_variable_set :@parent_config, nil
+        Google::Cloud::ErrorReporting.configure.universe_domain = custom_universe
+
+        service = Google::Cloud::ErrorReporting::Service.new project, insecure_credentials
+        _(service.universe_domain).must_equal custom_universe
+        _(service.error_reporting.universe_domain).must_equal custom_universe
+        _(service.error_reporting.report_errors_service_stub.endpoint).must_equal(
+          "clouderrorreporting.#{custom_universe}"
+        )
+
+        client_config.universe_domain = other_universe
+        override_service = Google::Cloud::ErrorReporting::Service.new project, insecure_credentials
+        _(override_service.universe_domain).must_equal other_universe
+        _(override_service.error_reporting.universe_domain).must_equal other_universe
+        _(override_service.error_reporting.report_errors_service_stub.endpoint).must_equal(
+          "clouderrorreporting.#{other_universe}"
+        )
+      ensure
+        client_config.instance_variable_set :@parent_config, orig_parent
+      end
     end
   end
 end
