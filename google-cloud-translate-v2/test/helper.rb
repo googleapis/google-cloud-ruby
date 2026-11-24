@@ -31,7 +31,67 @@ require "minitest/rg"
 require "ostruct"
 require "json"
 require "base64"
+require "openssl"
+require "jwt"
+require "stringio"
 require "google/cloud/translate/v2"
+
+module TranslateTestFixtures
+  TEST_RSA_KEY = OpenSSL::PKey::RSA.new 2048
+
+  module_function
+
+  def service_account_hash project_id: "test-project", universe_domain: nil, quota_project_id: nil
+    hash = {
+      "type" => "service_account",
+      "project_id" => project_id,
+      "private_key_id" => "key-id-1",
+      "private_key" => TEST_RSA_KEY.to_pem,
+      "client_email" => "translate-sa@#{project_id}.iam.gserviceaccount.com",
+      "client_id" => "1234567890"
+    }
+    hash["universe_domain"] = universe_domain unless universe_domain.nil?
+    hash["quota_project_id"] = quota_project_id unless quota_project_id.nil?
+    hash
+  end
+
+  def build_service_account_creds scope: nil,
+                                  enable_self_signed_jwt: nil,
+                                  universe_domain: nil,
+                                  project_id: "test-project"
+    sa_hash = service_account_hash project_id: project_id, universe_domain: universe_domain
+    opts = { json_key_io: StringIO.new(sa_hash.to_json) }
+    opts[:scope] = scope unless scope.nil?
+    opts[:enable_self_signed_jwt] = enable_self_signed_jwt unless enable_self_signed_jwt.nil?
+    Google::Auth::ServiceAccountCredentials.make_creds opts
+  end
+
+  def build_v2_credentials universe_domain: nil,
+                           enable_self_signed_jwt: true,
+                           scope: nil,
+                           project_id: "test-project",
+                           quota_project_id: nil
+    sa_hash = service_account_hash(
+      project_id: project_id,
+      universe_domain: universe_domain,
+      quota_project_id: quota_project_id
+    )
+    Google::Cloud::Translate::V2::Credentials.new(
+      sa_hash,
+      scope: scope,
+      enable_self_signed_jwt: enable_self_signed_jwt
+    )
+  end
+
+  def build_faraday_test_connection url
+    stubs = Faraday::Adapter::Test::Stubs.new
+    yield stubs if block_given?
+    conn = Faraday.new url: url do |builder|
+      builder.adapter :test, stubs
+    end
+    [conn, stubs]
+  end
+end
 
 class MockTranslate < Minitest::Spec
   let(:project) { "test" }

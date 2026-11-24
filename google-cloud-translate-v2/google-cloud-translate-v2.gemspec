@@ -22,6 +22,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "faraday", ">= 1.0", "< 3.a"
   gem.add_dependency "googleapis-common-protos", ">= 1.3.10", "< 2.a"
   gem.add_dependency "googleapis-common-protos-types", ">= 1.0.5", "< 2.a"
-  gem.add_dependency "googleauth", ">= 0.16.2", "< 2.a"
+  gem.add_dependency "googleauth", "~> 1.9"
   gem.add_dependency "google-cloud-core", "~> 1.6"
 end

@@ -47,6 +47,8 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional. If the param is nil, uses the default
       #   endpoint.
+      # @param [String] universe_domain Override of the universe domain. Optional. If the param is nil, uses the
+      #   configured `universe_domain`, `ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]`, or `"googleapis.com"`.
       #
       # @return [Google::Cloud::Translate::V2::Api]
       #
@@ -93,15 +95,26 @@ module Google
                                       scope: nil,
                                       retries: nil,
                                       timeout: nil,
-                                      endpoint: nil
+                                      endpoint: nil,
+                                      universe_domain: nil
         require "google/cloud/translate/v2"
-        Google::Cloud::Translate::V2.new project_id:  project_id,
-                                         credentials: credentials,
-                                         key:         key,
-                                         scope:       scope,
-                                         retries:     retries,
-                                         timeout:     timeout,
-                                         endpoint:    endpoint
+        args = {
+          project_id:  project_id,
+          credentials: credentials,
+          key:         key,
+          scope:       scope,
+          retries:     retries,
+          timeout:     timeout,
+          endpoint:    endpoint
+        }
+        resolved_universe = universe_domain
+        resolved_universe = configure.universe_domain if resolved_universe.nil?
+        if resolved_universe.nil?
+          env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]&.strip
+          resolved_universe = env_universe unless env_universe.nil? || env_universe.empty?
+        end
+        args[:universe_domain] = resolved_universe unless resolved_universe.nil?
+        Google::Cloud::Translate::V2.new(**args)
       end
 
       # Additional config keys used by V2

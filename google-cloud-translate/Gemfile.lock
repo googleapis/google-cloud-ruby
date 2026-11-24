@@ -1,18 +1,18 @@
 PATH
   remote: ../google-cloud-translate-v2
   specs:
-    google-cloud-translate-v2 (1.2.0)
+    google-cloud-translate-v2 (1.2.1)
       faraday (>= 1.0, < 3.a)
       google-cloud-core (~> 1.6)
       googleapis-common-protos (>= 1.3.10, < 2.a)
       googleapis-common-protos-types (>= 1.0.5, < 2.a)
-      googleauth (>= 0.16.2, < 2.a)
+      googleauth (~> 1.9)
 
 PATH
   remote: ../google-cloud-translate-v3
   specs:
-    google-cloud-translate-v3 (1.10.0)
-      gapic-common (~> 1.3)
+    google-cloud-translate-v3 (1.12.0)
+      gapic-common (~> 1.6)
       google-cloud-errors (~> 1.0)
       google-cloud-location (~> 1.0)
       google-iam-v1 (~> 1.3)
@@ -20,7 +20,7 @@ PATH
 PATH
   remote: .
   specs:
-    google-cloud-translate (3.9.0)
+    google-cloud-translate (3.10.0)
       google-cloud-core (~> 1.6)
       google-cloud-translate-v2 (>= 0.0, < 2.a)
       google-cloud-translate-v3 (>= 0.11, < 2.a)
@@ -45,7 +45,7 @@ GEM
       net-http (~> 0.5)
     faraday-retry (2.4.0)
       faraday (~> 2.0)
-    gapic-common (1.3.0)
+    gapic-common (1.6.1)
       faraday (>= 1.9, < 3.a)
       faraday-retry (>= 1.0, < 3.a)
       google-cloud-env (~> 2.2)
@@ -54,7 +54,7 @@ GEM
       googleapis-common-protos (~> 1.6)
       googleapis-common-protos-types (~> 1.15)
       googleauth (~> 1.12)
-      grpc (~> 1.66)
+      grpc (>= 1.84.1, < 2.a)
     google-cloud-core (1.9.0)
       google-cloud-env (>= 1.0, < 3.a)
       google-cloud-errors (~> 1.0)
@@ -88,9 +88,6 @@ GEM
     google-protobuf (4.35.1-x86-linux-musl)
       bigdecimal
       rake (~> 13.3)
-    google-protobuf (4.35.1-x86_64-darwin)
-      bigdecimal
-      rake (~> 13.3)
     google-protobuf (4.35.1-x86_64-linux-gnu)
       bigdecimal
       rake (~> 13.3)
@@ -113,31 +110,7 @@ GEM
       os (>= 0.9, < 2.0)
       pstore (~> 0.1)
       signet (>= 0.16, < 2.a)
-    grpc (1.83.0)
-      google-protobuf (>= 3.25, < 5.0)
-      googleapis-common-protos-types (~> 1.0)
-    grpc (1.83.0-aarch64-linux-gnu)
-      google-protobuf (>= 3.25, < 5.0)
-      googleapis-common-protos-types (~> 1.0)
-    grpc (1.83.0-aarch64-linux-musl)
-      google-protobuf (>= 3.25, < 5.0)
-      googleapis-common-protos-types (~> 1.0)
-    grpc (1.83.0-arm64-darwin)
-      google-protobuf (>= 3.25, < 5.0)
-      googleapis-common-protos-types (~> 1.0)
-    grpc (1.83.0-x86-linux-gnu)
-      google-protobuf (>= 3.25, < 5.0)
-      googleapis-common-protos-types (~> 1.0)
-    grpc (1.83.0-x86-linux-musl)
-      google-protobuf (>= 3.25, < 5.0)
-      googleapis-common-protos-types (~> 1.0)
-    grpc (1.83.0-x86_64-darwin)
-      google-protobuf (>= 3.25, < 5.0)
-      googleapis-common-protos-types (~> 1.0)
-    grpc (1.83.0-x86_64-linux-gnu)
-      google-protobuf (>= 3.25, < 5.0)
-      googleapis-common-protos-types (~> 1.0)
-    grpc (1.83.0-x86_64-linux-musl)
+    grpc (1.85.0-x86_64-linux-gnu)
       google-protobuf (>= 3.25, < 5.0)
       googleapis-common-protos-types (~> 1.0)
     grpc-google-iam-v1 (1.12.0)
@@ -162,10 +135,10 @@ GEM
     minitest-focus (1.4.1)
       minitest (> 5.0)
     minitest-mock (5.27.0)
-    minitest-reporters (1.5.0)
+    minitest-reporters (1.8.0)
       ansi
       builder
-      minitest (>= 5.0)
+      minitest (>= 5.0, < 7)
       ruby-progressbar
     minitest-rg (5.4.0)
       minitest (>= 5.0, < 7)
@@ -232,7 +205,7 @@ PLATFORMS
   ruby
   x86-linux-gnu
   x86-linux-musl
-  x86_64-darwin
+  x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
@@ -245,7 +218,7 @@ DEPENDENCIES
   minitest (~> 6.0.2)
   minitest-focus (~> 1.4)
   minitest-mock (~> 5.27)
-  minitest-reporters (~> 1.5.0)
+  minitest-reporters (~> 1.8.0)
   minitest-rg (~> 5.3)
   ostruct (~> 0.5.5)
   rake (>= 13.0)
@@ -265,14 +238,14 @@ CHECKSUMS
   faraday (2.14.3) sha256=1882247e6766615c8220b4392bf1d27f6ebb63d8e28267587cef1fb0bf37f278
   faraday-net_http (3.4.4) sha256=0e78af151747ed1b00f33e25973b4bc220d7f16c00c39676817c8b12331eb588
   faraday-retry (2.4.0) sha256=7b79c48fb7e56526faf247b12d94a680071ff40c9fda7cf1ec1549439ad11ebe
-  gapic-common (1.3.0) sha256=4e5d9be1effb7366e2cda13c0f44922285d5613ac8de8b9b18c2c835fe4faa91
+  gapic-common (1.6.1)
   google-cloud-core (1.9.0) sha256=ab55409f51488e8deefb6edcc1ce4771dfb5da2fe7b3bc075709a030c2b682a4
   google-cloud-env (2.4.0) sha256=01cb35ecee5d1c4d1cd4deaed8bb5bddc838e296bcc2a35c5d1ddd07ce40d28d
   google-cloud-errors (1.7.0) sha256=6e682f42d89aae08689f36f28495de629d756da076bafff0003bac7f8042ebb3
   google-cloud-location (1.5.0) sha256=336f94609b1fb18fce1929048fac964f4d5a87d27c1e5444bfed3605469c7532
-  google-cloud-translate (3.9.0)
-  google-cloud-translate-v2 (1.2.0)
-  google-cloud-translate-v3 (1.10.0)
+  google-cloud-translate (3.10.0)
+  google-cloud-translate-v2 (1.2.1)
+  google-cloud-translate-v3 (1.12.0)
   google-iam-v1 (1.7.0) sha256=9e3ea9dcc59cbd5f8d2f62b00da41ec57a2e427b33c0e798207fa06c8fbb8b87
   google-logging-utils (0.2.0) sha256=675462b4ea5affa825a3442694ca2d75d0069455a1d0956127207498fca3df7b
   google-protobuf (4.35.1) sha256=a3a6471331d918f58dfa4d014a8f6286f0af2cf4840216bde52fcf2ea3fe3726
@@ -281,22 +254,13 @@ CHECKSUMS
   google-protobuf (4.35.1-arm64-darwin) sha256=d9c957df04fa89c749fa9a72a7b383eb4296efc9b2303dc6fd6fbe39c698ad6b
   google-protobuf (4.35.1-x86-linux-gnu) sha256=cc7492566b27ad8b5dfa3a7b6f9b11e905050cc53c2fa8ff22de375a9e7a70fb
   google-protobuf (4.35.1-x86-linux-musl) sha256=ab403790b59e4dc588ffbed1eaacf05d4ca2f0d12ac9c13d6c64e69380d8c99e
-  google-protobuf (4.35.1-x86_64-darwin) sha256=66b62b4df00931018a692806df66393efa960d6d2b7da69735187249f950d3ee
   google-protobuf (4.35.1-x86_64-linux-gnu) sha256=c786439087512a3fbd199e9897d265b855f951d4027e218ea55e858d45969edd
   google-protobuf (4.35.1-x86_64-linux-musl) sha256=91890eb0002934a339fdb7d77a147c46b7474b6799db27872b747b905837f744
   google-style (1.32.0) sha256=3b13068979e5b8caa067ecce9bf818b6cf0e5eb706ead41c5b905f237d9bfb01
   googleapis-common-protos (1.9.0) sha256=207be372d8d25e3876e1e1155d057e14f3c92f8f5428772864a8ce04a0b756e4
   googleapis-common-protos-types (1.23.0) sha256=992e740a523794d9fc5f29a504465d8fc737aaa16c930fe7228e3346860faf0a
   googleauth (1.17.3) sha256=9a655455885c0c17a8b70537acd2a992a7c7842c43c06c6612dfb0d93e755d58
-  grpc (1.83.0) sha256=38119e7f9f7cbc98e79145201da4be470a7542b0befad454651d35015ea55c59
-  grpc (1.83.0-aarch64-linux-gnu) sha256=11562efdded494b2277fd9c3c530dfdf90177faa111526ae9e748d0be29f1a9d
-  grpc (1.83.0-aarch64-linux-musl) sha256=ee745eab4f3922ed27d379cbc4bc0a99e58db367fa96312e9fe258aafd3afeb2
-  grpc (1.83.0-arm64-darwin) sha256=25dd772aa80529f014d70da069787cd39b469c9edacbe493da4ff19952a147e2
-  grpc (1.83.0-x86-linux-gnu) sha256=e9b20f54b8e8915f3921f12b266742e79da2c31d60e88295e15d0d16ea3cfd55
-  grpc (1.83.0-x86-linux-musl) sha256=868e66d9c2a77eca1a93292fd879565219821fb5888673aedd08154303c9520c
-  grpc (1.83.0-x86_64-darwin) sha256=cfad91d559d1907159a5247fb12dc112a8ea0ebe2027ca7f5ab648d01a645716
-  grpc (1.83.0-x86_64-linux-gnu) sha256=25d66bfa3cb1b05258b3f9632478c7e7ceb52cb16ccc0b4b26d7df36be7158b1
-  grpc (1.83.0-x86_64-linux-musl) sha256=a5023264dbb8038c23b147bbf80adb06932ef11b5ab493412e9e37a43114fa8c
+  grpc (1.85.0-x86_64-linux-gnu)
   grpc-google-iam-v1 (1.12.0) sha256=a70ecad8987e340d5e22e7bf01be31256c84b29a3f78bebd385a4a110e1f2aef
   io-console (0.8.2) sha256=d6e3ae7a7cc7574f4b8893b4fca2162e57a825b223a177b7afa236c5ef9814cc
   irb (1.18.0) sha256=de9454a0703a54704b9811a5ef31a60c86949fbf4013fcf244fabc7c775248e3
@@ -308,7 +272,7 @@ CHECKSUMS
   minitest (6.0.6) sha256=153ea36d1d987a62942382b61075745042a2b3123b1cd48f4c3675af9cc7d6f1
   minitest-focus (1.4.1) sha256=394517cbe2dcb2d992d8ffc41a3b2b6315777a4daa69239de4fefe7110dd810e
   minitest-mock (5.27.0) sha256=7040ed7185417a966920987eaa6eaf1be4ea1fc5b25bb03ff4703f98564a55b0
-  minitest-reporters (1.5.0) sha256=a693acddc67987cde96d33ad6766b8d3e8522bb4c8a20628352950c30d42f0a3
+  minitest-reporters (1.8.0)
   minitest-rg (5.4.0) sha256=54d42bb8ce876381245be5866f3c1dd704ef79c06ba5c9ff280c0aa28c56effb
   net-http (0.9.1) sha256=25ba0b67c63e89df626ed8fac771d0ad24ad151a858af2cc8e6a716ca4336996
   os (1.1.4) sha256=57816d6a334e7bd6aed048f4b0308226c5fb027433b67d90a9ab435f35108d3f
