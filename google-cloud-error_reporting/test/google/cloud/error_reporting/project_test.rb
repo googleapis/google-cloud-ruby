@@ -17,9 +17,32 @@ require "minitest/focus"
 require "helper"
 
 describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
+  before do
+    Google::Cloud.configure.reset!
+  end
+
+  after do
+    Google::Cloud.configure.reset!
+  end
+
   it "knows the project identifier" do
     _(error_reporting).must_be_kind_of Google::Cloud::ErrorReporting::Project
     _(error_reporting.project).must_equal project
+  end
+
+  it "returns the default universe domain" do
+    ENV.stub :[], nil do
+      _(error_reporting.universe_domain).must_equal "googleapis.com"
+    end
+  end
+
+  it "returns a custom universe domain" do
+    ENV.stub :[], nil do
+      universe = "myuniverse.com"
+      service = Google::Cloud::ErrorReporting::Service.new project, credentials, universe_domain: universe
+      custom_error_reporting = Google::Cloud::ErrorReporting::Project.new service
+      _(custom_error_reporting.universe_domain).must_equal universe
+    end
   end
 
   describe "#error_event" do
