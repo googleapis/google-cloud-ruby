@@ -47,6 +47,8 @@ module Google
       # @param [Integer] timeout Default timeout to use in requests. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional. If the param is nil, uses the default
       #   endpoint.
+      # @param [String] universe_domain Override of the universe domain. Optional. If the param is nil, uses the
+      #   configured `universe_domain`, `ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]`, or `"googleapis.com"`.
       #
       # @return [Google::Cloud::Translate::V2::Api]
       #
@@ -93,15 +95,30 @@ module Google
                                       scope: nil,
                                       retries: nil,
                                       timeout: nil,
-                                      endpoint: nil
+                                      endpoint: nil,
+                                      universe_domain: nil
         require "google/cloud/translate/v2"
-        Google::Cloud::Translate::V2.new project_id:  project_id,
-                                         credentials: credentials,
-                                         key:         key,
-                                         scope:       scope,
-                                         retries:     retries,
-                                         timeout:     timeout,
-                                         endpoint:    endpoint
+        options = {
+          project_id:  project_id,
+          credentials: credentials,
+          key:         key,
+          scope:       scope,
+          retries:     retries,
+          timeout:     timeout,
+          endpoint:    endpoint
+        }
+        # `Translate::V2.new` shares `Google::Cloud.configure.translate` (via
+        # `V2.translation_config`) and `ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]`.
+        # Resolve `universe_domain` here as well so we can omit the keyword when
+        # unset (keeping GDU callers compatible with `google-cloud-translate-v2 <= 1.2.1`)
+        # while forwarding configured universes so older V2 gems fail closed
+        # with `ArgumentError` instead of silently routing to `googleapis.com`.
+        env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]&.strip
+        universe_domain ||= configure.universe_domain
+        universe_domain ||= env_universe unless env_universe.nil? || env_universe.empty?
+        options[:universe_domain] = universe_domain unless universe_domain.nil?
+
+        Google::Cloud::Translate::V2.new(**options)
       end
 
       # Additional config keys used by V2

@@ -65,6 +65,8 @@ module Google
         #   endpoint.
         # @param [Boolean] enable_self_signed_jwt Whether to enable self-signed JWT. Optional. If the param is nil,
         #   it is computed based on the endpoint.
+        # @param [String] universe_domain Override of the universe domain. Optional. If the param is nil, uses the
+        #   configured `universe_domain`, `ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]`, or `"googleapis.com"`.
         #
         # @return [Google::Cloud::Translate::V2::Api]
         #
@@ -100,19 +102,34 @@ module Google
         #   translation = translate.translate "Hello world!", to: "la"
         #   translation.text #=> "Salve mundi!"
         #
-        def self.new project_id: nil, credentials: nil, key: nil, scope: nil, retries: nil, timeout: nil, endpoint: nil, enable_self_signed_jwt: nil
+        def self.new project_id: nil,
+                     credentials: nil,
+                     key: nil,
+                     scope: nil,
+                     retries: nil,
+                     timeout: nil,
+                     endpoint: nil,
+                     enable_self_signed_jwt: nil,
+                     universe_domain: nil
           project_id ||= default_project_id
 
+          # Reuse the shared `Google::Cloud.configure.translate` subconfig when
+          # `google-cloud-translate` is loaded; otherwise `translation_config` is nil.
           configuration = translation_config
           key ||= configuration&.key || ENV["TRANSLATE_KEY"] || ENV["GOOGLE_CLOUD_KEY"]
           retries ||= configuration&.retries
           timeout ||= configuration&.timeout
           endpoint ||= configuration&.endpoint
+          universe_domain ||= configuration&.universe_domain
 
           if key
+            # API-key requests bypass OAuth/JWT credentials (and credential
+            # universe matching), so forward `universe_domain` here as well to
+            # route key-authenticated calls to `translate.<universe_domain>`.
             return Google::Cloud::Translate::V2::Api.new(
               Google::Cloud::Translate::V2::Service.new(
-                project_id.to_s, nil, retries: retries, timeout: timeout, key: key, host: endpoint
+                project_id.to_s, nil,
+                retries: retries, timeout: timeout, key: key, host: endpoint, universe_domain: universe_domain
               )
             )
           end
@@ -120,16 +137,19 @@ module Google
           scope ||= configuration&.scope
 
           if enable_self_signed_jwt.nil?
-            # Use self-signed JWT if the endpoint is unchanged from default (nil or default host).
-            # This logic is adapted from gapic-generator-ruby templates,
-            # simplified here since the default host is known to be global.
-            enable_self_signed_jwt = endpoint.nil? || endpoint == Service::API_HOST
+            # Enable self-signed JWTs when using the default endpoint for the
+            # effective universe (`translate.<universe_domain>`), rather than
+            # comparing against a hardcoded `translate.googleapis.com` host.
+            effective_universe = resolve_universe_domain universe_domain
+            enable_self_signed_jwt = endpoint.nil? || endpoint == "translate.#{effective_universe}"
           end
 
           credentials ||= default_credentials scope: scope, enable_self_signed_jwt: enable_self_signed_jwt
 
           unless credentials.is_a? Google::Auth::Credentials
-            credentials = Google::Cloud::Translate::V2::Credentials.new credentials, { scope: scope, enable_self_signed_jwt: enable_self_signed_jwt }
+            credentials = Google::Cloud::Translate::V2::Credentials.new(
+              credentials, { scope: scope, enable_self_signed_jwt: enable_self_signed_jwt }
+            )
           end
 
           project_id = resolve_project_id project_id, credentials
@@ -137,9 +157,26 @@ module Google
 
           Google::Cloud::Translate::V2::Api.new(
             Google::Cloud::Translate::V2::Service.new(
-              project_id, credentials, retries: retries, timeout: timeout, host: endpoint
+              project_id, credentials,
+              retries: retries, timeout: timeout, host: endpoint, universe_domain: universe_domain
             )
           )
+        end
+
+        ##
+        # @private Resolves the effective universe domain using standard Google
+        # Cloud client precedence: explicit argument -> `Translate.configure.universe_domain`
+        # -> non-blank `ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]` -> `"googleapis.com"`.
+        def self.resolve_universe_domain universe_domain = nil
+          universe_domain = translation_config&.universe_domain if universe_domain.nil?
+          if !universe_domain.nil? && universe_domain.to_s.strip.empty?
+            raise ArgumentError, "universe_domain cannot be empty"
+          end
+
+          env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]&.strip
+          env_universe = nil if env_universe == ""
+
+          universe_domain || env_universe || Service::DEFAULT_UNIVERSE_DOMAIN
         end
 
         ##
@@ -159,7 +196,9 @@ module Google
               "TRANSLATE_CREDENTIALS", "TRANSLATE_CREDENTIALS_JSON", "TRANSLATE_KEYFILE", "TRANSLATE_KEYFILE_JSON"
             ) ||
             Google::Cloud.configure.credentials ||
-            Google::Cloud::Translate::V2::Credentials.default({ scope: scope, enable_self_signed_jwt: enable_self_signed_jwt })
+            Google::Cloud::Translate::V2::Credentials.default(
+              { scope: scope, enable_self_signed_jwt: enable_self_signed_jwt }
+            )
         end
 
         ##

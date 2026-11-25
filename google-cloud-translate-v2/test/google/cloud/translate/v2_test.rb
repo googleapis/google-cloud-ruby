@@ -16,6 +16,21 @@ require "helper"
 require "google/cloud/translate/v2"
 
 describe Google::Cloud::Translate::V2 do
+  before do
+    @original_env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
+    ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    Google::Cloud.configure.reset!
+  end
+
+  after do
+    if @original_env_universe.nil?
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    else
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = @original_env_universe
+    end
+    Google::Cloud.configure.reset!
+  end
+
   describe ".new" do
     let(:default_credentials) do
       creds = OpenStruct.new empty: true
@@ -30,12 +45,14 @@ describe Google::Cloud::Translate::V2 do
       stubbed_env = ->(name) {
         "found-api-key" if name == "GOOGLE_CLOUD_KEY"
       }
-      stubbed_service = ->(project_id, credentials, retries: nil, timeout: nil, host: nil, key: nil) {
+      stubbed_service = ->(project_id, credentials, retries: nil, timeout: nil, host: nil, key: nil, universe_domain: nil) {
         _(key).must_equal "found-api-key"
         _(project_id).must_be :empty?
         _(credentials).must_be :nil?
         _(retries).must_be :nil?
         _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new key: key
       }
 
@@ -54,12 +71,14 @@ describe Google::Cloud::Translate::V2 do
     end
 
     it "uses provided api key" do
-      stubbed_service = ->(project_id, credentials, retries: nil, timeout: nil, host: nil, key: nil) {
+      stubbed_service = ->(project_id, credentials, retries: nil, timeout: nil, host: nil, key: nil, universe_domain: nil) {
         _(key).must_equal "my-api-key"
         _(project_id).must_be :empty?
         _(credentials).must_be :nil?
         _(retries).must_be :nil?
         _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new key: key
       }
 
@@ -77,6 +96,25 @@ describe Google::Cloud::Translate::V2 do
       end
     end
 
+    it "passes universe_domain when using api key" do
+      stubbed_service = ->(project_id, credentials, retries: nil, timeout: nil, host: nil, key: nil, universe_domain: nil) {
+        _(key).must_equal "my-api-key"
+        _(project_id).must_be :empty?
+        _(credentials).must_be :nil?
+        _(universe_domain).must_equal "myuniverse.com"
+        OpenStruct.new key: key, universe_domain: universe_domain
+      }
+
+      Google::Cloud::Translate::V2.stub :default_project_id, nil do
+        ENV.stub :[], nil do
+          Google::Cloud::Translate::V2::Service.stub :new, stubbed_service do
+            translate = Google::Cloud::Translate::V2.new key: "my-api-key", universe_domain: "myuniverse.com"
+            _(translate.universe_domain).must_equal "myuniverse.com"
+          end
+        end
+      end
+    end
+
     it "gets defaults for project_id and credentials" do
       # Clear all environment variables
       ENV.stub :[], nil do
@@ -86,6 +124,7 @@ describe Google::Cloud::Translate::V2 do
             translate = Google::Cloud::Translate::V2.new
             _(translate).must_be_kind_of Google::Cloud::Translate::V2::Api
             _(translate.project_id).must_equal "project-id"
+            _(translate.universe_domain).must_equal "googleapis.com"
             _(translate.service.credentials).must_equal default_credentials
           end
         end
@@ -120,13 +159,35 @@ describe Google::Cloud::Translate::V2 do
       end
     end
 
+    it "computes enable_self_signed_jwt against the resolved universe default host" do
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = "myuniverse.com"
+      Google::Cloud.stub :env, OpenStruct.new(project_id: "project-id") do
+        stubbed_default_true = ->(options = {}) {
+          _(options[:enable_self_signed_jwt]).must_equal true
+          default_credentials
+        }
+        Google::Cloud::Translate::V2::Credentials.stub :default, stubbed_default_true do
+          Google::Cloud::Translate::V2.new
+          Google::Cloud::Translate::V2.new endpoint: "translate.myuniverse.com"
+        end
+
+        stubbed_default_false = ->(options = {}) {
+          _(options[:enable_self_signed_jwt]).must_equal false
+          default_credentials
+        }
+        Google::Cloud::Translate::V2::Credentials.stub :default, stubbed_default_false do
+          Google::Cloud::Translate::V2.new endpoint: "translate.googleapis.com"
+        end
+      end
+    end
+
     it "uses provided project_id and credentials" do
       stubbed_credentials = ->(keyfile, options = {}) {
         _(keyfile).must_equal "path/to/keyfile.json"
         _(options[:scope]).must_be :nil?
         "translate-credentials"
       }
-      stubbed_service = ->(project_id, credentials, scope: nil, key: nil, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project_id, credentials, scope: nil, key: nil, retries: nil, timeout: nil, host: nil, universe_domain: nil) {
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "translate-credentials"
         _(scope).must_be :nil?
@@ -134,6 +195,7 @@ describe Google::Cloud::Translate::V2 do
         _(retries).must_be :nil?
         _(timeout).must_be :nil?
         _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project_id: project_id
       }
 
@@ -160,7 +222,7 @@ describe Google::Cloud::Translate::V2 do
         _(options[:scope]).must_be :nil?
         OpenStruct.new project_id: "project-id"
       }
-      stubbed_service = ->(project_id, credentials, scope: nil, key: nil, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project_id, credentials, scope: nil, key: nil, retries: nil, timeout: nil, host: nil, universe_domain: nil) {
         _(project_id).must_equal "project-id"
         _(credentials).must_be_kind_of OpenStruct
         _(credentials.project_id).must_equal "project-id"
@@ -169,6 +231,7 @@ describe Google::Cloud::Translate::V2 do
         _(retries).must_be :nil?
         _(timeout).must_be :nil?
         _(host).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project_id: project_id
       }
       empty_env = OpenStruct.new
@@ -198,7 +261,7 @@ describe Google::Cloud::Translate::V2 do
         _(options[:scope]).must_be :nil?
         "translate-credentials"
       }
-      stubbed_service = ->(project_id, credentials, scope: nil, key: nil, retries: nil, timeout: nil, host: nil) {
+      stubbed_service = ->(project_id, credentials, scope: nil, key: nil, retries: nil, timeout: nil, host: nil, universe_domain: nil) {
         _(project_id).must_equal "project-id"
         _(credentials).must_equal "translate-credentials"
         _(host).must_equal "custom-translate-endpoint.example.com"
@@ -206,6 +269,7 @@ describe Google::Cloud::Translate::V2 do
         _(key).must_be :nil?
         _(retries).must_be :nil?
         _(timeout).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project_id: project_id
       }
 
@@ -224,6 +288,53 @@ describe Google::Cloud::Translate::V2 do
           end
         end
       end
+    end
+
+    it "resolves universe_domain with precedence: argument > configure > ENV > default" do
+      custom_config = OpenStruct.new
+
+      Google::Cloud::Translate::V2.stub :translation_config, custom_config do
+        ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = "env-universe.com"
+        creds_env = TranslateTestFixtures.build_v2_credentials universe_domain: "env-universe.com"
+        translate_env = Google::Cloud::Translate::V2.new project_id: "proj", credentials: creds_env
+        _(translate_env.universe_domain).must_equal "env-universe.com"
+
+        custom_config.universe_domain = "cfg-universe.com"
+        creds_cfg = TranslateTestFixtures.build_v2_credentials universe_domain: "cfg-universe.com"
+        translate_cfg = Google::Cloud::Translate::V2.new project_id: "proj", credentials: creds_cfg
+        _(translate_cfg.universe_domain).must_equal "cfg-universe.com"
+
+        creds_arg = TranslateTestFixtures.build_v2_credentials universe_domain: "arg-universe.com"
+        translate_arg = Google::Cloud::Translate::V2.new(
+          project_id: "proj",
+          credentials: creds_arg,
+          universe_domain: "arg-universe.com"
+        )
+        _(translate_arg.universe_domain).must_equal "arg-universe.com"
+      end
+    end
+
+    it "raises ArgumentError when universe_domain is an empty string" do
+      creds = TranslateTestFixtures.build_v2_credentials
+      _(proc {
+        Google::Cloud::Translate::V2.new project_id: "proj", credentials: creds, universe_domain: ""
+      }).must_raise ArgumentError
+
+      _(proc {
+        Google::Cloud::Translate::V2.new project_id: "proj", credentials: creds, universe_domain: "   "
+      }).must_raise ArgumentError
+    end
+
+    it "raises Google::Cloud::Error when credentials universe_domain mismatches client universe_domain" do
+      gdu_creds = TranslateTestFixtures.build_v2_credentials universe_domain: "googleapis.com"
+      err = _(proc {
+        Google::Cloud::Translate::V2.new(
+          project_id: "proj",
+          credentials: gdu_creds,
+          universe_domain: "myuniverse.com"
+        )
+      }).must_raise Google::Cloud::Error
+      _(err.message).must_include "Universe domain is myuniverse.com but credentials are in googleapis.com"
     end
   end
 end

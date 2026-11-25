@@ -28,20 +28,39 @@ module Google
         # Represents the Translation API REST service, exposing the API calls.
         class Service # :nodoc:
           API_VERSION = "v2".freeze
+          DEFAULT_UNIVERSE_DOMAIN = "googleapis.com".freeze
           API_HOST = "translate.googleapis.com".freeze
 
           # @private
           attr_accessor :project_id, :credentials, :retries, :timeout, :key
 
+          # @private
+          # @return [String] The effective universe domain.
+          attr_reader :universe_domain
+
           ##
           # Creates a new Service instance.
-          def initialize project_id, credentials, retries: nil, timeout: nil, key: nil, host: nil
+          def initialize project_id, credentials, retries: nil, timeout: nil, key: nil, host: nil, universe_domain: nil
             @project_id = project_id
             @credentials = credentials
             @retries = retries
             @timeout = timeout
             @key = key
-            @url = "https://#{host || API_HOST}"
+
+            # Reuse `V2.resolve_universe_domain` so direct `Service.new` callers
+            # and `V2.new` share identical config/ENV precedence and validation,
+            # then verify that OAuth/JWT credentials match the resolved universe.
+            @universe_domain = V2.resolve_universe_domain universe_domain
+            verify_universe_domain! unless @key
+
+            # Default the REST endpoint to `translate.<universe_domain>` unless an
+            # explicit host override (either bare hostname or full URL) was given.
+            target_host = host || "translate.#{@universe_domain}"
+            @url = if target_host.start_with? "http://", "https://"
+                     target_host.sub %r{/\z}, ""
+                   else
+                     "https://#{target_host}"
+                   end
           end
 
           ##
@@ -135,14 +154,49 @@ module Google
           end
 
           ##
-          # Sign Oauth2 API calls.
+          # Signs outgoing HTTP requests using `googleauth`'s `#apply!` contract
+          # instead of calling `fetch_access_token!` directly. Using `#apply!`
+          # allows self-signed JWT credentials to sign locally for the target
+          # universe without exchanging assertions at GDU token endpoints, while
+          # still refreshing OAuth2 bearer tokens when needed.
           def sign_http_request! request
-            client = credentials.client
-            return if client.nil?
+            client = @credentials.respond_to?(:client) ? @credentials.client : @credentials
+            return request unless client.respond_to? :apply!
 
-            client.fetch_access_token! if client.access_token.nil? || client.expires_within?(30)
-            client.generate_authenticated_request request: request
+            # Seed `:jwt_aud_uri` with the universe-scoped service audience so
+            # scope-less ServiceAccountCredentials can mint an audience-bound JWT,
+            # then strip the helper key so it is never sent as an HTTP header.
+            raw_auth_headers = { jwt_aud_uri: "https://translate.#{@universe_domain}/" }
+            client.apply! raw_auth_headers
+            raw_auth_headers.delete :jwt_aud_uri
+
+            # `googleauth` populates `:authorization` with a symbol key, whereas
+            # Faraday's header map expects canonical string header names.
+            normalized_header_pairs = raw_auth_headers.map do |header_key, header_value|
+              header_name = header_key == :authorization ? "Authorization" : header_key.to_s
+              [header_name, header_value]
+            end
+            normalized_header_pairs.each do |header_name, header_value|
+              request.headers[header_name] = header_value
+            end
+
             request
+          end
+
+          ##
+          # Verifies that the credentials' universe domain matches the service's
+          # effective universe domain unless the credential explicitly opts out
+          # (e.g. GCE metadata credentials prior to universe domain discovery).
+          def verify_universe_domain!
+            return if @credentials.nil?
+            return if @credentials.respond_to?(:disable_universe_domain_check) &&
+                      @credentials.disable_universe_domain_check
+            return unless @credentials.respond_to?(:universe_domain) &&
+                          @credentials.universe_domain &&
+                          @credentials.universe_domain != @universe_domain
+
+            raise Google::Cloud::Error,
+                  "Universe domain is #{@universe_domain} but credentials are in #{@credentials.universe_domain}"
           end
 
           ##

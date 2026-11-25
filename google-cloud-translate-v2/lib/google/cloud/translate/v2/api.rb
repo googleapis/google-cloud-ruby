@@ -78,6 +78,25 @@ module Google
           alias project project_id
 
           ##
+          # The effective universe domain connected to.
+          #
+          # @return [String]
+          #
+          # @example
+          #   require "google/cloud/translate/v2"
+          #
+          #   translate = Google::Cloud::Translate::V2.new(
+          #     project_id: "my-todo-project",
+          #     credentials: "/path/to/keyfile.json"
+          #   )
+          #
+          #   translate.universe_domain #=> "googleapis.com"
+          #
+          def universe_domain
+            service.universe_domain
+          end
+
+          ##
           # Returns text translations from one language to another.
           #
           # @see https://cloud.google.com/translation/docs/translating-text#Translate Translating Text

@@ -80,6 +80,11 @@ YARD::Doctest.configure do |doctest|
       mock.expect :project_id, "my-todo-project"
     end
   end
+  doctest.before "Google::Cloud::Translate::V2::Api#universe_domain" do
+    mock_translate do |mock|
+      mock.expect :universe_domain, "googleapis.com"
+    end
+  end
 
   doctest.before "Google::Cloud::Translate::V2::Api#translate" do
     mock_translate do |mock|
