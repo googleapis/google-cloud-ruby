@@ -1,12 +1,9 @@
 --no-private
---title="BeyondCorp V1 API"
---exclude _pb\.rb$
+--title="Obsolete Gem google-cloud-beyond_corp-app_connections-v1"
 --markup markdown
 --markup-provider redcarpet
 
 ./lib/**/*.rb
-./proto_docs/**/*.rb
 -
 README.md
 LICENSE.md
-AUTHENTICATION.md
