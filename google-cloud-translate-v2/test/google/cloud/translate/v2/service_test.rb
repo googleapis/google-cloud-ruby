@@ -223,12 +223,8 @@ describe Google::Cloud::Translate::V2::Service, :service do
   end
 
   it "skips universe_domain check when disable_universe_domain_check is true" do
-    gce_like_creds = OpenStruct.new(
-      client: FakeClient.new,
-      universe_domain: "googleapis.com",
-      disable_universe_domain_check: true
-    )
-    svc = Google::Cloud::Translate::V2::Service.new project, gce_like_creds, universe_domain: "mydomain5.com"
+    gce_creds = Google::Cloud::Translate::V2::Credentials.new Google::Auth::GCECredentials.new
+    svc = Google::Cloud::Translate::V2::Service.new project, gce_creds, universe_domain: "mydomain5.com"
     _(svc.universe_domain).must_equal "mydomain5.com"
   end
 
@@ -255,7 +251,7 @@ describe Google::Cloud::Translate::V2::Service, :service do
 
       stubs.verify_stubbed_calls
       _(captured_env.url.to_s).must_equal "https://translate.mydomain6.com/language/translate/v2"
-      _(captured_env.request_headers.keys.map(&:downcase)).wont_include "jwt_aud_uri"
+      _(TranslateTestFixtures.lowercase_header_names(captured_env.request_headers)).wont_include "jwt_aud_uri"
       auth_header = captured_env.request_headers["Authorization"]
       _(auth_header).must_match(/\ABearer /)
       payload, = JWT.decode(
@@ -289,7 +285,7 @@ describe Google::Cloud::Translate::V2::Service, :service do
 
       stubs.verify_stubbed_calls
       _(captured_env.url.to_s).must_equal "https://translate.mydomain7.com/language/translate/v2/detect"
-      _(captured_env.request_headers.keys.map(&:downcase)).wont_include "jwt_aud_uri"
+      _(TranslateTestFixtures.lowercase_header_names(captured_env.request_headers)).wont_include "jwt_aud_uri"
       auth_header = captured_env.request_headers["Authorization"]
       _(auth_header).must_match(/\ABearer /)
       payload, = JWT.decode(
@@ -330,7 +326,7 @@ describe Google::Cloud::Translate::V2::Service, :service do
     stubs.verify_stubbed_calls
     _(refresh_calls).must_equal 1
     _(captured_env.request_headers["Authorization"]).must_equal "Bearer refreshed-oauth-token"
-    _(captured_env.request_headers.keys.map(&:downcase)).wont_include "jwt_aud_uri"
+    _(TranslateTestFixtures.lowercase_header_names(captured_env.request_headers)).wont_include "jwt_aud_uri"
   end
 
   it "routes API key requests to the configured universe_domain endpoint" do

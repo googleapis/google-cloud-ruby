@@ -113,6 +113,8 @@ module Google
                      universe_domain: nil
           project_id ||= default_project_id
 
+          # Reuse the shared `Google::Cloud.configure.translate` subconfig when
+          # `google-cloud-translate` is loaded; otherwise `translation_config` is nil.
           configuration = translation_config
           key ||= configuration&.key || ENV["TRANSLATE_KEY"] || ENV["GOOGLE_CLOUD_KEY"]
           retries ||= configuration&.retries
@@ -121,6 +123,9 @@ module Google
           universe_domain ||= configuration&.universe_domain
 
           if key
+            # API-key requests bypass OAuth/JWT credentials (and credential
+            # universe matching), so forward `universe_domain` here as well to
+            # route key-authenticated calls to `translate.<universe_domain>`.
             return Google::Cloud::Translate::V2::Api.new(
               Google::Cloud::Translate::V2::Service.new(
                 project_id.to_s, nil,
@@ -132,10 +137,11 @@ module Google
           scope ||= configuration&.scope
 
           if enable_self_signed_jwt.nil?
-            # Use self-signed JWT if the endpoint is unchanged from the resolved universe's default host.
-            effective_universe = Service.resolve_universe_domain universe_domain
-            default_host = Service.default_host_for effective_universe
-            enable_self_signed_jwt = endpoint.nil? || endpoint == default_host
+            # Enable self-signed JWTs when using the default endpoint for the
+            # effective universe (`translate.<universe_domain>`), rather than
+            # comparing against a hardcoded `translate.googleapis.com` host.
+            effective_universe = resolve_universe_domain universe_domain
+            enable_self_signed_jwt = endpoint.nil? || endpoint == "translate.#{effective_universe}"
           end
 
           credentials ||= default_credentials scope: scope, enable_self_signed_jwt: enable_self_signed_jwt
@@ -155,6 +161,22 @@ module Google
               retries: retries, timeout: timeout, host: endpoint, universe_domain: universe_domain
             )
           )
+        end
+
+        ##
+        # @private Resolves the effective universe domain using standard Google
+        # Cloud client precedence: explicit argument -> `Translate.configure.universe_domain`
+        # -> non-blank `ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]` -> `"googleapis.com"`.
+        def self.resolve_universe_domain universe_domain = nil
+          universe_domain = translation_config&.universe_domain if universe_domain.nil?
+          if !universe_domain.nil? && universe_domain.to_s.strip.empty?
+            raise ArgumentError, "universe_domain cannot be empty"
+          end
+
+          env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]&.strip
+          env_universe = nil if env_universe == ""
+
+          universe_domain || env_universe || Service::DEFAULT_UNIVERSE_DOMAIN
         end
 
         ##

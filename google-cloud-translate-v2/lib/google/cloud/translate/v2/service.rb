@@ -29,8 +29,6 @@ module Google
         class Service # :nodoc:
           API_VERSION = "v2".freeze
           DEFAULT_UNIVERSE_DOMAIN = "googleapis.com".freeze
-          ENDPOINT_SUBSTITUTION = "$UNIVERSE_DOMAIN$".freeze
-          ENDPOINT_TEMPLATE = "translate.$UNIVERSE_DOMAIN$".freeze
           API_HOST = "translate.googleapis.com".freeze
 
           # @private
@@ -41,50 +39,6 @@ module Google
           attr_reader :universe_domain
 
           ##
-          # @private Resolves the effective universe domain.
-          #
-          # @param [String, nil] universe_domain Explicit universe domain override.
-          # @return [String]
-          def self.resolve_universe_domain universe_domain = nil
-            configured = universe_domain
-            configured = V2.translation_config&.universe_domain if configured.nil?
-            validate_non_empty_universe_domain! configured
-            configured || env_universe_domain || DEFAULT_UNIVERSE_DOMAIN
-          end
-
-          ##
-          # @private Returns the default service hostname for a universe domain.
-          #
-          # @param [String] universe_domain The resolved universe domain.
-          # @return [String]
-          def self.default_host_for universe_domain
-            ENDPOINT_TEMPLATE.sub ENDPOINT_SUBSTITUTION, universe_domain
-          end
-
-          ##
-          # @private Validates that a non-nil universe_domain is not empty.
-          #
-          # @param [String, nil] universe_domain
-          def self.validate_non_empty_universe_domain! universe_domain
-            return if universe_domain.nil?
-            return unless universe_domain.to_s.strip.empty?
-
-            raise ArgumentError, "universe_domain cannot be empty"
-          end
-
-          ##
-          # @private Reads a non-empty GOOGLE_CLOUD_UNIVERSE_DOMAIN value from ENV.
-          #
-          # @return [String, nil]
-          def self.env_universe_domain
-            env_val = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
-            return nil if env_val.nil?
-
-            stripped = env_val.strip
-            stripped.empty? ? nil : stripped
-          end
-
-          ##
           # Creates a new Service instance.
           def initialize project_id, credentials, retries: nil, timeout: nil, key: nil, host: nil, universe_domain: nil
             @project_id = project_id
@@ -92,9 +46,21 @@ module Google
             @retries = retries
             @timeout = timeout
             @key = key
-            @universe_domain = self.class.resolve_universe_domain universe_domain
+
+            # Reuse `V2.resolve_universe_domain` so direct `Service.new` callers
+            # and `V2.new` share identical config/ENV precedence and validation,
+            # then verify that OAuth/JWT credentials match the resolved universe.
+            @universe_domain = V2.resolve_universe_domain universe_domain
             verify_universe_domain! unless @key
-            @url = resolve_url host
+
+            # Default the REST endpoint to `translate.<universe_domain>` unless an
+            # explicit host override (either bare hostname or full URL) was given.
+            target_host = host || "translate.#{@universe_domain}"
+            @url = if target_host.start_with? "http://", "https://"
+                     target_host.sub %r{/\z}, ""
+                   else
+                     "https://#{target_host}"
+                   end
           end
 
           ##
@@ -188,63 +154,49 @@ module Google
           end
 
           ##
-          # Sign OAuth2 / JWT API calls via googleauth's `#apply!`.
+          # Signs outgoing HTTP requests using `googleauth`'s `#apply!` contract
+          # instead of calling `fetch_access_token!` directly. Using `#apply!`
+          # allows self-signed JWT credentials to sign locally for the target
+          # universe without exchanging assertions at GDU token endpoints, while
+          # still refreshing OAuth2 bearer tokens when needed.
           def sign_http_request! request
-            client = auth_client
-            return request if client.nil?
+            client = @credentials.respond_to?(:client) ? @credentials.client : @credentials
+            return request unless client.respond_to? :apply!
 
-            auth_headers = { jwt_aud_uri: "#{default_service_url}/" }
-            client.apply! auth_headers
-            apply_auth_headers! request, auth_headers
+            # Seed `:jwt_aud_uri` with the universe-scoped service audience so
+            # scope-less ServiceAccountCredentials can mint an audience-bound JWT,
+            # then strip the helper key so it is never sent as an HTTP header.
+            raw_auth_headers = { jwt_aud_uri: "https://translate.#{@universe_domain}/" }
+            client.apply! raw_auth_headers
+            raw_auth_headers.delete :jwt_aud_uri
+
+            # `googleauth` populates `:authorization` with a symbol key, whereas
+            # Faraday's header map expects canonical string header names.
+            normalized_header_pairs = raw_auth_headers.map do |header_key, header_value|
+              header_name = header_key == :authorization ? "Authorization" : header_key.to_s
+              [header_name, header_value]
+            end
+            normalized_header_pairs.each do |header_name, header_value|
+              request.headers[header_name] = header_value
+            end
+
             request
           end
 
-          def apply_auth_headers! request, auth_headers
-            auth_headers.delete :jwt_aud_uri
-            auth_headers.each do |header_key, header_val|
-              normalized = header_key == :authorization ? "Authorization" : header_key.to_s
-              request.headers[normalized] = header_val
-            end
-          end
-
-          def default_service_url
-            "https://#{self.class.default_host_for @universe_domain}"
-          end
-
+          ##
+          # Verifies that the credentials' universe domain matches the service's
+          # effective universe domain unless the credential explicitly opts out
+          # (e.g. GCE metadata credentials prior to universe domain discovery).
           def verify_universe_domain!
-            return if @credentials.nil? || universe_domain_check_disabled?
-
-            creds_universe = extract_credentials_universe_domain
-            return if creds_universe.nil? || creds_universe == @universe_domain
+            return if @credentials.nil?
+            return if @credentials.respond_to?(:disable_universe_domain_check) &&
+                      @credentials.disable_universe_domain_check
+            return unless @credentials.respond_to?(:universe_domain) &&
+                          @credentials.universe_domain &&
+                          @credentials.universe_domain != @universe_domain
 
             raise Google::Cloud::Error,
-                  "Universe domain is #{@universe_domain} but credentials are in #{creds_universe}"
-          end
-
-          def universe_domain_check_disabled?
-            return true if @credentials.respond_to?(:disable_universe_domain_check) &&
-                           @credentials.disable_universe_domain_check
-
-            client = auth_client
-            client.respond_to?(:disable_universe_domain_check) && client.disable_universe_domain_check
-          end
-
-          def extract_credentials_universe_domain
-            return @credentials.universe_domain if @credentials.respond_to? :universe_domain
-
-            client = auth_client
-            client.universe_domain if client.respond_to? :universe_domain
-          end
-
-          def auth_client
-            @credentials.respond_to?(:client) ? @credentials.client : @credentials
-          end
-
-          def resolve_url host
-            target = host || self.class.default_host_for(@universe_domain)
-            return target.sub %r{/\z}, "" if target.start_with? "http://", "https://"
-
-            "https://#{target}"
+                  "Universe domain is #{@universe_domain} but credentials are in #{@credentials.universe_domain}"
           end
 
           ##

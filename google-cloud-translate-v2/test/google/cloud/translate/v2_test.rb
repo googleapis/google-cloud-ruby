@@ -291,17 +291,7 @@ describe Google::Cloud::Translate::V2 do
     end
 
     it "resolves universe_domain with precedence: argument > configure > ENV > default" do
-      custom_config = Google::Cloud::Config.new do |c|
-        c.add_field! :key, nil, match: String
-        c.add_field! :retries, nil, match: Integer
-        c.add_field! :timeout, nil, match: Numeric
-        c.add_field! :endpoint, nil, match: String
-        c.add_field! :scope, nil, match: [String, Array]
-        c.add_field! :project_id, nil, match: String
-        c.add_field! :credentials, nil, match: Object
-        c.add_field! :quota_project, nil, match: String
-        c.add_field! :universe_domain, nil, match: String
-      end
+      custom_config = OpenStruct.new
 
       Google::Cloud::Translate::V2.stub :translation_config, custom_config do
         ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = "env-universe.com"

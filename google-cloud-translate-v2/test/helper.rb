@@ -91,6 +91,11 @@ module TranslateTestFixtures
     end
     [conn, stubs]
   end
+
+  def lowercase_header_names headers
+    header_pairs = headers.to_a
+    header_pairs.map { |header_name, _header_value| header_name.to_s.downcase }
+  end
 end
 
 class MockTranslate < Minitest::Spec
