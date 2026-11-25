@@ -130,7 +130,6 @@ Google::Cloud.configure.add_config! :trace do |config|
       "TRACE_KEYFILE", "TRACE_KEYFILE_JSON"
     )
   end
-  endpoint = "cloudtrace.googleapis.com".freeze
   scopes = [
     "https://www.googleapis.com/auth/cloud-platform",
     "https://www.googleapis.com/auth/trace.append",
@@ -146,7 +145,8 @@ Google::Cloud.configure.add_config! :trace do |config|
   config.add_alias! :keyfile, :credentials
   config.add_field! :scope, scopes, match: [String, Array]
   config.add_field! :timeout, nil, match: Integer
-  config.add_field! :endpoint, endpoint, match: String
+  config.add_field! :endpoint, nil, match: String, allow_nil: true
+  config.add_field! :universe_domain, nil, match: String, allow_nil: true
   config.add_field! :capture_stack, nil, enum: [true, false]
   config.add_field! :sampler, nil
   config.add_field! :span_id_generator, nil, match: Proc

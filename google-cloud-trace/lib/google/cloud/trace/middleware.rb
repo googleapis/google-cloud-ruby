@@ -164,7 +164,9 @@ module Google
             if project_id
               credentials = configuration.credentials
               tracer = Google::Cloud::Trace.new project_id: project_id,
-                                                credentials: credentials
+                                                credentials: credentials,
+                                                endpoint: configuration.endpoint,
+                                                universe_domain: configuration.universe_domain
               @service = Google::Cloud::Trace::AsyncReporter.new tracer.service
             end
           end
@@ -388,6 +390,12 @@ module Google
         # already.
         #
         def load_config **kwargs
+          endpoint = kwargs[:endpoint]
+          configuration.endpoint = endpoint unless endpoint.nil?
+
+          universe_domain = kwargs[:universe_domain]
+          configuration.universe_domain = universe_domain unless universe_domain.nil?
+
           capture_stack = kwargs[:capture_stack]
           configuration.capture_stack = capture_stack unless capture_stack.nil?
 

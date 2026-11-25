@@ -37,11 +37,20 @@ module Google
         def initialize project,
                        credentials,
                        timeout: nil,
-                       host: nil
+                       host: nil,
+                       universe_domain: nil
           @project = project
           @credentials = credentials
           @timeout = timeout
           @host = host
+          @universe_domain = universe_domain
+        end
+
+        def universe_domain
+          @lowlevel_client&.universe_domain ||
+            resolved_universe_domain ||
+            ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] ||
+            "googleapis.com"
         end
 
         def lowlevel_client
@@ -53,10 +62,14 @@ module Google
               require "google/cloud/trace/patches/active_call_with_trace"
               require "google/cloud/trace/patches/call_with_trace"
 
+              endpoint = resolved_endpoint
+              universe = resolved_universe_domain
+
               V1::TraceService::Client.new do |config|
                 config.credentials = credentials if credentials
                 config.timeout = timeout if timeout
-                config.endpoint = host if host
+                config.endpoint = endpoint if endpoint
+                config.universe_domain = universe if universe
                 config.lib_name = "gccl"
                 config.lib_version = Google::Cloud::Trace::VERSION
               end
@@ -122,6 +135,28 @@ module Google
         # @private
         def inspect
           "#{self.class}(#{@project})"
+        end
+
+        private
+
+        def resolved_endpoint
+          host ||
+            V1::TraceService::Client.configure.endpoint ||
+            configured_trace_option(:endpoint)
+        end
+
+        def resolved_universe_domain
+          @universe_domain ||
+            V1::TraceService::Client.configure.universe_domain ||
+            configured_trace_option(:universe_domain)
+        end
+
+        def configured_trace_option key
+          return unless Google::Cloud.respond_to?(:configure) &&
+                        Google::Cloud.configure.subconfig?(:trace)
+
+          config = Google::Cloud.configure.trace
+          config[key] if config.respond_to? key
         end
       end
     end

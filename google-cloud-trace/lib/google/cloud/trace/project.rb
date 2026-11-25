@@ -73,6 +73,15 @@ module Google
         alias project project_id
 
         ##
+        # The universe domain the client is connected to.
+        #
+        # @return [String]
+        #
+        def universe_domain
+          service.universe_domain
+        end
+
+        ##
         # Create a new empty trace record for this project. Uses the current
         # thread's TraceContext by default; otherwise you may provide a
         # specific TraceContext.

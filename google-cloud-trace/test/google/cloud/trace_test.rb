@@ -20,9 +20,16 @@ describe Google::Cloud do
     "https://www.googleapis.com/auth/trace.append",
     "https://www.googleapis.com/auth/trace.readonly"
   ] }
-  let(:default_endpoint) { "cloudtrace.googleapis.com" }
 
   describe "#trace" do
+    before do
+      Google::Cloud.configure.reset!
+    end
+
+    after do
+      Google::Cloud.configure.reset!
+    end
+
     it "calls out to Google::Cloud.trace" do
       gcloud = Google::Cloud.new
       stubbed_trace = ->(project, keyfile, opts = {}) {
@@ -70,6 +77,24 @@ describe Google::Cloud do
         _(project).must_equal "trace-project-object-scoped"
       end
     end
+
+    it "uses trace config for endpoint and universe_domain" do
+      custom_universe = "myuniverse.com"
+      custom_endpoint = "custom.example.com"
+      creds = TraceTestHelpers.build_trace_credentials project_id: "project-id", universe_domain: custom_universe
+
+      Google::Cloud::Trace.configure do |config|
+        config.endpoint = custom_endpoint
+        config.universe_domain = custom_universe
+      end
+
+      ENV.stub :[], nil do
+        gcloud = Google::Cloud.new "project-id", creds
+        trace = gcloud.trace
+        _(trace.universe_domain).must_equal custom_universe
+        _(trace.service.host).must_equal custom_endpoint
+      end
+    end
   end
 
   describe ".trace" do
@@ -82,6 +107,14 @@ describe Google::Cloud do
     end
     let(:found_credentials) { "{}" }
 
+    before do
+      Google::Cloud.configure.reset!
+    end
+
+    after do
+      Google::Cloud.configure.reset!
+    end
+
     it "gets defaults for project_id and keyfile" do
       # Clear all environment variables
       ENV.stub :[], nil do
@@ -92,6 +125,8 @@ describe Google::Cloud do
             _(trace).must_be_kind_of Google::Cloud::Trace::Project
             _(trace.project).must_equal "project-id"
             _(trace.service.credentials).must_equal default_credentials
+            _(trace.service.host).must_be :nil?
+            _(trace.universe_domain).must_equal "googleapis.com"
           end
         end
       end
@@ -107,7 +142,8 @@ describe Google::Cloud do
         _(project).must_equal "project-id"
         _(credentials).must_equal "trace-credentials"
         _(opts[:timeout]).must_be :nil?
-        _(opts[:host]).must_equal default_endpoint
+        _(opts[:host]).must_be :nil?
+        _(opts[:universe_domain]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -127,6 +163,23 @@ describe Google::Cloud do
         end
       end
     end
+
+    it "uses trace config for endpoint and universe_domain" do
+      custom_universe = "myuniverse.com"
+      custom_endpoint = "custom.example.com"
+      creds = TraceTestHelpers.build_trace_credentials project_id: "project-id", universe_domain: custom_universe
+
+      Google::Cloud::Trace.configure do |config|
+        config.endpoint = custom_endpoint
+        config.universe_domain = custom_universe
+      end
+
+      ENV.stub :[], nil do
+        trace = Google::Cloud.trace "project-id", creds
+        _(trace.universe_domain).must_equal custom_universe
+        _(trace.service.host).must_equal custom_endpoint
+      end
+    end
   end
 
   describe "Trace.new" do
@@ -139,6 +192,14 @@ describe Google::Cloud do
     end
     let(:found_credentials) { "{}" }
 
+    before do
+      Google::Cloud.configure.reset!
+    end
+
+    after do
+      Google::Cloud.configure.reset!
+    end
+
     it "gets defaults for project_id and keyfile" do
       # Clear all environment variables
       ENV.stub :[], nil do
@@ -149,6 +210,8 @@ describe Google::Cloud do
             _(trace).must_be_kind_of Google::Cloud::Trace::Project
             _(trace.project).must_equal "project-id"
             _(trace.service.credentials).must_equal default_credentials
+            _(trace.service.host).must_be :nil?
+            _(trace.universe_domain).must_equal "googleapis.com"
           end
         end
       end
@@ -164,7 +227,8 @@ describe Google::Cloud do
         _(project).must_equal "project-id"
         _(credentials).must_equal "trace-credentials"
         _(opts[:timeout]).must_be :nil?
-        _(opts[:host]).must_equal default_endpoint
+        _(opts[:host]).must_be :nil?
+        _(opts[:universe_domain]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -192,6 +256,7 @@ describe Google::Cloud do
         _(credentials).must_equal default_credentials
         _(opts[:timeout]).must_be :nil?
         _(opts[:host]).must_equal endpoint
+        _(opts[:universe_domain]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -206,6 +271,57 @@ describe Google::Cloud do
       end
     end
 
+    it "uses provided universe_domain" do
+      custom_universe = "myuniverse.com"
+      stubbed_service = ->(project, credentials, opts = {}) {
+        _(project).must_equal "project-id"
+        _(credentials).must_equal default_credentials
+        _(opts[:timeout]).must_be :nil?
+        _(opts[:host]).must_be :nil?
+        _(opts[:universe_domain]).must_equal custom_universe
+        OpenStruct.new project: project, universe_domain: custom_universe
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud::Trace::Service.stub :new, stubbed_service do
+          trace = Google::Cloud::Trace.new project: "project-id",
+                                           credentials: default_credentials,
+                                           universe_domain: custom_universe
+          _(trace).must_be_kind_of Google::Cloud::Trace::Project
+          _(trace.project).must_equal "project-id"
+          _(trace.universe_domain).must_equal custom_universe
+          _(trace.service).must_be_kind_of OpenStruct
+        end
+      end
+    end
+
+    it "does not emit stderr warnings from Google::Cloud.configure during Trace.new" do
+      default_creds = TraceTestHelpers.build_trace_credentials project_id: "project-id", universe_domain: "googleapis.com"
+      custom_universe = "myuniverse.com"
+      custom_creds = TraceTestHelpers.build_trace_credentials project_id: "project-id", universe_domain: custom_universe
+      original_stderr = $stderr
+      captured_stderr = StringIO.new
+      $stderr = captured_stderr
+
+      ENV.stub :[], nil do
+        default_trace = Google::Cloud::Trace.new project_id: "project-id", credentials: default_creds
+        _(default_trace.universe_domain).must_equal "googleapis.com"
+        _(default_trace.service.universe_domain).must_equal "googleapis.com"
+        _(default_trace.service.lowlevel_client.universe_domain).must_equal "googleapis.com"
+
+        Google::Cloud::Trace.configure.universe_domain = custom_universe
+        custom_trace = Google::Cloud::Trace.new project_id: "project-id", credentials: custom_creds
+        _(custom_trace.universe_domain).must_equal custom_universe
+        _(custom_trace.service.universe_domain).must_equal custom_universe
+        _(custom_trace.service.lowlevel_client.universe_domain).must_equal custom_universe
+      end
+
+      _(captured_stderr.string).must_be_empty
+    ensure
+      $stderr = original_stderr
+    end
+
     it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, opts = {}) {
         _(keyfile).must_equal "path/to/keyfile.json"
@@ -216,7 +332,8 @@ describe Google::Cloud do
         _(project).must_equal "project-id"
         _(credentials).must_equal "trace-credentials"
         _(opts[:timeout]).must_be :nil?
-        _(opts[:host]).must_equal default_endpoint
+        _(opts[:host]).must_be :nil?
+        _(opts[:universe_domain]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -248,7 +365,8 @@ describe Google::Cloud do
         _(credentials).must_be_kind_of OpenStruct
         _(credentials.project_id).must_equal "project-id"
         _(opts[:timeout]).must_be :nil?
-        _(opts[:host]).must_equal default_endpoint
+        _(opts[:host]).must_be :nil?
+        _(opts[:universe_domain]).must_be :nil?
         OpenStruct.new project: project
       }
       empty_env = OpenStruct.new
@@ -276,8 +394,25 @@ describe Google::Cloud do
   describe "Trace.configure" do
     let(:found_credentials) { "{}" }
 
+    before do
+      Google::Cloud.configure.reset!
+    end
+
     after do
       Google::Cloud.configure.reset!
+    end
+
+    it "defaults endpoint and universe_domain to nil without stderr warnings" do
+      original_stderr = $stderr
+      captured_stderr = StringIO.new
+      $stderr = captured_stderr
+
+      _(Google::Cloud::Trace.configure.endpoint).must_be :nil?
+      _(Google::Cloud::Trace.configure.universe_domain).must_be :nil?
+
+      _(captured_stderr.string).must_be_empty
+    ensure
+      $stderr = original_stderr
     end
 
     it "uses shared config for project and keyfile" do
@@ -290,7 +425,8 @@ describe Google::Cloud do
         _(project).must_equal "project-id"
         _(credentials).must_equal "trace-credentials"
         _(opts[:timeout]).must_be :nil?
-        _(opts[:host]).must_equal default_endpoint
+        _(opts[:host]).must_be :nil?
+        _(opts[:universe_domain]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -327,7 +463,8 @@ describe Google::Cloud do
         _(project).must_equal "project-id"
         _(credentials).must_equal "trace-credentials"
         _(opts[:timeout]).must_be :nil?
-        _(opts[:host]).must_equal default_endpoint
+        _(opts[:host]).must_be :nil?
+        _(opts[:universe_domain]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -364,7 +501,8 @@ describe Google::Cloud do
         _(project).must_equal "project-id"
         _(credentials).must_equal "trace-credentials"
         _(opts[:timeout]).must_equal 42
-        _(opts[:host]).must_equal default_endpoint
+        _(opts[:host]).must_be :nil?
+        _(opts[:universe_domain]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -402,7 +540,8 @@ describe Google::Cloud do
         _(project).must_equal "project-id"
         _(credentials).must_equal "trace-credentials"
         _(opts[:timeout]).must_equal 42
-        _(opts[:host]).must_equal default_endpoint
+        _(opts[:host]).must_be :nil?
+        _(opts[:universe_domain]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -442,6 +581,7 @@ describe Google::Cloud do
         _(credentials).must_equal "trace-credentials"
         _(opts[:timeout]).must_be :nil?
         _(opts[:host]).must_equal endpoint
+        _(opts[:universe_domain]).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -461,6 +601,47 @@ describe Google::Cloud do
                 trace = Google::Cloud::Trace.new
                 _(trace).must_be_kind_of Google::Cloud::Trace::Project
                 _(trace.project).must_equal "project-id"
+                _(trace.service).must_be_kind_of OpenStruct
+              end
+            end
+          end
+        end
+      end
+    end
+
+    it "uses trace config for universe_domain" do
+      custom_universe = "myuniverse.com"
+      stubbed_credentials = ->(keyfile, opts = {}) {
+        _(keyfile).must_equal "path/to/keyfile.json"
+        _(opts[:scope]).must_equal default_scopes
+        "trace-credentials"
+      }
+      stubbed_service = ->(project, credentials, opts = {}) {
+        _(project).must_equal "project-id"
+        _(credentials).must_equal "trace-credentials"
+        _(opts[:timeout]).must_be :nil?
+        _(opts[:host]).must_be :nil?
+        _(opts[:universe_domain]).must_equal custom_universe
+        OpenStruct.new project: project, universe_domain: custom_universe
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        # Set new configuration
+        Google::Cloud::Trace.configure do |config|
+          config.project = "project-id"
+          config.keyfile = "path/to/keyfile.json"
+          config.universe_domain = custom_universe
+        end
+
+        File.stub :file?, true, ["path/to/keyfile.json"] do
+          File.stub :read, found_credentials, ["path/to/keyfile.json"] do
+            Google::Cloud::Trace::Credentials.stub :new, stubbed_credentials do
+              Google::Cloud::Trace::Service.stub :new, stubbed_service do
+                trace = Google::Cloud::Trace.new
+                _(trace).must_be_kind_of Google::Cloud::Trace::Project
+                _(trace.project).must_equal "project-id"
+                _(trace.universe_domain).must_equal custom_universe
                 _(trace.service).must_be_kind_of OpenStruct
               end
             end

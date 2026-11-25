@@ -161,6 +161,8 @@ module Google
             config.credentials ||= (config.keyfile ||
               trace_config.credentials || trace_config.keyfile ||
               gcp_config.credentials || gcp_config.keyfile)
+            config.endpoint ||= trace_config.endpoint
+            config.universe_domain ||= trace_config.universe_domain || gcp_config.universe_domain
             config.notifications ||= trace_config.notifications
             config.max_data_length ||= trace_config.max_data_length
             if config.capture_stack.nil?
