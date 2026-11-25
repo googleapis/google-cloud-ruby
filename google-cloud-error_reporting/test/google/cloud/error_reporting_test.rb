@@ -17,7 +17,6 @@ require "helper"
 
 describe Google::Cloud::ErrorReporting, :mock_error_reporting do
   let(:default_scopes) { ["https://www.googleapis.com/auth/cloud-platform"] }
-  let(:default_endpoint) { "clouderrorreporting.googleapis.com" }
 
   describe ".new" do
     let(:default_credentials) do
@@ -28,6 +27,25 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
       creds
     end
     let(:found_credentials) { "{}" }
+
+    before do
+      @original_env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+      Google::Cloud.configure.reset!
+      Google::Cloud::ErrorReporting.configure.reset!
+      ErrorReportingTestHelpers.reset_v1beta1_client_configs!
+    end
+
+    after do
+      if @original_env_universe.nil?
+        ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+      else
+        ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = @original_env_universe
+      end
+      Google::Cloud.configure.reset!
+      Google::Cloud::ErrorReporting.configure.reset!
+      ErrorReportingTestHelpers.reset_v1beta1_client_configs!
+    end
 
     it "gets defaults for project-id, keyfile, service, and version" do
       ENV.stub :[], nil do
@@ -66,12 +84,13 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
 
     it "uses provided endpoint" do
       endpoint = "errorreporting-endpoint2.example.com"
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(timeout).must_be :nil?
         _(host).must_equal endpoint
         _(quota_project).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
       ENV.stub :[], nil do
@@ -82,6 +101,54 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
           _(error_reporting).must_be_kind_of Google::Cloud::ErrorReporting::Project
           _(error_reporting.project).must_equal "project-id"
           _(error_reporting.service).must_be_kind_of OpenStruct
+        end
+      end
+    end
+
+    it "uses provided universe_domain" do
+      custom_universe = "myuniverse.com"
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil, universe_domain: nil) {
+        _(project).must_equal "project-id"
+        _(credentials).must_equal default_credentials
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(quota_project).must_be :nil?
+        _(universe_domain).must_equal custom_universe
+        OpenStruct.new project: project, universe_domain: universe_domain
+      }
+      ENV.stub :[], nil do
+        Google::Cloud::ErrorReporting::Service.stub :new, stubbed_service do
+          error_reporting = Google::Cloud::ErrorReporting.new project_id: "project-id",
+                                                              universe_domain: custom_universe,
+                                                              credentials: default_credentials
+          _(error_reporting).must_be_kind_of Google::Cloud::ErrorReporting::Project
+          _(error_reporting.project).must_equal "project-id"
+          _(error_reporting.universe_domain).must_equal custom_universe
+          _(error_reporting.service).must_be_kind_of OpenStruct
+        end
+      end
+    end
+
+    it "gives explicit universe_domain precedence over configure.universe_domain" do
+      custom_universe = "myuniverse.com"
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil, universe_domain: nil) {
+        _(project).must_equal "project-id"
+        _(credentials).must_equal default_credentials
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(quota_project).must_be :nil?
+        _(universe_domain).must_equal custom_universe
+        OpenStruct.new project: project, universe_domain: universe_domain
+      }
+      ENV.stub :[], nil do
+        Google::Cloud::ErrorReporting.configure do |config|
+          config.universe_domain = "otheruniverse.com"
+        end
+        Google::Cloud::ErrorReporting::Service.stub :new, stubbed_service do
+          error_reporting = Google::Cloud::ErrorReporting.new project_id: "project-id",
+                                                              universe_domain: custom_universe,
+                                                              credentials: default_credentials
+          _(error_reporting.universe_domain).must_equal custom_universe
         end
       end
     end
@@ -133,17 +200,28 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
   describe ".report" do
     let(:exception) { RuntimeError.new "test-exception" }
 
-    before {
-      Google::Cloud::ErrorReporting.instance_variable_set :@default_reporter, nil
-      _(Google::Cloud::ErrorReporting.instance_variable_get(:@default_reporter)).must_be_nil
-    }
-
-    after {
+    before do
+      @original_env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+      ErrorReportingTestHelpers.reset_default_reporter!
       Google::Cloud.configure.reset!
       Google::Cloud::ErrorReporting.configure.reset!
-      Google::Cloud::ErrorReporting.instance_variable_set :@default_reporter, nil
+      ErrorReportingTestHelpers.reset_v1beta1_client_configs!
       _(Google::Cloud::ErrorReporting.instance_variable_get(:@default_reporter)).must_be_nil
-    }
+    end
+
+    after do
+      ErrorReportingTestHelpers.reset_default_reporter!
+      if @original_env_universe.nil?
+        ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+      else
+        ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = @original_env_universe
+      end
+      Google::Cloud.configure.reset!
+      Google::Cloud::ErrorReporting.configure.reset!
+      ErrorReportingTestHelpers.reset_v1beta1_client_configs!
+      _(Google::Cloud::ErrorReporting.instance_variable_get(:@default_reporter)).must_be_nil
+    end
 
     it "doesn't call Project#report_exception if Google::Cloud.configure.use_error_reporting is false" do
       Google::Cloud.configure do |config|
@@ -208,13 +286,93 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         end
       end
     end
+
+    it "honors configure.endpoint and configure.universe_domain" do
+      require "google/devtools/clouderrorreporting/v1beta1/report_errors_service_services_pb"
+      custom_universe = "myuniverse.com"
+      custom_endpoint = "custom.example.com"
+      creds = ErrorReportingTestHelpers.build_error_reporting_credentials(
+        project_id: "test-project-id",
+        universe_domain: custom_universe
+      )
+
+      Google::Cloud::ErrorReporting.configure do |config|
+        config.project_id = "test-project-id"
+        config.credentials = creds
+        config.endpoint = custom_endpoint
+        config.universe_domain = custom_universe
+      end
+
+      stub_endpoints = []
+      fake_grpc_stub = Object.new
+      fake_grpc_stub.define_singleton_method :report_error_event do |*_args, **_kwargs|
+        OpenStruct.new execute: Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventResponse.new
+      end
+      stubbed_grpc_new = ->(endpoint, _creds, **_kwargs) {
+        stub_endpoints << endpoint
+        fake_grpc_stub
+      }
+
+      Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Stub.stub :new, stubbed_grpc_new do
+        Google::Cloud::ErrorReporting.report exception
+        Google::Cloud::ErrorReporting.default_reporter.stop! 10
+      end
+
+      _(stub_endpoints).must_equal [custom_endpoint]
+      project_client = Google::Cloud::ErrorReporting.default_reporter.error_reporting
+      _(project_client.universe_domain).must_equal custom_universe
+      _(project_client.service.host).must_equal custom_endpoint
+      _(project_client.service.error_reporting.universe_domain).must_equal custom_universe
+      _(project_client.service.error_reporting.report_errors_service_stub.endpoint).must_equal custom_endpoint
+    end
+
+    it "honors ENV['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] and reports credential mismatch via on_error" do
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = "myuniverse.com"
+      default_creds = ErrorReportingTestHelpers.build_error_reporting_credentials(
+        project_id: "test-project-id",
+        universe_domain: "googleapis.com"
+      )
+      captured_errors = []
+
+      Google::Cloud::ErrorReporting.configure do |config|
+        config.project_id = "test-project-id"
+        config.credentials = default_creds
+        config.on_error = ->(error) { captured_errors << error }
+      end
+
+      Google::Cloud::ErrorReporting.report exception
+      Google::Cloud::ErrorReporting.default_reporter.stop! 10
+
+      project_client = Google::Cloud::ErrorReporting.default_reporter.error_reporting
+      _(project_client.universe_domain).must_equal "myuniverse.com"
+      _(project_client.service.host).must_be :nil?
+      _(captured_errors.size).must_equal 1
+      _(captured_errors.first).must_be_kind_of Google::Cloud::ErrorReporting::ErrorReporterError
+      _(captured_errors.first.message).must_include "universe"
+    end
   end
 
   describe ".default_reporter" do
-    after {
+    before do
+      @original_env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+      ErrorReportingTestHelpers.reset_default_reporter!
       Google::Cloud.configure.reset!
       Google::Cloud::ErrorReporting.configure.reset!
-    }
+      ErrorReportingTestHelpers.reset_v1beta1_client_configs!
+    end
+
+    after do
+      ErrorReportingTestHelpers.reset_default_reporter!
+      if @original_env_universe.nil?
+        ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+      else
+        ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = @original_env_universe
+      end
+      Google::Cloud.configure.reset!
+      Google::Cloud::ErrorReporting.configure.reset!
+      ErrorReportingTestHelpers.reset_v1beta1_client_configs!
+    end
 
     it "uses the project_id and credentials from Google::Cloud::ErrorReporting.configure" do
       Google::Cloud::ErrorReporting.configure do |config|
@@ -295,6 +453,50 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         end
       end
     end
+
+    it "honors ErrorReporting.configure.endpoint and universe_domain" do
+      custom_universe = "myuniverse.com"
+      custom_endpoint = "custom.example.com"
+      creds = ErrorReportingTestHelpers.build_error_reporting_credentials(
+        project_id: "test-project-id",
+        universe_domain: custom_universe
+      )
+
+      Google::Cloud::ErrorReporting.configure do |config|
+        config.project_id = "test-project-id"
+        config.credentials = creds
+        config.endpoint = custom_endpoint
+        config.universe_domain = custom_universe
+      end
+
+      reporter = Google::Cloud::ErrorReporting.default_reporter
+      project_client = reporter.error_reporting
+      _(project_client.universe_domain).must_equal custom_universe
+      _(project_client.service.host).must_equal custom_endpoint
+      _(project_client.service.error_reporting.universe_domain).must_equal custom_universe
+      _(project_client.service.error_reporting.report_errors_service_stub.endpoint).must_equal custom_endpoint
+    end
+
+    it "honors ENV['GOOGLE_CLOUD_UNIVERSE_DOMAIN']" do
+      custom_universe = "myuniverse.com"
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = custom_universe
+      creds = ErrorReportingTestHelpers.build_error_reporting_credentials(
+        project_id: "test-project-id",
+        universe_domain: custom_universe
+      )
+
+      Google::Cloud::ErrorReporting.configure do |config|
+        config.project_id = "test-project-id"
+        config.credentials = creds
+      end
+
+      reporter = Google::Cloud::ErrorReporting.default_reporter
+      project_client = reporter.error_reporting
+      _(project_client.universe_domain).must_equal custom_universe
+      _(project_client.service.host).must_be :nil?
+      _(project_client.service.error_reporting.universe_domain).must_equal custom_universe
+      _(project_client.service.error_reporting.report_errors_service_stub.endpoint).must_equal "clouderrorreporting.#{custom_universe}"
+    end
   end
 
   describe "ErrorReporting.configure" do
@@ -307,8 +509,23 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     end
     let(:found_credentials) { "{}" }
 
-    after do
+    before do
+      @original_env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
       Google::Cloud.configure.reset!
+      Google::Cloud::ErrorReporting.configure.reset!
+      ErrorReportingTestHelpers.reset_v1beta1_client_configs!
+    end
+
+    after do
+      if @original_env_universe.nil?
+        ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+      else
+        ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = @original_env_universe
+      end
+      Google::Cloud.configure.reset!
+      Google::Cloud::ErrorReporting.configure.reset!
+      ErrorReportingTestHelpers.reset_v1beta1_client_configs!
     end
 
     it "uses shared config for project and keyfile" do
@@ -317,12 +534,13 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         _(scope).must_equal default_scopes
         "error_reporting-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "error_reporting-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_endpoint
+        _(host).must_be :nil?
         _(quota_project).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -355,12 +573,13 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         _(scope).must_equal default_scopes
         "error_reporting-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "error_reporting-credentials"
         _(timeout).must_be :nil?
-        _(host).must_equal default_endpoint
+        _(host).must_be :nil?
         _(quota_project).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -393,12 +612,13 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         _(scope).must_equal default_scopes
         "error_reporting-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "error_reporting-credentials"
         _(timeout).must_equal 42
-        _(host).must_equal default_endpoint
+        _(host).must_be :nil?
         _(quota_project).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -428,12 +648,13 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
 
     it "uses error_reporting config for endpoint" do
       endpoint = "errorreporting-endpoint2.example.com"
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(timeout).must_be :nil?
         _(host).must_equal endpoint
         _(quota_project).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -446,9 +667,38 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         end
 
         Google::Cloud::ErrorReporting::Service.stub :new, stubbed_service do
-          error_reporting = Google::Cloud::ErrorReporting.new project: "project-id", credentials: default_credentials, endpoint: endpoint
+          error_reporting = Google::Cloud::ErrorReporting.new credentials: default_credentials
           _(error_reporting).must_be_kind_of Google::Cloud::ErrorReporting::Project
           _(error_reporting.project).must_equal "project-id"
+          _(error_reporting.service).must_be_kind_of OpenStruct
+        end
+      end
+    end
+
+    it "uses error_reporting config for universe_domain" do
+      custom_universe = "myuniverse.com"
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil, universe_domain: nil) {
+        _(project).must_equal "project-id"
+        _(credentials).must_equal default_credentials
+        _(timeout).must_be :nil?
+        _(host).must_be :nil?
+        _(quota_project).must_be :nil?
+        _(universe_domain).must_equal custom_universe
+        OpenStruct.new project: project, universe_domain: universe_domain
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud::ErrorReporting.configure do |config|
+          config.project = "project-id"
+          config.universe_domain = custom_universe
+        end
+
+        Google::Cloud::ErrorReporting::Service.stub :new, stubbed_service do
+          error_reporting = Google::Cloud::ErrorReporting.new credentials: default_credentials
+          _(error_reporting).must_be_kind_of Google::Cloud::ErrorReporting::Project
+          _(error_reporting.project).must_equal "project-id"
+          _(error_reporting.universe_domain).must_equal custom_universe
           _(error_reporting.service).must_be_kind_of OpenStruct
         end
       end
@@ -460,12 +710,13 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
         _(scope).must_equal default_scopes
         "error_reporting-credentials"
       }
-      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil) {
+      stubbed_service = ->(project, credentials, timeout: nil, host: nil, quota_project: nil, universe_domain: nil) {
         _(project).must_equal "project-id"
         _(credentials).must_equal "error_reporting-credentials"
         _(timeout).must_equal 42
-        _(host).must_equal default_endpoint
+        _(host).must_be :nil?
         _(quota_project).must_be :nil?
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       }
 
@@ -494,12 +745,13 @@ describe Google::Cloud::ErrorReporting, :mock_error_reporting do
     end
 
     it "uses error_reporting config for quota_project" do
-      stubbed_service = lambda do |project, credentials, timeout: nil, host: nil, quota_project: nil|
+      stubbed_service = lambda do |project, credentials, timeout: nil, host: nil, quota_project: nil, universe_domain: nil|
         _(project).must_equal "project-id"
         _(credentials).must_equal default_credentials
         _(timeout).must_be :nil?
-        _(host).must_equal default_endpoint
+        _(host).must_be :nil?
         _(quota_project).must_equal "configure-quota-project"
+        _(universe_domain).must_be :nil?
         OpenStruct.new project: project
       end
 

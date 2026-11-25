@@ -119,6 +119,8 @@ module Google
             config.credentials ||= config.keyfile
             config.credentials ||= er_config.credentials || er_config.keyfile
             config.credentials ||= gcp_config.credentials || gcp_config.keyfile
+            config.endpoint ||= er_config.endpoint
+            config.universe_domain ||= er_config.universe_domain || gcp_config.universe_domain
             config.service_name ||= \
               (er_config.service_name || gcp_config.service_name)
             config.service_version ||= \

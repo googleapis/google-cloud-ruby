@@ -111,6 +111,15 @@ module Google
         alias project project_id
 
         ##
+        # The universe domain the client is connected to.
+        #
+        # @return [String]
+        #
+        def universe_domain
+          service.universe_domain
+        end
+
+        ##
         # Report a {Google::Cloud::ErrorReporting::ErrorEvent} to
         # Error Reporting service.
         #

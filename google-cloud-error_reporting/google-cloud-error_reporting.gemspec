@@ -22,6 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-core", "~> 1.5"
   gem.add_dependency "stackdriver-core", "~> 1.3"
-  gem.add_dependency "google-cloud-error_reporting-v1beta1", "~> 0.0"
+  gem.add_dependency "google-cloud-error_reporting-v1beta1", ">= 0.9.0", "< 2.a"
   gem.add_dependency "concurrent-ruby", "~> 1.1"
 end

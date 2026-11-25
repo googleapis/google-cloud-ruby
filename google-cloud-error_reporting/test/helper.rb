@@ -27,9 +27,74 @@ end
 
 require "minitest/autorun"
 require "minitest/focus"
+require "minitest/mock"
 require "minitest/rg"
 require "ostruct"
+require "json"
 require "google/cloud/error_reporting"
+require "gapic/universe_domain_concerns"
+require "grpc"
+
+module ErrorReportingTestHelpers
+  def self.rsa_key
+    @rsa_key ||= begin
+      require "openssl"
+      OpenSSL::PKey::RSA.new 2048
+    end
+  end
+
+  def self.sa_key_hash project_id: "test", universe_domain: "googleapis.com"
+    {
+      "type" => "service_account",
+      "project_id" => project_id,
+      "private_key_id" => "key-id",
+      "private_key" => rsa_key.to_pem,
+      "client_email" => "test-sa@#{project_id}.iam.gserviceaccount.com",
+      "client_id" => "1234567890",
+      "auth_uri" => "https://accounts.google.com/o/oauth2/auth",
+      "token_uri" => "https://oauth2.#{universe_domain}/token",
+      "universe_domain" => universe_domain
+    }
+  end
+
+  def self.build_sa_credentials project_id: "test", universe_domain: "googleapis.com",
+                                scope: Google::Cloud::ErrorReporting.configure.scope
+    require "stringio"
+    json = JSON.generate sa_key_hash(project_id: project_id, universe_domain: universe_domain)
+    Google::Auth::ServiceAccountCredentials.make_creds(
+      json_key_io: StringIO.new(json),
+      scope: scope
+    )
+  end
+
+  def self.build_error_reporting_credentials project_id: "test", universe_domain: "googleapis.com",
+                                             scope: Google::Cloud::ErrorReporting.configure.scope
+    sa_creds = build_sa_credentials(
+      project_id: project_id,
+      universe_domain: universe_domain,
+      scope: scope
+    )
+    Google::Cloud::ErrorReporting::Credentials.new sa_creds
+  end
+
+  def self.reset_default_reporter!
+    reporter = Google::Cloud::ErrorReporting.instance_variable_get :@default_reporter
+    reporter.stop! if reporter.respond_to? :stop!
+    Google::Cloud::ErrorReporting.instance_variable_set :@default_reporter, nil
+  end
+
+  def self.reset_v1beta1_client_configs!
+    require "google/cloud/error_reporting/v1beta1"
+    [
+      Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client,
+      Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client,
+      Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client
+    ].each do |klass|
+      klass.configure.endpoint = nil
+      klass.configure.universe_domain = nil
+    end
+  end
+end
 
 class MockErrorReporting < Minitest::Spec
   let(:project) { "test" }

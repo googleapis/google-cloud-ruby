@@ -57,7 +57,9 @@ module Google
             ErrorReporting.default_reporter do
               ErrorReporting::AsyncErrorReporter.new(
                 ErrorReporting.new(project: configuration.project_id,
-                                   credentials: configuration.credentials)
+                                   credentials: configuration.credentials,
+                                   endpoint: configuration.endpoint,
+                                   universe_domain: configuration.universe_domain)
               )
             end
         end
@@ -165,14 +167,10 @@ module Google
           creds = kwargs[:credentials] || kwargs[:keyfile]
           configuration.credentials = creds unless creds.nil?
 
-          service_name = kwargs[:service_name]
-          configuration.service_name = service_name unless service_name.nil?
-
-          service_vers = kwargs[:service_version]
-          configuration.service_version = service_vers unless service_vers.nil?
-
-          ignores = kwargs[:ignore_classes]
-          configuration.ignore_classes = ignores unless ignores.nil?
+          [:service_name, :service_version, :ignore_classes, :endpoint, :universe_domain].each do |key|
+            value = kwargs[key]
+            configuration[key] = value unless value.nil?
+          end
 
           init_default_config
         end

@@ -17,9 +17,43 @@ require "minitest/focus"
 require "helper"
 
 describe Google::Cloud::ErrorReporting::Project, :mock_error_reporting do
+  before do
+    @original_env_universe = ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"]
+    ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    Google::Cloud.configure.reset!
+    Google::Cloud::ErrorReporting.configure.reset!
+    ErrorReportingTestHelpers.reset_v1beta1_client_configs!
+  end
+
+  after do
+    if @original_env_universe.nil?
+      ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    else
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = @original_env_universe
+    end
+    Google::Cloud.configure.reset!
+    Google::Cloud::ErrorReporting.configure.reset!
+    ErrorReportingTestHelpers.reset_v1beta1_client_configs!
+  end
+
   it "knows the project identifier" do
     _(error_reporting).must_be_kind_of Google::Cloud::ErrorReporting::Project
     _(error_reporting.project).must_equal project
+  end
+
+  it "returns the default universe domain" do
+    ENV.stub :[], nil do
+      _(error_reporting.universe_domain).must_equal "googleapis.com"
+    end
+  end
+
+  it "returns a custom universe domain" do
+    ENV.stub :[], nil do
+      universe = "myuniverse.com"
+      service = Google::Cloud::ErrorReporting::Service.new project, credentials, universe_domain: universe
+      custom_error_reporting = Google::Cloud::ErrorReporting::Project.new service
+      _(custom_error_reporting.universe_domain).must_equal universe
+    end
   end
 
   describe "#error_event" do
