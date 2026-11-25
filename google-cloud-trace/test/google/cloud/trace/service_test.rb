@@ -370,4 +370,35 @@ describe Google::Cloud::Trace::Service do
     trace = Google::Cloud::Trace.new project_id: project, credentials: wrapped_creds, universe_domain: custom_universe
     _(trace.service.lowlevel_client.universe_domain).must_equal custom_universe
   end
+
+  it "safely falls back when Google::Cloud lacks configure or trace subconfig" do
+    service = Google::Cloud::Trace::Service.new project, credentials
+    empty_config = Google::Cloud::Config.new
+    original_stderr = $stderr
+    captured_stderr = StringIO.new
+    $stderr = captured_stderr
+
+    Google::Cloud.stub :configure, empty_config do
+      _(service.universe_domain).must_equal default_universe
+      ENV["GOOGLE_CLOUD_UNIVERSE_DOMAIN"] = custom_universe
+      _(service.universe_domain).must_equal custom_universe
+      _(service.lowlevel_client.universe_domain).must_equal custom_universe
+      _(service.lowlevel_client.trace_service_stub.endpoint).must_equal "cloudtrace.#{custom_universe}"
+      _(service.lowlevel_client.configure.endpoint).must_be :nil?
+    end
+
+    ENV.delete "GOOGLE_CLOUD_UNIVERSE_DOMAIN"
+    fresh_service = Google::Cloud::Trace::Service.new project, credentials
+    orig_respond_to = Google::Cloud.method :respond_to?
+    Google::Cloud.stub :respond_to?, ->(name, *args) { name == :configure ? false : orig_respond_to.call(name, *args) } do
+      _(fresh_service.universe_domain).must_equal default_universe
+      _(fresh_service.lowlevel_client.universe_domain).must_equal default_universe
+      _(fresh_service.lowlevel_client.trace_service_stub.endpoint).must_equal "cloudtrace.#{default_universe}"
+      _(fresh_service.lowlevel_client.configure.endpoint).must_be :nil?
+    end
+
+    _(captured_stderr.string).must_be_empty
+  ensure
+    $stderr = original_stderr
+  end
 end

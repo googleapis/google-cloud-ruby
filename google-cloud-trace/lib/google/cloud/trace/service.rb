@@ -142,13 +142,21 @@ module Google
         def resolved_endpoint
           host ||
             V1::TraceService::Client.configure.endpoint ||
-            Google::Cloud.configure.trace.endpoint
+            configured_trace_option(:endpoint)
         end
 
         def resolved_universe_domain
           @universe_domain ||
             V1::TraceService::Client.configure.universe_domain ||
-            Google::Cloud.configure.trace.universe_domain
+            configured_trace_option(:universe_domain)
+        end
+
+        def configured_trace_option key
+          return unless Google::Cloud.respond_to?(:configure) &&
+                        Google::Cloud.configure.subconfig?(:trace)
+
+          config = Google::Cloud.configure.trace
+          config[key] if config.respond_to? key
         end
       end
     end
