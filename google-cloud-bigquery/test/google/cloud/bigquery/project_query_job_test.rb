@@ -57,6 +57,57 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
     _(job.updated_row_count).must_be :nil?
   end
 
+  it "recovers a query job when a retried insertion already exists" do
+    job_gapi = query_job_gapi query, location: nil
+    job_resp_gapi = query_job_resp_gapi query, job_id: job_gapi.job_reference.job_id
+
+    stub = Object.new
+    stub.define_singleton_method :insert_job do |*|
+      @insert_attempts ||= 0
+      @insert_attempts += 1
+      if @insert_attempts == 1
+        raise Google::Apis::Error.new "backend error",
+                                      status_code: 500,
+                                      body: { "error" => { "errors" => [{ "reason" => "backendError" }] } }.to_json
+      end
+
+      raise Google::Apis::ClientError.new "Already Exists",
+                                          status_code: 409,
+                                          body: { "error" => { "errors" => [{ "reason" => "duplicate" }] } }.to_json
+    end
+    expected_project = project
+    job_ref = job_gapi.job_reference
+    stub.define_singleton_method :get_job do |received_project, received_job_id, location:|
+      unless received_project == expected_project && received_job_id == job_ref.job_id && location == job_ref.location
+        raise "Unexpected get_job arguments"
+      end
+
+      job_resp_gapi
+    end
+    bigquery.service.mocked_service = stub
+
+    Google::Cloud::Bigquery::Service::Backoff.stub :backoff, -> { ->(_) {} } do
+      job = bigquery.query_job query
+
+      _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+      _(job.job_id).must_equal job_gapi.job_reference.job_id
+    end
+  end
+
+  it "raises when the initial query job insertion already exists" do
+    stub = Object.new
+    stub.define_singleton_method :insert_job do |*|
+      raise Google::Apis::ClientError.new "Already Exists",
+                                          status_code: 409,
+                                          body: { "error" => { "errors" => [{ "reason" => "duplicate" }] } }.to_json
+    end
+    bigquery.service.mocked_service = stub
+
+    assert_raises Google::Cloud::AlreadyExistsError do
+      bigquery.query_job query
+    end
+  end
+
   it "queries the data with options set" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock

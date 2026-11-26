@@ -446,9 +446,15 @@ access_policy_version: access_policy_version, update_mode: update_mode
         end
 
         def query_job query_job_gapi
-          execute backoff: true do
+          retried = false
+          execute backoff: true, on_retry: -> { retried = true } do
             service.insert_job @project, query_job_gapi
           end
+        rescue Google::Cloud::AlreadyExistsError
+          raise unless retried
+
+          job_ref = query_job_gapi.job_reference
+          get_job job_ref.job_id, location: job_ref.location
         end
 
         ##
@@ -612,9 +618,9 @@ access_policy_version: access_policy_version, update_mode: update_mode
           nil
         end
 
-        def execute backoff: nil, &block
+        def execute backoff: nil, on_retry: nil, &block
           if backoff
-            Backoff.new(retries: retries).execute(&block)
+            Backoff.new(retries: retries, on_retry: on_retry).execute(&block)
           else
             yield
           end
@@ -647,10 +653,11 @@ access_policy_version: access_policy_version, update_mode: update_mode
             sleep delay
           end
 
-          def initialize retries: nil, reasons: nil, backoff: nil
+          def initialize retries: nil, reasons: nil, backoff: nil, on_retry: nil
             @retries = (retries || Backoff.retries).to_i
             @reasons = (reasons || Backoff.reasons).to_a
             @backoff = backoff || Backoff.backoff
+            @on_retry = on_retry
           end
 
           def execute
@@ -661,6 +668,7 @@ access_policy_version: access_policy_version, update_mode: update_mode
               raise e unless retry? e.body, current_retries
 
               @backoff.call current_retries
+              @on_retry&.call
               current_retries += 1
             end
           end
