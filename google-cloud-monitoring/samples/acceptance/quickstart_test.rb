@@ -31,7 +31,8 @@ describe "quickstart", :monitoring do
     interval = Google::Cloud::Monitoring::V3::TimeInterval.new start_time: start_time, end_time: end_time
     view = Google::Cloud::Monitoring::V3::ListTimeSeriesRequest::TimeSeriesView::FULL
 
-    received_time_series = retry_block 3 do
+    # Custom metric descriptors created on first write can take over a minute to appear in ListTimeSeries.
+    received_time_series = retry_block 12 do
       response = client.list_time_series name:     project_path,
                                          filter:   filter,
                                          interval: interval,
