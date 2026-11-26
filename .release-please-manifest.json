@@ -411,7 +411,7 @@
   "google-cloud-edge_network+FILLER": "0.0.0",
   "google-cloud-edge_network-v1": "2.8.0",
   "google-cloud-edge_network-v1+FILLER": "0.0.0",
-  "google-cloud-error_reporting": "0.45.2",
+  "google-cloud-error_reporting": "0.46.0",
   "google-cloud-error_reporting+FILLER": "0.0.0",
   "google-cloud-error_reporting-v1beta1": "0.19.0",
   "google-cloud-error_reporting-v1beta1+FILLER": "0.0.0",
