@@ -190,6 +190,9 @@ libraries:
             ruby-cloud-gem-namespace: Google::Cloud::AIPlatform
             ruby-cloud-service-override: AiPlatform=AIPlatform
     keep:
+      - acceptance/google/cloud/ai_platform/v1/prediction_service_smoke_test.rb
+      - acceptance/google/cloud/ai_platform/v1/smoke_test.rb
+      - acceptance/helper.rb
       - test/README.md
     ruby:
       wrapper_of:
